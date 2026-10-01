@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-01",
+  "phase": "Live permission-loss verification",
+  "result": "BUILD SUCCESSFUL",
+  "command": "testDebugUnitTest assembleDebug lintDebug connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.saathi.ui.LiveAccessibilityIntegrationTest,com.saathi.ui.PermissionLossIntegrationTest",
+  "unit": {
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "focused_instrumented": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Warning": 61
+  },
+  "environment": "Pixel_9_Pro AVD, Android17/API37, arm64 software graphics; no audio or physical device",
+  "production_changes": false,
+  "browser_status": "Chrome initial setup/terms screen; no consent, account or external page used. Browser compatibility not exercised."
+}

@@ -1,0 +1,19 @@
+<resources>
+    <item name="practice_back" type="id" />
+    <item name="practice_detour" type="id" />
+    <item name="practice_electricity" type="id" />
+    <item name="practice_water" type="id" />
+    <item name="practice_dth" type="id" />
+    <item name="recharge_bills" type="id" />
+    <item name="send_money" type="id" />
+    <item name="scan_qr" type="id" />
+    <item name="history" type="id" />
+    <item name="electricity_biller" type="id" />
+    <item name="water_biller" type="id" />
+    <item name="dth_biller" type="id" />
+    <item name="account_input" type="id" />
+    <item name="amount_input" type="id" />
+    <item name="pin_input" type="id" />
+    <item name="pay_button" type="id" />
+    <item name="success_title" type="id" />
+</resources>

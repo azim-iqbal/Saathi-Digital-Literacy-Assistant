@@ -1,0 +1,17 @@
+<resources>
+    <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">@color/primary</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/surface</item>
+    </style>
+    <style name="SaathiStarting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#131513</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/saathi_splash_icon</item>
+        <item name="windowSplashScreenAnimationDuration">1600</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">#131513</item>
+    </style>
+</resources>

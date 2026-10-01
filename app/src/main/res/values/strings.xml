@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name" translatable="false">Saathi</string>
+    <string name="accessibility_description">During a session you start, reads visible controls for practice or live option finding in apps and browsers. Processing stays local. You perform every tap. Sensitive-field filtering is not perfect.</string>
+</resources>

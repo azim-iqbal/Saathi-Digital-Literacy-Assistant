@@ -1,0 +1,75 @@
+{
+  "fileKey": "vx2M28p625yZQTAzcTLlQj",
+  "pages": [
+    {
+      "id": "0:1",
+      "name": "01 Product principles and journeys"
+    },
+    {
+      "id": "4:2",
+      "name": "02 Foundations"
+    },
+    {
+      "id": "4:3",
+      "name": "03 Component library"
+    },
+    {
+      "id": "4:4",
+      "name": "04 Light screens"
+    },
+    {
+      "id": "4:5",
+      "name": "05 Dark screens"
+    },
+    {
+      "id": "4:6",
+      "name": "06 Languages and large text \u2014 pending"
+    },
+    {
+      "id": "4:7",
+      "name": "07 Prototype and motion \u2014 pending"
+    },
+    {
+      "id": "4:8",
+      "name": "08 Developer handoff \u2014 pending"
+    }
+  ],
+  "screens": {
+    "light": {
+      "Welcome": "10:2",
+      "Home": "10:15",
+      "Practice": "10:40",
+      "Setup": "10:59",
+      "Session": "10:77",
+      "Settings": "10:92",
+      "Privacy": "10:119"
+    },
+    "dark": {
+      "Welcome": "11:2",
+      "Home": "11:15",
+      "Practice": "11:40",
+      "Setup": "11:59",
+      "Session": "11:77",
+      "Settings": "11:92",
+      "Privacy": "11:119"
+    }
+  },
+  "components": {
+    "Action": {
+      "set": "9:8",
+      "Primary": "9:2",
+      "Secondary": "9:4",
+      "Disabled": "9:6"
+    },
+    "Content": {
+      "set": "9:18",
+      "Feature": "9:9",
+      "Row": "9:12",
+      "Card": "9:15"
+    }
+  },
+  "navigationComponentSets": {
+    "Dock": "24:86",
+    "PracticeTabs": "24:189"
+  }
+}

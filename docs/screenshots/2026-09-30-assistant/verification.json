@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-30",
+  "head": "5896927 (local uncommitted changes)",
+  "command": "testDebugUnitTest assembleDebug lintDebug connectedDebugAndroidTest",
+  "result": "BUILD SUCCESSFUL",
+  "unit": {
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "android": {
+    "tests": 22,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Warning": 61
+  },
+  "environment": "Pixel_9_Pro AVD, Android 17/API 37, arm64, software graphics, headless/no audio",
+  "scope": "Real external trees, manually supplied observations; no full enabled AccessibilityService event pipeline or real audio exercised",
+  "settings": "System hides overlay windows; controlled separate APK/WebView allowed visible marker, bubble and touch-through",
+  "performance_accepted": false,
+  "post_review_panel_check": {
+    "result": "BUILD SUCCESSFUL",
+    "unit_tests": 49,
+    "instrumented_panel_tests": 2,
+    "scope": "AssistantActivity only: green mode-selection colors, padded input outline and accurate terminal-state copy; full 22-test run preceded this small UI change"
+  }
+}

@@ -1,0 +1,197 @@
+Redesign the app’s UI to have a premium, modern “Liquid Glass” aesthetic, using the attached reference screenshots as the visual direction.
+
+REFERENCE STYLE:
+- Screenshot 1: premium dark navigation/header with a clean white logo, minimal icons, generous spacing and rounded elements.
+- Screenshots 2 & 3: large pill-shaped glass buttons with strong rounded corners, translucency, background visibility, subtle borders and a premium glossy appearance.
+- Do NOT copy the exact UI/content from the screenshots. Use them purely as visual inspiration.
+
+MAIN GOAL:
+Make the entire app feel like a polished, high-end modern product rather than a typical web app. Think Apple-inspired liquid glass / frosted glass UI: elegant, minimal, spacious, tactile and refined.
+
+### 1. TOP HEADING / HERO
+Create a prominent heading at the top of the app.
+
+The heading should:
+- Be large and visually dominant.
+- Use clean, modern typography.
+- Have strong hierarchy and generous spacing.
+- Feel integrated into the glass aesthetic rather than looking like a normal HTML heading.
+- Where appropriate, use a subtle glass/translucent treatment or a refined gradient/glow behind the heading.
+- Keep the actual text highly readable.
+- Avoid excessive gradients, neon effects or flashy animations.
+
+The overall top section should feel similar in polish and visual hierarchy to the first reference screenshot.
+
+### 2. LIQUID GLASS BUTTON SYSTEM
+Redesign EVERY button in the application — primary, secondary, compact, CTA, navigation/action buttons, icon buttons, etc. — so they belong to one consistent Liquid Glass design system.
+
+Buttons should have:
+
+- Large rounded/pill-shaped corners.
+- Translucent/frosted backgrounds.
+- backdrop blur / glass blur where supported.
+- Subtle semi-transparent borders.
+- Soft inner highlight along the top/edge.
+- Very subtle shadow/depth.
+- Background content should remain faintly visible through the button.
+- Premium glossy appearance without looking metallic or cheap.
+- Excellent contrast and readability.
+- Smooth hover/pressed/focus transitions.
+
+Large CTA buttons should resemble the reference screenshots:
+- Wide horizontal pill.
+- Generous horizontal padding.
+- Large readable text.
+- Icon/arrow positioned cleanly on the right.
+- Slight glass highlight.
+- Strong but subtle depth.
+
+Smaller buttons should use the same visual language but scale naturally rather than becoming oversized pills.
+
+### 3. GLASS MATERIAL
+Create a reusable glass style/design token instead of individually styling random buttons.
+
+Use something conceptually similar to:
+
+background:
+rgba(255,255,255,0.10–0.18)
+
+border:
+1px solid rgba(255,255,255,0.20–0.30)
+
+backdrop-filter:
+blur(16px–24px) saturate(140%);
+
+box-shadow:
+subtle layered shadow + very subtle inner highlight.
+
+Adjust these values based on the existing app background so the glass remains visible without becoming opaque.
+
+IMPORTANT:
+The glass should look like actual translucent material:
+- background visible through it
+- subtle light reflection
+- soft depth
+- not simply a white/gray rounded rectangle
+
+### 4. BUTTON STATES
+Add polished interaction states:
+
+Default:
+- translucent glass
+- subtle border
+- soft depth
+
+Hover:
+- slightly brighter glass
+- slightly increased border visibility
+- tiny upward/lift effect
+- smooth transition
+
+Active/pressed:
+- slightly darker/denser glass
+- tiny scale-down effect
+
+Focus:
+- accessible but visually elegant focus ring
+
+Disabled:
+- reduced opacity and contrast without breaking the glass aesthetic
+
+Keep all transitions smooth, approximately 180–300ms.
+
+### 5. ICONS
+Use clean minimal icons.
+
+For arrow-based CTAs, use a simple right-facing chevron/arrow similar to the reference images.
+
+Icons should:
+- align perfectly with text
+- have consistent sizing
+- never feel cramped
+- inherit the button's visual language
+
+### 6. CONSISTENCY
+Create a proper UI system so the same visual language is used everywhere.
+
+Define reusable styles/components/tokens for:
+- Large CTA
+- Medium button
+- Small button
+- Icon button
+- Navigation buttons
+- Cards
+- Inputs where appropriate
+- Headings
+- Glass containers
+
+Do NOT create dozens of slightly different button styles.
+
+### 7. PREMIUM DETAILS
+Add subtle details that make the UI feel expensive:
+
+- soft ambient background glow where appropriate
+- subtle gradients
+- glass reflections
+- gentle shadows
+- carefully controlled borders
+- generous whitespace
+- strong typography hierarchy
+- consistent corner radii
+- smooth micro-interactions
+
+Avoid:
+- excessive glowing
+- excessive blur
+- neon cyberpunk styling
+- huge shadows
+- random gradients
+- overly saturated colors
+- excessive animations
+- generic “AI-generated dashboard” aesthetics
+
+The result should feel closer to a premium Apple-style product interface than a template/dashboard.
+
+### 8. RESPONSIVENESS
+Make sure the liquid glass system works beautifully on:
+- desktop
+- tablet
+- mobile
+
+Do not allow large buttons to overflow on smaller screens.
+
+On mobile:
+- preserve the pill/glass appearance
+- reduce padding/font sizes appropriately
+- maintain comfortable touch targets
+- keep spacing intentional
+
+### 9. IMPORTANT IMPLEMENTATION RULE
+First inspect the existing project thoroughly.
+
+Understand:
+- current component structure
+- existing CSS/design system
+- existing colors
+- typography
+- responsive behavior
+- all existing buttons and interactive elements
+
+Then implement the redesign cleanly within the existing architecture.
+
+Do NOT rewrite the entire application unnecessarily.
+
+Preserve:
+- all existing functionality
+- routes
+- APIs
+- business logic
+- forms
+- interactions
+- data handling
+
+This task is primarily a UI/UX redesign.
+
+Before finishing, search the entire codebase for existing buttons/CTAs and make sure none of the important interactive elements are left with the old generic styling.
+
+The final result should feel cohesive, premium, minimal, modern and intentionally designed — with the Liquid Glass treatment being the defining visual language of the application.

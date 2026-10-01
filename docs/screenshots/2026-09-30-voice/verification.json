@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-30",
+  "unit": {
+    "tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "instrumented": {
+    "tests": 18,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "instrumented_cases": [
+    "com.saathi.ui.LaunchUiTest.launcherOpensDirectlyAndSurvivesRecreation",
+    "com.saathi.ui.LaunchUiTest.returningFromBackgroundKeepsContentUsable",
+    "com.saathi.ui.PracticeRecoveryTest.unrelatedTileHasVisibleRecoveryAndNoInventedTarget",
+    "com.saathi.ui.PracticeRecoveryTest.wrongBillerGuidesBackThenToChosenBiller",
+    "com.saathi.ui.PracticeRecoveryTest.formRecreationKeepsCategoryButDiscardsPrivateValues",
+    "com.saathi.ui.SaathiUiTest.categoryIndicatorTracksSwipeAndRestoresSelection",
+    "com.saathi.ui.SaathiUiTest.lightHomeAndTaskRouting",
+    "com.saathi.ui.SaathiUiTest.welcomeLanguageAndPrivacyDeletion",
+    "com.saathi.ui.SaathiUiTest.reducedMotionIsImmediateAndHindiNarrowTabsAreReachable",
+    "com.saathi.ui.SaathiUiTest.reducedTransparencyPersistsThroughRecreation",
+    "com.saathi.ui.SaathiUiTest.navigationMotionEvidence",
+    "com.saathi.ui.SaathiUiTest.glassActionsKeepSemanticsAndOpaqueFallback",
+    "com.saathi.ui.SaathiUiTest.hindiLargeTextRemainsScrollable",
+    "com.saathi.ui.SaathiUiTest.speechSpeedPersistsWithoutStartingConversation",
+    "com.saathi.ui.SaathiUiTest.bottomIndicatorSlidesAndRapidTapRetargets",
+    "com.saathi.ui.SaathiUiTest.bottomSelectionFollowsNestedRoutesAndBack",
+    "com.saathi.ui.SaathiUiTest.homeScreenshots",
+    "com.saathi.ui.VoiceLifecycleTest.backgroundWaitingAndOldNotificationCannotStopReplacement"
+  ],
+  "lint": {
+    "Warning": 57
+  },
+  "limitations": "Software-rendered API 37 emulator, no audio input/output quality exercised; service test waits with microphone off. No physical-device performance certification."
+}

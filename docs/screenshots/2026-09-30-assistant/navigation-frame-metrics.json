@@ -1,0 +1,9 @@
+{
+  "device": "sdk_gphone16k_arm64",
+  "sdk": 37,
+  "frames": 173,
+  "p50_ms": 284.312698,
+  "p95_ms": 425.955816,
+  "over_16_67ms": 173,
+  "note": "Debug build on a software-rendered emulator, not physical-device jank certification. Includes page composition, gesture, and test synchronization work."
+}

@@ -1,0 +1,54 @@
+# Background conversation — 30 September 2026
+
+## Latest backend/browser continuation — 1 October 2026
+
+Debug Android now connects to the loopback gateway for mock practice and separately consented AI navigation. Independent Gemini/Groq REST adapters and ignored credential/model placeholders are implemented. A live proposal is accepted only on paired agreement, a current eligible control and fresh observation. The app resolves bounds locally and uses its localized instruction template. Recent suggested labels support step-by-step wrong-path recovery, but are not claimed clicks or completion evidence. Default/release guidance stays local. See [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md) and [SETUP.md](SETUP.md), which supersede older disconnected-backend notes below.
+
+Actual Chrome on the API37 emulator passed a localhost synthetic-page flow: highlight/tap-through, detour/return, private password screen suspension, retargeting and Stop. The live Android/backend route passed wrong-path recovery using two **simulated** provider adapters. No provider account was configured, no external model request made, and no real account/transaction used. The user chose emulator testing for now.
+
+Voice setup now offers an explicit installed-language check/download through the device speech service, with the existing brand, palette and glass controls. TTS completion callbacks succeeded in all3 languages; recognition returned missing-language error13. No intelligibility, microphone transcript or successful language download is claimed. Natural streaming/barge-in, physical-device/OEM survival, release backend connectivity and hosted authentication/TLS remain open.
+
+
+## Core conversation continuation — 1 October 2026
+
+The latest user priority is core app functionality first, with the established UI retained and shared by new interfaces. Live sessions can now change the requested visible option without restarting the foreground session. The assistant panel uses **Update on-screen help** for an active live session. Hands-free recognition can hand off explicit requests such as “find Help”, “Help dhundo” or “मदद खोजो”; ordinary conversation does not silently replace the goal. These are deterministic commands, not general AI reasoning.
+
+Every accepted change invalidates the old screen/audio work and asks the actual AccessibilityService for a fresh current tree, even if the other app emits no event. Session identity stays the same; stale presentation/session requests, stopped sessions, private-screen voice requests and refused option labels do not change the goal. The scheduled reader also rechecks keyguard before copying. Only a validated requested option is retained as the session goal in memory; raw audio/transcript history is not persisted. Voice notifications now reopen the assistant panel.
+
+`SaathiColors.kt` and `SaathiBrand.kt` share the existing main-app palette and vector header with AssistantActivity. Main palette values and header geometry are unchanged; assistant chips use the same green containers, and existing glass buttons/panels remain. The assistant respects system reduced motion and the main shell's maximum content width. Its glass remains an opaque fallback without sampling other apps. Panel localization, Figma parity, native/legacy surfaces and broader accessibility/device checks are still pending.
+
+Verification is recorded in TEST_RESULTS.md. Parser tests and direct request handoff are distinct from actual speech recognition: microphone/TTS delivery, natural streaming conversation, real browser compatibility and OEM survival remain unverified. No model or paid service was enabled.
+
+
+## Implemented scope
+
+From an active session, **Start voice & open practice** requests microphone and notification permission while the activity is visible, starts a microphone foreground service, and opens the synthetic practice screen. The foreground service continues when the main activity goes into the background. It does not start on boot, restore itself after process death, or turn on because a speech preference was saved.
+
+The current conversation is a deterministic practice assistant. It speaks the current step and then starts an on-device recognition turn. A recognised reply can trigger another spoken reply and listening turn without another button press. English, Hindi and Hinglish command phrases cover repeat, help, understood, pause and stop. Saying “done” only acknowledges the user; completion still requires the synthetic success screen. Unknown requests get an honest local-guide explanation. Raw transcripts are not persisted or kept as conversation history. An explicitly requested, validated visible option can now become the in-memory live-session goal and appear in guidance; see the latest continuation above.
+
+This is **not yet natural, open-ended AI conversation**. A debug reasoning connection is implemented but not tested with real credentials. Streaming speech, simultaneous speech/listening and barge-in remain absent; cross-app evidence is limited to synthetic fixtures and Chrome on a localhost page. The new service requires Android 12+ with an available on-device recognizer; older or unsupported devices keep visual and optional spoken guidance. Installed recognition language packs may still be missing. Task-intake voice continues to use the user's Android speech service separately.
+
+## Lifecycle and privacy
+
+- Service/notification actions carry a session identity. Audio callbacks carry turn identities; old TTS completions and cancelled recognition cannot resume a newer turn.
+- The notification shows preparing, speaking, listening, waiting, private-form or paused status. Only the recognizer's ready callback says “Listening”. Pause voice and Stop guidance remain accessible in the notification; the app also has a conversation-off control.
+- On a screen change, cancel speech and recognition immediately. Resume only after the current supported snapshot is validated. Unsupported packages are rejected before their accessibility trees are flattened.
+- Private forms allow static local spoken instructions, but no microphone turn. The recognizer is suspended for the whole form, not merely when a secret field receives focus.
+- Audio-focus loss and headphone disconnection pause voice. Screen-off/lock stops the guidance session. Returning does not silently resume a paused microphone.
+- A recognition error or silence timeout pauses instead of retrying indefinitely. Each speech/listening turn has a 30-second watchdog. A successful conversational exchange can continue through repeated turns.
+- Speech speed follows the session setting. TTS requests preserve completion callbacks during initialization, reject stale utterance callbacks, and fail visibly if the selected language is unavailable.
+- No source audio is written to a file by Saathi. This does not certify every vendor's speech engine or device.
+
+The API constraints were checked against the official [SpeechRecognizer reference](https://developer.android.com/reference/android/speech/SpeechRecognizer) and [foreground service restrictions](https://developer.android.com/develop/background-work/services/fgs/restrictions-bg-start). Android's recognizer is designed for speech turns, not indefinite continuous recognition. A future natural streaming mode needs a separately tested speech transport and protected reasoning gateway.
+
+## Recovering from a different path
+
+The synthetic fixture exposes stable category markers and an actual Back to choices button. A mismatched category or unrelated practice tile produces a corrective instruction anchored to that button. After the user returns, the guide points to the original chosen category. It never taps Back or changes the user's selected goal itself. Partial trees with no recovery control produce no invented target and no exception.
+
+Synthetic form recreation retains the category but clears entered values, including the made-up PIN. The success screen for a different category cannot complete the originally selected task.
+
+## Still required
+
+Verified this phase:41 unit tests and18 emulator tests pass, including real-tree corrective navigation, category/form recreation, persisted speech speed, and background waiting/Stop/replacement-notification behavior of the real foreground service. The emulator has an on-device recognizer, but the service test intentionally does not feed or record speech. See [TEST_RESULTS.md](TEST_RESULTS.md) for evidence and the remaining performance failure.
+
+Actual audio conversation, Hindi/Hinglish recognition quality, TTS intelligibility/latency, audio-focus/phone-call/Bluetooth behavior, battery use, and real microphone permission-revocation need physical-device testing. Backend authentication, independent provider validation, current unpaid data terms, quotas, streaming cancellation and grounded compatibility tests remain in the execution plan. No paid service or provider has been enabled.

@@ -1,0 +1,947 @@
+{
+  "fileKey": "vx2M28p625yZQTAzcTLlQj",
+  "pages": [
+    {
+      "id": "0:1",
+      "name": "01 Product principles and journeys"
+    },
+    {
+      "id": "4:2",
+      "name": "02 Foundations"
+    },
+    {
+      "id": "4:3",
+      "name": "03 Component library"
+    },
+    {
+      "id": "4:4",
+      "name": "04 Light screens"
+    },
+    {
+      "id": "4:5",
+      "name": "05 Dark screens"
+    },
+    {
+      "id": "4:6",
+      "name": "06 Languages and large text \u2014 pending"
+    },
+    {
+      "id": "4:7",
+      "name": "07 Prototype and motion \u2014 pending"
+    },
+    {
+      "id": "4:8",
+      "name": "08 Developer handoff \u2014 pending"
+    }
+  ],
+  "collections": [
+    {
+      "id": "VariableCollectionId:2:2",
+      "name": "Saathi / Primitives",
+      "modes": [
+        {
+          "name": "Value",
+          "modeId": "2:0"
+        }
+      ]
+    },
+    {
+      "id": "VariableCollectionId:2:3",
+      "name": "Saathi / Semantics",
+      "modes": [
+        {
+          "name": "Light",
+          "modeId": "2:1"
+        },
+        {
+          "name": "Dark",
+          "modeId": "2:2"
+        }
+      ]
+    },
+    {
+      "id": "VariableCollectionId:2:4",
+      "name": "Saathi / Layout",
+      "modes": [
+        {
+          "name": "Value",
+          "modeId": "2:3"
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "id": "VariableID:2:5",
+      "name": "palette/ivory",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_ivory"
+      },
+      "values": {
+        "2:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:6",
+      "name": "palette/white",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_white"
+      },
+      "values": {
+        "2:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:7",
+      "name": "palette/ink",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_ink"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.09019608050584793,
+          "g": 0.10196078568696976,
+          "b": 0.09019608050584793,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:8",
+      "name": "palette/teal",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_teal"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.0313725508749485,
+          "g": 0.4745098054409027,
+          "b": 0,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:9",
+      "name": "palette/night",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_night"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.07450980693101883,
+          "g": 0.08235294371843338,
+          "b": 0.07450980693101883,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:10",
+      "name": "palette/forest",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_forest"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.125490203499794,
+          "g": 0.1411764770746231,
+          "b": 0.125490203499794,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:11",
+      "name": "palette/snow",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_snow"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.9647058844566345,
+          "g": 0.9647058844566345,
+          "b": 0.9647058844566345,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:12",
+      "name": "palette/mint",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_mint"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.6431372761726379,
+          "g": 0.9333333373069763,
+          "b": 0.6000000238418579,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:13",
+      "name": "palette/mutedLight",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_mutedLight"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.3490196168422699,
+          "g": 0.3843137323856354,
+          "b": 0.3490196168422699,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:14",
+      "name": "palette/mutedDark",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_mutedDark"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.7215686440467834,
+          "g": 0.7647058963775635,
+          "b": 0.7137255072593689,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:15",
+      "name": "palette/borderLight",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_borderLight"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.8627451062202454,
+          "g": 0.8901960849761963,
+          "b": 0.8549019694328308,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:16",
+      "name": "palette/borderDark",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.palette_borderDark"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.24313725531101227,
+          "g": 0.2862745225429535,
+          "b": 0.23529411852359772,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:17",
+      "name": "color/background",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.color_background"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:5"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:9"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:18",
+      "name": "color/surface",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.color_surface"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:6"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:10"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:19",
+      "name": "color/text",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "TEXT_FILL"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.color_text"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:7"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:11"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:20",
+      "name": "color/muted",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "TEXT_FILL"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.color_muted"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:13"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:14"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:21",
+      "name": "color/primary",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.color_primary"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:8"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:12"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:22",
+      "name": "color/onPrimary",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "TEXT_FILL"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.color_onPrimary"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:6"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:9"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:23",
+      "name": "color/border",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.color_border"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:15"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2:16"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2:24",
+      "name": "space/4",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "GAP"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.space_4"
+      },
+      "values": {
+        "2:3": 4
+      }
+    },
+    {
+      "id": "VariableID:2:25",
+      "name": "space/8",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "GAP"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.space_8"
+      },
+      "values": {
+        "2:3": 8
+      }
+    },
+    {
+      "id": "VariableID:2:26",
+      "name": "space/12",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "GAP"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.space_12"
+      },
+      "values": {
+        "2:3": 12
+      }
+    },
+    {
+      "id": "VariableID:2:27",
+      "name": "space/16",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "GAP"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.space_16"
+      },
+      "values": {
+        "2:3": 16
+      }
+    },
+    {
+      "id": "VariableID:2:28",
+      "name": "space/24",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "GAP"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.space_24"
+      },
+      "values": {
+        "2:3": 24
+      }
+    },
+    {
+      "id": "VariableID:2:29",
+      "name": "space/32",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "GAP"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.space_32"
+      },
+      "values": {
+        "2:3": 32
+      }
+    },
+    {
+      "id": "VariableID:2:30",
+      "name": "space/48",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "GAP"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.space_48"
+      },
+      "values": {
+        "2:3": 48
+      }
+    },
+    {
+      "id": "VariableID:2:31",
+      "name": "radius/12",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "CORNER_RADIUS"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.radius_12"
+      },
+      "values": {
+        "2:3": 12
+      }
+    },
+    {
+      "id": "VariableID:2:32",
+      "name": "radius/24",
+      "collectionId": "VariableCollectionId:2:4",
+      "scopes": [
+        "CORNER_RADIUS"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.radius_24"
+      },
+      "values": {
+        "2:3": 24
+      }
+    },
+    {
+      "id": "VariableID:8:2",
+      "name": "palette/featureLight",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.featureLight"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.843137264251709,
+          "g": 1,
+          "b": 0.8313725590705872,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:8:3",
+      "name": "palette/featureDark",
+      "collectionId": "VariableCollectionId:2:2",
+      "scopes": [],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.featureDark"
+      },
+      "values": {
+        "2:0": {
+          "r": 0.14509804546833038,
+          "g": 0.239215686917305,
+          "b": 0.13333334028720856,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:8:4",
+      "name": "color/feature",
+      "collectionId": "VariableCollectionId:2:3",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "codeSyntax": {
+        "ANDROID": "SaathiTokens.feature"
+      },
+      "values": {
+        "2:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:8:2"
+        },
+        "2:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:8:3"
+        }
+      }
+    }
+  ],
+  "updatedAt": "2026-09-29",
+  "phase": "navigation-components-and-dock-integration",
+  "components": {
+    "Action": {
+      "set": "9:8",
+      "Primary": "9:2",
+      "Secondary": "9:4",
+      "Disabled": "9:6"
+    },
+    "Content": {
+      "set": "9:18",
+      "Feature": "9:9",
+      "Row": "9:12",
+      "Card": "9:15"
+    }
+  },
+  "screens": {
+    "light": {
+      "Welcome": "10:2",
+      "Home": "10:15",
+      "Practice": "10:40",
+      "Setup": "10:59",
+      "Session": "10:77",
+      "Settings": "10:92",
+      "Privacy": "10:119"
+    },
+    "dark": {
+      "Welcome": "11:2",
+      "Home": "11:15",
+      "Practice": "11:40",
+      "Setup": "11:59",
+      "Session": "11:77",
+      "Settings": "11:92",
+      "Privacy": "11:119"
+    }
+  },
+  "pending": [
+    "Hindi/Hinglish and large text Figma variants",
+    "Intake, error, completion and overlay frames",
+    "Prototype/motion",
+    "All-screen visual parity",
+    "Actual code syntax mapping (SaathiTokens absent)"
+  ],
+  "navigation": {
+    "components": [
+      {
+        "name": "Saathi / Navigation / Dock",
+        "id": "24:86",
+        "variants": [
+          {
+            "id": "24:2",
+            "name": "Theme=Light, Selected=Home",
+            "width": 358,
+            "height": 84
+          },
+          {
+            "id": "24:16",
+            "name": "Theme=Light, Selected=Practice",
+            "width": 358,
+            "height": 84
+          },
+          {
+            "id": "24:30",
+            "name": "Theme=Light, Selected=Settings",
+            "width": 358,
+            "height": 84
+          },
+          {
+            "id": "24:44",
+            "name": "Theme=Dark, Selected=Home",
+            "width": 358,
+            "height": 84
+          },
+          {
+            "id": "24:58",
+            "name": "Theme=Dark, Selected=Practice",
+            "width": 358,
+            "height": 84
+          },
+          {
+            "id": "24:72",
+            "name": "Theme=Dark, Selected=Settings",
+            "width": 358,
+            "height": 84
+          }
+        ]
+      },
+      {
+        "name": "Saathi / Navigation / PracticeTabs",
+        "id": "24:189",
+        "variants": [
+          {
+            "id": "24:87",
+            "name": "Theme=Light, Selected=Electricity bill",
+            "width": 396,
+            "height": 112
+          },
+          {
+            "id": "24:104",
+            "name": "Theme=Light, Selected=Water bill",
+            "width": 396,
+            "height": 112
+          },
+          {
+            "id": "24:121",
+            "name": "Theme=Light, Selected=TV recharge",
+            "width": 396,
+            "height": 112
+          },
+          {
+            "id": "24:138",
+            "name": "Theme=Dark, Selected=Electricity bill",
+            "width": 396,
+            "height": 112
+          },
+          {
+            "id": "24:155",
+            "name": "Theme=Dark, Selected=Water bill",
+            "width": 396,
+            "height": 112
+          },
+          {
+            "id": "24:172",
+            "name": "Theme=Dark, Selected=TV recharge",
+            "width": 396,
+            "height": 112
+          }
+        ]
+      }
+    ],
+    "createdIds": [
+      "24:2",
+      "24:3",
+      "24:4",
+      "24:5",
+      "24:6",
+      "24:7",
+      "24:8",
+      "24:9",
+      "24:10",
+      "24:11",
+      "24:12",
+      "24:13",
+      "24:14",
+      "24:15",
+      "24:16",
+      "24:17",
+      "24:18",
+      "24:19",
+      "24:20",
+      "24:21",
+      "24:22",
+      "24:23",
+      "24:24",
+      "24:25",
+      "24:26",
+      "24:27",
+      "24:28",
+      "24:29",
+      "24:30",
+      "24:31",
+      "24:32",
+      "24:33",
+      "24:34",
+      "24:35",
+      "24:36",
+      "24:37",
+      "24:38",
+      "24:39",
+      "24:40",
+      "24:41",
+      "24:42",
+      "24:43",
+      "24:44",
+      "24:45",
+      "24:46",
+      "24:47",
+      "24:48",
+      "24:49",
+      "24:50",
+      "24:51",
+      "24:52",
+      "24:53",
+      "24:54",
+      "24:55",
+      "24:56",
+      "24:57",
+      "24:58",
+      "24:59",
+      "24:60",
+      "24:61",
+      "24:62",
+      "24:63",
+      "24:64",
+      "24:65",
+      "24:66",
+      "24:67",
+      "24:68",
+      "24:69",
+      "24:70",
+      "24:71",
+      "24:72",
+      "24:73",
+      "24:74",
+      "24:75",
+      "24:76",
+      "24:77",
+      "24:78",
+      "24:79",
+      "24:80",
+      "24:81",
+      "24:82",
+      "24:83",
+      "24:84",
+      "24:85",
+      "24:86",
+      "24:87",
+      "24:88",
+      "24:89",
+      "24:90",
+      "24:91",
+      "24:92",
+      "24:93",
+      "24:94",
+      "24:95",
+      "24:96",
+      "24:97",
+      "24:98",
+      "24:99",
+      "24:100",
+      "24:101",
+      "24:102",
+      "24:103",
+      "24:104",
+      "24:105",
+      "24:106",
+      "24:107",
+      "24:108",
+      "24:109",
+      "24:110",
+      "24:111",
+      "24:112",
+      "24:113",
+      "24:114",
+      "24:115",
+      "24:116",
+      "24:117",
+      "24:118",
+      "24:119",
+      "24:120",
+      "24:121",
+      "24:122",
+      "24:123",
+      "24:124",
+      "24:125",
+      "24:126",
+      "24:127",
+      "24:128",
+      "24:129",
+      "24:130",
+      "24:131",
+      "24:132",
+      "24:133",
+      "24:134",
+      "24:135",
+      "24:136",
+      "24:137",
+      "24:138",
+      "24:139",
+      "24:140",
+      "24:141",
+      "24:142",
+      "24:143",
+      "24:144",
+      "24:145",
+      "24:146",
+      "24:147",
+      "24:148",
+      "24:149",
+      "24:150",
+      "24:151",
+      "24:152",
+      "24:153",
+      "24:154",
+      "24:155",
+      "24:156",
+      "24:157",
+      "24:158",
+      "24:159",
+      "24:160",
+      "24:161",
+      "24:162",
+      "24:163",
+      "24:164",
+      "24:165",
+      "24:166",
+      "24:167",
+      "24:168",
+      "24:169",
+      "24:170",
+      "24:171",
+      "24:172",
+      "24:173",
+      "24:174",
+      "24:175",
+      "24:176",
+      "24:177",
+      "24:178",
+      "24:179",
+      "24:180",
+      "24:181",
+      "24:182",
+      "24:183",
+      "24:184",
+      "24:185",
+      "24:186",
+      "24:187",
+      "24:188",
+      "24:189"
+    ],
+    "tokenIds": [
+      "VariableID:22:4",
+      "VariableID:22:5",
+      "VariableID:22:6",
+      "VariableID:22:7",
+      "VariableID:22:8"
+    ],
+    "prototypeLinks": 24,
+    "status": "Component sets and Home renders reviewed; full Practice frame composition and large-text Figma variants pending"
+  },
+  "glassRedesign": {
+    "date": "2026-09-29",
+    "sourceBrief": "docs/specs/Liquid-glass-brief-2026-09-29.txt",
+    "status": "Android shared material implemented; Figma synchronization pending. No new Figma nodes created this phase.",
+    "handoff": "docs/GLASS_UI.md"
+  }
+}

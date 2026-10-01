@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saathi local browser fixture</title>
+<style>body{font:20px sans-serif;padding:24px}button,a,input{display:block;margin:20px 0;padding:12px}</style>
+<h1>Saathi browser test</h1><p>Synthetic local page. No account or payment.</p><main id="content"></main>
+<script>
+const content = document.getElementById('content');
+function choices() {
+  content.innerHTML = '<button onclick="this.textContent=\'Help opened\'">Help</button><button onclick="detour()">Explore</button><a href="#support" onclick="this.textContent=\'Support opened\';return false;">Support</a><button onclick="privateForm()">Private example</button>';
+}
+function detour() { content.innerHTML = '<h2>Another page</h2><button onclick="choices()">Back to choices</button>'; }
+function privateForm() { content.innerHTML = '<label>Password (synthetic; leave empty)<input type="password" autocomplete="off"></label><button onclick="choices()">Back to choices</button>'; }
+choices();
+</script></html>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="surface">#0E1614</color><color name="surface_elevated">#16211D</color><color name="primary">#4FD8B0</color><color name="on_primary">#06211B</color>
+    <color name="primary_container">#1B3A33</color><color name="on_primary_container">#8FE9CE</color><color name="text_primary">#EAF3EF</color><color name="text_secondary">#9FB8AF</color>
+    <color name="border">#26433B</color><color name="border_subtle">#1E2C27</color><color name="success">#55C99A</color><color name="danger">#FF8A80</color>
+    <color name="chat_user_bg">#145C4C</color><color name="chat_user_text">#F2FBF8</color><color name="chat_assistant_bg">#16211D</color><color name="chat_assistant_text">#EAF3EF</color>
+    <color name="saathi_icon_background">#16211D</color>
+</resources>

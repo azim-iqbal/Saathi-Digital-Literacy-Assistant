@@ -1,0 +1,259 @@
+I want you to redesign/improve the navigation experience of our EXISTING Android Kotlin app.
+
+IMPORTANT:
+Do NOT treat the reference screenshots as a template to blindly copy.
+The navigation must be adapted to OUR PRODUCT, OUR APP'S branding, colors, typography, content hierarchy, and existing UI.
+
+First, inspect the entire existing project and understand:
+- What our product/app actually does
+- Our current screen structure
+- Existing navigation architecture
+- Current Kotlin/Jetpack Compose setup
+- Existing theme, colors, typography and design system
+- Existing icons/assets
+- Current navigation destinations
+- How users move between the major sections
+- Any existing animations or reusable components
+
+Do not unnecessarily rewrite or restructure the application.
+
+REFERENCE DESIGN:
+I want the navigation interaction inspired by the attached reference screenshots.
+
+The important part is NOT the exact colors or content from the screenshots. The important part is the interaction/design language:
+
+1. FLOATING LIQUID-GLASS BOTTOM NAVIGATION
+Create a premium floating bottom navigation bar similar in concept to the first reference image.
+
+It should:
+- Float above the content rather than being a conventional full-width Android NavigationBar.
+- Have a highly rounded/pill-shaped container.
+- Use a translucent glass-like appearance.
+- Have subtle background blur/transparency where technically appropriate.
+- Have a thin glass highlight/border.
+- Have subtle depth/shadow.
+- Respect our app's existing color palette instead of introducing random colors.
+- Have clear selected and unselected states.
+- Use our actual navigation destinations, NOT "Home / Categories / Order Again" unless those are actually relevant to our product.
+
+MOST IMPORTANT:
+The selected glass indicator should smoothly MOVE between navigation items.
+
+It should NOT simply disappear from one tab and appear on another.
+
+When the user taps another destination:
+- The glass indicator should physically slide toward the selected destination.
+- Use spring-based physics.
+- Add a subtle stretch/squish effect while moving.
+- Slightly deform/expand horizontally during movement.
+- Settle naturally when it reaches the destination.
+- Keep the animation fast and responsive.
+- Avoid excessive bouncing.
+
+The overall feeling should be:
+premium + fluid + physical + modern.
+
+Think "liquid glass" rather than a standard Material 3 navigation bar.
+
+2. SWIPE INTERACTION
+The navigation should also feel connected to swipe/page movement where applicable.
+
+If our app has horizontally swipable top-level sections:
+- Allow the user to swipe between them.
+- The selected glass indicator should respond continuously to the swipe position where technically appropriate.
+- Do not wait until the swipe is completed before moving the indicator.
+- The indicator should follow the user's gesture naturally.
+- On release, use spring physics to settle into the selected destination.
+
+The transition should feel like one continuous physical surface rather than independent animations.
+
+3. TOP CATEGORY / SECTION NAVIGATION
+If our product has a horizontal category/section navigation similar to the second reference screenshot, create a custom horizontally scrollable navigation component.
+
+Do NOT blindly use:
+- Food
+- Instamart
+- Dineout
+- Scenes
+
+Those are only examples from the reference.
+
+Instead, determine what the equivalent primary categories/sections are in OUR PRODUCT and use those.
+
+The component should support:
+- Horizontal scrolling
+- Selected state
+- Smooth selection animation
+- Premium rounded cards/tabs
+- Our actual app icons/assets where available
+- Appropriate typography
+- Subtle glass/depth treatment
+- Smooth transition between categories
+- Gesture/swipe interaction where appropriate
+
+4. LIQUID GLASS VISUAL LANGUAGE
+
+The glass effect should look intentional and premium.
+
+Use a combination of:
+- Transparency
+- Blur where supported
+- Subtle highlights
+- Thin borders
+- Soft shadows
+- Layered surfaces
+- Slight contrast between glass and background
+- Spring-based motion
+
+Do NOT make it look like:
+- A generic Material 3 navbar
+- A cheap neon/glow UI
+- A heavily blurred "frosted" rectangle
+- A Dribbble/vibe-coded UI
+- An over-animated gaming interface
+
+It should feel like a polished production mobile application.
+
+5. ANIMATION PRINCIPLES
+
+Use Compose-native animation APIs where appropriate.
+
+Prefer:
+- Animatable
+- Spring animations
+- graphicsLayer
+- animateFloatAsState / animateDpAsState where appropriate
+- derivedStateOf
+- Pager state / scroll state when applicable
+
+The animation should have:
+- Fast response to touch
+- Smooth interpolation
+- Slight stretch during movement
+- Natural settling
+- No visible frame jumps
+- No unnecessary recompositions
+- No janky scrolling
+
+If a custom Canvas/drawing approach is necessary for the glass indicator, use it.
+
+6. RESPONSIVENESS
+
+The navigation must work properly across:
+- Different Android screen widths
+- Small phones
+- Large phones
+- Different density values
+- Gesture navigation
+- Edge-to-edge layouts
+
+Do not hardcode pixel positions based on the reference screenshots.
+
+Use:
+- dp
+- sp
+- weights
+- constraints
+- screen-aware measurements
+
+appropriately.
+
+7. PRODUCT CONSISTENCY
+
+This is critical.
+
+Before implementing anything, understand our product.
+
+The final result should look like:
+
+"OUR PRODUCT, but with a premium liquid-glass navigation experience"
+
+NOT:
+
+"Apple/Swiggy/Zomato clone with our logo."
+
+Do not copy:
+- Their exact colors
+- Their exact typography
+- Their exact icons
+- Their exact category names
+- Their exact spacing
+- Their exact layout
+
+Use the references only for interaction inspiration and visual direction.
+
+8. EXISTING CODE
+
+Before making changes:
+- Inspect the existing navigation implementation.
+- Identify reusable components.
+- Identify the existing theme.
+- Identify existing navigation routes.
+- Identify whether the project uses Navigation Compose.
+- Identify whether a Pager is already present.
+- Reuse existing architecture wherever possible.
+
+Do not create duplicate navigation systems.
+
+Do not unnecessarily modify unrelated screens.
+
+Do not break existing functionality.
+
+9. IMPLEMENTATION QUALITY
+
+Write production-quality Kotlin.
+
+Requirements:
+- Clean composable architecture
+- Reusable navigation components
+- Meaningful names
+- Minimal unnecessary state
+- Proper state hoisting
+- No magic numbers scattered throughout the code
+- Avoid unnecessary dependencies
+- Use existing project dependencies whenever possible
+- Keep animations performant
+- Maintain accessibility/content descriptions
+- Preserve existing navigation behavior
+
+10. FINAL RESULT
+
+I want the result to feel:
+
+Premium
+Minimal
+Fluid
+Modern
+Product-specific
+Native to Android
+Physically responsive
+
+The user should feel that the glass navigation surface is actually moving underneath their finger.
+
+TAP:
+
+Tab A
+   ↓
+glass stretches → slides → settles
+                     ↓
+                   Tab B
+
+
+SWIPE:
+
+Tab A ───────────────→ Tab B
+glass indicator follows the gesture continuously.
+
+Do NOT just implement a basic animated color change.
+
+After implementation:
+1. Build the project.
+2. Fix any compilation errors.
+3. Check for navigation/state issues.
+4. Check the animation for jank.
+5. Make sure existing screens still work.
+6. Review the implementation against the reference screenshots.
+7. Make the final UI feel like it belongs to OUR PRODUCT.
+
+IMPORTANT:
+If there is a conflict between the reference design and our existing product design system, prioritize our product's design system and adapt the liquid-glass interaction to it.

@@ -1,0 +1,1 @@
+PASS: real enabled service; external native and WebView events; stable idle presentation; detour/return; changed label; own-app clearing; explicit Stop. Text only; no audio or model.

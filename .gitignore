@@ -1,0 +1,65 @@
+# Android / Gradle build outputs
+.gradle/
+build/
+**/build/
+**/out/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Local Android SDK and developer configuration
+local.properties
+local.properties.*
+.externalNativeBuild/
+.cxx/
+captures/
+externalNativeBuild/
+
+# Secrets and release signing material
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+key.properties
+secrets.properties
+google-services.json
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Kotlin and Java tooling
+.kotlin/
+hs_err_pid*
+replay_pid*
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Test, profiling, and temporary artifacts
+__pycache__/
+*.pyc
+test-results/
+coverage/
+*.ec
+*.hprof
+*.trace
+tmp/
+output/
+
+# Local persistent gateway counters (no user data)
+backend/*.sqlite3
+backend/*.sqlite3-*

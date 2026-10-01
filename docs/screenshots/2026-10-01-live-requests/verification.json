@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-01",
+  "unit": {
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "focused_instrumentation": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Warning": 61
+  },
+  "device": "Pixel_9_Pro API37 emulator; no physical device, no audio",
+  "scope": "explicit option parser; real-service request retarget/old identity rejection; permission loss; assistant modes/light/dark; waiting voice lifecycle",
+  "not_verified": [
+    "actual speech recognition to request handoff",
+    "actual microphone/TTS quality",
+    "natural AI conversation",
+    "real browser pages",
+    "OEM survival",
+    "all-screen design parity"
+  ]
+}

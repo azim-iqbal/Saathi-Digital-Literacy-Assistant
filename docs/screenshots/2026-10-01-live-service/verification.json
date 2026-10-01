@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-01",
+  "head": "5896927 plus local uncommitted changes",
+  "command": "testDebugUnitTest assembleDebug lintDebug connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.saathi.ui.CrossAppGuidanceTest,com.saathi.ui.LiveAccessibilityIntegrationTest,com.saathi.ui.VoiceLifecycleTest",
+  "result": "BUILD SUCCESSFUL",
+  "unit": {
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "android_focused": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Error": 0,
+    "Warning": 61
+  },
+  "environment": "Pixel_9_Pro AVD, Android 17/API37, arm64 software graphics; no physical device/audio",
+  "scope": "One real-service integration flow plus two prior cross-app component checks and background voice waiting lifecycle. Real-service test never supplies snapshots or invokes guide/presenter. Synthetic external native app and local WebView only.",
+  "performance_accepted": false,
+  "new_visual_design": false
+}
