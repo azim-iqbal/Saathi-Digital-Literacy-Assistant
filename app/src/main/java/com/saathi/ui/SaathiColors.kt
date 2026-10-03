@@ -10,11 +10,21 @@ internal fun saathiColorScheme(dark: Boolean) = if (dark) darkColorScheme(
         background = Color(0xFF131513), surface = Color(0xFF202420),
         onBackground = Color(0xFFF6F6F6), onSurface = Color(0xFFF6F6F6),
         onSurfaceVariant = Color(0xFFB8C3B6), outlineVariant = Color(0xFF3E493C),
-        primaryContainer = Color(0xFF253D22), onPrimaryContainer = Color(0xFFF6F6F6)
+        primaryContainer = Color(0xFF253D22), onPrimaryContainer = Color(0xFFF6F6F6),
+        secondary = Color(0xFFA4EE99), onSecondary = Color(0xFF131513),
+        secondaryContainer = Color(0xFF253D22), onSecondaryContainer = Color(0xFFF6F6F6),
+        tertiary = Color(0xFFA4EE99), onTertiary = Color(0xFF131513),
+        tertiaryContainer = Color(0xFF253D22), onTertiaryContainer = Color(0xFFF6F6F6),
+        surfaceVariant = Color(0xFF2C342A)
     ) else lightColorScheme(
         primary = Color(0xFF087900), onPrimary = Color.White,
         background = Color.White, surface = Color.White,
         onBackground = Color(0xFF171A17), onSurface = Color(0xFF171A17),
         onSurfaceVariant = Color(0xFF596259), outlineVariant = Color(0xFFDCE3DA),
-        primaryContainer = Color(0xFFD7FFD4), onPrimaryContainer = Color(0xFF171A17)
+        primaryContainer = Color(0xFFD7FFD4), onPrimaryContainer = Color(0xFF171A17),
+        secondary = Color(0xFF087900), onSecondary = Color.White,
+        secondaryContainer = Color(0xFFD7FFD4), onSecondaryContainer = Color(0xFF171A17),
+        tertiary = Color(0xFF087900), onTertiary = Color.White,
+        tertiaryContainer = Color(0xFFD7FFD4), onTertiaryContainer = Color(0xFF171A17),
+        surfaceVariant = Color(0xFFEDF2EB)
     )

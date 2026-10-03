@@ -1,0 +1,4 @@
+Explore: text=Rect(32, 497 - 1248, 641); clickable=true; tap=Rect(32, 497 - 1248, 641)
+Back to choices: text=Rect(32, 353 - 1248, 497); clickable=true; tap=Rect(32, 353 - 1248, 497)
+Help: text=Rect(32, 353 - 1248, 497); clickable=true; tap=Rect(32, 353 - 1248, 497)
+Support: text=Rect(56, 809 - 227, 869); clickable=false; tap=Rect(56, 809 - 227, 869)

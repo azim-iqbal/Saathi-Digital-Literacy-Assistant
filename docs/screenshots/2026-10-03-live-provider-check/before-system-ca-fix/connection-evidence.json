@@ -1,0 +1,42 @@
+{
+  "status": "connection",
+  "mode": "dual_ai",
+  "request_id": null,
+  "reason": "not_requested",
+  "providers": [
+    {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash-lite",
+      "attempts": 1,
+      "configured": true,
+      "last": {
+        "request_id": "a3c12d5e-f2bf-4660-895e-45f7c44fe219",
+        "outcome": "provider_unavailable",
+        "real_api": true,
+        "http_received": false,
+        "checked_at_ms": 1791042403892,
+        "elapsed_ms": 308,
+        "input_tokens": null,
+        "output_tokens": null,
+        "total_tokens": null
+      }
+    },
+    {
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b",
+      "attempts": 1,
+      "configured": true,
+      "last": {
+        "request_id": "a3c12d5e-f2bf-4660-895e-45f7c44fe219",
+        "outcome": "provider_unavailable",
+        "real_api": true,
+        "http_received": false,
+        "checked_at_ms": 1791042403892,
+        "elapsed_ms": 307,
+        "input_tokens": null,
+        "output_tokens": null,
+        "total_tokens": null
+      }
+    }
+  ]
+}

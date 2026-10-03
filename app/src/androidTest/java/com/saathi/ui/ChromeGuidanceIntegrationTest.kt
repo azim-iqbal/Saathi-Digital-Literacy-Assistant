@@ -94,6 +94,15 @@ class ChromeGuidanceIntegrationTest {
                 tap("Back to choices")
                 waitFor("Chrome return from private screen") { SaathiSession.instruction.value.startsWith("Find “Help”") }
                 val session = SaathiSession.sessionKey()
+                main { assertTrue(SaathiSession.changeLiveRequest("To", session)) }
+                tap("Travel options")
+                waitFor("Chrome travel destination remains public") { SaathiSession.instruction.value.startsWith("Find “To”") }
+                assertFalse("Public browser travel dates and fares must not pause guidance", nodes().any { it.isSensitive })
+                screenshot("chrome-public-travel")
+                main { assertTrue(SaathiSession.changeLiveRequest("01/10/2026", session)) }
+                waitFor("Chrome travel date can be highlighted") { SaathiSession.instruction.value.startsWith("Find “01/10/2026”") }
+                tap("Back to choices")
+                waitFor("Departed date target clears") { SaathiSession.instruction.value.startsWith("I cannot find") }
                 main { assertTrue(SaathiSession.changeLiveRequest("Support", session, SaathiSession.presentationKey())) }
                 waitFor("Chrome link retarget") { SaathiSession.instruction.value.startsWith("Find “Support”") }
                 screenshot("chrome-support")

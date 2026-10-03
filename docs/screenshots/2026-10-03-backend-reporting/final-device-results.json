@@ -1,0 +1,12 @@
+[
+  {
+    "suite": "mock-reporting",
+    "expected_tests": 7,
+    "passed": true
+  },
+  {
+    "suite": "paired-assessment",
+    "expected_tests": 4,
+    "passed": true
+  }
+]

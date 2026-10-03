@@ -40,9 +40,13 @@ class SaathiAccessibilityService : AccessibilityService() {
         // changed the underlying screen; re-observing would interrupt speech/model work.
         // Match actual attached window IDs, never ignore all events from the Saathi package:
         // opening a Saathi activity must still invalidate external guidance.
-        if (event.packageName?.toString() == packageName &&
-            (com.saathi.overlay.HighlightOverlayService.ownsAccessibilityWindow(event.windowId) ||
-                com.saathi.overlay.AssistantBubbleService.ownsAccessibilityWindow(event.windowId))) return
+        // TYPE_WINDOWS_CHANGED can have a null/system package even for our window.
+        // Ownership of the currently attached window is the boundary, not the event package.
+        val ownOverlay = com.saathi.overlay.HighlightOverlayService.ownsAccessibilityWindow(event.windowId) ||
+                com.saathi.overlay.AssistantBubbleService.ownsAccessibilityWindow(event.windowId) ||
+                com.saathi.overlay.CyberLinkOverlayService.ownsAccessibilityWindow(event.windowId)
+        ObservationDiagnostics.event(event.eventType, event.windowId, event.contentChangeTypes, ownOverlay)
+        if (ownOverlay) return
         refreshScreen()
     }
 

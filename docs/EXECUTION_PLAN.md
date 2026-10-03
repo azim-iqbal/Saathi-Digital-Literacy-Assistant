@@ -1,3 +1,37 @@
+## Current priorities — 3 October 2026
+
+The connection checks, complaint worksheet and per-field copy flow are implemented. Both real providers have returned valid responses, but the last paired request timed out on Groq. See [provider verification](PROVIDER_VERIFICATION.md) for the exact evidence. Next work is provider latency and genuine guidance evaluation, followed by the remaining browser, voice and production-readiness items below.
+
+## Completed continuation — 3 October 2026, connection evidence and complaint drafts
+
+Implemented in the debug local pilot: authenticated server-status refresh (no model request), explicit two-provider API smoke check, independent Gemini/Groq outcomes and token metadata, safe recovery, and a reviewed complaint worksheet with per-field clipboard consent and an optional floating helper. The user clarified that they **removed the keys**; no live Gemini/Groq call was made. Test fixtures remain explicitly labelled. Main navigation, logo and existing primary palette are unchanged; shared secondary/tertiary defaults now use the existing greens instead of inherited Material purple.
+
+Final checks: **75 Android unit, 54 backend and 12 focused emulator tests pass**; debug/test/release builds pass, lint 0 errors / 61 warnings. See TEST_RESULTS.md and NEXT_CONTINUATION.md. The local draft builder uses only supplied facts, not invented/model-written testimony. Private-form auto-paste, authenticated portal forms/submission, real model accuracy, hosted production/release connectivity, continuous natural speech and the original WebView post-tap root cause remain unfinished or unverified. Do not claim the full application is ready.
+
+The older “Next scheduled priority” immediately below is historical: diagnostics and the safe manual-copy phase are now implemented. Follow the updated NEXT_CONTINUATION.md rather than rebuilding them.
+
+## Next scheduled priority — latest user direction, 3 October 2026
+
+Read [NEXT_CONTINUATION.md](NEXT_CONTINUATION.md) first. The user now reports configuring API keys but seeing no provider usage. First prove the real Android/backend/Gemini/Groq path with clear per-provider diagnostics and bounded, explicit checks. Then implement fact-grounded complaint drafts, user corrections and per-field copy/paste consent with return-to-browser guidance, preserving the existing theme. Do not treat the older no-credentials statements below as current fact; live provider connection remains unverified. No new paid service or automated final complaint submission is authorized.
+
+## Latest continuation — 3 October 2026, backend/reporting reliability
+
+Backend failure paths now distinguish storage failure, quota, authentication, provider throttling, timeout and malformed output. Added bounded early cancellation, failed-worker cleanup and strict incident-assessment contracts. Android provides reviewed recovery copy and per-use summary sharing in the existing reporting UI; offline reporting remains available. API/model placeholders are unchanged and no live provider was contacted.
+
+Verified the **public** financial reporting route in emulator Chrome at https://cybercrime.gov.in/. The www hostname failed certificate validation in this environment; fixed app links to the working official apex hostname without bypassing TLS. The walkthrough reached the public filing explanation at `/Webform/Accept.aspx`, not a filed complaint.
+
+Reproduced an idle presentation instability and corrected own-overlay `TYPE_WINDOWS_CHANGED` classification by attached window identity, regardless of event package metadata. Final service tests pass. **The original intermittent post-tap WebView failure's root cause remains unestablished**; retain diagnostics and the failing idle run separately.
+
+Final checks: **71 Android unit, 46 backend, 11 focused emulator tests pass** across isolated mock and synthetic-paired suites; debug build passes, lint 0 errors / 61 warnings. See TEST_RESULTS.md and screenshots/2026-10-03-backend-reporting/verification.json. All providers in tests are synthetic. Next: real configured-provider assessment/navigation evaluation (credentials unavailable), production authentication/TLS/per-user accounting and release connectivity, remaining WebView cause investigation, and voice/device acceptance. Preserve current colors, logo, navigation and glass buttons. Do not repeat the already completed transport/consent phases.
+
+## Latest continuation — 2 October 2026, browser follow-up
+
+Fixed padded-field length bypasses in Android/backend validation. Final 67 unit, 34 backend and 2 focused browser checks pass; see TEST_RESULTS.md and screenshots/2026-10-02-browser-followup. Chrome now covers the public travel/date/fare fixture and private-form handover. Emulator browser setup is complete for this running emulator, but restoring an old snapshot may reset it. The original intermittent WebView post-tap failure remains unproven; diagnostics and bounded startup settling were added. Real cybercrime portal access still times out; genuine AI assessment, production/provider connection and hardware voice/OEM acceptance remain pending. Preserve existing theme. Next: current public portal validation when reachable, model-backed assessment contract with explicit data consent, and the remaining backend/voice/device acceptance gates. No real model or paid service enabled.
+
+# Latest user priority — 2 October 2026
+
+Read [CYBER_FRAUD_REPORTING.md](CYBER_FRAUD_REPORTING.md) for the new reporting companion, corrected date/fare privacy rules, optional consent-based floating link helper and backend admission/session fixes. Keep shared theme/buttons. Do not claim the checklist is a verified live portal workflow or a trained fraud classifier. Pending priority: current portal public-step validation and real-site/device privacy reproduction, then provider/production-backend and voice gaps below. No credentials or paid services are configured.
+
 # Resume here — 1 October 2026
 
 ## Latest backend/browser continuation — 1 October 2026

@@ -1,26 +1,39 @@
-# Documentation index
+# Project documentation
 
-- [Execution and continuation plan](EXECUTION_PLAN.md)
-- [Starting audit and resolutions](CURRENT_STATE_AUDIT.md)
-- [Test results and reproduction](TEST_RESULTS.md)
-- [Authoritative design references](DESIGN_REFERENCES.md)
-- [Partial design system](DESIGN_SYSTEM.md)
-- [Privacy](../PRIVACY.md)
+Start with [Setup](SETUP.md) to run the app and local backend. For the current scope, read the repository [README](../README.md) and [changelog](../CHANGELOG.md).
+
+## Behavior and implementation
+
 - [Architecture](ARCHITECTURE.md)
-- [Guidance decision foundation](AI_ORCHESTRATION.md)
-- [Test plan and current coverage](TEST_PLAN.md)
-- [Background conversation and recovery](VOICE_CONVERSATION.md)
-- [Floating assistant and live option finding](LIVE_ASSISTANT.md)
-- [Android and local mock gateway setup](SETUP.md)
+- [AI orchestration and validation](AI_ORCHESTRATION.md)
+- [Floating assistant and cross-app guidance](LIVE_ASSISTANT.md)
+- [Voice conversation and recovery](VOICE_CONVERSATION.md)
+- [Cybercrime reporting and complaint drafts](CYBER_FRAUD_REPORTING.md)
+- [Privacy and data handling](../PRIVACY.md)
+
+## Verification and remaining work
+
+- [Test results and saved evidence](TEST_RESULTS.md)
+- [Real provider connection checks](PROVIDER_VERIFICATION.md)
+- [Test plan](TEST_PLAN.md)
+- [Execution plan](EXECUTION_PLAN.md)
+- [Next continuation](NEXT_CONTINUATION.md)
+- [Initial audit and subsequent findings](CURRENT_STATE_AUDIT.md)
+
+The dated entries preserve earlier test conditions. Use the latest result for current status; older notes about missing credentials or portal availability describe those earlier runs.
+
+## Design
+
+- [Authorized design references](DESIGN_REFERENCES.md)
+- [Design system](DESIGN_SYSTEM.md)
+- [Glass controls and remaining parity](GLASS_UI.md)
+- [Navigation implementation](NAVBAR_REDESIGN_NEXT.md)
+- [Motion, haptics and performance](MOTION_AND_HAPTICS.md)
+- [Launch animation and vector identity](LAUNCH_EXPERIENCE.md)
+
+## Product references
+
+- [Product specification](specs/PRODUCT_SPEC.md)
 - [Demo script](DEMO_SCRIPT.md)
-- [Product and Architecture Specification](specs/PRODUCT_SPEC.md)
 
-Product scope, UX flows, dated provider costs, language evaluation, compatibility matrix, permissions, scalability, contributing, decisions and full limitations documentation remain pending. Production backend setup is still blocked on the unfinished provider/authentication work; local mock setup is documented. Requirements are tracked in the execution plan, not presented as implemented features.
-
-- [First task next session: liquid-glass navbars](NAVBAR_REDESIGN_NEXT.md)
-
-- [Navigation motion, glass, fallback and measured performance](MOTION_AND_HAPTICS.md)
-
-- [Liquid Glass implementation and remaining scope](GLASS_UI.md)
-
-- [Launch animation, vector identity and lifecycle follow-up](LAUNCH_EXPERIENCE.md)
+Requirements and proposed work are recorded separately from implemented behavior. Production deployment, physical-device acceptance and parts of the language/design review remain unfinished.

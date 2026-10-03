@@ -81,7 +81,7 @@ class GatewayIntegrationTest {
             main { PracticeGateway.request(snapshot()) { cancelled.countDown() }.cancel() }
             assertFalse("Cancelled callback never delivered", cancelled.await(1, TimeUnit.SECONDS))
             main { assertTrue(PracticeGateway.configure("x".repeat(40))) }
-            assertTrue(send() is GatewayResult.Rejected)
+            assertEquals("unauthorized", (send() as GatewayResult.Rejected).reason)
         } finally { main { PracticeGateway.disable() }; instrumentation.getUiAutomation(0) }
     }
 

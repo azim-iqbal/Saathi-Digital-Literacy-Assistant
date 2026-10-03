@@ -1,6 +1,6 @@
 # Privacy — local practice and opt-in live option finding
 
-Updated1October2026. Saathi observes accessibility structure during a user-started session. Practice sessions still reject other packages before flattening trees. The new **Help in apps & browsers** action separately lets the user start live option finding: it reads accessible control labels/structure in other apps locally to match the named option. The intake surface explains this before Start. It never taps, types or submits for the user.
+Updated 3 October 2026. Saathi observes accessibility structure during a user-started session. Practice sessions still reject other packages before flattening trees. The new **Help in apps & browsers** action separately lets the user start live option finding: it reads accessible control labels/structure in other apps locally to match the named option. The intake surface explains this before Start. It never taps, types or submits for the user.
 
 By default, cloud reasoning is disabled. Screenshot capture remains disabled. There is no provider API key field in newly built APKs. Task-screen Android speech recognition and installed TTS engines may use network services; their offline operation and retention have not been verified. The speech-speed preview uses the installed TTS engine. Use typing when voice is not desired.
 
@@ -19,3 +19,16 @@ Settings → Backend connection has a separate AI-navigation choice and disclosu
 Provider keys stay on the server. The app's development bearer token lives only in process memory; its setup screen blocks screenshots. Disable/Clear local data drops the token and pending results. Already-started requests may complete at providers after cancellation. Provider retention/data use follows their account terms, not Saathi's local deletion behavior. Saathi stores no request bodies/model replies on disk; the server keeps bounded in-memory session state and persistent aggregate provider call counts only. Do not enable external HTTP body logging.
 
 Default local/release mode sends no Saathi model requests. Task-intake Android speech services remain separate and may use the network. Offline language-pack setup talks to the installed device speech service only after the user's explicit request. Checking availability never starts recording.
+
+
+## Reporting and complaint drafts
+
+Incident intake and the complaint worksheet stay in memory. The worksheet arranges supplied facts locally; it does not upload evidence or invent missing details. Closing or recreating the worksheet clears it. Optional voice input uses the installed speech service and may be processed online by that service.
+
+AI incident assessment has its own sharing preview and requires **Share once**. The approved summary and concern category go through the configured backend to Gemini and Groq. Editing, clearing or leaving cancels the app's pending result; a request already sent may still be processed by a provider. Keep identifying details and secret values out of the summary. Filtering cannot guarantee anonymity.
+
+Copying a complaint field requires review and a separate **Allow copy** confirmation for the exact text. Saathi writes that text with Android's sensitive-clipboard marker and never reads the existing clipboard. It does not paste into a browser or submit a complaint. Copied text may remain after the worksheet closes, so clear it when finished. The optional floating helper holds reviewed fields in memory for up to two minutes and closes on dismissal, lock, screen-off or loss of overlay permission.
+
+## Connection diagnostics
+
+Refreshing server status makes no model request. The separate API check requires confirmation and sends synthetic practice data to both configured providers. The server keeps up to 64 diagnostic records per provider in memory: request identifiers, status, model, timing and available token counts. It does not record prompts, incident summaries, keys, raw replies or opaque model signatures. Records clear when the server restarts; aggregate call-budget counters remain in local storage.

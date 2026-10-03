@@ -20,6 +20,23 @@ import com.saathi.ui.navigation.rememberNavigationEnvironment
 
 /** Visible opt-in test setup; neither the token nor enabled state survives process death. */
 class GatewaySetupActivity : ComponentActivity() {
+    private var checking by mutableStateOf(false)
+    private var report by mutableStateOf<String?>(null)
+    private var check: com.saathi.core.GatewayCancellation? = null
+    private fun cancelCheck() { check?.cancel(); check = null; checking = false }
+    private fun runCheck(providers: Boolean) {
+        cancelCheck(); checking = true; report = null
+        val callback: (com.saathi.core.GatewayResult) -> Unit = { result ->
+            checking = false; check = null
+            report = if (result is com.saathi.core.GatewayResult.Connection) result.report
+                else com.saathi.core.GatewayRecovery.message((result as? com.saathi.core.GatewayResult.Rejected)?.reason ?: "invalid_response", com.saathi.language.GuidanceLanguage.ENGLISH)
+        }
+        check = if (providers) PracticeGateway.checkProviders(true, callback) else PracticeGateway.connectionStatus(callback)
+    }
+    override fun onStop() {
+        if (checking) report = "Check cancelled when you left. Refresh server status on return; calls already sent may still count."
+        cancelCheck(); super.onStop()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
@@ -31,6 +48,7 @@ class GatewaySetupActivity : ComponentActivity() {
             var token by remember { mutableStateOf("") }
             var enabled by remember { mutableStateOf(PracticeGateway.enabled() || PracticeGateway.aiEnabled()) }
             var ai by remember { mutableStateOf(PracticeGateway.aiEnabled()) }
+            var probeConsent by remember { mutableStateOf(false) }
             var error by remember { mutableStateOf(false) }
             MaterialTheme(colorScheme = colors) {
                 CompositionLocalProvider(LocalContentColor provides colors.onBackground,
@@ -53,14 +71,28 @@ class GatewaySetupActivity : ComponentActivity() {
                             shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp))
                         if (error) Text("Use the server’s token, between 32 and 256 characters with no spaces.", color = colors.error)
                         GlassButton(if (ai) "Enable AI navigation" else "Enable local test", enabled = token.isNotBlank(), onClick = {
-                            if (PracticeGateway.configure(token, ai)) { token = ""; enabled = true } else error = true
+                            if (PracticeGateway.configure(token, ai)) { cancelCheck(); report = null; token = ""; enabled = true } else error = true
                         })
+                        Text("API verification", style = MaterialTheme.typography.titleMedium)
+                        Text("Enabled is not proof of a connection. Refresh status checks your server without contacting a model. Check APIs sends one synthetic request to each provider.")
+                        GlassButton("Refresh server status", primary = false, enabled = enabled && !checking, onClick = { runCheck(false) })
+                        GlassButton("Check APIs", enabled = enabled && !checking, onClick = { probeConsent = true })
+                        if (checking) {
+                            Text("Checking connection…")
+                            GlassButton("Cancel check", primary = false, onClick = { cancelCheck(); report = "Cancelled. Refresh status before retrying; a call already sent may still count." })
+                        }
+                        report?.split("\n\n")?.forEach { value -> GlassPanel { Text(value, Modifier.padding(20.dp)) } }
                         Text("Enabling or disabling ends current guidance. Start a new guidance session to test. This setting and token are held only in memory.", style = MaterialTheme.typography.bodySmall)
                         GlassButton("Disable and forget token", primary = false, enabled = enabled, onClick = {
-                            PracticeGateway.disable(); enabled = false; token = ""
+                            cancelCheck(); report = null; PracticeGateway.disable(); enabled = false; token = ""
                         })
                         GlassButton("Back to Saathi", primary = false, onClick = { finish() })
                     }
+                    if (probeConsent) AlertDialog(onDismissRequest = { probeConsent = false }, containerColor = colors.surface,
+                        title = { Text("Check both APIs now?") },
+                        text = { Text("This sends one small synthetic practice request to Gemini and one to Groq through your server. It uses your existing provider quota and may incur charges under your account plan. No incident, screen content or audio is sent. There are no automatic retries. Simulated mode never calls either API.") },
+                        confirmButton = { GlassButton("Run check", compact = true, onClick = { probeConsent = false; runCheck(true) }) },
+                        dismissButton = { GlassButton("Not now", primary = false, compact = true, onClick = { probeConsent = false }) })
                 }
             }
         }

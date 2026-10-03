@@ -15,6 +15,8 @@ object PracticeGatewayContract {
 
 sealed interface GatewayResult {
     data class Accepted(val proposal: GuidanceProposal) : GatewayResult
+    data class Assessed(val assessment: IncidentAssessment) : GatewayResult
+    data class Connection(val report: String) : GatewayResult
     data class Rejected(val reason: String) : GatewayResult
 }
 

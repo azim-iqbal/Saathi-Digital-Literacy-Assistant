@@ -26,6 +26,9 @@ class GatewaySetupUiTest {
             androidx.test.espresso.Espresso.closeSoftKeyboard()
             ui.onNodeWithText("Enable AI navigation").performScrollTo().performClick()
             ui.runOnIdle { assertTrue(PracticeGateway.aiEnabled()); assertFalse(SaathiSession.isActive()) }
+            ui.onNodeWithText("Check APIs").performScrollTo().performClick()
+            ui.onNodeWithText("Check both APIs now?").assertIsDisplayed()
+            ui.onNodeWithText("Not now").performClick()
             ui.onNodeWithText("Disable and forget token").performScrollTo().performClick()
             ui.runOnIdle {
                 assertFalse(PracticeGateway.aiEnabled()); assertFalse(PracticeGateway.enabled())

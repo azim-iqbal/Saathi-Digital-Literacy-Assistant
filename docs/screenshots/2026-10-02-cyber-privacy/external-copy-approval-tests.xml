@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.saathi.ui.CyberLinkOverlayTest" tests="1" failures="0" errors="0" skipped="0" time="23.561" timestamp="2026-10-02T04:46:37" hostname="localhost">
+  <properties>
+    <property name="device" value="Pixel_9_Pro(AVD) - 17" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="externalHelperRequiresConsentAndDisappearsAfterPermissionLoss" classname="com.saathi.ui.CyberLinkOverlayTest" time="21.072" />
+</testsuite>

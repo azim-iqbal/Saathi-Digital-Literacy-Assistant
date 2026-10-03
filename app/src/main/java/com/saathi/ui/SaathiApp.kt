@@ -239,6 +239,7 @@ fun SaathiApp() {
                             Action(tr(Copy.CONTINUE)) { preferences.welcomed = true; navigate(Screen.Home) }
                         }
                         Screen.Home -> {
+                            Action("Report cyber fraud") { context.startActivity(Intent(context, com.saathi.CyberReportActivity::class.java)) }
                             Heading(tr(Copy.HELLO)); Body(tr(Copy.SUBTITLE))
                             Action(tr(Copy.LIVE_HELP)) { context.startActivity(Intent(context, com.saathi.AssistantActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
                             Feature(tr(Copy.FEATURE), tr(Copy.FEATURE_BODY)) {
@@ -382,8 +383,7 @@ fun SaathiApp() {
 @Composable private fun SectionTitle(value: String) { Text(value, style = MaterialTheme.typography.titleLarge, modifier = Modifier.semantics { heading() }) }
 @Composable private fun Body(value: String) { Text(value, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
 @Composable private fun Action(label: String, secondary: Boolean = false, enabled: Boolean = true, action: () -> Unit) {
-    GlassButton(label, onClick = action, primary = !secondary, enabled = enabled, arrow = !secondary,
-        modifier = Modifier.fillMaxWidth())
+    GlassButton(label, onClick = action, primary = !secondary, enabled = enabled, arrow = !secondary)
 }
 @Composable private fun Feature(title: String, description: String, content: @Composable ColumnScope.() -> Unit = {}) {
     GlassPanel(Modifier.fillMaxWidth()) {

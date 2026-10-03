@@ -9,7 +9,7 @@ import java.util.Locale
 /** Local visible-option finder. No inferred workflows, remote reasoning, gestures or completion. */
 object LiveGuide {
     private val prefixes = Regex("^(find|show|tap|click|open)\\s+", RegexOption.IGNORE_CASE)
-    private val consequential = Regex("(?i)(pay|purchase|buy|send|transfer|delete|remove|confirm|submit|install|allow|approve|accept|agree|reset|erase|password|pin|otp|permission|भुगतान|भेज|मिटा|स्वीकार|अनुमति)")
+    private val consequential = Regex("(?i)(?<![\\p{L}\\p{N}])(pay|purchase|buy|send|transfer|delete|remove|confirm|submit|install|allow|approve|accept|agree|reset|erase|password|pin|otp|permission)(?![\\p{L}\\p{N}])|भुगतान|भेज|मिटा|स्वीकार|अनुमति")
     fun label(request: String): String? {
         val label = request.trim().replace(prefixes, "").trim().trim('"', '“', '”')
         return label.takeIf { it.length in 2..80 && !it.contains('\n') &&
@@ -31,7 +31,7 @@ object LiveGuide {
             "Tell me the name of a visible navigation option, such as Settings or Help. I cannot confirm purchases, send, delete or handle secrets.",
             "स्क्रीन पर दिख रहे विकल्प का नाम बताएँ, जैसे Settings या Help। भुगतान, भेजना, मिटाना या गुप्त जानकारी स्वयं संभालें।",
             "Screen par dikh rahe option ka naam bataaiye, jaise Settings ya Help. Payment, send, delete aur secrets khud sambhaaliye."))
-        val matches = nodes.withIndex().filter { (_, node) -> node.isEnabled && (node.isClickable || node.clickableAncestorBounds != null) &&
+        val matches = nodes.withIndex().filter { (_, node) -> node.isEnabled && !node.isEditable && (node.isClickable || node.clickableAncestorBounds != null) &&
             listOfNotNull(node.text, node.description).any { normalized(it) == normalized(desired) } }
             .distinctBy { indexed ->
                 // Web accessibility can expose both a link and its identically labelled child.

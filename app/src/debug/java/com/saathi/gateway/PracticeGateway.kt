@@ -15,10 +15,12 @@ import java.util.concurrent.atomic.AtomicBoolean
 /** Debug source set only. Credentials live in process memory; destination is fixed device loopback. */
 object PracticeGateway {
     internal val requestsStarted = java.util.concurrent.atomic.AtomicInteger()
-    private var token: String? = null
-    private var ai = false
+    @Volatile private var token: String? = null
+    @Volatile private var ai = false
     private val io = Executors.newFixedThreadPool(2)
     private val slots = Semaphore(2)
+    private val cancellationIo = Executors.newFixedThreadPool(2)
+    private val cancellationSlots = Semaphore(2)
     private val main = Handler(Looper.getMainLooper())
     fun enabled() = token != null && !ai
     fun aiEnabled() = token != null && ai
@@ -43,12 +45,48 @@ object PracticeGateway {
                 snapshot.controls.all { LiveAiPolicy.allowed(it.label, 80) }) token else null,
             11000, { LiveGatewayCodec.decode(it, snapshot) }, callback)
 
+    /** Call only after the person approves the displayed summary for this request. */
+    fun assessIncident(snapshot: IncidentAssessmentRequest, consent: Boolean, callback: (GatewayResult) -> Unit): GatewayCancellation =
+        submit("/v1/incident-assessment", snapshot.requestId, IncidentGatewayCodec.encode(snapshot),
+            if (consent && aiEnabled() && IncidentAssessmentPolicy.allowed(snapshot.summary) &&
+                snapshot.concern in setOf("MONEY", "OTHER", "UNSURE")) token else null,
+            11000, { IncidentGatewayCodec.decode(it, snapshot) }, callback)
+
+    fun connectionStatus(callback: (GatewayResult) -> Unit): GatewayCancellation =
+        submit("/v1/connection-status", java.util.UUID.randomUUID().toString(), "{}", token, 2500,
+            { ConnectionCodec.decode(it, null) }, callback)
+
+    fun checkProviders(consent: Boolean, callback: (GatewayResult) -> Unit): GatewayCancellation {
+        val id = java.util.UUID.randomUUID().toString()
+        return submit("/v1/provider-check", id, JSONObject().put("request_id", id).put("consent", consent).toString(),
+            if (consent) token else null, 11000, { ConnectionCodec.decode(it, id) }, callback)
+    }
+
     private fun submit(path: String, requestId: String, encoded: String, secret: String?, timeoutMs: Int,
                        decode: (String) -> GatewayResult, callback: (GatewayResult) -> Unit): GatewayCancellation {
         val cancelled = AtomicBoolean(false)
-        if (secret == null || encoded.toByteArray().size > 8192 || !slots.tryAcquire()) {
-            main.post { if (!cancelled.get()) callback(GatewayResult.Rejected("unavailable")) }
+        val rejection = when {
+            secret == null -> "not_configured"
+            encoded.toByteArray().size > 8192 -> "invalid_request"
+            !slots.tryAcquire() -> "busy"
+            else -> null
+        }
+        if (rejection != null) {
+            main.post { if (!cancelled.get()) callback(GatewayResult.Rejected(rejection)) }
             return GatewayCancellation { cancelled.set(true) }
+        }
+        val credential = requireNotNull(secret)
+        val cancelSent = AtomicBoolean(false)
+        fun sendCancel() {
+            if (!cancelSent.compareAndSet(false, true)) return
+            runCatching {
+                val cancel = connection("/v1/cancel", credential).apply { readTimeout = 1000 }
+                try {
+                    val body = JSONObject().put("request_id", requestId).toString().toByteArray()
+                    cancel.setFixedLengthStreamingMode(body.size)
+                    cancel.outputStream.use { it.write(body) }; cancel.inputStream.close()
+                } finally { cancel.disconnect() }
+            }
         }
         io.execute {
             val deadline = android.os.SystemClock.elapsedRealtime() + timeoutMs + 1000
@@ -56,7 +94,7 @@ object PracticeGateway {
             try {
                 if (cancelled.get()) return@execute
                 requestsStarted.incrementAndGet()
-                connection = connection(path, secret).apply { readTimeout = timeoutMs }
+                connection = connection(path, credential).apply { readTimeout = timeoutMs }
                 val body = encoded.toByteArray(Charsets.UTF_8)
                 connection.setFixedLengthStreamingMode(body.size)
                 connection.outputStream.use { it.write(body) }
@@ -73,26 +111,28 @@ object PracticeGateway {
                         out.toString("UTF-8")
                     }
                     decode(data)
-                } else GatewayResult.Rejected("connection_failed")
+                } else GatewayResult.Rejected(GatewayRecovery.httpStatus(connection.responseCode))
                 main.post { if (!cancelled.get()) callback(result) }
-            } catch (_: Exception) {
-                main.post { if (!cancelled.get()) callback(GatewayResult.Rejected("unavailable")) }
+            } catch (error: Exception) {
+                val reason = when (error) {
+                    is java.net.SocketTimeoutException -> "timeout"
+                    is java.io.IOException -> "connection_failed"
+                    else -> "invalid_response"
+                }
+                main.post { if (!cancelled.get()) callback(GatewayResult.Rejected(reason)) }
             } finally {
                 connection?.disconnect()
-                // Best effort server cancellation after this bounded operation. Never enqueue a retry.
-                if (cancelled.get()) runCatching {
-                    val cancel = connection("/v1/cancel", secret)
-                    try {
-                        val body = JSONObject().put("request_id", requestId).toString().toByteArray()
-                        cancel.setFixedLengthStreamingMode(body.size)
-                        cancel.outputStream.use { it.write(body) }; cancel.inputStream.close()
-                    } finally { cancel.disconnect() }
-                }
+                if (cancelled.get()) sendCancel()
                 slots.release()
             }
         }
-        // Drop callbacks immediately. Socket reads remain bounded and never block the main thread.
-        return GatewayCancellation { cancelled.set(true) }
+        // Cancel promptly on a separate bounded lane, even while the response read is blocked.
+        // Server tombstones cover cancellation arriving before request admission. No automatic retry.
+        return GatewayCancellation {
+            if (cancelled.compareAndSet(false, true) && cancellationSlots.tryAcquire()) {
+                cancellationIo.execute { try { sendCancel() } finally { cancellationSlots.release() } }
+            }
+        }
     }
 
     private fun connection(path: String, token: String) = (URL("http://127.0.0.1:8765$path").openConnection() as HttpURLConnection).apply {

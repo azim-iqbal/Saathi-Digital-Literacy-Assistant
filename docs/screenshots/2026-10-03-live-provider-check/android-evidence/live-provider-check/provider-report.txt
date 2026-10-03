@@ -1,0 +1,21 @@
+Server reached · Gemini + Groq mode
+This is the running server's configuration. Editing a file requires restarting it.
+
+gemini · gemini-3.1-flash-lite
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · API response received
+API replied, but its answer did not match the required format.
+Input / output / total tokens: 336 / 95 / 431
+Request: 327d2ba8-2304-4b6f-bd37-7d7a341033ff · 2212 ms
+Checked: Oct 3, 2026 9:20:35 PM
+
+groq · openai/gpt-oss-20b
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · API response received
+Response parsed successfully. This alone does not verify guidance quality.
+Input / output / total tokens: 419 / 217 / 636
+Request: 327d2ba8-2304-4b6f-bd37-7d7a341033ff · 7356 ms
+Checked: Oct 3, 2026 9:20:35 PM
+
+Check result: I could not verify a clear next step. No marker is shown. Describe a more specific task or use visible-option help.
+Provider dashboards are separate. Missing usage metadata means unavailable, never zero. Records clear when the server restarts.

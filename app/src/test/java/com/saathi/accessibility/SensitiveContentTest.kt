@@ -28,4 +28,19 @@ class SensitiveContentTest {
             assertFalse(it, SensitiveContent.isSensitive(false, it))
         }
     }
+    @Test fun `travel dates fares and destinations remain public`() {
+        listOf("From", "To", "Destination", "01/10/2026", "2026-10-01", "Cheapest from ₹5221", "₹6,398", "INR 12345.50", "Rs. 1234", "10:20 AM", "DEL to SXR").forEach {
+            assertFalse(it, SensitiveContent.isSensitive(false, it))
+        }
+    }
+    @Test fun `public display does not override secret field metadata or adjacent secrets`() {
+        assertTrue(SensitiveContent.isSensitive(false, "01/10/2026", "dateOfBirth"))
+        assertTrue(SensitiveContent.isSensitive(false, "₹5221", "accountNumber"))
+        assertTrue(SensitiveContent.isSensitive(true, "₹5221"))
+        assertTrue(SensitiveContent.isSensitive(false, "01/10/2026", "enterOtp"))
+        assertTrue(SensitiveContent.isSensitive(false, "PIN ₹5221"))
+        assertTrue(SensitiveContent.isSensitive(false, "₹5221 code 582139"))
+        assertTrue(SensitiveContent.isSensitive(false, "https://example.com/01/10/2026"))
+        assertTrue(SensitiveContent.isSensitive(false, "₹1234567890123456"))
+    }
 }

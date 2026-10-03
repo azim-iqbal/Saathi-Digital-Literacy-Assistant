@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-02",
+  "android_unit": {
+    "tests": 66,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "focused_emulator": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "backend": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 60
+  },
+  "scope": "Pixel_9_Pro API37 emulator; no provider calls, actual audio, real complaint, real IRCTC/Google Flights reproduction or physical device",
+  "prior_failures": [
+    "New external fixture initially required missing Kotlin collections runtime; replaced with array loop.",
+    "Earlier mixed run missed WebView transition; strengthened mutation assertion, isolated and final focused run passed. Cause not conclusively established."
+  ],
+  "external_copy_approval_followup": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "note": "Same overlay test strengthened and rerun: both decline and approve while the separate app is foreground; read test clipboard after returning to Saathi."
+  }
+}

@@ -1,0 +1,21 @@
+Server reached · Gemini + Groq mode
+This is the running server's configuration. Editing a file requires restarting it.
+
+gemini · gemini-2.5-flash-lite
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · API response received
+Model endpoint not found. Check the configured model and its availability.
+Input / output / total tokens: unavailable / unavailable / unavailable
+Request: da0f21bc-776b-414d-97ee-19cfcf8db882 · 835 ms
+Checked: Oct 3, 2026 9:18:53 PM
+
+groq · openai/gpt-oss-20b
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · API response received
+Response parsed successfully. This alone does not verify guidance quality.
+Input / output / total tokens: 419 / 217 / 636
+Request: da0f21bc-776b-414d-97ee-19cfcf8db882 · 6191 ms
+Checked: Oct 3, 2026 9:18:53 PM
+
+Check result: I could not verify a clear next step. No marker is shown. Describe a more specific task or use visible-option help.
+Provider dashboards are separate. Missing usage metadata means unavailable, never zero. Records clear when the server restarts.

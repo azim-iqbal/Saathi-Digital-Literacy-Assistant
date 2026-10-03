@@ -1,0 +1,21 @@
+Server reached · Gemini + Groq mode
+This is the running server's configuration. Editing a file requires restarting it.
+
+gemini · gemini-2.5-flash-lite
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · No HTTP response confirmed
+Provider unavailable. Check connectivity and the configured model.
+Input / output / total tokens: unavailable / unavailable / unavailable
+Request: a3c12d5e-f2bf-4660-895e-45f7c44fe219 · 308 ms
+Checked: Oct 3, 2026 9:16:43 PM
+
+groq · openai/gpt-oss-20b
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · No HTTP response confirmed
+Provider unavailable. Check connectivity and the configured model.
+Input / output / total tokens: unavailable / unavailable / unavailable
+Request: a3c12d5e-f2bf-4660-895e-45f7c44fe219 · 307 ms
+Checked: Oct 3, 2026 9:16:43 PM
+
+Check result: The backend could not respond. Check the connection, then pause and resume guidance. You can use visible-option help if it stays unavailable.
+Provider dashboards are separate. Missing usage metadata means unavailable, never zero. Records clear when the server restarts.

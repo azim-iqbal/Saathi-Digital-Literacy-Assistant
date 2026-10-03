@@ -160,10 +160,25 @@ class GatewayTests(unittest.TestCase):
 
     def test_observation_expiring_during_work_is_rejected(self):
         request = Snapshot.parse(payload())
-        # Simulate time passing after admission, without a long wall-clock test delay.
         from unittest.mock import patch
+        gateway = self.gateway()
         with patch("backend.gateway.time.time", return_value=request.observed_at_ms / 1000 + 16):
-            self.assertEqual("stale", self.gateway().decide(request)["reason"])
+            self.assertEqual("stale", gateway.decide(request)["reason"])
+        self.assertEqual(0, sum(gateway.calls.values()))
+        def expires(s, event, p):
+            return p
+        gateway = self.gateway(providers=[Adapter("a", expires), Adapter("b", expires)])
+        with patch("backend.gateway.time.time", side_effect=[request.observed_at_ms / 1000, request.observed_at_ms / 1000 + 16]):
+            self.assertEqual("stale", gateway.decide(request)["reason"])
+
+    def test_inactive_sessions_expire_without_resetting_quotas(self):
+        gateway = self.gateway(max_sessions=1, session_ttl=30)
+        self.assertEqual("accepted", gateway.decide(Snapshot.parse(payload()))["status"])
+        gateway.session_seen["session-1"] = time.monotonic() - 31
+        request = Snapshot.parse(payload(session_id="other", request_id="other"))
+        self.assertEqual("accepted", gateway.decide(request)["status"])
+        self.assertEqual({"other"}, set(gateway.sessions))
+        self.assertEqual(4, sum(gateway.calls.values()))
 
     def test_busy_workers_do_not_accumulate_obsolete_jobs(self):
         started = threading.Barrier(3)

@@ -1,3 +1,17 @@
+## 3 October — optional complaint clipboard companion
+
+The reporting flow now offers a reviewed local worksheet and a short-lived overlay carrying exact draft fields. This companion does not observe or type into private forms and does not change AccessibilityService target/privacy rules. It asks per-copy consent, writes the selected text only, and directs the person back through recent apps to the existing browser tab. Missing/revoked overlay permission falls back to in-app copy. See CYBER_FRAUD_REPORTING.md for limits and TEST_RESULTS.md for emulator evidence. Do not call this autonomous form completion or uninterrupted background survival.
+
+## 3 October 2026 — connection recovery and overlay events
+
+The debug client preserves allowlisted rejection reasons and gives localized recovery copy for authentication/configuration, unavailable connection, timeout, capacity, quota/storage/circuit, stale observations and unverifiable decisions. Cancellation suppresses callbacks immediately and sends a best-effort server cancellation on a separate bounded lane; already dispatched provider network calls may continue until transport timeout. No automatic retries or single-provider fallback were added.
+
+Own overlay events are excluded by current attached window identity even when Android omits/changes event package metadata. An actual trace exposed a previously missed WINDOWS_CHANGED event. Final emulator service/event and paired synthetic-protocol tests pass; the original intermittent post-tap WebView failure is still not conclusively diagnosed. Test-only event observers store no default logs or screen text and have a no-op release implementation.
+
+## 2 October 2026 — public travel fields and reporting link helper
+
+Public dates/currency-formatted fares no longer trip the generic long-number rule; secret metadata still takes priority, and unknown numbers stay conservative. Editable controls are not highlight targets. The new reporting companion is reachable from Home and this panel. It provides an optional short-lived, consent-based fixed-URL overlay with a non-overlay fallback. Its windows are excluded from guidance feedback events by actual attached window identity. Read [CYBER_FRAUD_REPORTING.md](CYBER_FRAUD_REPORTING.md); this is not a verified automated portal workflow.
+
 # Floating assistant and live option finding
 
 ## Latest backend/browser continuation — 1 October 2026

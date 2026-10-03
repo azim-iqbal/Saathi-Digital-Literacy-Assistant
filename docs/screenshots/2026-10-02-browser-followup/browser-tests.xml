@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.saathi.ui.ChromeGuidanceIntegrationTest" tests="2" failures="0" errors="0" skipped="0" time="33.141" timestamp="2026-10-02T09:44:39" hostname="localhost">
+  <properties>
+    <property name="device" value="Pixel_9_Pro(AVD) - 17" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="realChromePageTracksDetourPrivateFormAndRetarget" classname="com.saathi.ui.ChromeGuidanceIntegrationTest" time="14.706" />
+  <testcase name="realServiceTracksExternalDetourReturnAndWebChangeThenStops" classname="com.saathi.ui.LiveAccessibilityIntegrationTest" time="16.289" />
+</testsuite>

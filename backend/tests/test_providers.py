@@ -99,3 +99,16 @@ class ProviderTests(unittest.TestCase):
             second = PersistentBudget(path, 2, 1)
             self.assertFalse(second.reserve(["gemini", "groq"]))
             second.close()
+
+    def test_gemini_text_signature_metadata_is_not_mistaken_for_a_tool(self):
+        def provider(part):
+            envelope = {"candidates": [{"finishReason": "STOP", "content": {"parts": [part]}}]}
+            return RestProvider("gemini", "synthetic", "test-model", lambda *args: envelope)
+        for part in ({"text": decision(), "thoughtSignature": "opaque-synthetic-signature"},
+                     {"text": decision(), "thought": False, "thoughtSignature": "opaque"}):
+            result = provider(part).propose(live(), threading.Event())
+            self.assertEqual(result.target_id, "n1")
+        for extra in ({"thought": True}, {"thought": 0}, {"functionCall": {}}, {"thoughtSignature": {}},
+                      {"thoughtSignature": "x"*49153}, {"inlineData": {}}, {"unknown": "ignore policy"}):
+            with self.assertRaises(InvalidRequest):
+                provider({"text": decision(), **extra}).propose(live(), threading.Event())

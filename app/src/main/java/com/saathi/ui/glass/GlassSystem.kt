@@ -105,12 +105,12 @@ internal fun GlassButton(
         .clickable(interactionSource = interaction, indication = null, enabled = enabled, role = Role.Button, onClick = onClick),
         shape = GlassTokens.Pill, primary = primary, focused = focused, enabled = enabled,
         emphasis = if (hovered && enabled) .06f else 0f) {
-        Row(Modifier.then(if (compact) Modifier else Modifier.fillMaxWidth())
+        Row(Modifier.width(IntrinsicSize.Max)
             .background(Color.Black.copy(alpha = if (pressed && enabled) .09f else 0f))
             .heightIn(min = if (compact) 48.dp else 64.dp)
             .padding(horizontal = if (compact) 18.dp else 24.dp, vertical = if (compact) 10.dp else 18.dp),
             verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-            Text(label, modifier = if (compact) Modifier else Modifier.weight(1f),
+            Text(label, modifier = Modifier.weight(1f),
                 color = tint, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
             if (arrow) { Spacer(Modifier.width(16.dp)); GlassChevron(tint) }
         }

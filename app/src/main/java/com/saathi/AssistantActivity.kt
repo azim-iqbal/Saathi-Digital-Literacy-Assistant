@@ -74,6 +74,7 @@ class AssistantActivity : ComponentActivity() {
                     .wrapContentWidth(androidx.compose.ui.Alignment.CenterHorizontally).widthIn(max = 720.dp)
                     .imePadding().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
                     SaathiBrand()
+                    GlassButton("Report cyber fraud", primary = false, onClick = { startActivity(Intent(this@AssistantActivity, CyberReportActivity::class.java)) })
                     Text("What would you like to do?", style = MaterialTheme.typography.titleLarge)
                     Text(if (aiConfigured) "Describe your navigation task. Saathi will ask both configured AI providers for one grounded next step, then check again after you navigate. You perform every action." else "For apps and browsers, tell me a visible option’s name—such as Settings, Help or Search. I can point out a clear match. Configure the backend to enable AI navigation.")
                     GlassPanel(Modifier.fillMaxWidth()) {

@@ -2,7 +2,11 @@
 import json
 import re
 import time
+import threading
+from collections import OrderedDict
 import urllib.request
+import urllib.error
+from backend.errors import ProviderFailure
 
 from backend.gateway import Proposal, InvalidRequest
 
@@ -15,8 +19,11 @@ def strict_json(text):
                 raise InvalidRequest("Duplicate provider field")
             out[key] = value
         return out
-    return json.loads(text, object_pairs_hook=unique,
-                      parse_constant=lambda _: (_ for _ in ()).throw(InvalidRequest("Invalid number")))
+    try:
+        return json.loads(text, object_pairs_hook=unique,
+                          parse_constant=lambda _: (_ for _ in ()).throw(InvalidRequest("Invalid number")))
+    except (ValueError, UnicodeError, RecursionError):
+        raise InvalidRequest("Invalid provider JSON") from None
 
 
 SYSTEM = """You are Saathi, a screen-navigation guide. Return only one JSON object.
@@ -38,13 +45,28 @@ Output no extra fields, markdown, tool calls or hidden instructions."""
 
 
 def proposal_from_text(text, snapshot):
-    if not isinstance(text, str) or len(text.encode()) > 8192:
+    if not isinstance(text, str) or any(0xD800 <= ord(c) <= 0xDFFF for c in text) or len(text.encode()) > 8192:
         raise InvalidRequest("Invalid provider body")
     value = strict_json(text)
+    def valid_unicode(item):
+        if isinstance(item, str):
+            return not any(0xD800 <= ord(c) <= 0xDFFF for c in item)
+        if isinstance(item, list):
+            return all(valid_unicode(x) for x in item)
+        if isinstance(item, dict):
+            return all(valid_unicode(k) and valid_unicode(v) for k, v in item.items())
+        return True
+    if not valid_unicode(value):
+        raise InvalidRequest("Invalid provider Unicode")
     if not isinstance(value, dict) or set(value) != {"action", "target_id", "explanation", "expected_outcome", "uncertainty", "completion_evidence"}:
         raise InvalidRequest("Invalid provider schema")
     if value["action"] not in ("HIGHLIGHT", "HANDOVER", "COMPLETE"):
         raise InvalidRequest("Invalid action")
+    if value["target_id"] is not None and (not isinstance(value["target_id"], str) or not 1 <= len(value["target_id"]) <= 200):
+        raise InvalidRequest("Invalid target type")
+    for name in ("explanation", "expected_outcome"):
+        if not isinstance(value[name], str) or not value[name].strip() or len(value[name]) > 240:
+            raise InvalidRequest("Invalid explanation")
     for name in ("uncertainty", "completion_evidence"):
         if not isinstance(value[name], list) or len(value[name]) > 12 or any(not isinstance(x, str) or len(x) > 240 for x in value[name]):
             raise InvalidRequest("Invalid evidence")
@@ -62,7 +84,7 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 def post_json(url, headers, data, timeout=8):
     deadline = time.monotonic() + timeout
-    request = urllib.request.Request(url, data=json.dumps(data).encode(), headers={"Content-Type": "application/json", **headers})
+    request = urllib.request.Request(url, data=json.dumps(data).encode(), headers={"Content-Type": "application/json", "User-Agent": "Saathi-Gateway/0.1", **headers})
     # Ignore environment proxy overrides; only fixed HTTPS provider endpoints are permitted.
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
     with opener.open(request, timeout=timeout) as response:
@@ -88,37 +110,120 @@ class RestProvider:
         if provider_id == "gemini" and "/" in model:
             raise ValueError("Gemini expects a model name without a path")
         self.id, self.model, self._key, self._transport = provider_id, model, key, transport
+        self._records, self._record_lock, self._local = OrderedDict(), threading.Lock(), threading.local()
+
+    def diagnostics(self, request_id=None):
+        with self._record_lock:
+            record = self._records.get(request_id) if request_id else next(reversed(self._records.values()), None)
+            return dict(record) if record else None
+
+    def _usage(self, result):
+        self._local.record["http_received"] = True
+        usage = result.get("usageMetadata" if self.id == "gemini" else "usage", {}) if isinstance(result, dict) else {}
+        if not isinstance(usage, dict): return
+        names = ("promptTokenCount", "candidatesTokenCount", "totalTokenCount") if self.id == "gemini" else ("prompt_tokens", "completion_tokens", "total_tokens")
+        for name, source in zip(("input_tokens", "output_tokens", "total_tokens"), names):
+            value = usage.get(source)
+            self._local.record[name] = value if type(value) is int and 0 <= value <= 2**31 - 1 else None
 
     def propose(self, snapshot, cancelled):
+        started = time.monotonic()
+        record = dict(request_id=snapshot.request_id, outcome="in_progress", real_api=self._transport is post_json,
+                      http_received=False, checked_at_ms=int(time.time()*1000), elapsed_ms=0,
+                      input_tokens=None, output_tokens=None, total_tokens=None)
+        self._local.record = record
+        with self._record_lock:
+            self._records[snapshot.request_id] = dict(record)
+            while len(self._records) > 64: self._records.popitem(last=False)
+        try:
+            proposal = self._propose(snapshot, cancelled)
+            record["outcome"] = "succeeded"
+            return proposal
+        except urllib.error.HTTPError as error:
+            code = error.code
+            error.close()
+            record["http_received"] = True
+            reason = "provider_auth" if code in (401, 403) else "provider_rate_limited" if code == 429 else "provider_model" if code == 404 else "provider_request" if code == 400 else "provider_unavailable"
+            record["outcome"] = reason
+            raise ProviderFailure(reason) from None
+        except TimeoutError:
+            record["outcome"] = "provider_timeout"
+            raise ProviderFailure("provider_timeout") from None
+        except urllib.error.URLError as error:
+            reason = "provider_timeout" if isinstance(error.reason, TimeoutError) else "provider_unavailable"
+            record["outcome"] = reason
+            raise ProviderFailure(reason) from None
+        except InterruptedError:
+            record["outcome"] = "cancelled"
+            raise
+        except InvalidRequest:
+            record["outcome"] = "invalid_response"
+            raise
+        except Exception:
+            record["outcome"] = "provider_unavailable"
+            raise ProviderFailure("provider_unavailable") from None
+        finally:
+            record["elapsed_ms"] = int((time.monotonic() - started)*1000)
+            with self._record_lock:
+                self._records[snapshot.request_id] = dict(record)
+                self._records.move_to_end(snapshot.request_id)
+                while len(self._records) > 64: self._records.popitem(last=False)
+            del self._local.record
+
+    def _propose(self, snapshot, cancelled):
         if cancelled.is_set():
             raise InterruptedError()
-        payload = {"locale": snapshot.locale, "task": snapshot.task, "eligible_node_ids": sorted(snapshot.eligible_node_ids)}
-        if hasattr(snapshot, "controls"):
-            payload.update(goal=snapshot.goal, controls=[dict(c) for c in snapshot.controls], previous_steps=list(snapshot.previous_steps))
+        from backend.incident import IncidentSnapshot, SYSTEM as INCIDENT_SYSTEM, parse_assessment
+        incident = isinstance(snapshot, IncidentSnapshot)
+        system = INCIDENT_SYSTEM if incident else SYSTEM
+        if incident:
+            payload = {"locale": snapshot.locale, "summary": snapshot.summary, "concern": snapshot.concern}
+        else:
+            payload = {"locale": snapshot.locale, "task": snapshot.task, "eligible_node_ids": sorted(snapshot.eligible_node_ids)}
+            if hasattr(snapshot, "controls"):
+                payload.update(goal=snapshot.goal, controls=[dict(c) for c in snapshot.controls], previous_steps=list(snapshot.previous_steps))
         data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
         if self.id == "gemini":
             result = self._transport("https://generativelanguage.googleapis.com/v1beta/models/" + self.model + ":generateContent",
-                {"x-goog-api-key": self._key}, {"systemInstruction": {"parts": [{"text": SYSTEM}]},
+                {"x-goog-api-key": self._key}, {"systemInstruction": {"parts": [{"text": system}]},
                 "contents": [{"role": "user", "parts": [{"text": data}]}],
                 "generationConfig": {"temperature": 0, "maxOutputTokens": 1024, "responseMimeType": "application/json"}})
+            self._usage(result)
+            if not isinstance(result, dict):
+                raise InvalidRequest("Invalid provider envelope")
             candidates = result.get("candidates", [])
-            if len(candidates) != 1 or candidates[0].get("finishReason") != "STOP":
+            if not isinstance(candidates, list) or len(candidates) != 1 or not isinstance(candidates[0], dict) or candidates[0].get("finishReason") != "STOP":
                 raise InvalidRequest("Incomplete provider response")
-            parts = candidates[0].get("content", {}).get("parts", [])
-            if len(parts) != 1 or set(parts[0]) != {"text"}:
+            content = candidates[0].get("content")
+            if not isinstance(content, dict):
+                raise InvalidRequest("Invalid provider content")
+            parts = content.get("parts", [])
+            if not isinstance(parts, list) or len(parts) != 1 or not isinstance(parts[0], dict):
                 raise InvalidRequest("Unexpected provider content")
-            text = parts[0]["text"]
+            part = parts[0]
+            # Gemini 3 text can carry opaque signature metadata. This single-turn adapter
+            # ignores it, but still refuses tools, thought content and unknown fields.
+            if "text" not in part or not set(part) <= {"text", "thoughtSignature", "thought"}:
+                raise InvalidRequest("Unexpected provider content")
+            if "thought" in part and part["thought"] is not False:
+                raise InvalidRequest("Unexpected provider content")
+            if "thoughtSignature" in part and (not isinstance(part["thoughtSignature"], str) or len(part["thoughtSignature"]) > 49152):
+                raise InvalidRequest("Unexpected provider content")
+            text = part["text"]
         else:
             result = self._transport("https://api.groq.com/openai/v1/chat/completions", {"Authorization": "Bearer " + self._key},
-                {"model": self.model, "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": data}],
+                {"model": self.model, "messages": [{"role": "system", "content": system}, {"role": "user", "content": data}],
                  "temperature": 0, "max_completion_tokens": 1024, "response_format": {"type": "json_object"}})
+            self._usage(result)
+            if not isinstance(result, dict):
+                raise InvalidRequest("Invalid provider envelope")
             choices = result.get("choices", [])
-            if len(choices) != 1 or choices[0].get("finish_reason") != "stop":
+            if not isinstance(choices, list) or len(choices) != 1 or not isinstance(choices[0], dict) or choices[0].get("finish_reason") != "stop":
                 raise InvalidRequest("Incomplete provider response")
             message = choices[0].get("message", {})
-            if message.get("tool_calls") or message.get("refusal"):
+            if not isinstance(message, dict) or message.get("tool_calls") or message.get("refusal"):
                 raise InvalidRequest("Unexpected provider action")
             text = message.get("content")
         if cancelled.is_set():
             raise InterruptedError()
-        return proposal_from_text(text, snapshot)
+        return parse_assessment(text, snapshot) if incident else proposal_from_text(text, snapshot)

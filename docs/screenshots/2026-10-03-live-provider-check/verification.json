@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-03",
+  "path": "Android debug app -> authenticated local backend -> real providers",
+  "provider_connectivity_verified": true,
+  "paired_final_guidance_verified": false,
+  "successful_calls": {
+    "gemini": {
+      "model": "gemini-3.1-flash-lite",
+      "tokens": 431,
+      "request_id": "7ce6986e-bc28-4e0f-9339-c6cc1bd83bff"
+    },
+    "groq": {
+      "model": "openai/gpt-oss-20b",
+      "tokens": 636,
+      "request_id": "da0f21bc-776b-414d-97ee-19cfcf8db882"
+    }
+  },
+  "final_pair_reason": "provider_timeout",
+  "generation_attempts_admitted_per_provider": 4,
+  "notes": [
+    "Successes occurred on separate checks; final Groq call timed out.",
+    "First pair failed local TLS validation; next Gemini model returned HTTP404.",
+    "Gemini3 metadata handling fixed and regression tested.",
+    "Timeout may still consume provider usage; missing usage is not zero.",
+    "Only synthetic practice IDs were sent; no incident assessment, private screen or complaint was sent."
+  ]
+}

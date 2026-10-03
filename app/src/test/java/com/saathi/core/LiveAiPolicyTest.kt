@@ -7,6 +7,16 @@ import org.junit.Test
 class LiveAiPolicyTest {
     private val ticket = ObservationGate.Ticket(1, 2, "app.test", 3)
     private fun node(label: String) = UiNode(Rect(), label, null, null, "private.resource.id", "Button", false, true, true)
+    @Test fun whitespaceCannotBypassRequestControlOrHistoryLimits() {
+        assertTrue(LiveAiPolicy.allowed("Help" + " ".repeat(76), 80))
+        assertFalse(LiveAiPolicy.allowed("Help" + " ".repeat(77), 80))
+        assertFalse(LiveAiPolicy.allowed(" ".repeat(80), 80))
+        assertNull(LiveAiPolicy.snapshot(ticket, listOf(node("Help")), "Help" + " ".repeat(157), "en-IN", 1, emptyList()))
+        val snapshot = LiveAiPolicy.snapshot(ticket, listOf(node("Help"), node("Support" + " ".repeat(80))),
+            "Open Help", "en-IN", 1, listOf("Support" + " ".repeat(80), "Help"))!!
+        assertEquals(listOf("Help"), snapshot.controls.map { it.label })
+        assertEquals(listOf("Help"), snapshot.previousSteps)
+    }
     @Test fun inputValuesAndPrivateScreensNeverEnterSnapshot() {
         val values = listOf(node("Help"), node("ordinary typed value").copy(isEditable = true))
         val snapshot = LiveAiPolicy.snapshot(ticket, values, "Open Help", "en-IN", System.currentTimeMillis(), emptyList())!!

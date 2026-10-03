@@ -1,31 +1,52 @@
 # Saathi — Digital Literacy Assistant
 
-Saathi helps people learn screen navigation while performing every tap themselves. **Saathi supports synthetic Bill Pay practice and an experimental local option finder for accessible apps/browser controls.** The live finder matches a named visible option; universal workflows and screen capture remain unavailable. A debug-only backend connection supports separately consented Gemini/Groq navigation once server credentials and model IDs are supplied.
+Saathi helps people find their way around digital tasks on Android. It points out the next option, explains the step in text or speech, and leaves the tap to the person using the phone.
 
-[Development Roadmap](docs/EXECUTION_PLAN.md) · [Architecture Audit](docs/CURRENT_STATE_AUDIT.md) · [Documentation Index](docs/README.md) · [Figma Designs](https://www.figma.com/design/vx2M28p625yZQTAzcTLlQj)
+The app brings together a practice space, an experimental assistant for other apps and browsers, and a cybercrime-reporting companion. It is an active development project. Local practice works without model accounts; AI guidance currently requires the debug app and a local backend.
 
-## Build and try
+[Setup](docs/SETUP.md) · [What changed](CHANGELOG.md) · [Test results](docs/TEST_RESULTS.md) · [Privacy](PRIVACY.md) · [Documentation](docs/README.md)
 
-Use JDK 17, Android SDK 35, Gradle wrapper 8.7 and AGP 8.6.1. Set only `sdk.dir=/absolute/path/to/Android/sdk` in ignored `local.properties`. Provider keys are neither needed nor read by the Android build.
+## What you can try
+
+| Area | Current behavior |
+| --- | --- |
+| Practice | Walk through synthetic electricity, water and TV-recharge tasks. No money moves. |
+| Help in apps and browsers | Ask for a visible option by text or voice. A floating button reopens the request panel; choose text-only or spoken guidance. Accessible controls vary by app. |
+| AI navigation | In the debug build, Gemini and Groq independently suggest a step from the current eligible controls. Saathi requires agreement before showing it. |
+| Report cyber fraud | Follow an offline reporting checklist, open the official portal, and optionally request a consented AI assessment. The assessment is provisional. |
+| Complaint drafts | Describe what happened, fill in any known details, review the draft, and approve each field before copying it. Return to the existing browser tab to paste it yourself. |
+| Connection checks | Check the local server without making a model call, or explicitly test both providers and inspect their separate results and available token usage. |
+
+The interface uses a shared green palette, rounded glass controls, a floating navigation capsule and vector brand assets. Light and dark themes are available. English, Hindi and Hinglish are supported in the main guidance flows; newer reporting and setup copy still needs language review.
+
+## Run the Android app
+
+Use JDK 17 and Android SDK 35. Set the SDK path in your ignored `local.properties` file:
+
+```properties
+sdk.dir=/absolute/path/to/Android/sdk
+```
+
+Build with the supplied wrapper:
 
 ```sh
 ./gradlew testDebugUnitTest assembleDebug lintDebug
 ```
 
-APK: `app/build/outputs/apk/debug/app-debug.apk`. Install on an Android API26+ test device, enable Saathi Accessibility and overlay access, start a bill practice task and open Demo Bill Pay. Use made-up values only. No money moves. Notification Stop ends guidance; lifecycle/device validation is still pending.
+Install `app/build/outputs/apk/debug/app-debug.apk` on an Android API 26+ test device or emulator. Start with **Practice** and use made-up values. Enable accessibility and overlay access when the guidance flow asks for them. The notification's **Stop** action ends a session.
 
-English, Hindi and Hinglish guidance strings exist; the new Compose shell also has these three languages. Native-language, voice quality and accessibility review remain pending. Task-screen voice uses the device recognition service and is not guaranteed offline. See [privacy](PRIVACY.md) and [test results](docs/TEST_RESULTS.md).
+Provider keys are not needed to build Android and never belong in the APK. To connect the optional AI features, follow [local backend setup](docs/SETUP.md). The server binds to loopback and uses a development token; it is not a hosted production service.
 
-No universal compatibility, production readiness, perfect redaction, unlimited free AI or successful real payment is claimed. The new app shell uses Jetpack Compose: welcome, home, practice, task intake, setup, session controls, settings and privacy. The synthetic practice activity remains Android Views. Editable light/dark Figma screens exist; full design parity, remaining variants and a recorded demo are pending. See docs/screenshots/2026-09-29 for emulator captures.
+## What has been checked
 
-The navigation now uses a floating capsule with spring-driven selection and swipable synthetic Practice categories. [Implementation and measured limits](docs/MOTION_AND_HAPTICS.md) · [Dark Practice screenshot](docs/screenshots/2026-09-29-navigation/practice-dark.png). Emulator performance is below target; physical-device profiling remains required.
+The latest saved verification includes 75 Android unit tests, 55 backend tests and 12 focused emulator checks. Debug and release builds passed. Lint reported no errors and 61 warnings. These checks were run in the phases recorded in [Test results](docs/TEST_RESULTS.md), rather than as one full acceptance run.
 
-Latest UI phase: shared Liquid Glass controls and branded header are implemented in the Android shell. See [scope and remaining parity](docs/GLASS_UI.md), [current verification](docs/TEST_RESULTS.md), and [dark Home screenshot](docs/screenshots/2026-09-29-glass/home-dark.png). Native/legacy screen parity, Figma synchronization and physical-device performance remain open.
+Both real providers returned valid responses through the Android-to-backend check. Those successes occurred on separate requests: the last paired check timed out on Groq, and Saathi rejected the incomplete result. See [provider verification](docs/PROVIDER_VERIFICATION.md) for the evidence and what it does—and does not—establish.
 
-The latest launch update adds shared vector brand assets, adaptive/themed launcher support and a centered animated opening. [Launch details and limits](docs/LAUNCH_EXPERIENCE.md).
+## Work still ahead
 
-The 30 September continuation adds explicit background practice conversation with on-device speech turns and notification controls, plus wrong-category/detour recovery anchored to Back to choices. This is a local command-based assistant; natural AI chat remains pending; external guidance is experimental. [Voice behavior and verification limits](docs/VOICE_CONVERSATION.md).
+Reliable multi-step AI guidance and incident-assessment accuracy need more evaluation. Private portal forms and browser paste behavior have not been verified end to end; Saathi does not fill or submit complaints automatically. The cause of an intermittent WebView transition failure is still under investigation.
 
-The Python gateway is connected to the debug app for mock practice and optional paired-model navigation. Gemini/Groq REST adapters, strict validation, persistent aggregate AI call caps, cancellation and current-screen grounding are implemented. Credentials/model IDs remain placeholders; release connectivity and production hosting/authentication remain open. [Local setup and production gaps](docs/SETUP.md).
+Real microphone behavior, voice quality, background survival and performance need physical-device testing. Continuous conversation currently uses turn-based device speech services, not natural streaming speech. Some apps deliberately hide overlays, and Saathi respects those restrictions.
 
-Choose **Help in apps & browsers** for the floating assistant: type or dictate a visible option name, select **Text only** or **Text + voice**, then start and open your app. The movable Saathi button returns to the request panel. [Implemented behavior and compatibility limits](docs/LIVE_ASSISTANT.md).
+Production hosting, per-user authentication, release-build AI connectivity, full localization and remaining design parity are also open. The [execution plan](docs/EXECUTION_PLAN.md) tracks these items separately from completed work.

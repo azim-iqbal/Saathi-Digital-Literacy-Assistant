@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-02",
+  "unit": {
+    "tests": 67,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "emulator": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "backend": {
+    "tests": 34,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "Warning": 61
+  },
+  "scope": "Chrome localhost travel fixture and real-service WebView; no IRCTC/Google Flights/live reporting or model calls",
+  "setup": "Chrome first-run completed signed out, optional usage reporting switched off, notifications declined",
+  "limitations": [
+    "Original intermittent post-tap transition not reproduced; diagnostics added, not a claimed production fix.",
+    "A cold WebView run failed initial idle assertion; bounded presentation settling added before retaining existing idle assertion.",
+    "Cybercrime portal direct fetch timed out."
+  ]
+}

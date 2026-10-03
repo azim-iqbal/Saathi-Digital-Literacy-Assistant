@@ -1,0 +1,21 @@
+Server reached · Gemini + Groq mode
+This is the running server's configuration. Editing a file requires restarting it.
+
+gemini · gemini-3.1-flash-lite
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · API response received
+Response parsed successfully. This alone does not verify guidance quality.
+Input / output / total tokens: 336 / 95 / 431
+Request: 7ce6986e-bc28-4e0f-9339-c6cc1bd83bff · 1863 ms
+Checked: Oct 3, 2026 9:23:15 PM
+
+groq · openai/gpt-oss-20b
+Attempts admitted this server session: 1 (not billed usage)
+Real HTTPS adapter · No HTTP response confirmed
+Provider timed out. Check connectivity and refresh status.
+Input / output / total tokens: unavailable / unavailable / unavailable
+Request: 7ce6986e-bc28-4e0f-9339-c6cc1bd83bff · 8101 ms
+Checked: Oct 3, 2026 9:23:15 PM
+
+Check result: The backend could not respond. Check the connection, then pause and resume guidance. You can use visible-option help if it stays unavailable.
+Provider dashboards are separate. Missing usage metadata means unavailable, never zero. Records clear when the server restarts.

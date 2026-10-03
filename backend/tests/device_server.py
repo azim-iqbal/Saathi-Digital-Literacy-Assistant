@@ -11,6 +11,9 @@ class FixtureProvider:
     def __init__(self, name): self.id = name
     def propose(self, s, cancelled):
         if cancelled.is_set(): raise InterruptedError()
+        from backend.incident import IncidentSnapshot, IncidentProposal
+        if isinstance(s, IncidentSnapshot):
+            return IncidentProposal("POSSIBLE_FINANCIAL", ("DECEPTIVE_REQUEST",))
         target = next((c["id"] for name in ("Help", "Back to choices") for c in s.controls if c["label"] == name), None)
         return Proposal(s.session_id, s.screen_revision, s.package_name, s.window_id,
                         "HIGHLIGHT" if target else "HANDOVER", target, "Fixture next step.", "Observe a new fixture screen.")

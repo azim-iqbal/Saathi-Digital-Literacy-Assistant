@@ -1,0 +1,31 @@
+1147148 type=2048 window=408 changes=1 ownOverlay=false
+1147496 type=32 window=411 changes=0 ownOverlay=false
+1147496 type=4194304 window=411 changes=0 ownOverlay=false
+1147662 type=2048 window=411 changes=0 ownOverlay=false
+1147912 type=32 window=410 changes=0 ownOverlay=false
+1147917 type=4194304 window=411 changes=0 ownOverlay=false
+1148697 type=32 window=412 changes=0 ownOverlay=true
+IDLE_ASSERT_BEGIN 1149546 key=Ticket(session=4958651457410583296, revision=11, packageName=com.saathi.test, windowId=411)
+IDLE_ASSERT_END 1150547 key=Ticket(session=4958651457410583296, revision=11, packageName=com.saathi.test, windowId=411)
+1151421 type=2048 window=411 changes=1 ownOverlay=false
+1151474 type=2048 window=411 changes=1 ownOverlay=false
+1151825 type=2048 window=411 changes=1 ownOverlay=false
+1151944 type=2048 window=411 changes=1 ownOverlay=false
+1152139 type=2048 window=411 changes=0 ownOverlay=false
+1152205 type=2048 window=411 changes=2 ownOverlay=false
+1152216 type=1 window=411 changes=0 ownOverlay=false
+1152463 type=2048 window=408 changes=0 ownOverlay=false
+1152602 type=2048 window=408 changes=1 ownOverlay=false
+1152637 type=32 window=408 changes=0 ownOverlay=false
+1152680 type=4194304 window=408 changes=0 ownOverlay=false
+1152795 type=32 window=414 changes=0 ownOverlay=true
+1152795 type=4194304 window=414 changes=0 ownOverlay=false
+1153111 type=32 window=416 changes=0 ownOverlay=false
+1153236 type=2048 window=416 changes=0 ownOverlay=false
+1153236 type=2048 window=416 changes=1 ownOverlay=false
+1153558 type=32 window=415 changes=0 ownOverlay=false
+1153585 type=4194304 window=416 changes=0 ownOverlay=false
+1153608 type=32 window=417 changes=0 ownOverlay=true
+1153658 type=2048 window=416 changes=1 ownOverlay=false
+1153659 type=1 window=416 changes=0 ownOverlay=false
+1153806 type=2048 window=416 changes=1 ownOverlay=false

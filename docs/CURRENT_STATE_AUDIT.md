@@ -1,3 +1,23 @@
+## Current state — 3 October 2026
+
+The local debug backend has independently verified Gemini and Groq responses. The last paired request timed out on Groq, so reliable dual-model guidance is not yet established. The complaint worksheet and copy helper are implemented; private-form paste, incident accuracy, physical-device acceptance and release connectivity remain open. [Provider verification](PROVIDER_VERIFICATION.md) records the connection findings and their limits.
+
+## 3 October 2026 — latest connection/draft implementation
+
+Implemented in the debug local pilot: authenticated server-status refresh (no model request), explicit two-provider API smoke check, independent Gemini/Groq outcomes and token metadata, safe recovery, and a reviewed complaint worksheet with per-field clipboard consent and an optional floating helper. The user clarified that they **removed the keys**; no live Gemini/Groq call was made. Test fixtures remain explicitly labelled. Main navigation, logo and existing primary palette are unchanged; shared secondary/tertiary defaults now use the existing greens instead of inherited Material purple.
+
+Verification: 75 unit / 54 backend / 12 emulator checks, debug and release builds, 0 lint errors (61 existing warnings). Keys are absent by user choice, so genuine provider connectivity/accuracy remains blocked. The complaint worksheet and helper never read a private form, clipboard or browser DOM; copy is explicit, paste is manual. See NEXT_CONTINUATION.md for open work.
+
+## 3 October 2026 update
+
+The local backend now has tested storage/quota distinction, cancellation tombstones, worker-start cleanup, provider error taxonomy and safer malformed-output handling. A consented paired-provider incident-assessment path is wired into the reporting screen with offline fallback and the existing Saathi theme. The adapters are configurable, but **no real AI account/model call has been tested**. Release connectivity and production hosting/authentication remain unfinished.
+
+The official apex portal loads in emulator Chrome through its public financial-reporting entry; www failed certificate validation, and all app fixed links now use the verified apex address. Own-overlay window-change filtering was corrected following an idle failure trace. The earlier post-tap WebView failure remains unexplained. Final evidence: 71 Android unit / 46 backend / 11 focused emulator passes, 0 lint errors / 61 warnings; see the newest TEST_RESULTS.md entry.
+
+## 2 October 2026 update
+
+The date/fare false-positive privacy rule and bounded backend admission/session defects have been corrected. A new cyber-fraud reporting companion provides optional text/dictation, conservative local triage, manual reporting steps, English step reading, browser selection and per-use official-link copy consent, including an optional short-lived floating helper. See [CYBER_FRAUD_REPORTING.md](CYBER_FRAUD_REPORTING.md) for exact scope, source limits and unfinished verification. This does not make the whole app production-ready or certify fraud/complaint completion.
+
 # Starting audit — 28 September 2026
 
 ## Latest backend/browser continuation — 1 October 2026

@@ -315,12 +315,8 @@ object SaathiSession {
     private fun requestLiveAi(nodes: List<UiNode>, ticket: ObservationGate.Ticket, observedAtMs: Long) {
         pendingGateway?.cancel()
         val snapshot = com.saathi.core.LiveAiPolicy.snapshot(ticket, nodes, goal, language.apiTag, observedAtMs, previousAiTargets.toList())
-        fun clarify() {
-            val message = when (language) {
-                GuidanceLanguage.ENGLISH -> "I could not agree on a clear next step. No marker is shown. Check your backend connection or describe a more specific task."
-                GuidanceLanguage.HINDI -> "अगले कदम पर सहमति नहीं मिली। कोई निशान नहीं दिखाया गया। कनेक्शन जाँचें या काम को और स्पष्ट बताएँ।"
-                GuidanceLanguage.HINGLISH -> "Clear next step par agreement nahi mila. Koi marker nahi dikhaya. Connection check karein ya task aur clearly batayein."
-            }
+        fun clarify(reason: String = "not_verified") {
+            val message = com.saathi.core.GatewayRecovery.message(reason, language)
             present(GuideStep(message, language.apiTag, null, "User clarification required.", false), false)
         }
         if (snapshot == null) { clarify(); return }
@@ -334,7 +330,9 @@ object SaathiSession {
             if (!observationGate.accepts(ticket)) return@requestLive
             pendingGateway = null
             val proposal = (result as? GatewayResult.Accepted)?.proposal
-            if (proposal == null || !snapshot.valid(proposal) || proposal.action != ProposedAction.HIGHLIGHT) { clarify(); return@requestLive }
+            if (proposal == null || !snapshot.valid(proposal) || proposal.action != ProposedAction.HIGHLIGHT) {
+                clarify((result as? GatewayResult.Rejected)?.reason ?: "not_verified"); return@requestLive
+            }
             val control = snapshot.controls.singleOrNull { it.id == proposal.targetResourceId } ?: run { clarify(); return@requestLive }
             val node = nodes.getOrNull(control.nodeIndex) ?: run { clarify(); return@requestLive }
             if (!node.isEnabled || node.isSensitive || node.isPassword || node.isEditable) { clarify(); return@requestLive }

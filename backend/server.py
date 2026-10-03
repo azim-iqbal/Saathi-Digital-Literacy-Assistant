@@ -3,10 +3,13 @@ import hmac
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import os
+import re
 import threading
+import time
 
 from backend.gateway import Gateway, InvalidRequest, Snapshot
 from backend.live import LiveSnapshot
+from backend.incident import IncidentSnapshot
 
 MAX_BODY = 8192
 
@@ -71,7 +74,7 @@ def make_server(token, gateway, port=8765):
                 self.send_header("Content-Length", str(len(encoded)))
                 self.end_headers()
                 self.wfile.write(encoded)
-            except (BrokenPipeError, ConnectionResetError):
+            except OSError:
                 pass
 
         def do_GET(self):
@@ -83,7 +86,7 @@ def make_server(token, gateway, port=8765):
             if len(auth) != 1 or not hmac.compare_digest(auth[0].encode(), ("Bearer " + token).encode()):
                 self.reply(401, {"error": "unauthorized"})
                 return
-            if self.path not in ("/v1/proposals", "/v1/live-proposals", "/v1/cancel"):
+            if self.path not in ("/v1/proposals", "/v1/live-proposals", "/v1/incident-assessment", "/v1/cancel", "/v1/connection-status", "/v1/provider-check"):
                 self.reply(404, {"error": "not_found"})
                 return
             lengths = self.headers.get_all("Content-Length", [])
@@ -95,28 +98,49 @@ def make_server(token, gateway, port=8765):
             if not 0 < length <= MAX_BODY:
                 self.reply(413, {"error": "body_too_large"})
                 return
-            if self.headers.get_content_type() != "application/json":
+            if len(self.headers.get_all("Content-Type", [])) != 1 or self.headers.get_content_type() != "application/json":
                 self.reply(415, {"error": "json_required"})
                 return
             try:
-                body = self.rfile.read(length)
+                deadline = time.monotonic() + 3
+                body = bytearray()
+                while len(body) < length:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0: raise TimeoutError()
+                    self.connection.settimeout(remaining)
+                    chunk = self.rfile.read1(length - len(body))
+                    if not chunk: break
+                    body.extend(chunk)
+                self.connection.settimeout(3)
                 if len(body) != length:
                     raise InvalidRequest("Incomplete body")
                 data = decode(body)
-                if self.path == "/v1/cancel":
-                    if not isinstance(data, dict) or set(data) != {"request_id"} or not isinstance(data["request_id"], str) or len(data["request_id"]) > 64:
+                if self.path == "/v1/connection-status":
+                    if data != {}: raise InvalidRequest("Empty status request required")
+                    from backend.diagnostics import status
+                    self.reply(200, status(gateway))
+                elif self.path == "/v1/provider-check":
+                    from backend.diagnostics import check
+                    self.reply(200, check(gateway, data))
+                elif self.path == "/v1/cancel":
+                    if not isinstance(data, dict) or set(data) != {"request_id"} or not isinstance(data["request_id"], str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", data["request_id"]):
                         raise InvalidRequest("Invalid cancellation")
                     self.reply(200, {"cancelled": gateway.cancel(data["request_id"]), "mode": gateway.mode})
                 else:
-                    if self.path == "/v1/live-proposals":
+                    if self.path in ("/v1/live-proposals", "/v1/incident-assessment"):
                         if gateway.mode != "dual_ai":
                             self.reply(200, gateway.rejected("not_configured"))
                         else:
-                            self.reply(200, gateway.decide(LiveSnapshot.parse(data)))
+                            self.reply(200, gateway.decide(IncidentSnapshot.parse(data) if self.path == "/v1/incident-assessment" else LiveSnapshot.parse(data)))
                     else:
                         self.reply(200, gateway.decide(Snapshot.parse(data)))
-            except (InvalidRequest, TimeoutError):
+            except InvalidRequest:
                 self.reply(400, {"error": "invalid_request"})
+            except TimeoutError:
+                self.reply(408, {"error": "request_timeout"})
+            except Exception:
+                # Keep the handler usable and never return raw storage/adapter failures.
+                self.reply(503, {"error": "unavailable"})
 
     return LocalServer(("127.0.0.1", port), Handler)
 

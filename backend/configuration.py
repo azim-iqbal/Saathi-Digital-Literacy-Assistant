@@ -6,6 +6,13 @@ from backend.providers import RestProvider
 from backend.budget import PersistentBudget
 
 
+class UnconfiguredProvider:
+    configured = False
+    model = "not-configured"
+    def __init__(self, name): self.id = name
+    def propose(self, *args): raise RuntimeError("Provider is not configured")
+
+
 def load_local_env(path=Path("backend/.env")):
     if not path.exists():
         return
@@ -26,7 +33,12 @@ def configured_gateway():
         return Gateway()
     if mode != "dual_ai":
         raise ValueError("SAATHI_PROVIDER_MODE must be mock or dual_ai")
-    providers = [RestProvider(p, os.environ.get(p.upper() + "_API_KEY", ""), os.environ.get(p.upper() + "_MODEL", "")) for p in ("gemini", "groq")]
+    providers = []
+    for name in ("gemini", "groq"):
+        try:
+            providers.append(RestProvider(name, os.environ.get(name.upper() + "_API_KEY", ""), os.environ.get(name.upper() + "_MODEL", "")))
+        except ValueError:
+            providers.append(UnconfiguredProvider(name))
     total = int(os.environ.get("SAATHI_MAX_PROVIDER_CALLS", "100"))
     per_provider = int(os.environ.get("SAATHI_MAX_CALLS_PER_PROVIDER", "50"))
     if not 2 <= total <= 10000 or not 1 <= per_provider <= 5000:

@@ -22,7 +22,7 @@ data class LiveAiSnapshot(
 
 object LiveAiPolicy {
     private val consequential = Regex("(?i)\\b(pay|purchase|buy|send|transfer|delete|remove|confirm|submit|install|allow|approve|accept|agree|reset|erase)\\b|भुगतान|भेज|मिटा|स्वीकार|अनुमति")
-    fun allowed(text: String, limit: Int = 160) = text.trim().length in 1..limit &&
+    fun allowed(text: String, limit: Int = 160) = text.isNotBlank() && text.length <= limit &&
         text.none { it.code < 32 } && !SensitiveContent.isSensitive(false, text) && !consequential.containsMatchIn(text)
 
     fun snapshot(ticket: ObservationGate.Ticket, nodes: List<UiNode>, goal: String, locale: String,

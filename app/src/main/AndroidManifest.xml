@@ -19,6 +19,8 @@
         android:usesCleartextTraffic="false">
         <activity android:name=".DemoBillPayActivity" android:exported="false" />
         <activity android:name=".AssistantActivity" android:exported="false" android:excludeFromRecents="true" android:taskAffinity="com.saathi.assistant" />
+        <activity android:name=".ComplaintDraftActivity" android:exported="false" />
+        <activity android:name=".CyberReportActivity" android:exported="false" />
         <activity android:name=".VoiceSetupActivity" android:exported="false" />
         <activity android:name=".TermsActivity" android:exported="false" />
         <activity android:name=".LaunchActivity" android:exported="true" android:theme="@style/SaathiStarting">
@@ -43,6 +45,7 @@
         </service>
         <service android:name=".overlay.HighlightOverlayService" android:exported="false" />
         <service android:name=".overlay.AssistantBubbleService" android:exported="false" />
+        <service android:name=".overlay.CyberLinkOverlayService" android:exported="false" />
         <service android:name=".orchestrator.GuidanceForegroundService" android:exported="false" />
         <service
             android:name=".speech.VoiceConversationService"

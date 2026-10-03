@@ -15,7 +15,7 @@ internal object LiveGatewayCodec {
         val d = MockGatewayCodec.parse(body)
         require(d["mode"] == "dual_ai")
         if (d["status"] == "rejected") {
-            require(d.keys == setOf("status", "mode", "reason")); GatewayResult.Rejected("not_verified")
+            require(d.keys == setOf("status", "mode", "reason")); GatewayResult.Rejected(GatewayRecovery.reason(d["reason"]))
         } else {
             require(d["status"] == "accepted" && d.keys == setOf("status", "mode", "request_id", "session_id", "screen_revision",
                 "package_name", "window_id", "action", "target_id", "explanation", "expected_outcome", "completion_evidence", "provenance"))

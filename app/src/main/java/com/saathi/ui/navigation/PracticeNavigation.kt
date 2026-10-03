@@ -127,7 +127,7 @@ internal fun PracticeNavigation(
                     Text(category.copy.text(language), style = MaterialTheme.typography.titleLarge, color = colors.onPrimaryContainer)
                     Text(Copy.SAFETY.text(language), style = MaterialTheme.typography.bodyLarge, color = colors.onPrimaryContainer)
                     GlassButton(Copy.REVIEW.text(language), onClick = { onChoose(category.goal) }, arrow = true,
-                        modifier = Modifier.fillMaxWidth().testTag("choose-${category.key}"))
+                        modifier = Modifier.testTag("choose-${category.key}"))
                 }
             }
         }

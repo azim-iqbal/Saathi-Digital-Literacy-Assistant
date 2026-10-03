@@ -22,7 +22,7 @@ internal object MockGatewayCodec {
         if (data["status"] == "rejected") {
             require(data.keys == setOf("status", "reason", "mode"))
             require(data["reason"] is String && (data["reason"] as String).length in 1..80)
-            GatewayResult.Rejected("rejected")
+            GatewayResult.Rejected(GatewayRecovery.reason(data["reason"]))
         } else {
             require(data["status"] == "accepted" && data.keys == setOf("status", "mode", "request_id", "session_id",
                 "screen_revision", "package_name", "window_id", "action", "target_id", "explanation",
@@ -75,6 +75,7 @@ internal object MockGatewayCodec {
             }
             JsonToken.STRING -> r.nextString().also { require(it.length <= 1024) }
             JsonToken.NUMBER -> r.nextString().let { require(it.matches(Regex("0|[1-9][0-9]*"))); it.toLong() }
+            JsonToken.BOOLEAN -> r.nextBoolean()
             JsonToken.NULL -> { r.nextNull(); null }
             else -> error("Unexpected JSON type")
         }

@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-03",
+  "android_unit": {
+    "tests": 75,
+    "failures": 0,
+    "errors": 0
+  },
+  "backend_tests": 54,
+  "emulator_tests": 12,
+  "debug_build": true,
+  "release_build": true,
+  "lint_errors": 0,
+  "lint_warnings": 61,
+  "real_model_calls": 0,
+  "real_provider_verified": false,
+  "private_portal_form_verified": false,
+  "automatic_paste": false
+}

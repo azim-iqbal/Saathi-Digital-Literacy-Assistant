@@ -12,6 +12,17 @@ class ExternalSurfaceActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent.getBooleanExtra("close_fixture", false)) { finish(); return }
+        if (intent.getBooleanExtra("travel_fixture", false)) {
+            val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 100, 32, 32) }
+            for (label in arrayOf("From", "To", "01/10/2026", "Cheapest from ₹5221", "₹6,398", "10:20 AM", "Shopping")) {
+                layout.addView(Button(this).apply { text = label; isAllCaps = false })
+            }
+            if (intent.getBooleanExtra("private_fixture", false)) layout.addView(android.widget.EditText(this).apply {
+                hint = "OTP"; inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
+                setText("582139")
+            })
+            setContentView(layout); return
+        }
         showChoices()
     }
     private fun showChoices() {

@@ -89,7 +89,7 @@ class LiveAiIntegrationTest {
                 tap("Back to choices")
                 waitFor("Backend returns to original goal") { SaathiSession.instruction.value.contains("choose “Help”") }
                 tap("Help")
-                waitFor("Unsupported next screen hands over without guessing completion") { SaathiSession.instruction.value.contains("could not agree") }
+                waitFor("Unsupported next screen hands over without guessing completion") { SaathiSession.instruction.value.contains("could not verify") }
                 assertTrue(SaathiSession.isActive())
                 main { SaathiSession.stop() }
                 assertNull(SaathiSession.presentationKey())

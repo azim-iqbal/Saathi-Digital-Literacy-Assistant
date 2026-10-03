@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-03",
+  "android_unit_tests": 71,
+  "backend_tests": 46,
+  "final_emulator_suites": [
+    {
+      "suite": "mock-reporting",
+      "expected_tests": 7,
+      "passed": true
+    },
+    {
+      "suite": "paired-assessment",
+      "expected_tests": 4,
+      "passed": true
+    }
+  ],
+  "lint_errors": 0,
+  "lint_warnings": 61,
+  "debug_build": "passed",
+  "live_provider_calls": 0,
+  "physical_device": false,
+  "original_post_tap_webview_root_cause": "not established",
+  "idle_failure": "reproduced before fix; attached-overlay event classification fixed; final real-service test passes",
+  "portal": "apex HTTPS loaded in emulator Chrome through public Accept.aspx; no declaration accepted, login or complaint submitted"
+}

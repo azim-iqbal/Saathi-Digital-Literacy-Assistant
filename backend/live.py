@@ -5,12 +5,13 @@ import time
 
 from backend.gateway import InvalidRequest, Proposal
 
-PRIVATE = re.compile(r"(?i)(?<!\w)(pin|otp|password|cvv|mpin|passcode|security code|recovery code)(?!\w)|पासवर्ड|पिन|ओटीपी|सीवीवी|(?<!\w)\d{4,}(?!\w)")
+from backend.privacy import sensitive
+
 CONSEQUENTIAL = re.compile(r"(?i)\b(pay|purchase|buy|send|transfer|delete|remove|confirm|submit|install|allow|approve|accept|agree|reset|erase)\b|भुगतान|भेज|मिटा|स्वीकार|अनुमति")
 
 
 def safe_text(value, limit):
-    return isinstance(value, str) and 1 <= len(value.strip()) <= limit and not PRIVATE.search(value) and not any(ord(c) < 32 for c in value)
+    return isinstance(value, str) and bool(value.strip()) and len(value) <= limit and not sensitive(value) and not any(ord(c) < 32 or 0xD800 <= ord(c) <= 0xDFFF for c in value)
 
 
 @dataclass(frozen=True)
@@ -77,6 +78,6 @@ def validate_live(snapshot, proposal):
         return "uncertain"
     if proposal.action == "HANDOVER" and proposal.target_id is None:
         return None
-    if proposal.action == "HIGHLIGHT" and proposal.target_id in snapshot.eligible_node_ids:
+    if proposal.action == "HIGHLIGHT" and isinstance(proposal.target_id, str) and proposal.target_id in snapshot.eligible_node_ids:
         return None
     return "invalid_target"

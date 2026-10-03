@@ -10,6 +10,9 @@ object PracticeGateway {
     fun requestLive(snapshot: LiveAiSnapshot, callback: (GatewayResult) -> Unit): GatewayCancellation {
         callback(GatewayResult.Rejected("unavailable")); return GatewayCancellation { }
     }
+    fun assessIncident(snapshot: IncidentAssessmentRequest, consent: Boolean, callback: (GatewayResult) -> Unit): GatewayCancellation {
+        callback(GatewayResult.Rejected("not_configured")); return GatewayCancellation { }
+    }
     fun openSetup(context: Context) = Unit
     fun disable() = Unit
     fun request(snapshot: SanitizedScreenSnapshot, callback: (GatewayResult) -> Unit): GatewayCancellation {

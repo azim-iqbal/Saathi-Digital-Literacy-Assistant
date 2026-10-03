@@ -52,4 +52,8 @@ class LiveGuideTest {
             assertTrue(LiveGuide.allowedPackage(it, "com.saathi"))
         }
     }
+    @Test fun `ordinary labels containing action substrings remain eligible`() {
+        listOf("Shopping", "Spinning", "Display", "Destination").forEach { assertNotNull(it, LiveGuide.label(it)) }
+        assertNull(LiveGuide.next("Destination", listOf(node("Destination").copy(isEditable = true)), "en-IN").target)
+    }
 }

@@ -32,6 +32,15 @@ class LiveAccessibilityIntegrationTest {
     private fun waitFor(description: String, condition: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + 12_000
         while (!condition() && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100)
+        if (!condition()) {
+            File(output(), "transition-failure.txt").writeText(description + "\n" + nodes().joinToString("\n") {
+                "class=${it.className} bounds=${it.bounds} clickable=${it.isClickable} parent=${it.clickableAncestorBounds}"
+            })
+            File(output(), "transition-windows.txt").writeText(shell("dumpsys window windows"))
+            File(output(), "transition-input.txt").writeText(shell("dumpsys input"))
+            File(output(), "transition-logcat.txt").writeText(shell("logcat -d -t 500 -s InputDispatcher chromium ViewRootImpl"))
+            screenshot("transition-failure")
+        }
         assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", condition())
     }
     private fun nodes() = automation.rootInActiveWindow?.let { root ->
@@ -41,6 +50,7 @@ class LiveAccessibilityIntegrationTest {
         waitFor("Visible $label") { nodes().any { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) } }
         val node = nodes().first { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
         val bounds = if (node.isClickable) node.bounds else requireNotNull(node.clickableAncestorBounds)
+        File(output(), "tap-geometry.txt").appendText("$label: text=${node.bounds}; clickable=${node.isClickable}; tap=$bounds\n")
         val down = SystemClock.uptimeMillis()
         for (action in listOf(MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP)) {
             val event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), action, bounds.exactCenterX(), bounds.exactCenterY(), 0)
@@ -65,6 +75,10 @@ class LiveAccessibilityIntegrationTest {
             if (value == "null" || value.isBlank()) shell("settings delete secure $key")
             else shell("settings put secure $key $value")
         }
+        val eventLog = java.util.Collections.synchronizedList(mutableListOf<String>())
+        main { com.saathi.accessibility.ObservationDiagnostics.observer = { type, window, changes, own ->
+            eventLog.add("${SystemClock.uptimeMillis()} type=$type window=$window changes=$changes ownOverlay=$own")
+        } }
         try {
             automation.serviceInfo = automation.serviceInfo.apply { flags = flags or AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS or AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS }
             shell("appops set com.saathi SYSTEM_ALERT_WINDOW allow")
@@ -87,9 +101,23 @@ class LiveAccessibilityIntegrationTest {
                 waitFor("Initial web content loaded") { nodes().any { it.text == "Support" } }
                 automation.waitForIdle(750, 8_000)
                 waitFor("Presentation after initial layout settles") { SaathiSession.presentationKey() != null }
+                // UiAutomation's idle callback can precede the real service's final WebView
+                // layout event. Require a bounded settling interval before testing idle stability.
+                var candidate = SaathiSession.presentationKey()
+                var unchangedSince = SystemClock.uptimeMillis()
+                waitFor("WebView presentation settles") {
+                    val current = SaathiSession.presentationKey()
+                    if (current == null || current != candidate) {
+                        candidate = current
+                        unchangedSince = SystemClock.uptimeMillis()
+                    }
+                    current != null && SystemClock.uptimeMillis() - unchangedSince >= 1000
+                }
                 val stable = SaathiSession.presentationKey()
                 assertNotNull(stable)
+                eventLog.add("IDLE_ASSERT_BEGIN ${SystemClock.uptimeMillis()} key=$stable")
                 SystemClock.sleep(1_000)
+                eventLog.add("IDLE_ASSERT_END ${SystemClock.uptimeMillis()} key=${SaathiSession.presentationKey()}")
                 assertEquals("Idle presentation must remain stable", stable, SaathiSession.presentationKey())
                 screenshot("live-service-native")
                 val session = SaathiSession.sessionKey()
@@ -124,6 +152,7 @@ class LiveAccessibilityIntegrationTest {
                 waitFor("Automatic WebView link guidance") { SaathiSession.instruction.value.startsWith("Find “Support”") }
                 screenshot("live-service-web")
                 tap("Support")
+                waitFor("Injected tap changes the fixture link") { nodes().any { it.text == "Support opened" } }
                 waitFor("Web mutation clears old target") { SaathiSession.instruction.value.startsWith("I cannot find") }
                 assertTrue(SaathiSession.isActive())
                 assertFalse(SaathiSession.hasSpokenGuidance())
@@ -134,6 +163,8 @@ class LiveAccessibilityIntegrationTest {
                 File(output(), "live-service-result.txt").writeText("PASS: real enabled service; native/WebView events; stable idle presentation; in-session request change without a screen event; old presentation/session rejection; detour/return; changed label; own-app clearing; explicit Stop. Request handoff exercised directly; no real speech recognition/audio or model.\n")
             }
         } finally {
+            main { com.saathi.accessibility.ObservationDiagnostics.observer = null }
+            File(output(), "observation-events.txt").writeText(eventLog.joinToString("\n"))
             File(output(), "service-state-final.txt").writeText(shell("dumpsys accessibility"))
             main { SaathiSession.stop() }
             restore("enabled_accessibility_services", priorServices)

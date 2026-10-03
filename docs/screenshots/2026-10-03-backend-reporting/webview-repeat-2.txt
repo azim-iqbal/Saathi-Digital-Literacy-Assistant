@@ -1,0 +1,38 @@
+INSTRUMENTATION_STATUS: class=com.saathi.ui.LiveAccessibilityIntegrationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.LiveAccessibilityIntegrationTest:
+INSTRUMENTATION_STATUS: test=realServiceTracksExternalDetourReturnAndWebChangeThenStops
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.LiveAccessibilityIntegrationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=org.junit.ComparisonFailure: Idle presentation must remain stable expected:<...62721653, revision=1[1], packageName=com.sa...> but was:<...62721653, revision=1[3], packageName=com.sa...>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops(LiveAccessibilityIntegrationTest.kt:115)
+
+INSTRUMENTATION_STATUS: stream=
+Error in realServiceTracksExternalDetourReturnAndWebChangeThenStops(com.saathi.ui.LiveAccessibilityIntegrationTest):
+org.junit.ComparisonFailure: Idle presentation must remain stable expected:<...62721653, revision=1[1], packageName=com.sa...> but was:<...62721653, revision=1[3], packageName=com.sa...>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops(LiveAccessibilityIntegrationTest.kt:115)
+
+INSTRUMENTATION_STATUS: test=realServiceTracksExternalDetourReturnAndWebChangeThenStops
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 5.396
+There was 1 failure:
+1) realServiceTracksExternalDetourReturnAndWebChangeThenStops(com.saathi.ui.LiveAccessibilityIntegrationTest)
+org.junit.ComparisonFailure: Idle presentation must remain stable expected:<...62721653, revision=1[1], packageName=com.sa...> but was:<...62721653, revision=1[3], packageName=com.sa...>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops(LiveAccessibilityIntegrationTest.kt:115)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1
