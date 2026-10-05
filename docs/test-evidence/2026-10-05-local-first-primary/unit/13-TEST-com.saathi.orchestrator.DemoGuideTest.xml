@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.orchestrator.DemoGuideTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.006">
+  <properties/>
+  <testcase name="partialBillerTreeHasNoCrashingOrGuessedTarget" classname="com.saathi.orchestrator.DemoGuideTest" time="0.002"/>
+  <testcase name="backFromDetourResolvesTheOriginalCategory" classname="com.saathi.orchestrator.DemoGuideTest" time="0.002"/>
+  <testcase name="masked filled account field advances without reading its value" classname="com.saathi.orchestrator.DemoGuideTest" time="0.001"/>
+  <testcase name="dth goal highlights the DTH category" classname="com.saathi.orchestrator.DemoGuideTest" time="0.0"/>
+  <testcase name="synthetic success never claims a real payment" classname="com.saathi.orchestrator.DemoGuideTest" time="0.0"/>
+  <testcase name="wrongCategorySuccessDoesNotCompleteSelectedTask" classname="com.saathi.orchestrator.DemoGuideTest" time="0.001"/>
+  <testcase name="wrongCategoryReturnsToChoicesInsteadOfFillingAnotherBill" classname="com.saathi.orchestrator.DemoGuideTest" time="0.0"/>
+  <testcase name="water goal highlights the water category" classname="com.saathi.orchestrator.DemoGuideTest" time="0.0"/>
+  <testcase name="missingRecoveryTargetNeverThrowsOrInventsCoordinates" classname="com.saathi.orchestrator.DemoGuideTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

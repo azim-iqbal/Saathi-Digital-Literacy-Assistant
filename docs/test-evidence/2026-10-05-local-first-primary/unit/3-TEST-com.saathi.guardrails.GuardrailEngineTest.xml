@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.guardrails.GuardrailEngineTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.006">
+  <properties/>
+  <testcase name="flags unsafe screen categories" classname="com.saathi.guardrails.GuardrailEngineTest" time="0.002"/>
+  <testcase name="refuses off-topic requests in English Hindi and Hinglish" classname="com.saathi.guardrails.GuardrailEngineTest" time="0.002"/>
+  <testcase name="allows concrete on-screen tasks in English Hindi and Hinglish" classname="com.saathi.guardrails.GuardrailEngineTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

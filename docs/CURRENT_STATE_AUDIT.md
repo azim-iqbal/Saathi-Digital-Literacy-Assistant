@@ -1,3 +1,15 @@
+# 4 October follow-up — confirmed account rotation defect
+
+Resolved an access-loss bug in the new offline deployment CLI: committing a replacement token before its file write meant a disk error could invalidate the user's only available credential. Failure injection reproduced it. Token contents and directory are now synced before rotation; SQLite errors are sanitized and uncertain candidates retained for documented recovery. Eight new regressions plus eight hosted tests pass. Actual production storage/power-loss behavior remains untested; no real account or UI was changed.
+
+## Hosted preparation — 4 October 2026
+
+Hosted pilot authentication/budgets and shared release HTTPS transport are now implemented. The user has no host and requested deployment files only. Verified 71 backend tests, six local Gunicorn checks, 77 Android unit tests, five emulator connection checks, debug/release builds and lint (0 errors/58 warnings). A connection-generation guard fixes results arriving after disable or credential replacement. No public endpoint, certificate, signing or live model evaluation occurred. Caddy/systemd templates require host validation; broad remaining acceptance is tracked in DEPLOYMENT.md and NEXT_CONTINUATION.md. Existing visual theme and core privacy rules are retained.
+
+## Current state — 4 October 2026
+
+Backend inspection found that each REST request used an independent eight-second timeout even when its screen was nearly expired. The gateway now shares a monotonic deadline bounded by remaining freshness, propagates it to both transports, and rechecks it after proposal validation. Late body/EOF reads are rejected. Eight new regression tests bring the offline suite to **63 passing tests**. This is a tested local timing fix; the external cause of the last Groq timeout remains unknown. UI, Android and previously stored credentials are unchanged. See TEST_RESULTS.md and NEXT_CONTINUATION.md for evidence and remaining work.
+
 ## Current state — 3 October 2026
 
 The local debug backend has independently verified Gemini and Groq responses. The last paired request timed out on Groq, so reliable dual-model guidance is not yet established. The complaint worksheet and copy helper are implemented; private-form paste, incident accuracy, physical-device acceptance and release connectivity remain open. [Provider verification](PROVIDER_VERIFICATION.md) records the connection findings and their limits.

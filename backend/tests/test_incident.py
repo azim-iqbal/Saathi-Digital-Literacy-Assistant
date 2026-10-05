@@ -21,7 +21,7 @@ class IncidentTests(unittest.TestCase):
 
     def test_both_adapters_assess_independently_and_only_return_reviewed_codes(self):
         seen = []
-        def transport(url, headers, payload):
+        def transport(url, headers, payload, timeout):
             seen.append(payload)
             result = json.dumps({"category": "POSSIBLE_FINANCIAL", "signals": ["DECEPTIVE_REQUEST"]})
             if "googleapis" in url: return {"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": result}]}}]}
@@ -37,7 +37,7 @@ class IncidentTests(unittest.TestCase):
         finally: gateway.close()
 
     def test_disagreement_withholds_assessment_and_cancellation_spends_nothing(self):
-        def transport(url, headers, payload):
+        def transport(url, headers, payload, timeout):
             result = json.dumps({"category": "POSSIBLE_FINANCIAL", "signals": ["DECEPTIVE_REQUEST" if "googleapis" in url else "UNAUTHORISED_TRANSACTION"]})
             return ({"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": result}]}}]} if "googleapis" in url else
                 {"choices": [{"finish_reason": "stop", "message": {"content": result}}]})

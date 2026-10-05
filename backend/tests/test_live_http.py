@@ -13,7 +13,7 @@ class LiveHttpTests(unittest.TestCase):
     def setUp(self):
         self.target = "n1"
         self.requests = []
-        def transport(url, headers, payload):
+        def transport(url, headers, payload, timeout):
             self.requests.append(payload)
             text = decision(self.target)
             if "googleapis" in url:
@@ -36,12 +36,14 @@ class LiveHttpTests(unittest.TestCase):
             response = connection.getresponse()
             return response.status, json.loads(response.read())
         finally: connection.close()
-    def test_live_route_runs_both_adapters_and_rejects_replay(self):
+    def test_live_route_uses_primary_only_and_rejects_replay(self):
         code, result = self.post(self.body())
         self.assertEqual(code, 200); self.assertEqual(result["status"], "accepted")
-        self.assertEqual(len(self.requests), 2)
+        self.assertEqual(result["decision_policy"], "primary")
+        self.assertEqual([p["provider"] for p in result["provenance"]], ["gemini"])
+        self.assertEqual(len(self.requests), 1)
         self.assertEqual(self.post(self.body())[1]["reason"], "stale")
-        self.assertEqual(len(self.requests), 2)
+        self.assertEqual(len(self.requests), 1)
     def test_invented_target_returns_no_guidance(self):
         self.target = "n99"
         self.assertEqual(self.post(self.body())[1]["reason"], "invalid_target")

@@ -243,7 +243,8 @@ object SaathiSession {
                     waitForPractice()
                     return@Runnable
                 }
-                if (liveAi && nodes.none { it.isSensitive || it.isPassword }) {
+                val livePlan = if (live) LiveGuide.plan(goal, nodes, language.apiTag, liveAi) else null
+                if (livePlan?.useCloud == true) {
                     requestLiveAi(nodes, ticket, observedAtMs)
                     return@Runnable
                 }
@@ -251,7 +252,7 @@ object SaathiSession {
                     requestGateway(nodes, ticket, observedAtMs)
                     return@Runnable
                 }
-                val step = if (live) LiveGuide.next(goal, nodes, language.apiTag) else DemoGuide.next(goal, nodes, language.apiTag, false)
+                val step = livePlan?.local ?: DemoGuide.next(goal, nodes, language.apiTag, false)
                 // Only a current, enabled local node can determine overlay coordinates.
                 val resolvedNode = step.target?.let { proposed ->
                     if (proposed.nodeIndex != null) nodes.getOrNull(proposed.nodeIndex)

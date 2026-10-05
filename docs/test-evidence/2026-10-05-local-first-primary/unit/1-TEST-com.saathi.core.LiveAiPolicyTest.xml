@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.core.LiveAiPolicyTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.012">
+  <properties/>
+  <testcase name="inputValuesAndPrivateScreensNeverEnterSnapshot" classname="com.saathi.core.LiveAiPolicyTest" time="0.006"/>
+  <testcase name="whitespaceCannotBypassRequestControlOrHistoryLimits" classname="com.saathi.core.LiveAiPolicyTest" time="0.002"/>
+  <testcase name="inventedStaleOrCompletionResponsesNeverBecomeGuidance" classname="com.saathi.core.LiveAiPolicyTest" time="0.002"/>
+  <testcase name="consequentialAndSecretTasksOrTargetsAreNotSent" classname="com.saathi.core.LiveAiPolicyTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.core.ObservationGateTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.014">
+  <properties/>
+  <testcase name="restarting on identical screen cannot reuse old result" classname="com.saathi.core.ObservationGateTest" time="0.001"/>
+  <testcase name="latest revision wins even when old worker completes last" classname="com.saathi.core.ObservationGateTest" time="0.0"/>
+  <testcase name="overlay failure can only stop its current presentation" classname="com.saathi.core.ObservationGateTest" time="0.012"/>
+  <testcase name="movement invalidates before replacement snapshot finishes" classname="com.saathi.core.ObservationGateTest" time="0.0"/>
+  <testcase name="notification identity survives screen changes but never a session restart" classname="com.saathi.core.ObservationGateTest" time="0.001"/>
+  <testcase name="window and package changes invalidate previous work" classname="com.saathi.core.ObservationGateTest" time="0.0"/>
+  <testcase name="stop rejects a delayed tree and clears presentation identity" classname="com.saathi.core.ObservationGateTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

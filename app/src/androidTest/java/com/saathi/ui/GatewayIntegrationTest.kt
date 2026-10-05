@@ -85,6 +85,31 @@ class GatewayIntegrationTest {
         } finally { main { PracticeGateway.disable() }; instrumentation.getUiAutomation(0) }
     }
 
+    @Test fun disableOrReconfigureSuppressesQueuedConnectionResults() {
+        val secret = token()
+        try {
+            for (replace in listOf(false, true)) {
+                val obsolete = CountDownLatch(1)
+                main {
+                    assertTrue(PracticeGateway.configure(secret))
+                    val before = PracticeGateway.requestsStarted.get()
+                    PracticeGateway.connectionStatus { obsolete.countDown() }
+                    // Hold the main loop so even a completed HTTP result remains queued.
+                    val end = SystemClock.uptimeMillis() + 1500
+                    while (PracticeGateway.requestsStarted.get() == before && SystemClock.uptimeMillis() < end) SystemClock.sleep(10)
+                    assertTrue(PracticeGateway.requestsStarted.get() > before)
+                    if (replace) assertTrue(PracticeGateway.configure(secret)) else PracticeGateway.disable()
+                }
+                assertFalse("Old connection must not report after credentials change", obsolete.await(500, TimeUnit.MILLISECONDS))
+            }
+            val fresh = CountDownLatch(1)
+            var result: GatewayResult? = null
+            main { PracticeGateway.connectionStatus { result = it; fresh.countDown() } }
+            assertTrue(fresh.await(5, TimeUnit.SECONDS))
+            assertTrue(result is GatewayResult.Connection)
+        } finally { main { PracticeGateway.disable() }; instrumentation.getUiAutomation(0) }
+    }
+
     @Test fun realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal() {
         val secret = token()
         val service = "com.saathi/com.saathi.accessibility.SaathiAccessibilityService"

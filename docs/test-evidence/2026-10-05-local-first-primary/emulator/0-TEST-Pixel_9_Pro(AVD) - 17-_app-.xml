@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.saathi.ui.LiveAiIntegrationTest" tests="4" failures="1" errors="0" skipped="0" time="71.62" timestamp="2026-10-04T15:54:19" hostname="localhost">
+  <properties>
+    <property name="device" value="Pixel_9_Pro(AVD) - 17" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="primaryProtocolGuidesAnExternalDetourAndReturn" classname="com.saathi.ui.LiveAiIntegrationTest" time="39.338">
+    <failure>java.lang.AssertionError: Primary backend proposes Help for a free-form goal; state=GUIDING; instruction=I could not verify a clear next step. No marker is shown. Describe a more specific task or use visible-option help.
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.assertTrue(Assert.java:42)
+at com.saathi.ui.LiveAiIntegrationTest.waitFor(LiveAiIntegrationTest.kt:35)
+at com.saathi.ui.LiveAiIntegrationTest.runProtocol(LiveAiIntegrationTest.kt:97)
+at com.saathi.ui.LiveAiIntegrationTest.primaryProtocolGuidesAnExternalDetourAndReturn(LiveAiIntegrationTest.kt:55)
+</failure>
+  </testcase>
+  <testcase name="exactVisibleGoalUsesNoGatewayEvenWithAiEnabled" classname="com.saathi.ui.LiveAiIntegrationTest" time="26.242" />
+  <testcase name="mismatchedPolicyProvenanceAndInventedTargetsAreRejected" classname="com.saathi.ui.LiveGatewayCodecTest" time="0.273" />
+  <testcase name="primaryFallbackAndLegacyPairedContractsRemainGrounded" classname="com.saathi.ui.LiveGatewayCodecTest" time="0.069" />
+</testsuite>

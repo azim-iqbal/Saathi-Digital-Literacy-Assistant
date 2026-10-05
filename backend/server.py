@@ -10,6 +10,7 @@ import time
 from backend.gateway import Gateway, InvalidRequest, Snapshot
 from backend.live import LiveSnapshot
 from backend.incident import IncidentSnapshot
+from backend.routing import PATHS, dispatch
 
 MAX_BODY = 8192
 
@@ -86,7 +87,7 @@ def make_server(token, gateway, port=8765):
             if len(auth) != 1 or not hmac.compare_digest(auth[0].encode(), ("Bearer " + token).encode()):
                 self.reply(401, {"error": "unauthorized"})
                 return
-            if self.path not in ("/v1/proposals", "/v1/live-proposals", "/v1/incident-assessment", "/v1/cancel", "/v1/connection-status", "/v1/provider-check"):
+            if self.path not in PATHS:
                 self.reply(404, {"error": "not_found"})
                 return
             lengths = self.headers.get_all("Content-Length", [])
@@ -115,25 +116,7 @@ def make_server(token, gateway, port=8765):
                 if len(body) != length:
                     raise InvalidRequest("Incomplete body")
                 data = decode(body)
-                if self.path == "/v1/connection-status":
-                    if data != {}: raise InvalidRequest("Empty status request required")
-                    from backend.diagnostics import status
-                    self.reply(200, status(gateway))
-                elif self.path == "/v1/provider-check":
-                    from backend.diagnostics import check
-                    self.reply(200, check(gateway, data))
-                elif self.path == "/v1/cancel":
-                    if not isinstance(data, dict) or set(data) != {"request_id"} or not isinstance(data["request_id"], str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", data["request_id"]):
-                        raise InvalidRequest("Invalid cancellation")
-                    self.reply(200, {"cancelled": gateway.cancel(data["request_id"]), "mode": gateway.mode})
-                else:
-                    if self.path in ("/v1/live-proposals", "/v1/incident-assessment"):
-                        if gateway.mode != "dual_ai":
-                            self.reply(200, gateway.rejected("not_configured"))
-                        else:
-                            self.reply(200, gateway.decide(IncidentSnapshot.parse(data) if self.path == "/v1/incident-assessment" else LiveSnapshot.parse(data)))
-                    else:
-                        self.reply(200, gateway.decide(Snapshot.parse(data)))
+                self.reply(200, dispatch(gateway, self.path, data))
             except InvalidRequest:
                 self.reply(400, {"error": "invalid_request"})
             except TimeoutError:

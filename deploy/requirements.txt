@@ -1,0 +1,2 @@
+# Version exercised by the local deployment-entry smoke check.
+gunicorn==26.2.0

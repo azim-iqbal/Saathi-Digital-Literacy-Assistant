@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.ui.PracticeTaskTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.001">
+  <properties/>
+  <testcase name="all three languages route to synthetic tasks" classname="com.saathi.ui.PracticeTaskTest" time="0.001"/>
+  <testcase name="unknown task cannot silently become bill practice" classname="com.saathi.ui.PracticeTaskTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

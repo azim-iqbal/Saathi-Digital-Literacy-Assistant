@@ -1,0 +1,34 @@
+# Replace this placeholder with the host you own before validating or starting Caddy.
+{
+    servers {
+        timeouts {
+            read_header 5s
+            read_body 5s
+            write 20s
+            idle 30s
+        }
+        max_header_size 8KB
+    }
+}
+
+saathi.example.invalid {
+    request_body {
+        max_size 8KB
+    }
+    header {
+        Cache-Control "no-store"
+        X-Content-Type-Options "nosniff"
+        -Server
+    }
+    reverse_proxy 127.0.0.1:8768 {
+        # Buffer the bounded body before occupying an application worker.
+        request_buffers 8KB
+        header_up X-Forwarded-Proto https
+        transport http {
+            dial_timeout 2s
+            response_header_timeout 15s
+            read_timeout 15s
+        }
+    }
+    # Access logging is deliberately absent: no credentials or request content in logs.
+}

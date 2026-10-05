@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-04",
+  "scope": "Backend decision deadlines and remaining screen freshness",
+  "command": "python3 -m unittest discover -s backend/tests -v",
+  "backend_tests": 63,
+  "new_deadline_tests": 8,
+  "result": "passed",
+  "provider_transports": "synthetic fixtures only",
+  "live_provider_calls": 0,
+  "android_changed": false,
+  "android_tests_rerun": false,
+  "published": false,
+  "initial_environment_failure": "Restricted sandbox denied five localhost test-server binds; full permitted localhost run passed.",
+  "remaining": [
+    "External cause of the recorded Groq timeout and real paired latency/accuracy",
+    "Forcible cancellation of blocking network operations",
+    "Original intermittent WebView post-tap failure",
+    "Real incident assessment quality and authenticated portal workflow",
+    "Voice and physical-device acceptance",
+    "Production hosting, authentication, accounting and release connectivity"
+  ]
+}

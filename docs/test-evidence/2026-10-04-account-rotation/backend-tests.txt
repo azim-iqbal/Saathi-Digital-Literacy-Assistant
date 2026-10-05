@@ -1,0 +1,21 @@
+test_database_failure_keeps_saved_candidate_and_sanitizes_error (backend.tests.test_manage_accounts.AccountCommandTests.test_database_failure_keeps_saved_candidate_and_sanitizes_error) ... ok
+test_database_open_failure_is_sanitized (backend.tests.test_manage_accounts.AccountCommandTests.test_database_open_failure_is_sanitized) ... ok
+test_error_after_commit_retains_the_active_candidate_for_recovery (backend.tests.test_manage_accounts.AccountCommandTests.test_error_after_commit_retains_the_active_candidate_for_recovery) ... ok
+test_existing_file_and_symlink_are_never_overwritten (backend.tests.test_manage_accounts.AccountCommandTests.test_existing_file_and_symlink_are_never_overwritten) ... ok
+test_failed_directory_sync_preserves_previous_access (backend.tests.test_manage_accounts.AccountCommandTests.test_failed_directory_sync_preserves_previous_access) ... ok
+test_failed_token_sync_preserves_previous_access (backend.tests.test_manage_accounts.AccountCommandTests.test_failed_token_sync_preserves_previous_access) ... ok
+test_failed_token_write_preserves_previous_access (backend.tests.test_manage_accounts.AccountCommandTests.test_failed_token_write_preserves_previous_access) ... ok
+test_success_saves_private_token_before_rotation_and_never_prints_it (backend.tests.test_manage_accounts.AccountCommandTests.test_success_saves_private_token_before_rotation_and_never_prints_it) ... ok
+test_account_capacity_and_broken_storage_fail_closed (backend.tests.test_hosted.HostedTests.test_account_capacity_and_broken_storage_fail_closed) ... ok
+test_global_cap_and_user_counts_survive_restart (backend.tests.test_hosted.HostedTests.test_global_cap_and_user_counts_survive_restart) ... ok
+test_https_authentication_and_revocation_before_any_dispatch (backend.tests.test_hosted.HostedTests.test_https_authentication_and_revocation_before_any_dispatch) ... ok
+test_invalid_requests_spend_no_calls (backend.tests.test_hosted.HostedTests.test_invalid_requests_spend_no_calls) ... ok
+test_revocation_during_dispatch_discards_response (backend.tests.test_hosted.HostedTests.test_revocation_during_dispatch_discards_response) ... ok
+test_rotation_and_expiry_and_hash_only_storage (backend.tests.test_hosted.HostedTests.test_rotation_and_expiry_and_hash_only_storage) ... ok
+test_same_request_ids_are_isolated_and_other_users_cannot_cancel_or_read_them (backend.tests.test_hosted.HostedTests.test_same_request_ids_are_isolated_and_other_users_cannot_cancel_or_read_them) ... ok
+test_user_cap_does_not_take_another_users_allowance (backend.tests.test_hosted.HostedTests.test_user_cap_does_not_take_another_users_allowance) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.135s
+
+OK

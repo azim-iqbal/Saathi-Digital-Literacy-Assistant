@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.core.DualProposalValidatorTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.043">
+  <properties/>
+  <testcase name="uncertainty or evidence attached to an ordinary step is rejected" classname="com.saathi.core.DualProposalValidatorTest" time="0.022"/>
+  <testcase name="timeout quota and malformed outputs never become single provider guidance" classname="com.saathi.core.DualProposalValidatorTest" time="0.002"/>
+  <testcase name="stale package window or revision cannot be presented" classname="com.saathi.core.DualProposalValidatorTest" time="0.001"/>
+  <testcase name="snapshot contains only safe control ids and no untrusted screen text" classname="com.saathi.core.DualProposalValidatorTest" time="0.013"/>
+  <testcase name="different targets require clarification instead of choosing one" classname="com.saathi.core.DualProposalValidatorTest" time="0.001"/>
+  <testcase name="handover has no target and can be agreed safely" classname="com.saathi.core.DualProposalValidatorTest" time="0.0"/>
+  <testcase name="matching eligible proposals are accepted" classname="com.saathi.core.DualProposalValidatorTest" time="0.001"/>
+  <testcase name="old future and private identifier snapshots cannot be accepted" classname="com.saathi.core.DualProposalValidatorTest" time="0.0"/>
+  <testcase name="completion requires the matching observed category and success marker" classname="com.saathi.core.DualProposalValidatorTest" time="0.002"/>
+  <testcase name="unknown or sensitive targets are rejected locally" classname="com.saathi.core.DualProposalValidatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

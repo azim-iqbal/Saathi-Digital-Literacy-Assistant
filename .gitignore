@@ -27,7 +27,11 @@ externalNativeBuild/
 *.pem
 *.key
 key.properties
+keystore.properties
+signing.properties
 secrets.properties
+*.token
+.venv/
 google-services.json
 
 # Android Studio / IntelliJ IDEA
@@ -63,3 +67,22 @@ output/
 # Local persistent gateway counters (no user data)
 backend/*.sqlite3
 backend/*.sqlite3-*
+
+# Presentation and motion graphics video editing
+saathi-motion/
+presentation-build/
+deliverables/
+
+# PDF documents
+*.pdf
+
+# New documentation files without previous repo version
+backend/README.md
+docs/DEPLOYMENT.md
+docs/DEVICE_COMPATIBILITY.md
+docs/JUDGES_TEAM_GUIDE.md
+docs/PRIVACY.md
+docs/PROJECT_AUDIT.md
+docs/RELEASE_SECURITY_CHECKLIST.md
+docs/SECURITY.md
+docs/specs/PRODUCTION_RELEASE_BRIEF.md

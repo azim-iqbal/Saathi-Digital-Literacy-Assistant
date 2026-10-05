@@ -18,7 +18,7 @@ import com.saathi.ui.*
 import com.saathi.ui.glass.*
 import com.saathi.ui.navigation.rememberNavigationEnvironment
 
-/** Visible opt-in test setup; neither the token nor enabled state survives process death. */
+/** Visible opt-in setup; neither the access token nor enabled state survives process death. */
 class GatewaySetupActivity : ComponentActivity() {
     private var checking by mutableStateOf(false)
     private var report by mutableStateOf<String?>(null)
@@ -48,6 +48,7 @@ class GatewaySetupActivity : ComponentActivity() {
             var token by remember { mutableStateOf("") }
             var enabled by remember { mutableStateOf(PracticeGateway.enabled() || PracticeGateway.aiEnabled()) }
             var ai by remember { mutableStateOf(PracticeGateway.aiEnabled()) }
+            val development = com.saathi.BuildConfig.DEBUG
             var probeConsent by remember { mutableStateOf(false) }
             var error by remember { mutableStateOf(false) }
             MaterialTheme(colorScheme = colors) {
@@ -58,19 +59,24 @@ class GatewaySetupActivity : ComponentActivity() {
                         .verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                         SaathiBrand()
                         Text("Backend connection", style = MaterialTheme.typography.headlineMedium)
-                        Text("Connect through the server on your computer. Practice testing uses simulated providers. AI navigation needs both configured model accounts.")
-                        FilterChip(selected = ai, onClick = { ai = !ai }, label = { Text("Use AI navigation in other apps") })
-                        if (ai) Text("By enabling AI navigation, you allow your task, app identity, eligible visible control labels and up to three previous target labels to be sent through your server to Gemini and Groq. Private forms and text-entry values are excluded, but filtering is not perfect. Provider data terms apply. No screenshots, audio or coordinates are sent. Use synthetic or non-private tasks while testing.")
+                        Text(if (development) "Connect through the server on your computer. Practice testing uses simulated providers. AI navigation uses local matching first, then a primary model; the second model is used when needed."
+                            else "Connect to the Saathi server supplied with this app using your access token. The server operator configures the primary and fallback models.")
+                        Text(PracticeGateway.serverLabel(), style = MaterialTheme.typography.bodySmall)
+                        FilterChip(selected = ai, onClick = { ai = !ai }, enabled = PracticeGateway.available(), label = { Text("Use AI navigation in other apps") })
+                        if (ai) Text("By enabling AI navigation, you allow your task, app identity, eligible visible control labels and up to three previous target labels to be sent through your server to the primary model and, when needed, the fallback model. Private forms and text-entry values are excluded, but filtering is not perfect. Provider data terms apply. No screenshots, audio or coordinates are sent. Use synthetic or non-private tasks while testing.")
                         GlassPanel(Modifier.fillMaxWidth()) { Column(Modifier.padding(20.dp)) {
                             Text(if (enabled) "Enabled for this app process" else "Off", style = MaterialTheme.typography.titleMedium)
-                            Text(if (ai) "AI replies require agreement on an observed control. You perform every tap. Model agreement is not a safety guarantee." else "Only public practice IDs and a task category are sent. Help in other apps stays local.")
+                            Text(if (ai) "Local matches stay on this device. Cloud replies must name an observed control. You perform every tap; a model answer is not a safety guarantee." else "Only public practice IDs and a task category are sent. Help in other apps stays local.")
                         } }
-                        Text("Follow Local setup in the project documentation to start the server and connect it over USB. Enter its temporary development token below.")
-                        OutlinedTextField(token, { token = it.take(256); error = false }, label = { Text("Temporary development token") },
+                        Text(if (!PracticeGateway.available()) "This build has no configured HTTPS server. Local practice and on-screen option finding are available. Contact the app provider for a connected build."
+                            else if (development) "Follow Local setup in the project documentation to start the server and connect it over USB. Enter its temporary development token below."
+                            else "Enter your personal server access token. Do not enter Gemini or Groq API keys here. Your token stays in memory and is forgotten when this app process closes.")
+                        OutlinedTextField(token, { token = it.take(256); error = false }, label = { Text(if (development) "Temporary development token" else "Server access token") },
                             visualTransformation = PasswordVisualTransformation(), singleLine = true, modifier = Modifier.fillMaxWidth(),
                             shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp))
                         if (error) Text("Use the server’s token, between 32 and 256 characters with no spaces.", color = colors.error)
-                        GlassButton(if (ai) "Enable AI navigation" else "Enable local test", enabled = token.isNotBlank(), onClick = {
+                        GlassButton(if (ai) "Enable AI navigation" else if (development) "Enable local test" else "Choose AI navigation above",
+                            enabled = PracticeGateway.available() && token.isNotBlank() && (development || ai), onClick = {
                             if (PracticeGateway.configure(token, ai)) { cancelCheck(); report = null; token = ""; enabled = true } else error = true
                         })
                         Text("API verification", style = MaterialTheme.typography.titleMedium)

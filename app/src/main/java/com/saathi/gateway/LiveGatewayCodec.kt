@@ -17,15 +17,19 @@ internal object LiveGatewayCodec {
         if (d["status"] == "rejected") {
             require(d.keys == setOf("status", "mode", "reason")); GatewayResult.Rejected(GatewayRecovery.reason(d["reason"]))
         } else {
+            val adaptive = d.containsKey("decision_policy")
+            if (adaptive) require(d["decision_policy"] in setOf("primary", "fallback"))
             require(d["status"] == "accepted" && d.keys == setOf("status", "mode", "request_id", "session_id", "screen_revision",
-                "package_name", "window_id", "action", "target_id", "explanation", "expected_outcome", "completion_evidence", "provenance"))
+                "package_name", "window_id", "action", "target_id", "explanation", "expected_outcome", "completion_evidence", "provenance") + if (adaptive) setOf("decision_policy") else emptySet<String>())
             require(d["request_id"] == s.requestId && d["session_id"] == s.sessionId.toString())
             val identities = d["provenance"] as List<*>
-            require(identities.size == 2 && identities.map {
+            require(identities.size == (if (adaptive) 1 else 2))
+            val providers = identities.map {
                 val identity = it as Map<*, *>
                 require(identity.keys == setOf("provider", "model") && (identity["model"] as String).matches(Regex("[A-Za-z0-9._/-]{1,100}")))
                 identity["provider"]
-            }.toSet() == setOf("gemini", "groq"))
+            }.toSet()
+            require(if (adaptive) providers.single() in setOf("gemini", "groq") else providers == setOf("gemini", "groq"))
             require((d["completion_evidence"] as List<*>).isEmpty())
             val window = d["window_id"] as Long; require(window in 0..Int.MAX_VALUE)
             val p = GuidanceProposal(s.sessionId, d["screen_revision"] as Long, d["package_name"] as String, window.toInt(),

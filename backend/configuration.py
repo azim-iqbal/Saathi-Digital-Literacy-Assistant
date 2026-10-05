@@ -26,6 +26,13 @@ def load_local_env(path=Path("backend/.env")):
         os.environ.setdefault(name, value.strip().strip('"').strip("'"))
 
 
+def provider_order():
+    primary = os.environ.get("SAATHI_PRIMARY_PROVIDER", "gemini")
+    if primary not in ("gemini", "groq"):
+        raise ValueError("SAATHI_PRIMARY_PROVIDER must be gemini or groq")
+    return (primary, "groq" if primary == "gemini" else "gemini")
+
+
 def configured_gateway():
     load_local_env()
     mode = os.environ.get("SAATHI_PROVIDER_MODE", "mock")
@@ -34,7 +41,7 @@ def configured_gateway():
     if mode != "dual_ai":
         raise ValueError("SAATHI_PROVIDER_MODE must be mock or dual_ai")
     providers = []
-    for name in ("gemini", "groq"):
+    for name in provider_order():
         try:
             providers.append(RestProvider(name, os.environ.get(name.upper() + "_API_KEY", ""), os.environ.get(name.upper() + "_MODEL", "")))
         except ValueError:

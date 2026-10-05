@@ -52,7 +52,10 @@ class LiveAiIntegrationTest {
         File(output(), "$name.png").outputStream().use { image.compress(Bitmap.CompressFormat.PNG, 100, it) }; image.recycle()
     } }
 
-    @Test fun pairedProtocolGuidesAnExternalDetourAndReturn() {
+    @Test fun primaryProtocolGuidesAnExternalDetourAndReturn() = runProtocol(false)
+    @Test fun exactVisibleGoalUsesNoGatewayEvenWithAiEnabled() = runProtocol(true)
+
+    private fun runProtocol(localFirst: Boolean) {
         assertTrue("Run only on a synthetic Android emulator", android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.MODEL.startsWith("sdk_"))
         val service = "com.saathi/com.saathi.accessibility.SaathiAccessibilityService"
         val priorServices = shell("settings get secure enabled_accessibility_services")
@@ -74,14 +77,24 @@ class LiveAiIntegrationTest {
             waitFor("Real Saathi accessibility service bound") {
                 shell("dumpsys accessibility").substringAfter("Bound services:").substringBefore("Enabled services:").contains("label=Saathi guidance")
             }
-            val token = shell("cat /data/local/tmp/saathi-test-token")
+            val token = if (localFirst) "a".repeat(43) else shell("cat /data/local/tmp/saathi-test-token")
             ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+                val before = com.saathi.gateway.PracticeGateway.requestsStarted.get()
                 scenario.onActivity {
                     assertTrue(com.saathi.gateway.PracticeGateway.configure(token, true))
-                    assertTrue(SaathiSession.startLive(it, "Show me the help section", GuidanceLanguage.ENGLISH, false))
+                    assertTrue(SaathiSession.startLive(it, if (localFirst) "Help" else "Show me the help section", GuidanceLanguage.ENGLISH, false))
                     it.startActivity(external)
                 }
-                waitFor("Paired backend proposes Help for a free-form goal") { SaathiSession.instruction.value.contains("choose “Help”") }
+                if (localFirst) {
+                    waitFor("Exact Help stays local with AI enabled") { SaathiSession.instruction.value.contains("Find “Help”") }
+                    SystemClock.sleep(500)
+                    assertEquals("Local match must not even start HTTP", before, com.saathi.gateway.PracticeGateway.requestsStarted.get())
+                    screenshot("local-first-ai-enabled")
+                    main { SaathiSession.stop() }
+                    assertNull(SaathiSession.presentationKey())
+                    return@use
+                }
+                waitFor("Primary backend proposes Help for a free-form goal") { SaathiSession.instruction.value.contains("choose “Help”") }
                 screenshot("ai-fixture-help")
                 tap("Explore")
                 waitFor("Backend adapts to detour with observed Back control") { SaathiSession.instruction.value.contains("choose “Back to choices”") }
@@ -93,7 +106,7 @@ class LiveAiIntegrationTest {
                 assertTrue(SaathiSession.isActive())
                 main { SaathiSession.stop() }
                 assertNull(SaathiSession.presentationKey())
-                File(output(), "ai-fixture-result.txt").writeText("PASS: actual Android HTTP/live-schema transport and real AccessibilityService; free-form goal; paired synthetic adapters select Help, correct wrong path to Back, return, hand over; Stop clears. PROVIDERS ARE DETERMINISTIC TEST FAKES, NOT LIVE GEMINI/GROQ.\n")
+                File(output(), "ai-fixture-result.txt").writeText("PASS: actual Android HTTP/live-schema transport and real AccessibilityService; free-form goal; primary synthetic adapter selects Help, correct wrong path to Back, return, hand over; Stop clears. PROVIDERS ARE DETERMINISTIC TEST FAKES, NOT LIVE GEMINI/GROQ.\n")
             }
         } finally {
             File(output(), "ai-fixture-service-state.txt").writeText(shell("dumpsys accessibility"))

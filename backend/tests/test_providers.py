@@ -37,7 +37,7 @@ class ProviderTests(unittest.TestCase):
 
     def test_both_rest_adapters_use_independent_requests_and_current_control(self):
         seen = []
-        def transport(url, headers, payload):
+        def transport(url, headers, payload, timeout):
             seen.append((url, headers, payload))
             if "googleapis" in url:
                 return {"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": decision()}]}}]}

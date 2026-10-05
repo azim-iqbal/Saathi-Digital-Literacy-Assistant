@@ -1,4 +1,40 @@
+## In-progress handoff — 5 October 2026, local-first and conditional cloud navigation
+
+The user authorized this manual run down to **8% weekly remaining**. Current usage is **6%**, so stop implementation and resume after allowance is available or the user explicitly changes the limit. Do not consume reset credits. The scheduled automation still has its separate 25% rule.
+
+Implemented, uncommitted: LiveGuide.plan and SaathiSession now use an exact local match before cloud guidance, with private/ambiguous handover. Backend live navigation tries the configured primary (SAATHI_PRIMARY_PROVIDER, default gemini) then one secondary only for provider failure, uncertain/invalid output or explicit HANDOVER. Both share the original deadline and budgets; quota/cancellation/staleness do not trigger fallback. Incident assessment and explicit provider checks still use paired validation. Navigation responses declare decision_policy and actual single-provider provenance; Android strictly decodes this or the legacy paired contract. Consent copy reflects local/primary/fallback use; styles and colors are unchanged. The legacy mode name dual_ai now means two adapters available, not two calls per live navigation request.
+
+Evidence: **80 Android unit tests pass**; debug/test builds passed before the final consent-copy edits. **89 offline backend tests passed**, including ten primary-navigation tests and localhost HTTP tests (prior tool output; the /tmp log disappeared, so no durable backend log is available). Four focused emulator tests produced **3 passes / 1 failure**: zero-HTTP exact local match and two decoder tests passed; primaryProtocolGuidesAnExternalDetourAndReturn failed at the first Help instruction with generic cannot-verify text. XML reports are preserved under test-evidence/2026-10-05-local-first-primary. Do not mark H2 integration or the whole release complete.
+
+Failure investigation: a separate synthetic host request returned the expected primary-policy envelope; fixture status reported one Gemini attempt and zero Groq attempts, attributable to that host diagnostic. Thus the failed device flow had no confirmed provider dispatch. Next inspect safe request/rejection counters and snapshot eligibility; distinguish snapshot-null, Android validation, HTTP rejection and observation churn. Clock skew is a hypothesis only, never verified. Decoder tests passed, so do not loosen parsing or freshness to mask the failure. This failure is distinct from the earlier unresolved WebView post-tap issue. The emulator and fixture are no longer running on 5 October; temporary logs/tokens are gone. Recreate only synthetic test infrastructure and restart the fixture after any backend changes.
+
+Next: reproduce/fix the failed integration, then run release build/lint and relevant emulator regressions against the final copy/config changes. H3 time/token/device/IP quotas, localization, voice/Sarvam, Cloud Run persistent state/enrollment, signing, real-model quality and physical-device acceptance remain open. No live model calls, hosting, signing, commit or push occurred. Preserve all pre-existing changes. Current audit remains docs/PROJECT_AUDIT.md and latest human spec is specs/PRODUCTION_RELEASE_BRIEF.md.
+
 # Test results
+
+## 4 October 2026 — account issuance failure recovery
+
+**16 targeted offline tests pass**: eight new account-command tests and eight existing hosted-boundary tests. Before the fix, injected token-write failure reproduced loss of the old credential; the save-order and missing-sync tests also failed, and a SQLite error escaped unsanitized. The CLI now saves and syncs the token file/directory before rotating the database.
+
+Coverage includes write/file-sync/directory-sync failure preserving previous access, database opening/issuance errors, retaining a usable candidate after a simulated post-commit error, exclusive file/symlink refusal, owner-only output, saved-before-rotation ordering, and no token in command output. Existing hosted isolation/quota/revocation checks still pass. See [targeted test log](test-evidence/2026-10-04-account-rotation/backend-tests.txt).
+
+No live account/key, model call, external service or Android change. These are temporary SQLite/filesystem tests, not a host power-loss test. Prior full-suite/build/emulator evidence below was not rerun in this bounded phase.
+
+## 4 October 2026 — hosted pilot and shared Android connection
+
+**71 backend tests pass**, including eight hosted-token/isolation/budget tests. A real Gunicorn 26.2.0 subprocess passed six localhost checks with keys removed: readiness, HTTPS-scheme requirement, auth refusal, authenticated status, missing-provider refusal without calls, and revocation. See [backend log](test-evidence/2026-10-04-hosted-connection/backend-tests.txt) and [Gunicorn smoke](test-evidence/2026-10-04-hosted-connection/gunicorn-smoke.json).
+
+Android: **77 unit tests**, debug/release/test APK builds and lint pass (0 errors/58 warnings). [Five emulator checks](test-evidence/2026-10-04-hosted-connection/emulator-connection.txt) pass: setup consent, real mock-HTTP practice/private handover, strict decoding, wrong-token/cancelled callbacks, and suppressing old results after disable/reconfigure. A temporary synthetic server and ephemeral token were used; no model requests. Existing palette/navigation/logo/glass geometry remain unchanged; release now exposes the existing connection screen and only accepts a build-selected HTTPS origin. No release signing or remote host is configured.
+
+Untested: Caddy/systemd deployment, real TLS/remote Android release connection, public load/abuse and host recovery, live AI accuracy, browser paste, the original intermittent WebView cause, voice/physical-device behavior and remaining localization/design parity. The local Gunicorn check simulates a trusted proxy header; it is not a TLS test. See DEPLOYMENT.md for the exact operating limits.
+
+## 4 October 2026 — provider deadlines and screen freshness
+
+**63 offline backend tests pass**, including eight new latency/cancellation regressions. [Complete output](test-evidence/2026-10-04-provider-deadlines/backend-tests.txt) and [verification summary](test-evidence/2026-10-04-provider-deadlines/verification.json) are saved. The initial restricted run passed its non-network checks but could not bind five localhost test servers; the permitted localhost run passed the full suite. All model transports were synthetic; no keys were loaded and no live provider call occurred.
+
+Verified: both adapters receive the remaining shared decision time (at most eight seconds); expired requests never dispatch; aged screens stop waiting at their remaining freshness deadline; cooperative workers release all four slots; expiry during budget reservation spends no provider calls; late body/EOF and late validation cannot release accepted guidance. Parsed replies arriving too late or after cancellation retain available token metadata without being marked successful. Screen-expiry cancellation does not by itself count as a provider-health failure.
+
+Only backend runtime/tests and documentation changed. Android builds, emulator/browser/voice tests and live model checks were not repeated. Existing Android evidence remains historical. The final 3 October Groq record shows an 8,101ms timeout without a parsed HTTP reply; it cannot distinguish network/TLS delay from provider processing. This phase fixes local deadline propagation, **not** the unproven cause of that live timeout. Python blocking network operations may still outlive cooperative cancellation; worker admission remains bounded and late results are rejected. Live paired accuracy, incident quality, the original WebView failure, production connectivity and physical-device acceptance remain open.
 
 ## Latest live-provider check — 3 October 2026
 

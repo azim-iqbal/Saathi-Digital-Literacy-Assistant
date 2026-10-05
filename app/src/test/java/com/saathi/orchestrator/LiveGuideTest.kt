@@ -56,4 +56,23 @@ class LiveGuideTest {
         listOf("Shopping", "Spinning", "Display", "Destination").forEach { assertNotNull(it, LiveGuide.label(it)) }
         assertNull(LiveGuide.next("Destination", listOf(node("Destination").copy(isEditable = true)), "en-IN").target)
     }
+    @Test fun `AI opt in keeps exact English Hindi and Hinglish labels local`() {
+        for ((request, label, language) in listOf(Triple("Find Help", "Help", "en-IN"),
+            Triple("मदद", "मदद", "hi-IN"), Triple("Help", "Help", "hinglish"))) {
+            val plan = LiveGuide.plan(request, listOf(node(label)), language, true)
+            assertNotNull(plan.local.target)
+            assertFalse(plan.useCloud)
+        }
+    }
+    @Test fun `cloud never resolves local duplicates or overrides private and risky handover`() {
+        assertFalse(LiveGuide.plan("Help", listOf(node("Help"), node("Help")), "en-IN", true).useCloud)
+        assertFalse(LiveGuide.plan("Find support", listOf(node("", sensitive = true)), "en-IN", true).useCloud)
+        assertFalse(LiveGuide.plan("Pay", listOf(node("Help")), "en-IN", true).useCloud)
+        assertFalse(LiveGuide.plan("Find support", listOf(node("Help")), "en-IN", false).useCloud)
+    }
+    @Test fun `consented unresolved safe request may use cloud`() {
+        val plan = LiveGuide.plan("Show me the help section", listOf(node("Help")), "en-IN", true)
+        assertNull(plan.local.target)
+        assertTrue(plan.useCloud)
+    }
 }

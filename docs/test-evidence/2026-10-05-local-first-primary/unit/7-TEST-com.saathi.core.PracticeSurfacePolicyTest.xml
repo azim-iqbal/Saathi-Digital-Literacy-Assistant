@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.core.PracticeSurfacePolicyTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.001">
+  <properties/>
+  <testcase name="matching ids in another app never enable guidance" classname="com.saathi.core.PracticeSurfacePolicyTest" time="0.001"/>
+  <testcase name="same package screens without a registered practice control remain ineligible" classname="com.saathi.core.PracticeSurfacePolicyTest" time="0.0"/>
+  <testcase name="all supported synthetic bill pay controls are eligible" classname="com.saathi.core.PracticeSurfacePolicyTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

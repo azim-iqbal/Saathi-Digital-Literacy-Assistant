@@ -1,0 +1,20 @@
+"""Run behind the same-host Caddy proxy; never bind this service publicly."""
+bind = "127.0.0.1:8768"
+workers = 1  # Request ownership, cancellation and diagnostics are process-local.
+worker_class = "gthread"
+threads = 8
+worker_connections = 32
+timeout = 30
+graceful_timeout = 15
+keepalive = 2
+preload_app = False
+control_socket_disable = True
+forwarded_allow_ips = "127.0.0.1"
+secure_scheme_headers = {"X-FORWARDED-PROTO": "https"}
+limit_request_line = 2048
+limit_request_fields = 32
+limit_request_field_size = 2048
+accesslog = None  # Do not log URLs, headers, tokens or bodies.
+errorlog = "-"
+capture_output = False
+umask = 0o077

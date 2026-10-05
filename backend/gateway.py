@@ -20,6 +20,13 @@ class InvalidRequest(ValueError):
     pass
 
 
+class RequestCancellation(threading.Event):
+    """Cooperative stop signal with the shared monotonic decision deadline."""
+    def __init__(self, deadline):
+        super().__init__()
+        self.deadline = deadline
+
+
 @dataclass(frozen=True)
 class Snapshot:
     request_id: str
@@ -145,7 +152,8 @@ def validate(snapshot, proposal):
 class Gateway:
     """Paired decisions with process limits and optional durable aggregate call reservations."""
     def __init__(self, providers=None, timeout=2.0, global_limit=100, provider_limit=50,
-                 max_sessions=128, failure_limit=3, mode="mock", budget=None, session_ttl=300):
+                 max_sessions=128, failure_limit=3, mode="mock", budget=None, session_ttl=300,
+                 executor=None, slots=None):
         self.mode, self.budget = mode, budget
         self.providers = tuple(providers or (MockProvider("mock-a"), MockProvider("mock-b")))
         if len(self.providers) != 2 or len({p.id for p in self.providers}) != 2:
@@ -157,8 +165,9 @@ class Gateway:
         self.timeout, self.global_limit, self.provider_limit = timeout, global_limit, provider_limit
         self.max_sessions, self.failure_limit = max_sessions, failure_limit
         self.lock = threading.Lock()
-        self.pool = ThreadPoolExecutor(max_workers=4, thread_name_prefix="saathi-provider")
-        self.slots = threading.BoundedSemaphore(4)
+        self.owns_pool = executor is None
+        self.pool = executor or ThreadPoolExecutor(max_workers=4, thread_name_prefix="saathi-provider")
+        self.slots = slots or threading.BoundedSemaphore(4)
         self.sessions, self.active, self.cancelled_requests = {}, {}, {}
         self.session_seen, self.session_ttl = {}, session_ttl
         self.calls = {p.id: 0 for p in self.providers}
@@ -182,143 +191,173 @@ class Gateway:
 
     def _call(self, provider, snapshot, cancelled):
         try:
+            if cancelled.is_set():
+                raise InterruptedError()
+            if time.monotonic() >= cancelled.deadline:
+                raise TimeoutError("Decision expired before provider dispatch")
             return provider.propose(snapshot, cancelled)
         finally:
             self.slots.release()
 
-    def decide(self, snapshot):
-        deadline = time.monotonic() + self.timeout
-        event = threading.Event()
+    def _launch(self, providers, snapshot, event, deadline_reason):
+        """Reserve only the calls about to run, within the original request deadline."""
         with self.lock:
-            if any(not getattr(p, "configured", True) for p in self.providers):
-                return self.rejected("not_configured")
+            if event.is_set():
+                return [], "cancelled"
             if self.closed:
-                return self.rejected("unavailable")
-            # Do not spend provider quota on observations which expired after parsing.
-            if not 0 <= int(time.time() * 1000) - snapshot.observed_at_ms <= 15_000:
-                return self.rejected("stale")
-            now = time.monotonic()
-            self.cancelled_requests = {key: until for key, until in self.cancelled_requests.items() if until > now}
-            if snapshot.request_id in self.cancelled_requests:
+                return [], "unavailable"
+            if time.monotonic() >= event.deadline:
+                return [], deadline_reason
+            if any(not getattr(p, "configured", True) for p in providers):
+                return [], "not_configured"
+            if any(self.failures[p.id] >= self.failure_limit for p in providers):
+                return [], "circuit_open"
+            if sum(self.calls.values()) + len(providers) > self.global_limit or any(self.calls[p.id] >= self.provider_limit for p in providers):
+                return [], "quota_exhausted"
+            acquired = 0
+            for _ in providers:
+                if not self.slots.acquire(blocking=False):
+                    for _ in range(acquired): self.slots.release()
+                    return [], "busy"
+                acquired += 1
+            try:
+                reserved = self.budget is None or self.budget.reserve([p.id for p in providers])
+            except Exception:
+                for _ in range(acquired): self.slots.release()
+                return [], "budget_unavailable"
+            if not reserved:
+                for _ in range(acquired): self.slots.release()
+                return [], "quota_exhausted"
+            if time.monotonic() >= event.deadline or not 0 <= int(time.time()*1000) - snapshot.observed_at_ms <= 15_000:
+                for _ in range(acquired): self.slots.release()
+                return [], deadline_reason if time.monotonic() >= event.deadline else "stale"
+            futures = []
+            try:
+                for provider in providers:
+                    futures.append(self.pool.submit(self._call, provider, snapshot, event))
+                    self.calls[provider.id] += 1
+            except Exception:
+                event.set()
+                for _ in range(acquired - len(futures)): self.slots.release()
+                return [], "provider_unavailable"
+            return futures, None
+
+    def _collect(self, providers, futures, snapshot, event, deadline_reason):
+        while not all(f.done() for f in futures):
+            if event.wait(min(.01, max(0, event.deadline - time.monotonic()))):
+                return [], ["cancelled"]
+            if time.monotonic() >= event.deadline:
+                if deadline_reason == "timeout":
+                    with self.lock:
+                        for p, f in zip(providers, futures):
+                            if not f.done(): self.failures[p.id] += 1
+                return [], [deadline_reason]
+        if event.is_set(): return [], ["cancelled"]
+        if time.monotonic() >= event.deadline: return [], [deadline_reason]
+        proposals, errors = [], []
+        for provider, future in zip(providers, futures):
+            try:
+                proposal = future.result()
+                from backend.live import LiveSnapshot, validate_live
+                from backend.incident import IncidentSnapshot, validate_assessment
+                error = (validate_assessment(snapshot, proposal) if isinstance(snapshot, IncidentSnapshot) else
+                         validate_live(snapshot, proposal) if isinstance(snapshot, LiveSnapshot) else validate(snapshot, proposal))
+            except ProviderFailure as failure:
+                error, proposal = failure.reason, None
+            except InvalidRequest:
+                error, proposal = "invalid_response", None
+            except Exception:
+                error, proposal = "provider_unavailable", None
+            if error:
+                with self.lock:
+                    if event.is_set(): return [], ["cancelled"]
+                    self.failures[provider.id] += 1
+                errors.append(error)
+            else:
+                proposals.append(proposal)
+        return proposals, errors
+
+    def _accepted(self, snapshot, proposal, providers, event, deadline_reason, policy=None):
+        with self.lock:
+            if event.is_set() or self.sessions[snapshot.session_id][1] is not event:
                 return self.rejected("cancelled")
-            if now >= deadline:
-                return self.rejected("timeout")
+            if time.monotonic() >= event.deadline: return self.rejected(deadline_reason)
+            if not 0 <= int(time.time()*1000) - snapshot.observed_at_ms <= 15_000:
+                return self.rejected("stale")
+            result = {"status": "accepted", "mode": self.mode, "request_id": snapshot.request_id,
+                      "session_id": snapshot.session_id, "screen_revision": snapshot.screen_revision,
+                      "provenance": [{"provider": p.id, "model": p.model} for p in providers]}
+            from backend.incident import IncidentSnapshot
+            if isinstance(snapshot, IncidentSnapshot):
+                result.update(category=proposal.category, signals=sorted(proposal.signals))
+            else:
+                result.update(package_name=snapshot.package_name, window_id=snapshot.window_id,
+                              action=proposal.action, target_id=proposal.target_id, explanation=proposal.explanation,
+                              expected_outcome=proposal.expected_outcome, completion_evidence=list(proposal.completion_evidence))
+            if policy is not None: result["decision_policy"] = policy
+            return result
+
+    def decide(self, snapshot, primary_navigation=False):
+        from backend.live import LiveSnapshot
+        if primary_navigation and not isinstance(snapshot, LiveSnapshot):
+            raise InvalidRequest("Primary policy is limited to non-sensitive navigation")
+        event = RequestCancellation(time.monotonic() + self.timeout)
+        deadline_reason = "timeout"
+        with self.lock:
+            if not primary_navigation and any(not getattr(p, "configured", True) for p in self.providers):
+                return self.rejected("not_configured")
+            if self.closed: return self.rejected("unavailable")
+            age_ms = int(time.time()*1000) - snapshot.observed_at_ms
+            if not 0 <= age_ms < 15_000: return self.rejected("stale")
+            now = time.monotonic()
+            freshness_deadline = now + (15_000 - age_ms) / 1000
+            if freshness_deadline <= event.deadline:
+                event.deadline, deadline_reason = freshness_deadline, "stale"
+            self.cancelled_requests = {key: until for key, until in self.cancelled_requests.items() if until > now}
+            if snapshot.request_id in self.cancelled_requests: return self.rejected("cancelled")
+            if now >= event.deadline: return self.rejected(deadline_reason)
             for session_id, seen in list(self.session_seen.items()):
                 retained = self.sessions[session_id][1]
                 if now - seen >= self.session_ttl and retained not in self.active.values():
                     del self.sessions[session_id]
                     del self.session_seen[session_id]
-            if snapshot.request_id in self.active:
-                return self.rejected("duplicate_request")
+            if snapshot.request_id in self.active: return self.rejected("duplicate_request")
             previous = self.sessions.get(snapshot.session_id)
-            if previous and snapshot.screen_revision <= previous[0]:
-                return self.rejected("stale")
-            if not previous and len(self.sessions) >= self.max_sessions:
-                return self.rejected("session_capacity")
-            # A new observation immediately invalidates the old decision, even when budget is exhausted.
-            if previous:
-                previous[1].set()
+            if previous and snapshot.screen_revision <= previous[0]: return self.rejected("stale")
+            if not previous and len(self.sessions) >= self.max_sessions: return self.rejected("session_capacity")
+            if previous: previous[1].set()
             self.sessions[snapshot.session_id] = (snapshot.screen_revision, event)
             self.session_seen[snapshot.session_id] = now
-            if any(n >= self.failure_limit for n in self.failures.values()):
-                return self.rejected("circuit_open")
-            if sum(self.calls.values()) + 2 > self.global_limit or any(n >= self.provider_limit for n in self.calls.values()):
-                return self.rejected("quota_exhausted")
-            acquired = 0
-            for _ in self.providers:
-                if not self.slots.acquire(blocking=False):
-                    for _ in range(acquired):
-                        self.slots.release()
-                    return self.rejected("busy")
-                acquired += 1
-            try:
-                reserved = self.budget is None or self.budget.reserve([p.id for p in self.providers])
-            except Exception:
-                for _ in range(acquired):
-                    self.slots.release()
-                return self.rejected("budget_unavailable")
-            if not reserved:
-                for _ in range(acquired):
-                    self.slots.release()
-                return self.rejected("quota_exhausted")
-            # A slow reservation must not start provider work after the deadline or expiry.
-            # Durable reservations are intentionally not refunded, even if no call starts.
-            if time.monotonic() >= deadline or not 0 <= int(time.time() * 1000) - snapshot.observed_at_ms <= 15_000:
-                for _ in range(acquired):
-                    self.slots.release()
-                return self.rejected("timeout" if time.monotonic() >= deadline else "stale")
             self.active[snapshot.request_id] = event
-            futures = []
-            try:
-                for provider in self.providers:
-                    futures.append(self.pool.submit(self._call, provider, snapshot, event))
-                    self.calls[provider.id] += 1
-            except Exception:
-                event.set()
-                self.active.pop(snapshot.request_id, None)
-                for _ in range(acquired - len(futures)):
-                    self.slots.release()
-                return self.rejected("provider_unavailable")
         try:
-            while not all(f.done() for f in futures):
-                if event.wait(min(.01, max(0, deadline - time.monotonic()))):
-                    return self.rejected("cancelled")
-                if time.monotonic() >= deadline:
-                    with self.lock:
-                        for p, f in zip(self.providers, futures):
-                            if not f.done():
-                                self.failures[p.id] += 1
-                    return self.rejected("timeout")
-            if event.is_set():
-                return self.rejected("cancelled")
-            if time.monotonic() >= deadline:
-                return self.rejected("timeout")
-            proposals, errors = [], []
-            for provider, future in zip(self.providers, futures):
-                try:
-                    proposal = future.result()
-                    from backend.live import LiveSnapshot, validate_live
-                    from backend.incident import IncidentSnapshot, validate_assessment
-                    error = (validate_assessment(snapshot, proposal) if isinstance(snapshot, IncidentSnapshot) else
-                             validate_live(snapshot, proposal) if isinstance(snapshot, LiveSnapshot) else validate(snapshot, proposal))
-                except ProviderFailure as failure:
-                    error, proposal = failure.reason, None
-                except InvalidRequest:
-                    error, proposal = "invalid_response", None
-                except Exception:
-                    error, proposal = "provider_unavailable", None
-                if error:
-                    with self.lock:
-                        if event.is_set():
-                            return self.rejected("cancelled")
-                        self.failures[provider.id] += 1
-                    errors.append(error)
-                else:
-                    proposals.append(proposal)
-            if errors:
-                return self.rejected(errors[0])
-            a, b = proposals
-            from backend.incident import IncidentSnapshot
-            incident = isinstance(snapshot, IncidentSnapshot)
-            if (incident and (a.category, set(a.signals)) != (b.category, set(b.signals))) or (
-                    not incident and (a.action, a.target_id) != (b.action, b.target_id)):
-                return self.rejected("disagreement")
-            with self.lock:
-                if event.is_set() or self.sessions[snapshot.session_id][1] is not event:
-                    return self.rejected("cancelled")
-                if not 0 <= int(time.time() * 1000) - snapshot.observed_at_ms <= 15_000:
-                    return self.rejected("stale")
-                if incident:
-                    return {"status": "accepted", "mode": self.mode, "request_id": snapshot.request_id,
-                            "session_id": snapshot.session_id, "screen_revision": snapshot.screen_revision,
-                            "category": a.category, "signals": sorted(a.signals),
-                            "provenance": [{"provider": p.id, "model": p.model} for p in self.providers]}
-                return {"status": "accepted", "mode": self.mode, "request_id": snapshot.request_id,
-                        "session_id": snapshot.session_id, "screen_revision": snapshot.screen_revision,
-                        "package_name": snapshot.package_name, "window_id": snapshot.window_id,
-                        "action": a.action, "target_id": a.target_id, "explanation": a.explanation,
-                        "expected_outcome": a.expected_outcome, "completion_evidence": list(a.completion_evidence),
-                        "provenance": [{"provider": p.id, "model": p.model} for p in self.providers]}
+            if primary_navigation:
+                # Safe eligible navigation only. An explicit HANDOVER represents an
+                # unresolved primary answer; no numeric confidence is invented.
+                recoverable = {"not_configured", "circuit_open", "provider_auth", "provider_model", "provider_request",
+                               "provider_rate_limited", "provider_unavailable", "provider_timeout", "invalid_response",
+                               "malformed", "uncertain", "invalid_target"}
+                for index, provider in enumerate(self.providers):
+                    futures, error = self._launch((provider,), snapshot, event, deadline_reason)
+                    proposals, errors = ([], [error]) if error else self._collect((provider,), futures, snapshot, event, deadline_reason)
+                    if errors:
+                        if index == 0 and errors[0] in recoverable: continue
+                        return self.rejected(errors[0])
+                    proposal = proposals[0]
+                    if index == 0 and proposal.action == "HANDOVER": continue
+                    return self._accepted(snapshot, proposal, (provider,), event, deadline_reason,
+                                          "primary" if index == 0 else "fallback")
+            else:
+                futures, error = self._launch(self.providers, snapshot, event, deadline_reason)
+                if error: return self.rejected(error)
+                proposals, errors = self._collect(self.providers, futures, snapshot, event, deadline_reason)
+                if errors: return self.rejected(errors[0])
+                a, b = proposals
+                from backend.incident import IncidentSnapshot
+                incident = isinstance(snapshot, IncidentSnapshot)
+                if (incident and (a.category, set(a.signals)) != (b.category, set(b.signals))) or (
+                        not incident and (a.action, a.target_id) != (b.action, b.target_id)):
+                    return self.rejected("disagreement")
+                return self._accepted(snapshot, a, self.providers, event, deadline_reason)
         finally:
             event.set()
             with self.lock:
@@ -329,6 +368,7 @@ class Gateway:
             self.closed = True
             for event in self.active.values():
                 event.set()
-        self.pool.shutdown(wait=True)
+        if self.owns_pool:
+            self.pool.shutdown(wait=True)
         if self.budget is not None:
             self.budget.close()

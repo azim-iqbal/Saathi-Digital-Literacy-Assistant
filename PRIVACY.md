@@ -32,3 +32,6 @@ Copying a complaint field requires review and a separate **Allow copy** confirma
 ## Connection diagnostics
 
 Refreshing server status makes no model request. The separate API check requires confirmation and sends synthetic practice data to both configured providers. The server keeps up to 64 diagnostic records per provider in memory: request identifiers, status, model, timing and available token counts. It does not record prompts, incident summaries, keys, raw replies or opaque model signatures. Records clear when the server restarts; aggregate call-budget counters remain in local storage.
+# Hosted pilot access (4 October 2026)
+
+The optional hosted configuration stores operator-issued user IDs, hashed access tokens, expiry/revocation state and aggregate per-user call counts on the server. It does not store raw access tokens or request/incident content. Account usage caps persist through token rotation and restart. Each user's request state and recent provider diagnostics are isolated in server memory. The Android token and opt-in remain memory-only. Release connections require a build-selected HTTPS server; an unconfigured build remains offline. No public host is currently deployed. See [deployment limits](docs/DEPLOYMENT.md).

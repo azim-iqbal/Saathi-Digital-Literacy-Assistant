@@ -1,4 +1,32 @@
-# Next continuation
+## 5 October 2026 — Local-First Guidance and Conditional Cloud Navigation
+
+Implemented: `LiveGuide.plan` and `SaathiSession` prioritize exact deterministic local matching before initiating cloud guidance, with private/ambiguous screen handover. Backend live navigation queries the configured primary provider (`SAATHI_PRIMARY_PROVIDER`, default `gemini`) and conditionally invokes a secondary provider only upon primary failure, uncertain/invalid output, or explicit handover. Both share the original deadline and budget tracking; quota exhaustion, cancellation, or stale observations do not trigger fallback. Incident assessment and explicit provider checks retain dual-provider validation. Navigation responses declare `decision_policy` and provider provenance, decoded by the Android client. Consent copy reflects local/primary/fallback routing while preserving existing UI styling and colors.
+
+Verification evidence: **80 Android unit tests pass**; debug/test builds pass; **89 offline backend tests pass**, including ten primary-navigation tests and localhost HTTP tests. Focused emulator tests verify zero-HTTP exact local match and protocol decoder stability. Reports are preserved under `docs/test-evidence/2026-10-05-local-first-primary`.
+
+## 4 October 2026 — Architecture & Release-Readiness Progress
+
+Release architecture establishes: local deterministic guidance first, primary cloud provider with conditional secondary use, comprehensive localization/voice/failure handling, followed by production container deployment (Cloud Run) and release build signing.
+
+Completed: Initial severity-classified architecture audit, compatibility/release-security tracking, signing properties ignore rules, and local configuration for multi-provider support. Code adheres strictly to local-first routing, session-level request limits, and backend multi-account quota isolation.
+
+## 4 October 2026 — Account Rotation Reliability
+
+Resolved an operator CLI bug: database rotation happened before the replacement token was saved, so disk-write failure invalidated the old token without a usable replacement. The CLI now saves/syncs the private candidate and directory before rotation, sanitizes SQLite failures (including database opening), and retains the candidate for uncertain-commit recovery.
+
+Verified **16 targeted offline tests** (eight new account-command regressions plus eight existing hosted-boundary tests). Evidence: `docs/test-evidence/2026-10-04-account-rotation/backend-tests.txt`.
+
+## 4 October 2026 — Hosted Pilot and Release Connection
+
+Prepared a Gunicorn/Caddy/systemd deployment package, hashed expiring per-user tokens, isolated sessions/cancellation/diagnostics, atomic durable individual/global call caps, and shared bounded provider workers. Moved the Android gateway and existing themed setup into main sources; release accepts only a build-selected HTTPS origin and stays offline when absent. Connection replacement/disable now invalidates pending callbacks.
+
+Verified: 71 offline backend tests; six real local Gunicorn checks with provider keys removed; 77 Android unit tests; debug/release/test builds; lint 0 errors/58 warnings; five emulator connection tests including the new credential-change cancellation regression. Saved under `docs/test-evidence/2026-10-04-hosted-connection`.
+
+## Latest completed phase — 4 October 2026
+
+Provider work now shares a monotonic deadline capped by remaining observation freshness. Both REST adapters receive at most the smaller of eight seconds and the remaining decision time. Expired dispatch, late response reads and validation overrun are rejected; parsed late replies retain usage evidence without successful guidance. All **63 offline backend tests pass**; see TEST_RESULTS.md and `test-evidence/2026-10-04-provider-deadlines`. App code/UI and local credentials were untouched; no live API check, emulator rebuild or push occurred.
+
+The Groq timeout's external cause is still unknown. Next useful latency work is transport-phase observability and bounded synthetic navigation/incident evaluation with explicit scoped authorization for any live probe. Do not increase deadlines beyond screen freshness or repeat unchanged connection checks. Blocking socket/DNS operations cannot be forcibly recalled by the cooperative stop signal. The original WebView post-tap investigation, browser clipboard return, voice/device acceptance and production release work below remain pending.
 
 Read the latest [provider verification](PROVIDER_VERIFICATION.md), [test results](TEST_RESULTS.md) and [execution plan](EXECUTION_PLAN.md) first. Preserve the completed connection checks, reviewed complaint worksheet and themed copy helper.
 

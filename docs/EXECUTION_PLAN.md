@@ -1,3 +1,27 @@
+## Milestone — Local-First Guidance and Conditional Cloud Navigation
+
+Implemented: `LiveGuide.plan` and `SaathiSession` prioritize exact deterministic local matching before initiating cloud guidance, with private/ambiguous screen handover. Backend live navigation queries the configured primary provider (`SAATHI_PRIMARY_PROVIDER`, default `gemini`) and conditionally invokes a secondary provider only upon primary failure, uncertain/invalid output, or explicit handover. Both share the original deadline and budget tracking; quota exhaustion, cancellation, or stale observations do not trigger fallback. Incident assessment and explicit provider checks retain dual-provider validation. Navigation responses declare `decision_policy` and provider provenance, decoded by the Android client. Consent copy reflects local/primary/fallback routing while preserving existing UI styling and colors.
+
+Verification evidence: **80 Android unit tests pass**; debug/test builds pass; **89 offline backend tests pass**, including ten primary-navigation tests and localhost HTTP tests. Focused emulator tests verify zero-HTTP exact local match and protocol decoder stability. Reports are preserved under `docs/test-evidence/2026-10-05-local-first-primary`.
+
+## Architecture & Release-Readiness Roadmap
+
+Release architecture establishes: local deterministic guidance first, primary cloud provider with conditional secondary use, comprehensive localization/voice/failure handling, followed by production container deployment (Cloud Run) and release build signing.
+
+Completed: Initial severity-classified architecture audit, compatibility/release-security tracking, signing properties ignore rules, and local configuration for multi-provider support. Code adheres strictly to local-first routing, session-level request limits, and backend multi-account quota isolation.
+
+# 4 October follow-up — account rotation reliability
+
+Completed the offline operator-token failure fix: save/sync the private candidate before changing database access, sanitize SQLite errors, preserve candidates when commit outcome is uncertain, and document recovery. Sixteen targeted tests pass; see TEST_RESULTS.md. No app/UI change, live API call, deployment or push. This does not close the host/TLS, real paired-AI, original WebView failure, clipboard/browser or physical-device gates in the plan below.
+
+## Latest implementation — 4 October, hosted pilot preparation
+
+Prepared per-user authenticated hosted WSGI routing with durable individual/global budgets and isolated diagnostics, plus Gunicorn/Caddy/systemd templates. Release Android now shares the tested transport/setup and accepts only a configured HTTPS origin; an unconfigured build remains offline. Credential replacement/disable cancels and suppresses old callbacks. Verified 71 backend / 77 Android unit / five emulator connection tests and six local Gunicorn checks; build/lint pass. The user has no host and requested deployment files only. See DEPLOYMENT.md and TEST_RESULTS.md. Remote TLS, Caddy/systemd, release signing, real AI/browser/voice acceptance, localization and design parity remain open. Usage reached the defer threshold; NEXT_CONTINUATION.md records the next work.
+
+## Completed bounded phase — 4 October 2026
+
+Closed the local deadline-propagation gap: provider transport and final gateway acceptance now respect the smaller of the decision limit and remaining screen freshness. Eight new offline regression tests cover delayed transport, cancellation, worker release, late validation and reservation expiry; **63 backend tests pass**. No Android/UI changes, live API requests or publishing. See TEST_RESULTS.md for evidence and limits. Next: finer transport diagnostics or separately authorized synthetic live evaluation; the actual Groq timeout cause, WebView transition cause, voice/device and production-release gates remain open.
+
 ## Current priorities — 3 October 2026
 
 The connection checks, complaint worksheet and per-field copy flow are implemented. Both real providers have returned valid responses, but the last paired request timed out on Groq. See [provider verification](PROVIDER_VERIFICATION.md) for the exact evidence. Next work is provider latency and genuine guidance evaluation, followed by the remaining browser, voice and production-readiness items below.

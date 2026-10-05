@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.orchestrator.LiveGuideTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.017">
+  <properties/>
+  <testcase name="private screen suspends even a matching public target" classname="com.saathi.orchestrator.LiveGuideTest" time="0.0"/>
+  <testcase name="label inside clickable parent uses the observed parent bounds" classname="com.saathi.orchestrator.LiveGuideTest" time="0.004"/>
+  <testcase name="own and protected system surfaces are excluded but apps and browsers are eligible" classname="com.saathi.orchestrator.LiveGuideTest" time="0.001"/>
+  <testcase name="only exact labels are matched not substring or injected instructions" classname="com.saathi.orchestrator.LiveGuideTest" time="0.001"/>
+  <testcase name="missing target asks to return or clarify without claiming completion" classname="com.saathi.orchestrator.LiveGuideTest" time="0.001"/>
+  <testcase name="ordinary labels containing action substrings remain eligible" classname="com.saathi.orchestrator.LiveGuideTest" time="0.001"/>
+  <testcase name="cloud never resolves local duplicates or overrides private and risky handover" classname="com.saathi.orchestrator.LiveGuideTest" time="0.001"/>
+  <testcase name="disabled nonclickable and duplicate labels do not produce guessed targets" classname="com.saathi.orchestrator.LiveGuideTest" time="0.001"/>
+  <testcase name="consequential and secret requests are handed back" classname="com.saathi.orchestrator.LiveGuideTest" time="0.002"/>
+  <testcase name="browser link without resource id uses snapshot position" classname="com.saathi.orchestrator.LiveGuideTest" time="0.0"/>
+  <testcase name="consented unresolved safe request may use cloud" classname="com.saathi.orchestrator.LiveGuideTest" time="0.001"/>
+  <testcase name="AI opt in keeps exact English Hindi and Hinglish labels local" classname="com.saathi.orchestrator.LiveGuideTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

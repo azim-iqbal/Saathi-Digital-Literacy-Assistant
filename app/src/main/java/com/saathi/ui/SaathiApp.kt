@@ -326,11 +326,11 @@ fun SaathiApp() {
                             ToggleRow(tr(Copy.TRANSPARENCY), tr(Copy.TRANSPARENCY_BODY), reduceTransparency) { reduceTransparency = it; preferences.reducedTransparency = it }
                             ToggleRow(tr(Copy.HAPTICS), tr(Copy.HAPTICS_BODY), haptics) { haptics = it; preferences.haptics = it }
                             SettingRow(tr(Copy.PRIVACY), tr(Copy.PRIVACY_BODY)) { navigate(Screen.Privacy) }
-                            if (com.saathi.BuildConfig.DEBUG) Action("Backend connection", secondary = true) { com.saathi.gateway.PracticeGateway.openSetup(context) }
+                            Action("Backend connection", secondary = true) { com.saathi.gateway.PracticeGateway.openSetup(context) }
                             Body(tr(Copy.LIMIT))
                         }
                         Screen.Privacy -> {
-                            if (com.saathi.gateway.PracticeGateway.aiEnabled()) Body("AI navigation is enabled for new live sessions. Your task, app identity and eligible visible labels go through your server to Gemini and Groq. Clear local data disables this connection and forgets its token.")
+                            if (com.saathi.gateway.PracticeGateway.aiEnabled()) Body("AI navigation is enabled for new live sessions. Exact matches stay local. Otherwise your task, app identity and eligible labels go through your server to a primary model, with fallback only when needed. Clear local data disables this connection and forgets its token.")
                             if (com.saathi.gateway.PracticeGateway.enabled()) Body("Local backend test is enabled for practice: public control IDs and a task category go to your computer’s loopback server. Help in other apps stays local. Clear local data also forgets the temporary token.")
                             Heading(tr(Copy.PRIVACY)); Feature(tr(Copy.LOCAL), tr(Copy.PRIVACY_BODY))
                             Body(tr(Copy.ACCESS_BODY)); Body(tr(Copy.VOICE_NOTE)); Body(tr(Copy.LIMIT))

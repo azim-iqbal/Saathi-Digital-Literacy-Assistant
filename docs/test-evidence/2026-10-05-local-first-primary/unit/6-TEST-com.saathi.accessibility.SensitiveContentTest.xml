@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.accessibility.SensitiveContentTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-04T15:52:03" hostname="Azims-Air.bbrouter" time="0.074">
+  <properties/>
+  <testcase name="public display does not override secret field metadata or adjacent secrets" classname="com.saathi.accessibility.SensitiveContentTest" time="0.056"/>
+  <testcase name="network ports do not hide public pages but URL secrets remain private" classname="com.saathi.accessibility.SensitiveContentTest" time="0.011"/>
+  <testcase name="English Hindi and camel case identifiers are sensitive" classname="com.saathi.accessibility.SensitiveContentTest" time="0.0"/>
+  <testcase name="notification and ordinary text containing numeric secrets are withheld" classname="com.saathi.accessibility.SensitiveContentTest" time="0.002"/>
+  <testcase name="password flag masks unlabelled values" classname="com.saathi.accessibility.SensitiveContentTest" time="0.0"/>
+  <testcase name="shipping shopping and spinner are not pin matches" classname="com.saathi.accessibility.SensitiveContentTest" time="0.001"/>
+  <testcase name="travel dates fares and destinations remain public" classname="com.saathi.accessibility.SensitiveContentTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

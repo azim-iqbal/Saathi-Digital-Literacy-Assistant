@@ -1,3 +1,21 @@
+## 5 October — primary-navigation update, integration not yet accepted
+
+Live requests now use local-first Android matching and primary/conditional-secondary server routing. Incident assessment and explicit API checks remain paired. SAATHI_PRIMARY_PROVIDER selects gemini or groq; the other is fallback. decision_policy=primary/fallback accompanies single-provider provenance. Legacy paired responses remain supported. No numeric confidence is invented; uncertainty or HANDOVER can trigger fallback. Cancellation, freshness and budget limits remain mandatory. See NEXT_CONTINUATION.md for the one failing emulator integration and exact evidence; do not treat historical always-paired descriptions below as current live routing.
+
+## Hosted pilot transport — 4 October 2026
+
+See DEPLOYMENT.md for the prepared WSGI/HTTPS proxy package. Hosted requests use expiring hashed per-user bearer tokens, isolated Gateway/provider instances and atomically reserved per-user/global budgets. All user gateways share four provider-worker slots. Status/cancellation cannot inspect another user's state. The shared development token is not accepted. One Gunicorn worker is required; 32 user contexts are retained until restart. Auth is rechecked before returning results after long-running work. Already dispatched calls may still spend quota after revocation.
+
+Android main/release now uses the shared transport and existing themed setup. Release networking is disabled until a public HTTPS origin is supplied at build time and the user explicitly enables AI with a personal token. No endpoint or secrets are embedded by default. This supersedes the historical disabled-release-stub statements below; actual hosting, TLS and remote-release verification are still outstanding.
+
+## Deadline propagation — 4 October 2026
+
+Each admitted request carries one monotonic deadline through its cancellation signal: the earlier of the gateway decision deadline and the observation's remaining 15-second lifetime. Budget reservation and worker dispatch consume that same allowance. Both REST transports receive `min(8 seconds, remaining time)` rather than a fresh eight-second allowance. The injected transport contract is `(url, headers, payload, timeout)`; fixtures exercise the same contract without external calls.
+
+The gateway stops waiting at that deadline and checks it again immediately before acceptance. A screen-lifetime expiry returns `stale`; it does not alone trip provider-health counters. Adapters reject late replies and transport body/EOF reads, including after parsing. When a transport does return a parsed envelope after cancellation/expiry, available usage stays in diagnostics but the adapter does not mark the request successful. No retry, single-provider fallback or extension of the freshness window was added.
+
+**Verified:** 63 offline backend tests, including eight new deadline regressions; see TEST_RESULTS.md. **Not verified:** improved real-provider latency or accuracy. Socket timeouts bound individual blocking operations; DNS/TLS/body work cannot be forcibly interrupted by a Python Event. Cancellation prevents accepted guidance promptly, but does not guarantee immediate transport termination or zero provider usage.
+
 ## Live connection status — 3 October 2026
 
 Gemini and Groq have each returned a valid response through the Android debug/backend path. Their successful checks were separate; the final paired request timed out on Groq and was rejected. [Provider verification](PROVIDER_VERIFICATION.md) records token counts, the local CA repair and the Gemini metadata-parsing fix. These checks establish connectivity, not reliable agreement or model accuracy.

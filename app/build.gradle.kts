@@ -20,6 +20,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         versionCode = 1
         versionName = "1.0.0"
+        // Public server origin only. Provider keys and user tokens never belong in BuildConfig.
+        val backendUrl = providers.gradleProperty("saathiBackendUrl").orElse("").get()
+        require(backendUrl.matches(Regex("[A-Za-z0-9.:/-]*"))) { "Backend URL must be a plain HTTPS origin" }
+        buildConfigField("String", "BACKEND_URL", "\"$backendUrl\"")
     }
     buildFeatures { buildConfig = true; compose = true }
 }

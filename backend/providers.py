@@ -93,12 +93,17 @@ def post_json(url, headers, data, timeout=8):
             if time.monotonic() >= deadline:
                 raise TimeoutError("Provider deadline")
             chunk = response.read1(min(4096, 65_537 - len(raw)))
+            if time.monotonic() >= deadline:
+                raise TimeoutError("Provider deadline")
             if not chunk:
                 break
             raw.extend(chunk)
             if len(raw) > 65_536:
                 raise InvalidRequest("Provider response too large")
-        return strict_json(raw.decode("utf-8"))
+        result = strict_json(raw.decode("utf-8"))
+        if time.monotonic() >= deadline:
+            raise TimeoutError("Provider deadline")
+        return result
 
 
 class RestProvider:
@@ -170,6 +175,23 @@ class RestProvider:
                 while len(self._records) > 64: self._records.popitem(last=False)
             del self._local.record
 
+    def _request(self, url, headers, payload, cancelled):
+        if cancelled.is_set():
+            raise InterruptedError()
+        now = time.monotonic()
+        deadline = min(now + 8, getattr(cancelled, "deadline", now + 8))
+        timeout = deadline - now
+        if timeout <= 0:
+            raise TimeoutError("Decision expired before transport")
+        result = self._transport(url, headers, payload, timeout)
+        # Preserve usage evidence even when a late reply cannot become guidance.
+        self._usage(result)
+        if cancelled.is_set():
+            raise InterruptedError()
+        if time.monotonic() >= deadline:
+            raise TimeoutError("Provider deadline")
+        return result
+
     def _propose(self, snapshot, cancelled):
         if cancelled.is_set():
             raise InterruptedError()
@@ -184,11 +206,10 @@ class RestProvider:
                 payload.update(goal=snapshot.goal, controls=[dict(c) for c in snapshot.controls], previous_steps=list(snapshot.previous_steps))
         data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
         if self.id == "gemini":
-            result = self._transport("https://generativelanguage.googleapis.com/v1beta/models/" + self.model + ":generateContent",
+            result = self._request("https://generativelanguage.googleapis.com/v1beta/models/" + self.model + ":generateContent",
                 {"x-goog-api-key": self._key}, {"systemInstruction": {"parts": [{"text": system}]},
                 "contents": [{"role": "user", "parts": [{"text": data}]}],
-                "generationConfig": {"temperature": 0, "maxOutputTokens": 1024, "responseMimeType": "application/json"}})
-            self._usage(result)
+                "generationConfig": {"temperature": 0, "maxOutputTokens": 1024, "responseMimeType": "application/json"}}, cancelled)
             if not isinstance(result, dict):
                 raise InvalidRequest("Invalid provider envelope")
             candidates = result.get("candidates", [])
@@ -211,10 +232,9 @@ class RestProvider:
                 raise InvalidRequest("Unexpected provider content")
             text = part["text"]
         else:
-            result = self._transport("https://api.groq.com/openai/v1/chat/completions", {"Authorization": "Bearer " + self._key},
+            result = self._request("https://api.groq.com/openai/v1/chat/completions", {"Authorization": "Bearer " + self._key},
                 {"model": self.model, "messages": [{"role": "system", "content": system}, {"role": "user", "content": data}],
-                 "temperature": 0, "max_completion_tokens": 1024, "response_format": {"type": "json_object"}})
-            self._usage(result)
+                 "temperature": 0, "max_completion_tokens": 1024, "response_format": {"type": "json_object"}}, cancelled)
             if not isinstance(result, dict):
                 raise InvalidRequest("Invalid provider envelope")
             choices = result.get("choices", [])

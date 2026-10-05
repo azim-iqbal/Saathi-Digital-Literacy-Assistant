@@ -1,0 +1,28 @@
+[Unit]
+Description=Saathi guidance gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=saathi
+Group=saathi
+WorkingDirectory=/opt/saathi
+EnvironmentFile=/etc/saathi/backend.env
+Environment=SAATHI_STATE_DIR=/var/lib/saathi
+ExecStart=/opt/saathi/.venv/bin/gunicorn --config deploy/gunicorn.conf.py backend.hosted:create_app()
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+StateDirectory=saathi
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/saathi
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

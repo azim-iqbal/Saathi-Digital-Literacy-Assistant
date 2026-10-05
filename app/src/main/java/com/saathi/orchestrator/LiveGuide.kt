@@ -20,6 +20,30 @@ object LiveGuide {
         !name.contains("permissioncontroller") && !name.contains("packageinstaller")
     private fun normalized(value: String) = value.trim().lowercase(Locale.ROOT).replace(Regex("\\s+"), " ")
 
+    private fun matches(desired: String, nodes: List<UiNode>): List<IndexedValue<UiNode>> =
+        nodes.withIndex().filter { (_, node) -> node.isEnabled && !node.isEditable && (node.isClickable || node.clickableAncestorBounds != null) &&
+            listOfNotNull(node.text, node.description).any { normalized(it) == normalized(desired) } }
+            .distinctBy { indexed ->
+                // Web accessibility can expose both a link and its identically labelled child.
+                // Collapse only the same observed nonempty tap area, never separate controls.
+                val node = indexed.value
+                val area = if (node.isClickable) node.bounds else node.clickableAncestorBounds!!
+                if (area.right > area.left && area.bottom > area.top)
+                    listOf(area.left, area.top, area.right, area.bottom) else indexed.index
+            }
+
+    data class Plan(val local: GuideStep, val useCloud: Boolean)
+
+    /** AI opt-in never overrides an exact local match or a privacy/ambiguity handover. */
+    fun plan(request: String, nodes: List<UiNode>, language: String, cloudEnabled: Boolean): Plan {
+        val local = next(request, nodes, language)
+        val desired = label(request)
+        val ambiguous = desired != null && matches(desired, nodes).size > 1
+        val useCloud = cloudEnabled && local.target == null && !ambiguous &&
+            nodes.none { it.isSensitive || it.isPassword } && com.saathi.core.LiveAiPolicy.allowed(request)
+        return Plan(local, useCloud)
+    }
+
     fun next(request: String, nodes: List<UiNode>, language: String): GuideStep {
         fun message(en: String, hi: String, hinglish: String) = when(language) { "hi-IN" -> hi; "hinglish" -> hinglish; else -> en }
         fun wait(text: String) = GuideStep(text, language, null, "Wait for a clear, current control.", false)
@@ -31,16 +55,7 @@ object LiveGuide {
             "Tell me the name of a visible navigation option, such as Settings or Help. I cannot confirm purchases, send, delete or handle secrets.",
             "स्क्रीन पर दिख रहे विकल्प का नाम बताएँ, जैसे Settings या Help। भुगतान, भेजना, मिटाना या गुप्त जानकारी स्वयं संभालें।",
             "Screen par dikh rahe option ka naam bataaiye, jaise Settings ya Help. Payment, send, delete aur secrets khud sambhaaliye."))
-        val matches = nodes.withIndex().filter { (_, node) -> node.isEnabled && !node.isEditable && (node.isClickable || node.clickableAncestorBounds != null) &&
-            listOfNotNull(node.text, node.description).any { normalized(it) == normalized(desired) } }
-            .distinctBy { indexed ->
-                // Web accessibility can expose both a link and its identically labelled child.
-                // Collapse only the same observed nonempty tap area, never separate controls.
-                val node = indexed.value
-                val area = if (node.isClickable) node.bounds else node.clickableAncestorBounds!!
-                if (area.right > area.left && area.bottom > area.top)
-                    listOf(area.left, area.top, area.right, area.bottom) else indexed.index
-            }
+        val matches = matches(desired, nodes)
         if (matches.size != 1) return wait(message(
             if (matches.isEmpty()) "I cannot find that option on this screen. If you opened a different page, go back; or open Saathi to change your request." else "More than one option matches. I will not guess. Open Saathi to clarify your request.",
             if (matches.isEmpty()) "वह विकल्प इस स्क्रीन पर नहीं मिला। दूसरी जगह पहुँच गए हों तो वापस जाएँ, या साथी में अनुरोध बदलें।" else "एक से अधिक विकल्प मिले। साथी में अपना अनुरोध स्पष्ट करें।",

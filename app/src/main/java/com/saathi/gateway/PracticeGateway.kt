@@ -12,11 +12,14 @@ import java.util.concurrent.Executors
 import java.util.concurrent.Semaphore
 import java.util.concurrent.atomic.AtomicBoolean
 
-/** Debug source set only. Credentials live in process memory; destination is fixed device loopback. */
+/** Process-only credentials. Release destinations are fixed at build time and require HTTPS. */
 object PracticeGateway {
     internal val requestsStarted = java.util.concurrent.atomic.AtomicInteger()
     @Volatile private var token: String? = null
     @Volatile private var ai = false
+    private val generation = java.util.concurrent.atomic.AtomicLong()
+    private val pending = java.util.concurrent.ConcurrentHashMap<String, GatewayCancellation>()
+    private val endpoint = GatewayEndpoint.resolve(com.saathi.BuildConfig.BACKEND_URL, com.saathi.BuildConfig.DEBUG)
     private val io = Executors.newFixedThreadPool(2)
     private val slots = Semaphore(2)
     private val cancellationIo = Executors.newFixedThreadPool(2)
@@ -24,14 +27,23 @@ object PracticeGateway {
     private val main = Handler(Looper.getMainLooper())
     fun enabled() = token != null && !ai
     fun aiEnabled() = token != null && ai
+    fun available() = endpoint != null
+    fun serverLabel() = endpoint ?: "Server not configured for this build"
     fun openSetup(context: Context) { context.startActivity(Intent(context, GatewaySetupActivity::class.java)) }
     fun configure(value: String, enableAi: Boolean = false): Boolean {
+        if (!available() || (!com.saathi.BuildConfig.DEBUG && !enableAi)) return false
         if (value.length !in 32..256 || value.startsWith("REPLACE_") || value.any { it.code !in 33..126 }) return false
+        invalidateConnection()
         com.saathi.orchestrator.SaathiSession.stop()
         token = value; ai = enableAi
         return true
     }
-    fun disable() { com.saathi.orchestrator.SaathiSession.stop(); token = null; ai = false }
+    private fun invalidateConnection() {
+        generation.incrementAndGet()
+        pending.values.toList().forEach { it.cancel() }
+        pending.clear()
+    }
+    fun disable() { invalidateConnection(); com.saathi.orchestrator.SaathiSession.stop(); token = null; ai = false }
 
     fun request(snapshot: SanitizedScreenSnapshot, callback: (GatewayResult) -> Unit): GatewayCancellation {
         val validation = DualProposalValidator.validate(snapshot, GuidanceProposal(snapshot.sessionId, snapshot.screenRevision,
@@ -65,6 +77,8 @@ object PracticeGateway {
     private fun submit(path: String, requestId: String, encoded: String, secret: String?, timeoutMs: Int,
                        decode: (String) -> GatewayResult, callback: (GatewayResult) -> Unit): GatewayCancellation {
         val cancelled = AtomicBoolean(false)
+        val ticket = generation.get()
+        fun current() = !cancelled.get() && generation.get() == ticket
         val rejection = when {
             secret == null -> "not_configured"
             encoded.toByteArray().size > 8192 -> "invalid_request"
@@ -72,11 +86,12 @@ object PracticeGateway {
             else -> null
         }
         if (rejection != null) {
-            main.post { if (!cancelled.get()) callback(GatewayResult.Rejected(rejection)) }
+            main.post { if (current()) callback(GatewayResult.Rejected(rejection)) }
             return GatewayCancellation { cancelled.set(true) }
         }
         val credential = requireNotNull(secret)
         val cancelSent = AtomicBoolean(false)
+        val activeConnection = java.util.concurrent.atomic.AtomicReference<HttpURLConnection?>()
         fun sendCancel() {
             if (!cancelSent.compareAndSet(false, true)) return
             runCatching {
@@ -88,13 +103,24 @@ object PracticeGateway {
                 } finally { cancel.disconnect() }
             }
         }
+        val cancellation = GatewayCancellation {
+            if (cancelled.compareAndSet(false, true) && cancellationSlots.tryAcquire()) {
+                cancellationIo.execute {
+                    try { activeConnection.get()?.disconnect(); sendCancel() }
+                    finally { cancellationSlots.release() }
+                }
+            }
+        }
+        pending[requestId] = cancellation
         io.execute {
             val deadline = android.os.SystemClock.elapsedRealtime() + timeoutMs + 1000
             var connection: HttpURLConnection? = null
             try {
-                if (cancelled.get()) return@execute
+                if (!current()) return@execute
                 requestsStarted.incrementAndGet()
                 connection = connection(path, credential).apply { readTimeout = timeoutMs }
+                activeConnection.set(connection)
+                if (!current()) return@execute
                 val body = encoded.toByteArray(Charsets.UTF_8)
                 connection.setFixedLengthStreamingMode(body.size)
                 connection.outputStream.use { it.write(body) }
@@ -104,38 +130,37 @@ object PracticeGateway {
                         val out = java.io.ByteArrayOutputStream()
                         val buffer = ByteArray(1024)
                         while (true) {
-                            require(!cancelled.get() && android.os.SystemClock.elapsedRealtime() < deadline)
+                            require(current() && android.os.SystemClock.elapsedRealtime() < deadline)
                             val size = input.read(buffer); if (size < 0) break
                             require(out.size() + size <= 8192); out.write(buffer, 0, size)
                         }
                         out.toString("UTF-8")
                     }
+                    require(current() && android.os.SystemClock.elapsedRealtime() < deadline)
                     decode(data)
                 } else GatewayResult.Rejected(GatewayRecovery.httpStatus(connection.responseCode))
-                main.post { if (!cancelled.get()) callback(result) }
+                main.post { if (current()) callback(result) }
             } catch (error: Exception) {
                 val reason = when (error) {
                     is java.net.SocketTimeoutException -> "timeout"
                     is java.io.IOException -> "connection_failed"
                     else -> "invalid_response"
                 }
-                main.post { if (!cancelled.get()) callback(GatewayResult.Rejected(reason)) }
+                main.post { if (current()) callback(GatewayResult.Rejected(reason)) }
             } finally {
                 connection?.disconnect()
+                activeConnection.set(null)
+                pending.remove(requestId, cancellation)
                 if (cancelled.get()) sendCancel()
                 slots.release()
             }
         }
         // Cancel promptly on a separate bounded lane, even while the response read is blocked.
         // Server tombstones cover cancellation arriving before request admission. No automatic retry.
-        return GatewayCancellation {
-            if (cancelled.compareAndSet(false, true) && cancellationSlots.tryAcquire()) {
-                cancellationIo.execute { try { sendCancel() } finally { cancellationSlots.release() } }
-            }
-        }
+        return cancellation
     }
 
-    private fun connection(path: String, token: String) = (URL("http://127.0.0.1:8765$path").openConnection() as HttpURLConnection).apply {
+    private fun connection(path: String, token: String) = (URL(requireNotNull(endpoint) + path).openConnection() as HttpURLConnection).apply {
         requestMethod = "POST"; doOutput = true; useCaches = false; instanceFollowRedirects = false
         connectTimeout = 1000; readTimeout = 2500
         setRequestProperty("Authorization", "Bearer $token"); setRequestProperty("Content-Type", "application/json")

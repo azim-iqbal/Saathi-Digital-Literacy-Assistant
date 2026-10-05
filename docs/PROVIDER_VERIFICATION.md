@@ -39,7 +39,9 @@ Earlier failures are retained in the same evidence directory. Some earlier neste
 
 ## Next checks
 
-Investigate Groq latency within the existing observation-freshness limit, starting with offline tests. Further live checks should be bounded and tied to a material change. Evaluate navigation and incident assessment separately; repeating the same successful connectivity probe will not establish their quality.
+On 4 October, offline investigation corrected local deadline propagation: both adapters now receive the remaining decision/freshness allowance, and late body reads or validation cannot produce accepted guidance. The expanded backend suite passes 63 tests; see [test results](TEST_RESULTS.md). No new live request was made. The recorded Groq failure lasted 8,101ms with no parsed HTTP response, which does not establish whether network/TLS or provider processing caused the delay.
+
+Further live checks need scoped authorization, should be bounded and tied to a material change, and should evaluate navigation and incident assessment separately. Repeating the same successful connectivity probe will not establish their quality. Transport-phase observability remains useful before attributing external latency to a specific cause.
 
 Production hosting and release connectivity are still separate tasks. Credentials belong only in local ignored configuration, never Android source, screenshots, logs or Git.
 
