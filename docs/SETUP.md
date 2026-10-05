@@ -36,31 +36,37 @@ The Gemini adapter uses `generateContent` JSON mode; Groq uses `chat/completions
 ## Connect the debug app
 
 ```sh
-python3 -m backend.server
+python3 backend/server.py
 ```
 
-Expected startup: `Saathi gateway: http://127.0.0.1:8765; mode=mock` (or `dual_ai`). In another terminal, with the emulator attached:
+Expected startup: `Saathi gateway listening on http://0.0.0.0:8765 (and http://127.0.0.1:8765); mode=dual_ai` (or `mock`).
+
+### Network connection options:
+- **Android Emulator**: In debug builds, the app automatically falls back to `http://10.0.2.2:8765` if `127.0.0.1` is not routed. No manual reverse port mapping is required.
+- **Physical USB Device**: Run `adb reverse tcp:8765 tcp:8765` so `127.0.0.1:8765` maps over the USB cable directly to the host machine.
+- **Local Wi-Fi LAN**: Set `SAATHI_DEV_HOST=0.0.0.0` (default) and point the app or custom endpoint to your computer's LAN IP (`http://192.168.x.x:8765`).
 
 ```sh
-adb reverse tcp:8765 tcp:8765
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Open Saathi Settings → **Backend connection**, enter only the development bearer token, and select **Use AI navigation in other apps** if the server is in `dual_ai` mode. Read the data disclosure, then enable. Without that selection, the connection is for synthetic mock practice. The setup screen blocks screenshots; the token is held only in memory and cleared by Disable, Clear local data or process death. Switching connections stops an active session.
+Open Saathi Settings → **Backend connection**, enter the development bearer token from `backend/.env`, and verify **Use AI navigation in other apps** is selected (enabled by default in debug builds). Tap **Enable AI navigation**. The setup screen blocks screenshots; the token is held only in memory and cleared by Disable, Clear local data, or process death.
 
-For AI navigation, choose **Help in apps & browsers**, describe a low-risk navigation goal (for example, “Show me the help section”), choose text or spoken output, start, and open the test app/browser. Both models must agree on an eligible visible control. The person performs every action. Arbitrary completion, financial actions and protected screens remain outside this pilot.
+To verify your providers immediately, tap **Check APIs** → **Run check**. This sends a single paired synthetic probe to Gemini and Groq and confirms both respond with valid structured guidance (`"accepted"`).
 
-Default/offline mode works without the gateway. For synthetic mock practice, leave the server in `mock`, enable the local-test connection and start a practice task. Private form values remain local. To end testing, disable the connection, stop the server with Ctrl-C and run `adb reverse --remove tcp:8765`.
+For AI navigation, choose **Help in apps & browsers**, describe a low-risk navigation goal (for example, “Show me the help section”), choose text or spoken output, start, and open the test app/browser. Both models must agree on an eligible visible control. The person performs every action. Arbitrary completion, financial actions, and protected screens remain outside this pilot.
+
+Default/offline mode works without the gateway. For synthetic mock practice, leave the server in `mock`, enable the local-test connection and start a practice task. Private form values remain local. To end testing, disable the connection, stop the server with Ctrl-C and run `adb reverse --remove tcp:8765` if USB reverse was used.
 
 ## Contract and troubleshooting
 
-Authenticated `POST /v1/proposals` accepts registered synthetic IDs only. `POST /v1/live-proposals` additionally accepts consented goal/labels and is available only in `dual_ai`. Both reject unknown/duplicate fields and bodies above8192bytes. `POST /v1/cancel` accepts only request_id. `GET /health` reports configured mode, not provider health or credential validity. Schemas are in `backend/gateway.py` and `backend/live.py`; examples/tests are in `backend/tests`.
+Authenticated `POST /v1/proposals` accepts registered synthetic IDs only. `POST /v1/live-proposals` additionally accepts consented goal/labels and is available only in `dual_ai`. Both reject unknown/duplicate fields and bodies above 8192 bytes. `POST /v1/cancel` accepts only request_id. `GET /health` reports configured mode, not provider health or credential validity. Schemas are in `backend/gateway.py` and `backend/live.py`; examples/tests are in `backend/tests`.
 
-A rejected decision can still return HTTP200; inspect status/reason, never assume200 means guidance. A disconnected server produces no guessed marker. Check mode, token, reverse mapping and current screen. After exhausted call caps, stop and review your usage before deliberately changing caps; deleting the budget file resets usage accounting and is not a billing control. Three provider failures open a circuit until restart. No automatic retries exist.
+A rejected decision can still return HTTP 200; inspect status/reason, never assume 200 means guidance. A disconnected server produces no guessed marker. Check mode, token, reverse mapping and current screen. After exhausted call caps, stop and review your usage before deliberately changing caps; deleting the budget file resets usage accounting and is not a billing control. Three provider failures open a circuit until restart. No automatic retries exist.
 
-`backend/local-budget.sqlite3` holds durable aggregate AI call counts (default100 total,50 each). `.env`, SQLite files and keys must never be committed. Mock caps reset on restart. See [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md) for limits and cancellation caveats.
+`backend/local-budget.sqlite3` holds durable aggregate AI call counts (default 100 total, 50 each). `.env`, SQLite files and keys must never be committed. Mock caps reset on restart. See [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md) for limits and cancellation caveats.
 
-This server binds **127.0.0.1 only**, uses a shared development token and local HTTP, and must not be exposed publicly. Hosted HTTPS, per-user authentication/quotas, release Android connectivity and distribution are unfinished. Filling API placeholders makes the local pilot configurable; it does not deploy a production backend.
+This development server uses a shared development token and local HTTP, and must not be exposed publicly on untrusted networks. Hosted HTTPS, per-user authentication/quotas, release Android connectivity and distribution are documented in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Voice and test evidence
 

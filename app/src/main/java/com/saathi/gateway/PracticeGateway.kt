@@ -19,16 +19,21 @@ object PracticeGateway {
     @Volatile private var ai = false
     private val generation = java.util.concurrent.atomic.AtomicLong()
     private val pending = java.util.concurrent.ConcurrentHashMap<String, GatewayCancellation>()
-    private val endpoint = GatewayEndpoint.resolve(com.saathi.BuildConfig.BACKEND_URL, com.saathi.BuildConfig.DEBUG)
+    private val defaultEndpoint = GatewayEndpoint.resolve(com.saathi.BuildConfig.BACKEND_URL, com.saathi.BuildConfig.DEBUG)
+    @Volatile private var activeEndpoint: String? = defaultEndpoint
     private val io = Executors.newFixedThreadPool(2)
     private val slots = Semaphore(2)
     private val cancellationIo = Executors.newFixedThreadPool(2)
     private val cancellationSlots = Semaphore(2)
     private val main = Handler(Looper.getMainLooper())
-    fun enabled() = token != null && !ai
+    fun enabled() = token != null
     fun aiEnabled() = token != null && ai
-    fun available() = endpoint != null
-    fun serverLabel() = endpoint ?: "Server not configured for this build"
+    fun available() = defaultEndpoint != null || activeEndpoint != null
+    fun serverLabel() = activeEndpoint ?: defaultEndpoint ?: "Server not configured for this build"
+    fun setCustomEndpoint(url: String?) {
+        if (!com.saathi.BuildConfig.DEBUG) return
+        activeEndpoint = if (url.isNullOrBlank()) defaultEndpoint else url.trim().trimEnd('/')
+    }
     fun openSetup(context: Context) { context.startActivity(Intent(context, GatewaySetupActivity::class.java)) }
     fun configure(value: String, enableAi: Boolean = false): Boolean {
         if (!available() || (!com.saathi.BuildConfig.DEBUG && !enableAi)) return false
@@ -43,7 +48,7 @@ object PracticeGateway {
         pending.values.toList().forEach { it.cancel() }
         pending.clear()
     }
-    fun disable() { invalidateConnection(); com.saathi.orchestrator.SaathiSession.stop(); token = null; ai = false }
+    fun disable() { invalidateConnection(); com.saathi.orchestrator.SaathiSession.stop(); token = null; ai = false; activeEndpoint = defaultEndpoint }
 
     fun request(snapshot: SanitizedScreenSnapshot, callback: (GatewayResult) -> Unit): GatewayCancellation {
         val validation = DualProposalValidator.validate(snapshot, GuidanceProposal(snapshot.sessionId, snapshot.screenRevision,
@@ -95,7 +100,8 @@ object PracticeGateway {
         fun sendCancel() {
             if (!cancelSent.compareAndSet(false, true)) return
             runCatching {
-                val cancel = connection("/v1/cancel", credential).apply { readTimeout = 1000 }
+                val target = activeEndpoint ?: defaultEndpoint ?: return@runCatching
+                val cancel = openHttp(target, "/v1/cancel", credential, 1000)
                 try {
                     val body = JSONObject().put("request_id", requestId).toString().toByteArray()
                     cancel.setFixedLengthStreamingMode(body.size)
@@ -118,12 +124,33 @@ object PracticeGateway {
             try {
                 if (!current()) return@execute
                 requestsStarted.incrementAndGet()
-                connection = connection(path, credential).apply { readTimeout = timeoutMs }
-                activeConnection.set(connection)
-                if (!current()) return@execute
+                var target = activeEndpoint ?: defaultEndpoint
+                if (target == null) {
+                    main.post { if (current()) callback(GatewayResult.Rejected("not_configured")) }
+                    return@execute
+                }
                 val body = encoded.toByteArray(Charsets.UTF_8)
-                connection.setFixedLengthStreamingMode(body.size)
-                connection.outputStream.use { it.write(body) }
+                connection = try {
+                    openHttp(target, path, credential, timeoutMs).apply {
+                        activeConnection.set(this)
+                        setFixedLengthStreamingMode(body.size)
+                        outputStream.use { it.write(body) }
+                    }
+                } catch (ioe: java.io.IOException) {
+                    if (com.saathi.BuildConfig.DEBUG && target == "http://127.0.0.1:8765") {
+                        val fallback = "http://10.0.2.2:8765"
+                        target = fallback
+                        activeEndpoint = fallback
+                        openHttp(fallback, path, credential, timeoutMs).apply {
+                            activeConnection.set(this)
+                            setFixedLengthStreamingMode(body.size)
+                            outputStream.use { it.write(body) }
+                        }
+                    } else {
+                        throw ioe
+                    }
+                }
+                if (!current()) return@execute
                 val result = if (connection.responseCode == 200) {
                     require(connection.contentType?.substringBefore(';') == "application/json")
                     val data = connection.inputStream.use { input ->
@@ -160,9 +187,9 @@ object PracticeGateway {
         return cancellation
     }
 
-    private fun connection(path: String, token: String) = (URL(requireNotNull(endpoint) + path).openConnection() as HttpURLConnection).apply {
+    private fun openHttp(base: String, path: String, token: String, timeoutMs: Int) = (URL(base + path).openConnection() as HttpURLConnection).apply {
         requestMethod = "POST"; doOutput = true; useCaches = false; instanceFollowRedirects = false
-        connectTimeout = 1000; readTimeout = 2500
+        connectTimeout = 2500; readTimeout = timeoutMs
         setRequestProperty("Authorization", "Bearer $token"); setRequestProperty("Content-Type", "application/json")
     }
 }

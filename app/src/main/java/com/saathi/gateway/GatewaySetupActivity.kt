@@ -45,10 +45,10 @@ class GatewaySetupActivity : ComponentActivity() {
             val dark = preferences.theme == "Dark" || (preferences.theme == "System" && isSystemInDarkTheme())
             val colors = saathiColorScheme(dark)
             val environment = rememberNavigationEnvironment()
+            val development = com.saathi.BuildConfig.DEBUG
             var token by remember { mutableStateOf("") }
             var enabled by remember { mutableStateOf(PracticeGateway.enabled() || PracticeGateway.aiEnabled()) }
-            var ai by remember { mutableStateOf(PracticeGateway.aiEnabled()) }
-            val development = com.saathi.BuildConfig.DEBUG
+            var ai by remember { mutableStateOf(if (development) true else PracticeGateway.aiEnabled()) }
             var probeConsent by remember { mutableStateOf(false) }
             var error by remember { mutableStateOf(false) }
             MaterialTheme(colorScheme = colors) {
@@ -62,6 +62,9 @@ class GatewaySetupActivity : ComponentActivity() {
                         Text(if (development) "Connect through the server on your computer. Practice testing uses simulated providers. AI navigation uses local matching first, then a primary model; the second model is used when needed."
                             else "Connect to the Saathi server supplied with this app using your access token. The server operator configures the primary and fallback models.")
                         Text(PracticeGateway.serverLabel(), style = MaterialTheme.typography.bodySmall)
+                        if (development) {
+                            Text("Note: On an Android emulator, connections fall back to 10.0.2.2 automatically. On a physical USB phone, execute 'adb reverse tcp:8765 tcp:8765' in your computer terminal.", style = MaterialTheme.typography.bodySmall, color = colors.onSurfaceVariant)
+                        }
                         FilterChip(selected = ai, onClick = { ai = !ai }, enabled = PracticeGateway.available(), label = { Text("Use AI navigation in other apps") })
                         if (ai) Text("By enabling AI navigation, you allow your task, app identity, eligible visible control labels and up to three previous target labels to be sent through your server to the primary model and, when needed, the fallback model. Private forms and text-entry values are excluded, but filtering is not perfect. Provider data terms apply. No screenshots, audio or coordinates are sent. Use synthetic or non-private tasks while testing.")
                         GlassPanel(Modifier.fillMaxWidth()) { Column(Modifier.padding(20.dp)) {

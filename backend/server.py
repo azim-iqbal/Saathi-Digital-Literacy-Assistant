@@ -53,15 +53,17 @@ def decode(body):
         raise InvalidRequest("Invalid JSON") from error
 
 
-def make_server(token, gateway, port=8765):
+def make_server(token, gateway, host=None, port=8765):
     if not isinstance(token, str) or not 32 <= len(token) <= 256 or token.startswith("REPLACE_") or any(not 33 <= ord(c) <= 126 for c in token):
         raise ValueError("Set SAATHI_DEV_TOKEN to a random token of at least 32 ASCII characters")
+    if host is None:
+        host = "127.0.0.1"
 
     class Handler(BaseHTTPRequestHandler):
         # HTTP/1.0 closes each connection: no unread-body reuse after a rejected request.
         def setup(self):
             super().setup()
-            self.connection.settimeout(3)
+            self.connection.settimeout(15)
 
         def log_message(self, *_):
             pass  # Never print bearer tokens, requests, screen IDs, or provider output.
@@ -112,7 +114,7 @@ def make_server(token, gateway, port=8765):
                     chunk = self.rfile.read1(length - len(body))
                     if not chunk: break
                     body.extend(chunk)
-                self.connection.settimeout(3)
+                self.connection.settimeout(15)
                 if len(body) != length:
                     raise InvalidRequest("Incomplete body")
                 data = decode(body)
@@ -125,18 +127,22 @@ def make_server(token, gateway, port=8765):
                 # Keep the handler usable and never return raw storage/adapter failures.
                 self.reply(503, {"error": "unavailable"})
 
-    return LocalServer(("127.0.0.1", port), Handler)
+    return LocalServer((host, port), Handler)
 
 
 def main():
     from backend.configuration import configured_gateway
     gateway = configured_gateway()
+    host = os.environ.get("SAATHI_DEV_HOST", "0.0.0.0")
+    port = int(os.environ.get("SAATHI_DEV_PORT", "8765"))
     try:
-        server = make_server(os.environ.get("SAATHI_DEV_TOKEN", ""), gateway)
+        server = make_server(os.environ.get("SAATHI_DEV_TOKEN", ""), gateway, host=host, port=port)
     except ValueError as error:
         gateway.close()
         raise SystemExit(str(error)) from None
-    print("Saathi gateway: http://127.0.0.1:8765; mode=" + gateway.mode)
+    print(f"Saathi gateway listening on http://{host}:{port} (and http://127.0.0.1:{port}); mode={gateway.mode}")
+    print("• For Android USB debugging: run 'adb reverse tcp:8765 tcp:8765'")
+    print("• For Android Emulator: connects via http://10.0.2.2:8765")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

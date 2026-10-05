@@ -13,10 +13,20 @@ class UnconfiguredProvider:
     def propose(self, *args): raise RuntimeError("Provider is not configured")
 
 
-def load_local_env(path=Path("backend/.env")):
-    if not path.exists():
+def load_local_env(path=None):
+    if path is not None:
+        target = Path(path)
+    elif Path("backend/.env").exists():
+        target = Path("backend/.env")
+    elif (Path(__file__).resolve().parent / ".env").exists():
+        target = Path(__file__).resolve().parent / ".env"
+    elif Path(".env").exists():
+        target = Path(".env")
+    else:
         return
-    for line in path.read_text().splitlines():
+    if not target.exists():
+        return
+    for line in target.read_text().splitlines():
         line = line.strip()
         if not line or line.startswith("#"):
             continue
