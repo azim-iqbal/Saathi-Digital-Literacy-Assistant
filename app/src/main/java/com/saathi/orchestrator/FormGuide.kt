@@ -12,6 +12,19 @@ internal object FormGuide {
     private val browserAddress = Regex(
         "(?i)(url|omnibox|address[_ ]?bar|search[_ ]?box[_ ]?text|search or type (?:a )?(?:web )?(?:address|url)|enter (?:a )?(?:web )?(?:address|url)|type (?:a )?(?:web )?(?:address|url))"
     )
+    private val knownFieldNames = mapOf(
+        "first name" to "first name", "given name" to "first name",
+        "last name" to "last name", "family name" to "last name", "surname" to "last name",
+        "middle name" to "middle name", "full name" to "full name", "name" to "name",
+        "email" to "email", "e mail" to "email", "email address" to "email",
+        "phone" to "phone number", "phone number" to "phone number",
+        "mobile" to "mobile number", "mobile number" to "mobile number",
+        "address" to "address", "street address" to "address", "city" to "city",
+        "state" to "state", "country" to "country", "postal code" to "postal code",
+        "zip code" to "postal code", "company" to "company", "website" to "website",
+        "username" to "username", "subject" to "subject", "message" to "message",
+        "comments" to "comments"
+    )
 
     fun isRequest(request: String): Boolean = form.containsMatchIn(request) && helpAction.containsMatchIn(request)
 
@@ -54,10 +67,15 @@ internal object FormGuide {
         ))
 
         val node = next.value
-        val instruction = copy(
-            "Use the marker for this form field. Enter and review the value yourself; Saathi does not read, type, or submit it.",
-            "Is form field ka nishaan dekhein. Jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta.",
-            "Is form field ka marker dekhein. Jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta."
+        val fieldName = fieldName(next.index, node, fields, nodes)
+        val instruction = if (fieldName == null) copy(
+            "Fill the highlighted field. Enter and review the value yourself; Saathi does not read, type, or submit it.",
+            "Nishaan wale field mein jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta.",
+            "Marker wale field mein jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta."
+        ) else copy(
+            "Fill the $fieldName field. Enter and review the value yourself; Saathi does not read, type, or submit it.",
+            "$fieldName field mein jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta.",
+            "$fieldName field mein jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta."
         )
         return GuideStep(
             instruction,
@@ -66,5 +84,61 @@ internal object FormGuide {
             "Check the current screen after the user moves to another field.",
             false
         )
+    }
+
+    /** Speak only a small allowlist of field labels, never arbitrary page text or entered values. */
+    private fun fieldName(
+        nodeIndex: Int,
+        field: UiNode,
+        fields: List<IndexedValue<UiNode>>,
+        nodes: List<UiNode>
+    ): String? {
+        label(node.hint)?.let { return it }
+        val id = node.resourceId?.substringAfterLast('/')?.substringAfterLast(':')
+        label(id)?.let { return it }
+
+        val labels = nodes.mapIndexedNotNull { index, candidate ->
+            if (candidate.isEditable || candidate.isSensitive || candidate.isPassword) return@mapIndexedNotNull null
+            val name = label(candidate.text) ?: label(candidate.description) ?: return@mapIndexedNotNull null
+            IndexedValue(index, candidate to name)
+        }
+        val nearby = labels.filter { (_, pair) ->
+            val bounds = pair.first.bounds
+            val verticalOverlap = bounds.bottom > field.bounds.top && bounds.top < field.bounds.bottom
+            val directlyAbove = bounds.bottom <= field.bounds.top &&
+                field.bounds.top - bounds.bottom <= (field.bounds.height() * 2).coerceAtLeast(80)
+            val horizontalOverlap = bounds.right > field.bounds.left && bounds.left < field.bounds.right
+            horizontalOverlap && (verticalOverlap || directlyAbove)
+        }.minByOrNull { (_, pair) ->
+            kotlin.math.abs(field.bounds.top - pair.first.bounds.bottom)
+        } ?: return null
+
+        val anchor = nearby.value.second
+        if (anchor != "name") return anchor
+
+        // Some pages expose one shared "Name" label above separate first/last-name inputs.
+        val anchorBounds = nearby.value.first.bounds
+        val nextLabelTop = labels.asSequence().map { it.value.first }
+            .filter { it.bounds.top >= anchorBounds.bottom && it.bounds.top > anchorBounds.top }
+            .minOfOrNull { it.bounds.top } ?: Int.MAX_VALUE
+        val group = fields.filter { (_, candidate) ->
+            candidate.bounds.top >= anchorBounds.bottom && candidate.bounds.top < nextLabelTop &&
+                candidate.bounds.right > anchorBounds.left && candidate.bounds.left < anchorBounds.right
+        }.sortedBy { it.value.bounds.top }
+        val position = group.indexOfFirst { it.index == nodeIndex }
+        if (group.size == 2 && position in 0..1) return if (position == 0) "first name" else "last name"
+        return anchor
+    }
+
+    private fun label(raw: String?): String? {
+        val value = raw?.replace(Regex("([a-z])([A-Z])"), "$1 $2")
+            ?.replace(Regex("[_-]+"), " ")
+            ?.replace(Regex("\\s+"), " ")
+            ?.trim()
+            ?.trimEnd(':', '*', '.')
+            ?.lowercase(java.util.Locale.ROOT)
+            ?: return null
+        if ('@' in value) return "email"
+        return knownFieldNames[value]
     }
 }

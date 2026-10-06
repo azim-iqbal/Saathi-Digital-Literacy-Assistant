@@ -16,7 +16,7 @@ Public dates/currency-formatted fares no longer trip the generic long-number rul
 
 ## 6 October 2026 — local form-field guidance
 
-Requests for help filling a form now use a local field guide instead of the model route. It marks the currently focused eligible field, or the topmost visible unoccupied text field, using fresh accessibility bounds. Editable text and descriptions are discarded from retained nodes; only an occupied/not-occupied bit from the value remains for local progression. Saathi does not type, click or submit. Password/private fields, ambiguous focus, recognized browser address fields and screens with a detected private field produce no marker. This is field-by-field assistance, not form interpretation or completion verification.
+Requests for help filling a form now use a local field guide instead of the model route. It marks the currently focused eligible field, or the topmost visible unoccupied text field, using fresh accessibility bounds. Spoken guidance names the field when its hint, resource ID or nearby label maps to a reviewed field-name list (for example, “Fill the first name field”); it does not read arbitrary page text aloud. Editable text and descriptions are discarded from retained nodes; only an occupied/not-occupied bit from the value remains for local progression. Saathi does not type, click or submit. Password/private fields, ambiguous focus, recognized browser address fields and screens with a detected private field produce no marker. This is field-by-field assistance, not form interpretation or completion verification.
 
 ## Latest backend/browser continuation — 1 October 2026
 
