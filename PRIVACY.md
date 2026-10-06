@@ -1,6 +1,8 @@
 # Privacy — local practice and opt-in live option finding
 
-Updated 3 October 2026. Saathi observes accessibility structure during a user-started session. Practice sessions still reject other packages before flattening trees. The new **Help in apps & browsers** action separately lets the user start live option finding: it reads accessible control labels/structure in other apps locally to match the named option. The intake surface explains this before Start. It never taps, types or submits for the user.
+Updated 6 October 2026. Saathi observes accessibility structure during a user-started session. Practice sessions still reject other packages before flattening trees. The new **Help in apps & browsers** action separately lets the user start live option finding: it reads accessible control labels/structure in other apps locally to match the named option. The intake surface explains this before Start. It never taps, types or submits for the user.
+
+Form-filling requests use a local-only field guide. It can mark one visible, enabled, non-sensitive editable field at a time. Editable text and descriptions are discarded from retained accessibility nodes; a boolean indicating whether a field has content remains for local progression. No field value is sent to a model, and Saathi never enters or submits it. Password/private screens and recognized browser address fields are not marked.
 
 By default, cloud reasoning is disabled. Screenshot capture remains disabled. There is no provider API key field in newly built APKs. Task-screen Android speech recognition and installed TTS engines may use network services; their offline operation and retention have not been verified. The speech-speed preview uses the installed TTS engine. Use typing when voice is not desired.
 

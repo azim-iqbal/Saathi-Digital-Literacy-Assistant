@@ -21,6 +21,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.saathi.orchestrator.LiveGuide
+import com.saathi.orchestrator.FormGuide
 import com.saathi.orchestrator.SaathiSession
 import com.saathi.overlay.AssistantBubbleService
 import com.saathi.speech.VoiceConversationService
@@ -45,6 +46,7 @@ class AssistantActivity : ComponentActivity() {
             var readiness by remember { mutableIntStateOf(0) }
             var pendingSession by remember { mutableStateOf<String?>(null) }
             val aiConfigured = com.saathi.gateway.PracticeGateway.aiEnabled()
+            val localFormHelp = FormGuide.isRequest(request)
             val state by SaathiSession.status.collectAsState()
             val instruction by SaathiSession.instruction.collectAsState()
             val lastReply by SaathiSession.lastReply.collectAsState()
@@ -76,7 +78,7 @@ class AssistantActivity : ComponentActivity() {
                     SaathiBrand()
                     GlassButton("Report cyber fraud", primary = false, onClick = { startActivity(Intent(this@AssistantActivity, CyberReportActivity::class.java)) })
                     Text("What would you like to do?", style = MaterialTheme.typography.titleLarge)
-                    Text(if (aiConfigured) "Describe your navigation task. Saathi will ask both configured AI providers for one grounded next step, then check again after you navigate. You perform every action." else "For apps and browsers, tell me a visible option’s name—such as Settings, Help or Search. I can point out a clear match. Configure the backend to enable AI navigation.")
+                    Text(if (aiConfigured) "Describe your navigation task. Form-filling help stays on this device and can mark safe visible fields. Other unresolved navigation tasks may use the configured AI route for one grounded next step. You perform every action." else "For apps and browsers, tell me a visible option’s name—such as Settings, Help or Search. For form filling, I can mark safe visible fields locally. Configure the backend to enable AI navigation for other tasks.")
                     GlassPanel(Modifier.fillMaxWidth()) {
                         OutlinedTextField(value = request, onValueChange = { request = it.take(if (aiConfigured) 160 else 80); error = null },
                             label = { Text("Your request") }, placeholder = { Text("Find Settings") },
@@ -103,7 +105,7 @@ class AssistantActivity : ComponentActivity() {
                     }
                     if (!accessibility) GlassButton("Enable screen guidance", primary = false, onClick = { settings.launch(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) })
                     if (!overlay) GlassButton("Enable floating assistant", primary = false, onClick = { settings.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))) })
-                    Text(if (aiConfigured) "AI navigation is enabled. Exact matches stay on this device. Otherwise your task, app identity, eligible labels and recent suggestions go through your server to the primary model, with a second model only when needed. Private forms and text-entry values are excluded; filtering is not perfect. A model answer is not a safety guarantee." else "Starting lets Saathi read accessible controls in other apps locally while this session is active. Nothing is sent to an AI provider. Detected private fields and unclear controls get no target. Filtering is not perfect. You perform every tap.", style = MaterialTheme.typography.bodySmall)
+                    Text(if (aiConfigured) "AI navigation is enabled. Form-filling help and exact matches stay on this device. Other tasks may send your request, app identity, eligible labels and recent suggestions through your server to its primary model, with fallback only when needed. Editable values are excluded; detected private fields get no marker. Filtering is not perfect." else "Starting lets Saathi read accessible controls in other apps locally while this session is active. Nothing is sent to an AI provider. Form help marks only safe visible fields; detected private fields and unclear controls get no target. You perform every tap.", style = MaterialTheme.typography.bodySmall)
                     error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                     GlassButton(if (SaathiSession.isLive()) "Update on-screen help" else "Start on-screen help", enabled = overlay && accessibility && request.isNotBlank(), onClick = {
                         if (!SaathiSession.acceptsLiveRequest(request)) error = "Name a visible navigation option. Payments, deletion, permissions and secrets must be handled yourself."
@@ -120,8 +122,9 @@ class AssistantActivity : ComponentActivity() {
                             Text(lastReply.ifBlank { instruction.ifBlank { "Return to the app you want help with." } })
                             Text("Last response · I’ll recheck the screen when you return.", style = MaterialTheme.typography.bodySmall)
                         } }
-                        if (spoken && SaathiSession.isLive()) Text("With hands-free replies enabled, say find Help to change the visible option. Repeat, pause and stop are also available.", style = MaterialTheme.typography.bodySmall)
-                        if (spoken && VoiceConversationService.supported(this@AssistantActivity)) GlassButton("Enable hands-free replies", primary = false, onClick = {
+                        if (spoken && SaathiSession.isLive() && localFormHelp) Text("Hands-free listening is paused during form help. Saathi marks safe fields locally; you enter each value yourself.", style = MaterialTheme.typography.bodySmall)
+                        if (spoken && SaathiSession.isLive() && !localFormHelp) Text("With hands-free replies enabled, say find Help to change the visible option. Repeat, pause and stop are also available.", style = MaterialTheme.typography.bodySmall)
+                        if (spoken && !localFormHelp && VoiceConversationService.supported(this@AssistantActivity)) GlassButton("Enable hands-free replies", primary = false, onClick = {
                             pendingSession = SaathiSession.sessionKey()
                             val required = mutableListOf(Manifest.permission.RECORD_AUDIO)
                             if (Build.VERSION.SDK_INT >= 33) required += Manifest.permission.POST_NOTIFICATIONS

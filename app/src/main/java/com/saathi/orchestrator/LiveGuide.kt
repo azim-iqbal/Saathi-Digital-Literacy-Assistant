@@ -36,6 +36,8 @@ object LiveGuide {
 
     /** AI opt-in never overrides an exact local match or a privacy/ambiguity handover. */
     fun plan(request: String, nodes: List<UiNode>, language: String, cloudEnabled: Boolean): Plan {
+        // Form progression uses only local field metadata. Editable contents never go to a model.
+        if (FormGuide.isRequest(request)) return Plan(FormGuide.next(nodes, language), useCloud = false)
         val local = next(request, nodes, language)
         val desired = label(request)
         val ambiguous = desired != null && matches(desired, nodes).size > 1

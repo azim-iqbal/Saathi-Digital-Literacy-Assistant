@@ -14,6 +14,10 @@ Public dates/currency-formatted fares no longer trip the generic long-number rul
 
 # Floating assistant and live option finding
 
+## 6 October 2026 — local form-field guidance
+
+Requests for help filling a form now use a local field guide instead of the model route. It marks the currently focused eligible field, or the topmost visible unoccupied text field, using fresh accessibility bounds. Editable text and descriptions are discarded from retained nodes; only an occupied/not-occupied bit from the value remains for local progression. Saathi does not type, click or submit. Password/private fields, ambiguous focus, recognized browser address fields and screens with a detected private field produce no marker. This is field-by-field assistance, not form interpretation or completion verification.
+
 ## Latest backend/browser continuation — 1 October 2026
 
 Debug Android now connects to the loopback gateway for mock practice and separately consented AI navigation. Independent Gemini/Groq REST adapters and ignored credential/model placeholders are implemented. A live proposal is accepted only on paired agreement, a current eligible control and fresh observation. The app resolves bounds locally and uses its localized instruction template. Recent suggested labels support step-by-step wrong-path recovery, but are not claimed clicks or completion evidence. Default/release guidance stays local. See [AI_ORCHESTRATION.md](AI_ORCHESTRATION.md) and [SETUP.md](SETUP.md), which supersede older disconnected-backend notes below.
