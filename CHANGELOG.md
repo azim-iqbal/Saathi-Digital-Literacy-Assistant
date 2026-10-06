@@ -2,7 +2,7 @@
 
 ## 6 October 2026
 
-- Added local, field-by-field help for form-filling requests. The guide marks safe visible text fields, discards editable text from retained accessibility nodes and leaves entry and submission to the user. Private/password screens remain unmarked; hands-free listening pauses during form guidance.
+- Added local, field-by-field help for form-filling requests. When a safe field label is available, spoken guidance names it (for example, “Fill the first name field”). The guide discards editable text from retained accessibility nodes and leaves entry and submission to the user. Private/password screens remain unmarked; hands-free listening pauses during form guidance.
 - Form-filling tasks bypass the AI backend and use local field guidance, so backend handovers do not block this supported task.
 
 ## 3 October 2026

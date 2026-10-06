@@ -69,6 +69,7 @@ object SaathiSession {
                 latestNodes.any { it.isSensitive || it.isPassword })) return false
         goal = request
         previousAiTargets.clear()
+        lastSpokenTargetId = null
         mutableReply.value = ""
         mutableStatus.value = GuidanceSessionState.OBSERVING
         // Invalidate first and copy the real current screen; never reuse retained bounds.
@@ -189,7 +190,7 @@ object SaathiSession {
         pendingRunnable?.let(handler::removeCallbacks)
         latestNodes = emptyList()
         lastStep = null
-        lastSpokenTargetId = null
+        if (!live || !FormGuide.isRequest(goal)) lastSpokenTargetId = null
         mutableInstruction.value = ""
         HighlightOverlayService.clearPresentation()
         VoiceConversationService.suspendForScreenChange()
@@ -411,7 +412,8 @@ object SaathiSession {
     private fun speakWhenUseful(step: GuideStep) {
         if (!spokenPromptsEnabled) return
 
-        val targetId = step.target?.resourceId ?: step.speechText
+        // Include the instruction so distinct fields with shared/missing WebView IDs get their own prompt.
+        val targetId = "${step.target?.resourceId.orEmpty()}|${step.speechText}"
         val isCorrection = step.correctionNote != null
         if (isCorrection || targetId != lastSpokenTargetId) {
             val prompt = step.correctionNote ?: step.speechText
