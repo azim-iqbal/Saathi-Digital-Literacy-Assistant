@@ -223,7 +223,8 @@ object SaathiSession {
 
     fun refreshVoice() {
         val step = lastStep ?: return
-        if (active) VoiceConversationService.update(step.speechText, latestNodes.none { it.isSensitive || it.isPassword })
+        if (active) VoiceConversationService.update(step.speechText,
+            latestNodes.none { it.isSensitive || it.isPassword } && !FormGuide.isRequest(goal))
     }
 
     fun onScreenChanged(nodes: List<UiNode>, ticket: ObservationGate.Ticket) {
@@ -259,7 +260,8 @@ object SaathiSession {
                     else nodes.singleOrNull { it.resourceId == proposed.resourceId }
                 }
                 val target = resolvedNode?.takeIf { it.isEnabled && !it.isSensitive }
-                    ?.let { step.target?.copy(bounds = android.graphics.Rect(if (live && !it.isClickable) it.clickableAncestorBounds ?: it.bounds else it.bounds)) }
+                    ?.let { step.target?.copy(bounds = android.graphics.Rect(
+                        if (live && !it.isClickable && !it.isEditable) it.clickableAncestorBounds ?: it.bounds else it.bounds)) }
                 if (observationGate.accepts(ticket)) present(
                     step.copy(target = target),
                     sensitiveTarget = resolvedNode?.isSensitive == true

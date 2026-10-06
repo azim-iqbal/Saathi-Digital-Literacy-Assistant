@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.accessibility.AccessibilityNodeInfo
 import com.saathi.core.UiNode
 
-/** Best-effort local masking. Cloud guidance remains disabled; detection is not exhaustive. */
+/** Best-effort local masking; editable values are discarded and cloud filtering is not exhaustive. */
 object NodeMasker {
     private const val MAX_NODES = 600
 
@@ -25,8 +25,10 @@ object NodeMasker {
             val sensitive = isSensitive(node.isPassword, hint, id, rawDescription, rawText)
             into += UiNode(
                 bounds = bounds,
-                text = if (sensitive) null else rawText,
-                description = if (sensitive) null else rawDescription,
+                // Editable contents can be personal even when heuristics do not recognize them.
+                // Keep only the occupied bit needed for local form progression.
+                text = if (sensitive || node.isEditable) null else rawText,
+                description = if (sensitive || node.isEditable) null else rawDescription,
                 hint = if (sensitive) null else hint,
                 resourceId = id,
                 className = node.className?.toString(),
@@ -36,7 +38,8 @@ object NodeMasker {
                 isSensitive = sensitive,
                 hasValue = !rawText.isNullOrBlank(),
                 clickableAncestorBounds = clickableAncestor?.let(::Rect),
-                isEditable = node.isEditable
+                isEditable = node.isEditable,
+                isFocused = node.isFocused
             )
         }
         for (index in 0 until node.childCount) {
