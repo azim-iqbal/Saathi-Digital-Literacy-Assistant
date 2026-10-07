@@ -74,7 +74,12 @@ class SaathiAccessibilityService : AccessibilityService() {
             if (ticket == null) { @Suppress("DEPRECATION") snapshot.recycle(); return@postDelayed }
             copying = true
             nodeExecutor.execute {
-                try { SaathiSession.onScreenChanged(NodeMasker.flatten(snapshot), ticket) }
+                try {
+                    val started = android.os.SystemClock.elapsedRealtime()
+                    val nodes = NodeMasker.flatten(snapshot)
+                    ObservationDiagnostics.snapshot(android.os.SystemClock.elapsedRealtime() - started)
+                    SaathiSession.onScreenChanged(nodes, ticket)
+                }
                 catch (_: RuntimeException) { SaathiSession.onObservationFailed(ticket) }
                 finally {
                     @Suppress("DEPRECATION") snapshot.recycle()

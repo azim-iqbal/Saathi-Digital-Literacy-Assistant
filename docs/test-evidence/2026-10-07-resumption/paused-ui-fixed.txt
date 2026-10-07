@@ -1,0 +1,46 @@
+INSTRUMENTATION_STATUS: class=com.saathi.ui.AssistantUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.AssistantUiTest:
+INSTRUMENTATION_STATUS: test=pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.AssistantUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=android.app.RemoteServiceException$ForegroundServiceDidNotStartInTimeException: Context.startForegroundService() did not then call Service.startForeground(): ServiceRecord{d8899c9 u0 com.saathi/.orchestrator.GuidanceForegroundService c:com.saathi}
+	at android.app.ActivityThread.generateForegroundServiceDidNotStartInTimeException(ActivityThread.java:2525)
+	at android.app.ActivityThread.throwRemoteServiceException(ActivityThread.java:2487)
+	at android.app.ActivityThread.-$$Nest$mthrowRemoteServiceException(ActivityThread.java:0)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2860)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+	at android.os.Handler.dispatchMessage(Handler.java:126)
+	at android.os.Looper.loopOnce(Looper.java:285)
+	at android.os.Looper.loop(Looper.java:390)
+	at android.app.ActivityThread.main(ActivityThread.java:9884)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+
+INSTRUMENTATION_STATUS: stream=
+Process crashed while executing pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening(com.saathi.ui.AssistantUiTest):
+android.app.RemoteServiceException$ForegroundServiceDidNotStartInTimeException: Context.startForegroundService() did not then call Service.startForeground(): ServiceRecord{d8899c9 u0 com.saathi/.orchestrator.GuidanceForegroundService c:com.saathi}
+	at android.app.ActivityThread.generateForegroundServiceDidNotStartInTimeException(ActivityThread.java:2525)
+	at android.app.ActivityThread.throwRemoteServiceException(ActivityThread.java:2487)
+	at android.app.ActivityThread.-$$Nest$mthrowRemoteServiceException(ActivityThread.java:0)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2860)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+	at android.os.Handler.dispatchMessage(Handler.java:126)
+	at android.os.Looper.loopOnce(Looper.java:285)
+	at android.os.Looper.loop(Looper.java:390)
+	at android.app.ActivityThread.main(ActivityThread.java:9884)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+
+INSTRUMENTATION_STATUS: test=pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+INSTRUMENTATION_CODE: 0

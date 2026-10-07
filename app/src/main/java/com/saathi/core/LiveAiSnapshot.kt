@@ -27,7 +27,7 @@ object LiveAiPolicy {
 
     fun snapshot(ticket: ObservationGate.Ticket, nodes: List<UiNode>, goal: String, locale: String,
                  observedAtMs: Long, previous: List<String>): LiveAiSnapshot? {
-        if (!allowed(goal) || nodes.any { it.isSensitive || it.isPassword } ||
+        if (!allowed(goal) || ScreenInterruption.reason(nodes) != null ||
             !com.saathi.orchestrator.LiveGuide.allowedPackage(ticket.packageName, "com.saathi")) return null
         val controls = nodes.mapIndexedNotNull { index, node ->
             // Text-entry values, including browser address bars, never become cloud controls.

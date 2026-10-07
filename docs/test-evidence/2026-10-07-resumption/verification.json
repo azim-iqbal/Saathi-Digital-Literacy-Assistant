@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-07",
+  "scope": "Pause/resume priority; broader remediation brief unfinished",
+  "android_unit_tests": 95,
+  "unit_failures": 0,
+  "final_emulator_tests": 10,
+  "emulator_failures": 0,
+  "private_round_trips": 3,
+  "captcha_round_trips": 3,
+  "additional_rapid_pause_resume_cycles": 3,
+  "debug_test_build": "PASS",
+  "release_kotlin_compile": "PASS",
+  "production_services_remaining_after_tests": 0,
+  "test_fixture_webview_service_remaining_before_emulator_shutdown": true,
+  "live_provider_calls": 0,
+  "production_ui_theme": "preserved",
+  "fixed": [
+    "Pause erased task",
+    "Challenge could reach guidance without explicit pause",
+    "Immediate start/pause foreground-service crash"
+  ],
+  "untested": [
+    "real authentication/CAPTCHA sites",
+    "actual microphone/TTS resumption quality",
+    "physical-device/OEM survival",
+    "process death intentionally discards task"
+  ]
+}

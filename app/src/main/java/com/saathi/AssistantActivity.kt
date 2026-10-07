@@ -41,7 +41,7 @@ class AssistantActivity : ComponentActivity() {
         setContent {
             val preferences = remember { Preferences(this) }
             var request by remember { mutableStateOf(if (SaathiSession.isLive()) SaathiSession.currentRequest() else "") }
-            var spoken by remember { mutableStateOf(SaathiSession.hasSpokenGuidance()) }
+            var spoken by remember { mutableStateOf(SaathiSession.prefersSpokenGuidance()) }
             var error by remember { mutableStateOf<String?>(null) }
             var readiness by remember { mutableIntStateOf(0) }
             var pendingSession by remember { mutableStateOf<String?>(null) }
@@ -107,10 +107,17 @@ class AssistantActivity : ComponentActivity() {
                     if (!overlay) GlassButton("Enable floating assistant", primary = false, onClick = { settings.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))) })
                     Text(if (aiConfigured) "AI navigation is enabled. Form-filling help and exact matches stay on this device. Other tasks may send your request, app identity, eligible labels and recent suggestions through your server to its primary model, with fallback only when needed. Editable values are excluded; detected private fields get no marker. Filtering is not perfect." else "Starting lets Saathi read accessible controls in other apps locally while this session is active. Nothing is sent to an AI provider. Form help marks only safe visible fields; detected private fields and unclear controls get no target. You perform every tap.", style = MaterialTheme.typography.bodySmall)
                     error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
-                    GlassButton(if (SaathiSession.isLive()) "Update on-screen help" else "Start on-screen help", enabled = overlay && accessibility && request.isNotBlank(), onClick = {
+                    if (SaathiSession.canResume()) {
+                        GlassButton("Resume guidance", enabled = overlay && accessibility, onClick = {
+                            if (SaathiSession.resume(this@AssistantActivity)) finish()
+                            else error = "Could not resume. Check screen guidance and overlay permissions, then try again."
+                        })
+                        GlassButton("Discard paused task", primary = false, onClick = { SaathiSession.stop(); request = "" })
+                    }
+                    GlassButton(if (SaathiSession.isActive() && SaathiSession.isLive()) "Update on-screen help" else "Start on-screen help", enabled = overlay && accessibility && request.isNotBlank(), onClick = {
                         if (!SaathiSession.acceptsLiveRequest(request)) error = "Name a visible navigation option. Payments, deletion, permissions and secrets must be handled yourself."
                         else runCatching {
-                            if (SaathiSession.isLive()) SaathiSession.changeLiveRequest(request, SaathiSession.sessionKey())
+                            if (SaathiSession.isActive() && SaathiSession.isLive()) SaathiSession.changeLiveRequest(request, SaathiSession.sessionKey())
                             else SaathiSession.startLive(this@AssistantActivity, request, preferences.language, spoken)
                         }
                             .onSuccess { if (it) finish() else error = "Could not start. Check screen guidance and overlay permissions." }
@@ -131,10 +138,13 @@ class AssistantActivity : ComponentActivity() {
                             permissions.launch(required.toTypedArray())
                         })
                         GlassButton("Stop guidance", primary = false, onClick = { SaathiSession.stop() })
+                        GlassButton("Pause guidance", primary = false, onClick = { SaathiSession.pause() })
                     }
                     Text(when (state) {
                         com.saathi.core.GuidanceSessionState.STOPPED -> "Guidance is off"
                         com.saathi.core.GuidanceSessionState.PAUSED -> "Guidance is paused"
+                        com.saathi.core.GuidanceSessionState.SENSITIVE_HANDOVER -> "Waiting for you to finish privately · guidance resumes on a clear screen"
+                        com.saathi.core.GuidanceSessionState.WAITING_FOR_CAPTCHA -> "Waiting for you to complete the CAPTCHA · guidance resumes afterward"
                         com.saathi.core.GuidanceSessionState.COMPLETED -> "Guidance is complete"
                         com.saathi.core.GuidanceSessionState.ERROR -> "Guidance could not continue. Please try again."
                         else -> "Guidance is active · open your app to continue"

@@ -49,6 +49,7 @@ enum class GuidanceSessionState {
     GUIDING,
     WAITING_FOR_PRACTICE,
     SENSITIVE_HANDOVER,
+    WAITING_FOR_CAPTCHA,
     PAUSED,
     COMPLETED,
     ERROR

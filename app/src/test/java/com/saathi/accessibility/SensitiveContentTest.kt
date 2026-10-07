@@ -4,6 +4,11 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class SensitiveContentTest {
+    @Test fun `format characters full width cues and separated secrets cannot bypass classification`() {
+        listOf("pass\u200bword fictional", "ｐａｓｓｗｏｒｄ fictional", "5\u200b8\u200b2\u200b1\u200b3\u200b9", "5 8 2 1 3 9", "५ ८ २ १ ३ ९", "58-21-39").forEach {
+            assertTrue(it, SensitiveContent.isSensitive(false, it))
+        }
+    }
     @Test fun `network ports do not hide public pages but URL secrets remain private`() {
         listOf("127.0.0.1:8766/browser.html", "https://example.com:8443/help", "localhost:12345").forEach {
             assertFalse(it, SensitiveContent.isSensitive(false, it))

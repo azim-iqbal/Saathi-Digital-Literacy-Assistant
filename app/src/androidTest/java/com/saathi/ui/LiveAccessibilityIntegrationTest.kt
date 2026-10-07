@@ -76,6 +76,8 @@ class LiveAccessibilityIntegrationTest {
             else shell("settings put secure $key $value")
         }
         val eventLog = java.util.Collections.synchronizedList(mutableListOf<String>())
+        val snapshotTimes = java.util.Collections.synchronizedList(mutableListOf<Long>())
+        main { com.saathi.accessibility.ObservationDiagnostics.snapshotObserver = { snapshotTimes.add(it) } }
         main { com.saathi.accessibility.ObservationDiagnostics.observer = { type, window, changes, own ->
             eventLog.add("${SystemClock.uptimeMillis()} type=$type window=$window changes=$changes ownOverlay=$own")
         } }
@@ -119,13 +121,32 @@ class LiveAccessibilityIntegrationTest {
                 SystemClock.sleep(1_000)
                 eventLog.add("IDLE_ASSERT_END ${SystemClock.uptimeMillis()} key=${SaathiSession.presentationKey()}")
                 assertEquals("Idle presentation must remain stable", stable, SaathiSession.presentationKey())
+                val eventStart = eventLog.size
+                val snapshotsBefore = snapshotTimes.size
+                val memoryBefore = android.os.Debug.getPss()
+                val stormStart = SystemClock.uptimeMillis()
+                tap("Event storm")
+                SystemClock.sleep(1600)
+                waitFor("Useful guidance after event storm") {
+                    SaathiSession.presentationKey() != null && SaathiSession.instruction.value.startsWith("Find “Help”")
+                }
+                val analyzed = snapshotTimes.size - snapshotsBefore
+                assertTrue("Snapshots must be coalesced, not one per emitted event", analyzed < 60)
+                val metrics = org.json.JSONObject().put("fixture_events_emitted", 600)
+                    .put("service_event_records_including_overlay", eventLog.size - eventStart)
+                    .put("screens_analyzed", analyzed).put("elapsed_including_fixture_ms", SystemClock.uptimeMillis() - stormStart)
+                    .put("pss_before_kb", memoryBefore).put("pss_after_kb", android.os.Debug.getPss())
+                    .put("snapshot_analysis_ms", org.json.JSONArray(snapshotTimes.toList()))
+                    .put("scope", "Real service; local exact-match task with cloud disabled. No claim about paid-cloud event-storm behavior.")
+                File(output(), "event-storm.json").writeText(metrics.toString(2))
                 screenshot("live-service-native")
                 val session = SaathiSession.sessionKey()
+                val retargetPresentation = SaathiSession.presentationKey()
                 main {
-                    assertFalse(SaathiSession.changeLiveRequest("Delete", session, stable))
-                    assertFalse(SaathiSession.changeLiveRequest("Support", "old-session", stable))
+                    assertFalse(SaathiSession.changeLiveRequest("Delete", session, retargetPresentation))
+                    assertFalse(SaathiSession.changeLiveRequest("Support", "old-session", retargetPresentation))
                     assertEquals("Help", SaathiSession.currentRequest())
-                    assertTrue(SaathiSession.changeLiveRequest("Support", session, stable))
+                    assertTrue(SaathiSession.changeLiveRequest("Support", session, retargetPresentation))
                     assertNull("Old bounds cleared before reading the replacement tree", SaathiSession.presentationKey())
                     assertFalse("Late reply from old screen is rejected", SaathiSession.changeLiveRequest("Help", session, stable))
                 }
@@ -163,7 +184,10 @@ class LiveAccessibilityIntegrationTest {
                 File(output(), "live-service-result.txt").writeText("PASS: real enabled service; native/WebView events; stable idle presentation; in-session request change without a screen event; old presentation/session rejection; detour/return; changed label; own-app clearing; explicit Stop. Request handoff exercised directly; no real speech recognition/audio or model.\n")
             }
         } finally {
-            main { com.saathi.accessibility.ObservationDiagnostics.observer = null }
+            main {
+                com.saathi.accessibility.ObservationDiagnostics.observer = null
+                com.saathi.accessibility.ObservationDiagnostics.snapshotObserver = null
+            }
             File(output(), "observation-events.txt").writeText(eventLog.joinToString("\n"))
             File(output(), "service-state-final.txt").writeText(shell("dumpsys accessibility"))
             main { SaathiSession.stop() }

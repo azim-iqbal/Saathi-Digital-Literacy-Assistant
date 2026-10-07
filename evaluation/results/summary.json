@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-07",
+  "baseline": "935863a",
+  "readiness": "NOT_READY",
+  "scope": "Capability evaluation with explicit gaps; no deployment or push",
+  "catalog": {
+    "scenarios": 142,
+    "prerequisite": 28,
+    "eligibility": 37,
+    "full_workflows_passed": 0,
+    "full_workflows_blocked": 142
+  },
+  "offline": {
+    "PASS": 51,
+    "FAIL": 0
+  },
+  "backend_regression": {
+    "tests": 95,
+    "failures": 0
+  },
+  "android_unit": {
+    "tests": 91,
+    "failures": 0
+  },
+  "harness": {
+    "tests": 4,
+    "failures": 0
+  },
+  "emulator": {
+    "distinct_tests": 8,
+    "passed": 7,
+    "blocked": 1,
+    "executions": 9,
+    "blocked_reason": "Chrome first-run onboarding; initial fixture server setup also corrected"
+  },
+  "genuine_models": {
+    "attempts": 12,
+    "case_count": 6,
+    "accepted_cases": 0,
+    "failed_cases": 6,
+    "reported_tokens": 4566,
+    "normal_primary_fallback_app_e2e": false
+  },
+  "remaining": [
+    "research and source provenance",
+    "dependency and eligibility planner",
+    "genuine provider failures",
+    "cloud event storm",
+    "full privacy/telemetry audit",
+    "Chrome first-run and browser acceptance",
+    "hosted HTTPS and phone acceptance",
+    "voice and physical-device/OEM validation"
+  ],
+  "report": "SAATHI_REAL_WORLD_EVALUATION.md"
+}

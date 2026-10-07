@@ -40,14 +40,20 @@ object SaathiSession {
     val instruction: kotlinx.coroutines.flow.StateFlow<String> = mutableInstruction
     private val mutableReply = kotlinx.coroutines.flow.MutableStateFlow("")
     val lastReply: kotlinx.coroutines.flow.StateFlow<String> = mutableReply
-    fun currentRequest() = if (active) goal else ""
+    fun currentRequest() = if (active) goal else pausedTask?.goal.orEmpty()
+    private data class PausedTask(val goal: String, val language: GuidanceLanguage, val spoken: Boolean,
+                                  val rate: Float, val live: Boolean)
+    private var pausedTask: PausedTask? = null
+    fun canResume() = !active && pausedTask != null && mutableStatus.value == GuidanceSessionState.PAUSED
     private var live = false
     private var liveAi = false
     private val previousAiTargets = java.util.ArrayDeque<String>()
     fun acceptsLiveRequest(request: String) = if (liveAi || PracticeGateway.aiEnabled()) com.saathi.core.LiveAiPolicy.allowed(request) else LiveGuide.label(request) != null
-    fun isLive() = live
+    fun isLive() = live || pausedTask?.live == true
     fun hasSpokenGuidance() = active && (spokenPromptsEnabled || VoiceConversationService.isRunning())
+    fun prefersSpokenGuidance() = pausedTask?.spoken ?: hasSpokenGuidance()
     fun setSpokenGuidance(enabled: Boolean) {
+        pausedTask = pausedTask?.copy(spoken = enabled)
         spokenPromptsEnabled = enabled
         if (!enabled) {
             tts?.release(); tts = null
@@ -76,7 +82,25 @@ object SaathiSession {
         com.saathi.accessibility.SaathiAccessibilityService.requestCurrentScreen()
         return true
     }
-    fun pause() { clearSession(GuidanceSessionState.PAUSED) }
+    fun pause() {
+        if (!active) return // Repeated Pause must not erase an already paused task.
+        val task = PausedTask(goal, language, spokenPromptsEnabled, speechRate, live)
+        clearSession(GuidanceSessionState.PAUSED)
+        pausedTask = task
+    }
+
+    /** Explicit user action only. A new identity and fresh observation replace all prior work.
+     * Microphone conversation still requires its separate visible-activity opt-in. */
+    fun resume(app: Context): Boolean {
+        val task = pausedTask?.takeIf { canResume() } ?: return false
+        if (app.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked ||
+            !android.provider.Settings.canDrawOverlays(app) ||
+            !com.saathi.accessibility.SaathiAccessibilityService.isConnected()) return false
+        start(app, task.goal, task.language, task.spoken, task.rate, task.live)
+        if (!active) return false
+        com.saathi.accessibility.SaathiAccessibilityService.requestCurrentScreen()
+        return true
+    }
     private val handler = Handler(Looper.getMainLooper())
     private val observationGate = ObservationGate()
     private var context: Context? = null
@@ -142,6 +166,7 @@ object SaathiSession {
     fun stop() = clearSession(GuidanceSessionState.STOPPED)
 
     private fun clearSession(terminalState: GuidanceSessionState) {
+        pausedTask = null // Stop/error/process death never offers an automatic restart.
         val app = context
         pendingGateway?.cancel(); pendingGateway = null
         useGateway = false
@@ -225,7 +250,7 @@ object SaathiSession {
     fun refreshVoice() {
         val step = lastStep ?: return
         if (active) VoiceConversationService.update(step.speechText,
-            latestNodes.none { it.isSensitive || it.isPassword } && !FormGuide.isRequest(goal))
+            com.saathi.core.ScreenInterruption.reason(latestNodes) == null && !FormGuide.isRequest(goal))
     }
 
     fun onScreenChanged(nodes: List<UiNode>, ticket: ObservationGate.Ticket) {
@@ -243,6 +268,14 @@ object SaathiSession {
                 if (if (live) !LiveGuide.allowedPackage(ticket.packageName, app.packageName)
                     else !PracticeSurfacePolicy.isEligible(ticket.packageName, app.packageName, nodes)) {
                     waitForPractice()
+                    return@Runnable
+                }
+                val interruption = com.saathi.core.ScreenInterruption.reason(nodes)
+                if (interruption != null) {
+                    present(GuideStep(com.saathi.core.ScreenInterruption.message(interruption, language.apiTag),
+                        language.apiTag, null, "Wait for a fresh screen after the user finishes privately.", false), true)
+                    mutableStatus.value = if (interruption == com.saathi.core.ScreenInterruption.Reason.CAPTCHA)
+                        GuidanceSessionState.WAITING_FOR_CAPTCHA else GuidanceSessionState.SENSITIVE_HANDOVER
                     return@Runnable
                 }
                 val livePlan = if (live) LiveGuide.plan(goal, nodes, language.apiTag, liveAi) else null

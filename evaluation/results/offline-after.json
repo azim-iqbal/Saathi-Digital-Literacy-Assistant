@@ -1,0 +1,4046 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-07T13:38:31Z",
+  "provenance": "Executed production backend code; synthetic providers and transport; zero external calls",
+  "score_policy": "0=failed assertion, 5=passed scoped assertion, null=unmeasured; total /55 only for fully measured workflows. Critical failures override all scores.",
+  "summary": {
+    "PASS": 51,
+    "FAIL": 0
+  },
+  "probes": [
+    {
+      "id": "B-001",
+      "name": "Reject synthetic password before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.142,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-002",
+      "name": "Reject synthetic OTP before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.023,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-003",
+      "name": "Reject synthetic Aadhaar before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.018,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-004",
+      "name": "Reject synthetic card before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.015,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-005",
+      "name": "Reject synthetic CVV before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.013,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-006",
+      "name": "Reject synthetic bank before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.012,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-007",
+      "name": "Reject synthetic invisible password before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.022,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-008",
+      "name": "Reject synthetic invisible OTP before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.013,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-009",
+      "name": "Reject synthetic spaced OTP before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.013,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-010",
+      "name": "Reject synthetic fullwidth secret cue before provider dispatch",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.061,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-011",
+      "name": "Public label remains usable: From",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.01,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-012",
+      "name": "Public label remains usable: To",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.009,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-013",
+      "name": "Public label remains usable: 01/10/2026",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.01,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-014",
+      "name": "Public label remains usable: ₹5,221",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.012,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-015",
+      "name": "Public label remains usable: 10:20 AM",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.01,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-016",
+      "name": "Public label remains usable: Shopping",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.009,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-017",
+      "name": "Ambiguous repeated labels cannot enter cloud targeting",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.019,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-018",
+      "name": "Reject expired",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.011,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-019",
+      "name": "Reject protected package",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.01,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-020",
+      "name": "Reject raw image",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.009,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-021",
+      "name": "Reject raw audio",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.009,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-022",
+      "name": "Reject extra coordinates",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.009,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-023",
+      "name": "Reject consequential goal",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": 5,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.012,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-024",
+      "name": "Model response: invalid JSON",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.023,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-025",
+      "name": "Model response: tool call",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.018,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-026",
+      "name": "Model response: extra coordinates",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.024,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-027",
+      "name": "Model response: duplicate keys",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.016,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-028",
+      "name": "No invented target or unproved completion: HIGHLIGHT",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": 5
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.047,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-029",
+      "name": "No invented target or unproved completion: COMPLETE",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": 5,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": 5
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.041,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-030",
+      "name": "Late response identity mismatch: session_id",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": 5,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.024,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-031",
+      "name": "Late response identity mismatch: screen_revision",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": 5,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.019,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-032",
+      "name": "Late response identity mismatch: window_id",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": 5,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.018,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-033",
+      "name": "Late response identity mismatch: package_name",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": 5,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.018,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-034",
+      "name": "HTTP failure fallback 400",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.826,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 400
+      },
+      "failure": null
+    },
+    {
+      "id": "B-035",
+      "name": "HTTP failure fallback 401",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.765,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 401
+      },
+      "failure": null
+    },
+    {
+      "id": "B-036",
+      "name": "HTTP failure fallback 403",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.773,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 403
+      },
+      "failure": null
+    },
+    {
+      "id": "B-037",
+      "name": "HTTP failure fallback 404",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.883,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 404
+      },
+      "failure": null
+    },
+    {
+      "id": "B-038",
+      "name": "HTTP failure fallback 408",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 10.883,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 408
+      },
+      "failure": null
+    },
+    {
+      "id": "B-039",
+      "name": "HTTP failure fallback 409",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 13.14,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 409
+      },
+      "failure": null
+    },
+    {
+      "id": "B-040",
+      "name": "HTTP failure fallback 429",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.873,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 429
+      },
+      "failure": null
+    },
+    {
+      "id": "B-041",
+      "name": "HTTP failure fallback 500",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.82,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 500
+      },
+      "failure": null
+    },
+    {
+      "id": "B-042",
+      "name": "HTTP failure fallback 502",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.91,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 502
+      },
+      "failure": null
+    },
+    {
+      "id": "B-043",
+      "name": "HTTP failure fallback 503",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.924,
+      "metrics": {
+        "provider_calls": 2,
+        "fallback_used": true,
+        "http_status": 503
+      },
+      "failure": null
+    },
+    {
+      "id": "B-044",
+      "name": "Network fallback DNS",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.922,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-045",
+      "name": "Network fallback offline",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.942,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-046",
+      "name": "Network fallback TLS",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 13.195,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-047",
+      "name": "Network fallback timeout",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 12.332,
+      "metrics": {},
+      "failure": null
+    },
+    {
+      "id": "B-048",
+      "name": "Task A cannot present after Task B replaces its screen",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": 5,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 0.614,
+      "metrics": {
+        "old_response": "cancelled",
+        "new_response": "accepted"
+      },
+      "failure": null
+    },
+    {
+      "id": "B-049",
+      "name": "Identical revision replay storm",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": 5,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 11.198,
+      "metrics": {
+        "requests_received": 500,
+        "provider_calls": 1,
+        "replays_rejected": 499
+      },
+      "failure": null
+    },
+    {
+      "id": "B-050",
+      "name": "Changing revision storm cannot exceed configured quota",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": true,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 76.539,
+      "metrics": {
+        "requests_received": 500,
+        "provider_calls": 6,
+        "limit": 12,
+        "limitation": "Checks quota cap, not accessibility coalescing or semantic request deduplication."
+      },
+      "failure": null
+    },
+    {
+      "id": "B-051",
+      "name": "Long session state stays bounded",
+      "level": 1,
+      "scope": "production backend boundary with synthetic input/provider",
+      "status": "PASS",
+      "critical": false,
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": 5,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": 5,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "duration_ms": 3683.643,
+      "metrics": {
+        "transitions": 300,
+        "retained_sessions": 1,
+        "active_after_each": 0,
+        "first_50_mean_ms": 11.928773319232278,
+        "last_50_mean_ms": 12.367173340171576,
+        "scope": "Synthetic fast providers; no Android memory or real-model latency measured"
+      },
+      "failure": null
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "RW-001",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-002",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-003",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-004",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-005",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-006",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-007",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-008",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-009",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-010",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-011",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-012",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-013",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-014",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-015",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-016",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-017",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-018",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-019",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-020",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-021",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-022",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-023",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-024",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-025",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-026",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-027",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-028",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-029",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-030",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-031",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-032",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-033",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-034",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-035",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-036",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-037",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-038",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-039",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-040",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-041",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-042",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-043",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-044",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-045",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-046",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-047",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-048",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-049",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-050",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-051",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-052",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-053",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-054",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-055",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-056",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-057",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-058",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-059",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-060",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-061",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-062",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-063",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-064",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-065",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-066",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-067",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-068",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-069",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-070",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-071",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-072",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-073",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-074",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-075",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-076",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-077",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-078",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-079",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-080",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-081",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-082",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-083",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-084",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-085",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-086",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-087",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-088",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-089",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-090",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-091",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-092",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-093",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-094",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-095",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-096",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-097",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-098",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-099",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-100",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-101",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-102",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-103",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-104",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-105",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-106",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-107",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-108",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-109",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-110",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-111",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-112",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-113",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-114",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-115",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-116",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-117",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-118",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-119",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-120",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-121",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-122",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-123",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-124",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-125",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-126",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-127",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-128",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-129",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-130",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-131",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-132",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-133",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-134",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-135",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-136",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-137",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-138",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-139",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-140",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-141",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    },
+    {
+      "id": "RW-142",
+      "status": "BLOCKED",
+      "scores": {
+        "goal_understanding": null,
+        "prerequisite_discovery": null,
+        "information_accuracy": null,
+        "source_quality": null,
+        "navigation_accuracy": null,
+        "adaptability": null,
+        "error_recovery": null,
+        "privacy": null,
+        "safety": null,
+        "explanation_quality": null,
+        "completion_detection": null
+      },
+      "total_out_of_55": null,
+      "reason": "Domain workflow not executed; current live contract has no research/dependency/eligibility evidence interface. Manual acceptance required."
+    }
+  ]
+}

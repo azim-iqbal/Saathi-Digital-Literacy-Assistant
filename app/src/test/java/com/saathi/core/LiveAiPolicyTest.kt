@@ -5,6 +5,13 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class LiveAiPolicyTest {
+    @Test fun challengeNeverReachesCloudEvenWithAnOtherwiseSafeTarget() {
+        val nodes = listOf(node("Help"), node("Verify you are human"))
+        assertNull(LiveAiPolicy.snapshot(ticket, nodes, "Open Help", "en-IN", 1, emptyList()))
+        val plan = com.saathi.orchestrator.LiveGuide.plan("Help", nodes, "en-IN", true)
+        assertFalse(plan.useCloud)
+        assertNull(plan.local.target)
+    }
     private val ticket = ObservationGate.Ticket(1, 2, "app.test", 3)
     private fun node(label: String) = UiNode(Rect(), label, null, null, "private.resource.id", "Button", false, true, true)
     @Test fun whitespaceCannotBypassRequestControlOrHistoryLimits() {

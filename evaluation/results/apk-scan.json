@@ -1,0 +1,8 @@
+{
+  "scope": "Current debug APK only; exact configured provider key byte/UTF16 scan, not arbitrary-secret proof",
+  "configured_keys_checked": 2,
+  "entries_with_keys": 0,
+  "status": "PASS",
+  "android_unit_tests": 91,
+  "unit_failures": 0
+}

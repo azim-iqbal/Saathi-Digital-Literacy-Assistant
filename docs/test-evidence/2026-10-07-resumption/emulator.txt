@@ -1,0 +1,132 @@
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PauseResumeIntegrationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.PauseResumeIntegrationTest:
+INSTRUMENTATION_STATUS: test=manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PauseResumeIntegrationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Initial guidance; state=WAITING_FOR_PRACTICE; instruction=Open the app or browser you want help with. Saathi will check its visible controls.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PauseResumeIntegrationTest.waitFor(PauseResumeIntegrationTest.kt:44)
+	at com.saathi.ui.PauseResumeIntegrationTest.manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(PauseResumeIntegrationTest.kt:91)
+
+INSTRUMENTATION_STATUS: stream=
+Error in manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(com.saathi.ui.PauseResumeIntegrationTest):
+java.lang.AssertionError: Initial guidance; state=WAITING_FOR_PRACTICE; instruction=Open the app or browser you want help with. Saathi will check its visible controls.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PauseResumeIntegrationTest.waitFor(PauseResumeIntegrationTest.kt:44)
+	at com.saathi.ui.PauseResumeIntegrationTest.manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(PauseResumeIntegrationTest.kt:91)
+
+INSTRUMENTATION_STATUS: test=manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=com.saathi.ui.LiveAccessibilityIntegrationTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.LiveAccessibilityIntegrationTest:
+INSTRUMENTATION_STATUS: test=realServiceTracksExternalDetourReturnAndWebChangeThenStops
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.LiveAccessibilityIntegrationTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realServiceTracksExternalDetourReturnAndWebChangeThenStops
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PermissionLossIntegrationTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.PermissionLossIntegrationTest:
+INSTRUMENTATION_STATUS: test=overlayAndAccessibilityRevocationStopAndNeverAutoResume
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PermissionLossIntegrationTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=overlayAndAccessibilityRevocationStopAndNeverAutoResume
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.saathi.ui.VoiceLifecycleTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.VoiceLifecycleTest:
+INSTRUMENTATION_STATUS: test=backgroundWaitingAndOldNotificationCannotStopReplacement
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.VoiceLifecycleTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=backgroundWaitingAndOldNotificationCannotStopReplacement
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PracticeRecoveryTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.PracticeRecoveryTest:
+INSTRUMENTATION_STATUS: test=unrelatedTileHasVisibleRecoveryAndNoInventedTarget
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PracticeRecoveryTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=unrelatedTileHasVisibleRecoveryAndNoInventedTarget
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PracticeRecoveryTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=wrongBillerGuidesBackThenToChosenBiller
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PracticeRecoveryTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=wrongBillerGuidesBackThenToChosenBiller
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PracticeRecoveryTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=formRecreationKeepsCategoryButDiscardsPrivateValues
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.PracticeRecoveryTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=formRecreationKeepsCategoryButDiscardsPrivateValues
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 41.433
+There was 1 failure:
+1) manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(com.saathi.ui.PauseResumeIntegrationTest)
+java.lang.AssertionError: Initial guidance; state=WAITING_FOR_PRACTICE; instruction=Open the app or browser you want help with. Saathi will check its visible controls.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PauseResumeIntegrationTest.waitFor(PauseResumeIntegrationTest.kt:44)
+	at com.saathi.ui.PauseResumeIntegrationTest.manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(PauseResumeIntegrationTest.kt:91)
+
+FAILURES!!!
+Tests run: 7,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

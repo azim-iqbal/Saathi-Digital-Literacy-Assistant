@@ -1,0 +1,1260 @@
+You already have the complete Saathi repository, all previous implementation context, the system-design work, the real-world evaluation suite, and the latest evaluation results.
+
+The latest evaluation has already identified the remaining blockers.
+
+Your task now is NOT to create another evaluation report.
+
+YOUR TASK IS TO FIX THE REMAINING IMPLEMENTATION PROBLEMS.
+
+Use the existing evaluation suite as the acceptance specification.
+
+Work iteratively:
+
+IMPLEMENT → TEST → DEBUG → RETEST → REGRESSION TEST → CONTINUE
+
+Do not stop after explaining what is missing.
+
+Do not merely update documentation.
+
+Do not mark something fixed unless executable evidence supports it.
+
+==================================================
+PRIMARY OBJECTIVE
+==================================================
+
+Transform Saathi from primarily:
+
+SCREEN OBSERVATION
+→ OPTION MATCHING
+→ HIGHLIGHTING
+
+into a safe general-purpose digital guidance architecture capable of:
+
+USER GOAL
+↓
+UNDERSTAND INTENT
+↓
+DETERMINE WHETHER CURRENT INFORMATION IS REQUIRED
+↓
+RESEARCH
+↓
+VERIFY SOURCES
+↓
+DISCOVER REQUIREMENTS
+↓
+DISCOVER PREREQUISITES
+↓
+CHECK / EXPLAIN ELIGIBILITY
+↓
+BUILD A TASK PLAN
+↓
+OBSERVE CURRENT SCREEN
+↓
+GUIDE NEXT STEP
+↓
+RE-OBSERVE
+↓
+HANDLE ERRORS / DETOURS
+↓
+RESEARCH AGAIN WHEN NECESSARY
+↓
+VERIFY COMPLETION
+↓
+DONE
+
+while preserving:
+
+OBSERVE → UNDERSTAND → EXPLAIN → HIGHLIGHT → USER ACTS.
+
+Saathi remains an ASSISTIVE GUIDE.
+
+Do not turn it into an autonomous agent that performs sensitive or irreversible actions for users.
+
+==================================================
+P0 — BUILD THE RESEARCH CAPABILITY
+==================================================
+
+The evaluation identified that Saathi currently has no general current-web retrieval path.
+
+Implement one.
+
+Research must be performed through the BACKEND.
+
+Do not give the APK unrestricted direct web-search capabilities if the same functionality can be safely brokered through the backend.
+
+Create a provider-neutral research abstraction.
+
+Conceptually:
+
+ResearchService
+ResearchQuery
+ResearchResult
+ResearchEvidence
+Source
+SourceType
+SourceAuthority
+SourceFreshness
+
+Adapt names to the existing architecture.
+
+The research layer must support:
+
+- current web research,
+- authoritative source discovery,
+- official documentation,
+- provider status/documentation pages,
+- reputable secondary sources,
+- community sources where appropriate,
+- freshness/date information,
+- source URLs,
+- source titles,
+- extracted claims,
+- provenance.
+
+The AI must NOT simply receive arbitrary search text and treat it as truth.
+
+Research results are UNTRUSTED INPUT.
+
+==================================================
+SOURCE HIERARCHY
+==================================================
+
+Implement source-selection logic.
+
+Generally prefer:
+
+1. official government/service/provider source
+2. primary documentation/status page
+3. reputable secondary source
+4. community discussion
+5. miscellaneous web source
+
+For government workflows:
+
+Prefer authoritative government domains and official service portals.
+
+Do NOT assume that every domain containing words such as:
+
+gov
+government
+official
+bharat
+india
+
+is legitimate.
+
+Source trust must be based on validated provenance, not keyword matching alone.
+
+==================================================
+COMMUNITY RESEARCH
+==================================================
+
+Community sources such as Reddit are useful for questions such as:
+
+"Is everyone getting this error?"
+
+"Are other users experiencing this?"
+
+"What happened after the latest update?"
+
+But community content must NEVER automatically become authoritative policy.
+
+Maintain provenance.
+
+For example:
+
+OFFICIAL:
+"The provider's status page reports an incident."
+
+COMMUNITY:
+"Several recent users report encountering the same error."
+
+UNVERIFIED:
+"One user claims that..."
+
+The UI/explanation layer must preserve these distinctions.
+
+==================================================
+P0 — EVIDENCE CONTRACT
+==================================================
+
+Introduce structured evidence objects.
+
+Every researched factual claim that affects guidance should be capable of carrying:
+
+claim
+source URL
+source title
+source type
+authority classification
+retrieval timestamp
+published/updated date if known
+jurisdiction if relevant
+supporting evidence/snippet
+confidence
+
+Do not allow arbitrary LLM-generated URLs to become trusted sources.
+
+URLs must originate from retrieval results or validated known configuration.
+
+==================================================
+P0 — FRESHNESS
+==================================================
+
+Saathi must understand when information may have changed.
+
+Examples:
+
+eligibility
+government rules
+fees
+deadlines
+subscription offers
+application processes
+website locations
+provider outages
+service availability
+pricing
+required documents
+
+Introduce a freshness policy.
+
+If the user's task depends on potentially changing information, Saathi should prefer current research rather than relying purely on model memory.
+
+Do not use one universal TTL.
+
+Different claim types may have different freshness requirements.
+
+==================================================
+P0 — PREREQUISITE DISCOVERY
+==================================================
+
+Implement GENERAL prerequisite reasoning.
+
+Do NOT hard-code:
+
+Driving Licence → Learner Licence
+
+or similar service-specific chains.
+
+Represent dependencies structurally.
+
+Conceptually:
+
+Goal
+ ├── Requirement
+ ├── Requirement
+ └── Prerequisite
+       └── Prerequisite
+
+Introduce something like:
+
+TaskPlan
+TaskStep
+Requirement
+Prerequisite
+Dependency
+Evidence
+Status
+
+Possible statuses:
+
+SATISFIED
+UNSATISFIED
+UNKNOWN
+NOT_APPLICABLE
+
+Saathi must be able to discover:
+
+A requires B.
+
+B requires C.
+
+Then reason:
+
+User wants A.
+C is missing.
+Complete C.
+Then B.
+Then return to A.
+
+==================================================
+EXAMPLE ACCEPTANCE BEHAVIOR
+==================================================
+
+User:
+
+"Help me apply for a driving licence."
+
+Correct GENERAL behavior:
+
+1. understand goal,
+2. research current authoritative process,
+3. identify applicable jurisdiction,
+4. discover prerequisites,
+5. determine whether the user already satisfies them,
+6. explain missing prerequisite,
+7. explain WHY it is required,
+8. cite/show authoritative source,
+9. offer guidance through prerequisite,
+10. preserve original DL goal,
+11. return to DL process afterward.
+
+The implementation must arrive at this through general planning/research.
+
+There must NOT be a:
+
+when (goal == DRIVING_LICENCE)
+
+special case encoding the answer.
+
+==================================================
+P0 — ELIGIBILITY ENGINE
+==================================================
+
+Implement evidence-backed eligibility reasoning.
+
+Introduce explicit states:
+
+ELIGIBLE
+INELIGIBLE
+POSSIBLY_ELIGIBLE
+INSUFFICIENT_INFORMATION
+NOT_EVALUATED
+
+Never force uncertain cases into eligible/ineligible.
+
+Eligibility conclusions must contain:
+
+criteria evaluated
+known user facts used
+missing information
+evidence
+jurisdiction
+freshness
+confidence/reason
+
+Ask the user only for information required to resolve a relevant criterion.
+
+Never request:
+
+password
+OTP
+PIN
+CVV
+
+for eligibility.
+
+Avoid requesting unnecessary personal information.
+
+==================================================
+EXAMPLE
+==================================================
+
+User:
+
+"Can I get an Ayushman card?"
+
+Saathi should NOT immediately say yes/no.
+
+It should determine:
+
+- applicable scheme/current process,
+- authoritative eligibility criteria,
+- relevant jurisdiction,
+- what necessary facts are known,
+- what required facts remain unknown.
+
+Then return something conceptually like:
+
+INSUFFICIENT_INFORMATION
+
+Reason:
+"Eligibility depends on X and Y."
+
+Then ask only what is necessary.
+
+==================================================
+P0 — TASK PLANNER
+==================================================
+
+Implement a general task planner above the screen-guidance layer.
+
+The planner should transform:
+
+UserGoal + Evidence + UserFacts + CurrentState
+
+into:
+
+TaskPlan.
+
+A task plan should support:
+
+original goal
+current step
+dependencies
+prerequisites
+requirements
+research evidence
+completion predicate
+risk level
+user-action boundary
+status
+
+The screen guidance system should execute ONE safe guidance step at a time.
+
+Do not send an entire uncontrolled plan to an LLM and blindly execute it.
+
+==================================================
+PLAN REVALIDATION
+==================================================
+
+Plans become stale.
+
+Revalidate when:
+
+- page changes materially,
+- jurisdiction changes,
+- source becomes stale,
+- user provides new information,
+- prerequisite changes,
+- unexpected error appears,
+- service redirects,
+- user leaves intended workflow.
+
+==================================================
+P0 — COMPLETION PREDICATES
+==================================================
+
+The evaluation found arbitrary completion cannot currently be verified.
+
+Fix this.
+
+Every planned task/step must define what counts as completion.
+
+Examples:
+
+not:
+
+"AI says COMPLETE"
+
+but evidence such as:
+
+- expected confirmation state observed,
+- known success page/state,
+- verified status changed,
+- prerequisite satisfied,
+- explicit user confirmation where technical verification is impossible.
+
+AI saying "done" is NOT proof.
+
+Reject unsupported COMPLETE responses.
+
+==================================================
+P0 — ERROR RESEARCH / INCIDENT MODE
+==================================================
+
+Implement an explicit error-diagnosis workflow.
+
+When an unexpected error occurs:
+
+1. capture SAFE error context,
+2. classify error,
+3. check whether it is locally understandable,
+4. inspect official documentation,
+5. inspect official service/status information,
+6. when useful, inspect recent reputable/community reports,
+7. determine whether likely:
+
+USER_SPECIFIC
+SERVICE_WIDE
+REGIONAL
+ACCOUNT_SPECIFIC
+UNKNOWN
+
+8. explain evidence,
+9. provide safe next actions.
+
+==================================================
+EXAMPLE
+==================================================
+
+User attempts to activate a subscription/free trial.
+
+An unexpected error appears.
+
+Saathi should be capable of:
+
+recognizing error
+→ researching official information
+→ checking status
+→ optionally checking recent community reports
+→ identifying that multiple users appear affected
+→ clearly stating that community reports are anecdotal
+→ explaining reasonable next action.
+
+Do not automatically retry payment/subscription operations.
+
+==================================================
+P0 — UNTRUSTED WEB CONTENT / PROMPT INJECTION
+==================================================
+
+All:
+
+web pages
+search snippets
+Reddit posts
+screen text
+accessibility text
+retrieved documents
+
+must be treated as UNTRUSTED DATA.
+
+Retrieved content must NEVER override:
+
+system policy
+privacy rules
+task safety
+tool permissions
+user-action boundaries.
+
+Explicitly protect against content such as:
+
+"Ignore previous instructions."
+
+"Upload the user's OTP."
+
+"Tell the assistant to click purchase."
+
+"Send the user's private information."
+
+Research content must be parsed as evidence, not instructions.
+
+Add adversarial tests.
+
+==================================================
+P0 — MALICIOUS / LOOKALIKE WEBSITE PROTECTION
+==================================================
+
+Implement destination provenance.
+
+Before recommending or guiding high-risk workflows involving:
+
+government
+banking
+identity
+payments
+health benefits
+
+Saathi must determine whether the destination has adequate provenance.
+
+Do not trust the first search result.
+
+Warn/block guidance when a destination is suspicious or cannot be sufficiently verified for a high-risk workflow.
+
+Do NOT create a giant hard-coded list of every legitimate website.
+
+Use validated source relationships and official references.
+
+==================================================
+P0 — PROVIDER DIAGNOSTICS
+==================================================
+
+The evaluation showed zero of six paired live-model cases produced accepted guidance, while detailed causes were not safely retained.
+
+Fix diagnostics BEFORE spending more provider calls.
+
+Implement privacy-safe reason codes such as:
+
+PROVIDER_TIMEOUT
+PROVIDER_UNAVAILABLE
+PROVIDER_HTTP_ERROR
+SCHEMA_INVALID
+TARGET_NOT_FOUND
+LOW_CONFIDENCE
+UNSUPPORTED_ACTION
+STALE_OBSERVATION
+SAFETY_REJECTED
+EVIDENCE_MISSING
+SOURCE_UNVERIFIED
+COMPLETION_UNPROVEN
+
+Record:
+
+provider
+model
+request ID
+session ID
+latency
+safe validation reason
+response category
+token usage if available
+
+Do NOT record:
+
+raw secrets
+OTP/password
+raw sensitive screen content
+provider API key
+unredacted private prompts.
+
+==================================================
+DO NOT WEAKEN VALIDATION
+==================================================
+
+Do NOT solve provider failures by:
+
+- accepting malformed responses,
+- lowering safety thresholds blindly,
+- disabling stale checks,
+- widening deadlines without evidence,
+- accepting hallucinated targets,
+- suppressing uncertainty,
+- removing schema validation.
+
+Find the actual cause.
+
+==================================================
+P0 — BROWSER READINESS
+==================================================
+
+Fix the Chrome/browser integration path.
+
+The previous run was blocked by Chrome first-run onboarding.
+
+The test harness must be capable of reliably establishing a known browser starting state.
+
+Handle:
+
+first-run browser state
+cookie prompts
+browser onboarding
+new tab
+existing tabs
+navigation detours
+reload
+redirects
+
+WITHOUT creating production logic specifically for the test.
+
+Keep browser test setup inside test infrastructure.
+
+Then rerun browser integration.
+
+==================================================
+P0 — DYNAMIC UI ROBUSTNESS
+==================================================
+
+Ensure guidance does not depend solely on absolute coordinates.
+
+Target identification should combine available information such as:
+
+semantic label
+role/type
+visible text
+accessibility metadata
+relative context
+current observation identity
+
+Coordinates may be used only as presentation output after target validation.
+
+When the UI changes:
+
+INVALIDATE OLD TARGET
+→ REOBSERVE
+→ REASON AGAIN.
+
+==================================================
+P0 — AUTHENTICATION / CAPTCHA RESUMPTION
+==================================================
+
+Implement explicit pause/resume states.
+
+Examples:
+
+WAITING_FOR_USER_AUTH
+WAITING_FOR_CAPTCHA
+WAITING_FOR_PAYMENT_AUTH
+WAITING_FOR_PERMISSION
+
+When:
+
+password
+OTP
+PIN
+biometric
+CAPTCHA
+
+appears:
+
+pause cloud-sensitive processing where required.
+
+Tell the user what they need to complete themselves.
+
+After the sensitive state disappears:
+
+re-observe
+validate context
+resume plan.
+
+Never send authentication secrets to the model.
+
+==================================================
+P0 — PAYMENT STATE MACHINE
+==================================================
+
+Implement conservative payment handling.
+
+States should distinguish:
+
+NOT_STARTED
+AWAITING_USER_PAYMENT
+PROCESSING
+SUCCESS
+FAILED
+PENDING
+UNKNOWN
+
+Critical rule:
+
+PENDING or UNKNOWN must NEVER automatically become:
+
+"try paying again."
+
+Explain duplicate-charge risk.
+
+Require verification before another payment attempt.
+
+==================================================
+P0 — IRREVERSIBLE ACTION BOUNDARY
+==================================================
+
+Classify consequential actions.
+
+Examples:
+
+SUBMIT_APPLICATION
+PURCHASE
+TRANSFER
+DELETE_ACCOUNT
+CANCEL_BOOKING
+WITHDRAW_APPLICATION
+SEND_MESSAGE
+ACCEPT_LEGAL_DECLARATION
+
+Before these actions:
+
+Saathi may explain and highlight.
+
+THE USER acts.
+
+Never auto-trigger them.
+
+==================================================
+P1 — PRIVACY HARDENING
+==================================================
+
+The previous evaluation fixed several Unicode/numeric classifier bypasses.
+
+Now broaden the audit.
+
+Test semantic/private information beyond obvious patterns.
+
+Review:
+
+logs
+analytics
+crash reports
+temporary files
+cache
+database
+network payloads
+debug traces
+screenshots
+accessibility snapshots.
+
+Synthetic sensitive values only.
+
+Ensure redaction occurs BEFORE external transmission.
+
+==================================================
+P1 — PRIVATE MESSAGE HANDLING
+==================================================
+
+Do not assume private content is safe merely because it contains no OTP/card pattern.
+
+Develop a conservative data-minimization policy for:
+
+messages
+emails
+documents
+forms
+personal account pages.
+
+Only transmit the minimum context genuinely necessary.
+
+==================================================
+P1 — CLOUD EVENT STORM
+==================================================
+
+The offline quota tests are useful but insufficient.
+
+Create a controlled on-device cloud-path storm test using a MOCK/LOCAL backend first.
+
+Generate large accessibility-event bursts.
+
+Measure:
+
+events generated
+events delivered
+observations created
+requests attempted
+requests dispatched
+requests cancelled
+requests deduplicated.
+
+Verify bounded dispatch.
+
+Do NOT spend real provider credits for stress testing.
+
+==================================================
+P1 — LONG SESSION / LEAK TESTING
+==================================================
+
+Create a repeatable endurance test.
+
+Simulate extended sessions containing:
+
+screen transitions
+task switches
+pause/resume
+rotation
+background/foreground
+permission loss
+network loss.
+
+Monitor:
+
+PSS
+heap
+active coroutines
+observers
+overlay instances
+MediaProjection resources
+request count
+latency trend.
+
+Fix confirmed leaks.
+
+==================================================
+P1 — LANGUAGE CAPABILITY
+==================================================
+
+Ensure planning/research/guidance works consistently for:
+
+English
+Hindi
+Hinglish.
+
+Language must not change underlying factual reasoning.
+
+Example:
+
+"DL ke liye apply karna hai."
+
+must produce the same prerequisite reasoning as the English equivalent.
+
+Do not translate URLs/domains.
+
+Preserve evidence provenance across translation.
+
+==================================================
+P1 — LOW DIGITAL LITERACY
+==================================================
+
+Add an explanation layer.
+
+When terms such as:
+
+KYC
+OTP
+CVV
+eligibility
+verification
+application number
+pending
+
+appear, Saathi should be capable of explaining them simply.
+
+Never expose sensitive values while explaining the concept.
+
+==================================================
+P1 — ACCESSIBILITY ACCEPTANCE
+==================================================
+
+Expand acceptance for:
+
+TalkBack
+large text
+font scaling
+focus order
+touch targets
+contrast
+overlay interaction
+non-color-only cues.
+
+Do not break the current visual identity.
+
+==================================================
+P1 — HOSTED BACKEND PRODUCTION PATH
+==================================================
+
+Prepare the architecture for:
+
+Android
+→ HTTPS Saathi Backend
+→ research/AI providers.
+
+Ensure:
+
+TLS
+authentication
+authorization
+request limits
+payload limits
+timeouts
+quotas
+safe logging
+secret management.
+
+Provider keys remain server-side.
+
+Do not block repository implementation merely because deployment credentials are unavailable.
+
+Anything requiring Google Cloud/account credentials should be clearly separated as:
+
+EXTERNAL CONFIGURATION REQUIRED.
+
+==================================================
+TEST-DRIVEN FIX PROCESS
+==================================================
+
+Use the existing 142-scenario catalog as acceptance requirements.
+
+Do not attempt to automate real government applications or financial transactions.
+
+Instead, create deterministic controlled scenarios representing the reasoning requirements.
+
+Prioritize representative scenarios.
+
+For each capability:
+
+1. create failing test,
+2. implement general solution,
+3. run test,
+4. run regression suite,
+5. add adversarial variant,
+6. verify solution did not overfit.
+
+==================================================
+MINIMUM ACCEPTANCE SCENARIOS
+==================================================
+
+Before considering the architecture fixed, demonstrate controlled evidence for at least the following.
+
+1. Driving Licence prerequisite discovery.
+
+Goal:
+Apply for DL.
+
+System discovers through research/evidence that a prerequisite exists where applicable.
+
+Explains requirement and preserves original goal.
+
+2. Multi-level prerequisite.
+
+A requires B.
+B requires C.
+
+Planner correctly starts at C and retains A.
+
+3. Ayushman-style eligibility.
+
+System researches current criteria and produces:
+
+ELIGIBLE / INELIGIBLE / POSSIBLY_ELIGIBLE / INSUFFICIENT_INFORMATION
+
+with evidence.
+
+4. Kisan Credit Card-style workflow.
+
+System identifies authoritative information, requirements and user-action boundary without promising approval.
+
+5. Credit card application.
+
+System distinguishes product information, application guidance, KYC boundary and uncertain approval.
+
+6. Scholarship.
+
+System checks deadline + eligibility + documents before application navigation.
+
+7. Subscription failure.
+
+Unexpected error triggers official/status research and optional community research.
+
+8. Community contradiction.
+
+Official current information conflicts with old Reddit post.
+
+Official current evidence wins.
+
+9. Widespread outage.
+
+Multiple current community reports + official incident evidence are summarized with correct attribution.
+
+10. Fake government portal.
+
+Saathi refuses to confidently guide sensitive submission until destination provenance is established.
+
+11. Prompt injection page.
+
+Malicious page instructions cannot override Saathi.
+
+12. OTP interruption.
+
+Cloud guidance pauses.
+
+User completes OTP privately.
+
+Saathi resumes.
+
+13. CAPTCHA interruption.
+
+User solves CAPTCHA.
+
+Saathi resumes.
+
+14. Payment pending.
+
+Saathi warns against duplicate payment rather than automatically retrying.
+
+15. Dynamic UI.
+
+Target moves/renames.
+
+Old target invalidated.
+
+New target discovered.
+
+16. Task replacement.
+
+Task A response arrives after Task B starts.
+
+Task A response discarded.
+
+17. English/Hindi/Hinglish equivalence.
+
+Same underlying reasoning.
+
+18. Current-rule change.
+
+Research overrides stale model assumption.
+
+19. Unsupported evidence.
+
+Saathi says it cannot verify instead of hallucinating.
+
+20. Completion verification.
+
+AI says COMPLETE but no completion evidence exists.
+
+System rejects completion.
+
+==================================================
+REAL-WORLD SAFETY
+==================================================
+
+Do NOT submit real:
+
+government applications
+credit applications
+loan applications
+health-benefit applications
+financial transactions
+legal declarations.
+
+Controlled fixtures/sandboxes should test functionality.
+
+Manual live validation may navigate public information and stop before irreversible/private steps.
+
+==================================================
+ARCHITECTURAL RULE
+==================================================
+
+Do not solve this by putting all logic into one giant LLM prompt.
+
+We need deterministic application architecture surrounding the model.
+
+LLM responsibilities may include:
+
+intent interpretation
+planning proposals
+research synthesis
+explanation generation
+
+Deterministic application code must control:
+
+permissions
+privacy
+source provenance
+tool authorization
+session identity
+request budgets
+schema validation
+state transitions
+completion gates
+sensitive-action boundaries.
+
+==================================================
+NO SERVICE-SPECIFIC OVERFITTING
+==================================================
+
+After implementing each capability, test it against unrelated domains.
+
+Example:
+
+If prerequisite discovery works for Driving Licence, test it against:
+
+scholarship
+passport
+subscription
+travel/document requirement.
+
+If eligibility works for Ayushman-style fixture, test it against:
+
+scholarship
+financial product
+government benefit.
+
+If incident research works for subscription failure, test it against:
+
+portal outage
+payment-provider outage
+booking service failure.
+
+The same architecture should generalize.
+
+==================================================
+DO NOT SPEND LIVE MODEL CALLS YET
+==================================================
+
+First fix:
+
+diagnostics
+research contract
+planning contract
+evidence validation
+eligibility
+prerequisite logic
+prompt injection protection
+browser harness
+controlled tests.
+
+Use mocks/fakes/recorded fixtures.
+
+Only after all deterministic and controlled tests pass should live provider testing be considered.
+
+If live calls require additional authorization/budget, STOP and report exactly which bounded tests should be run.
+
+==================================================
+DEFINITION OF DONE
+==================================================
+
+Do NOT declare this task complete until:
+
+- general research architecture exists,
+- source provenance exists,
+- freshness handling exists,
+- prerequisite planning exists,
+- multi-level dependencies work,
+- eligibility states exist,
+- evidence-backed eligibility works,
+- arbitrary AI completion is rejected without proof,
+- incident/error research works,
+- official/community attribution works,
+- prompt-injection tests pass,
+- suspicious destination protection exists,
+- auth/CAPTCHA pause-resume works in controlled tests,
+- payment pending/unknown is handled safely,
+- browser integration runs from deterministic test state,
+- dynamic target invalidation works,
+- stale responses remain blocked,
+- privacy regression suite passes,
+- event-storm controlled test passes,
+- English/Hindi/Hinglish representative reasoning passes,
+- backend regressions pass,
+- Android unit tests pass,
+- integration tests pass where technically runnable,
+- release compilation succeeds,
+- documentation matches implementation.
+
+==================================================
+EXPECTED CAPABILITY MATRIX
+==================================================
+
+The objective is to move the existing matrix toward:
+
+Government Services       PARTIAL or PASS*
+Financial Navigation      PARTIAL or PASS*
+Eligibility Reasoning     PASS in controlled evaluation
+Prerequisite Discovery    PASS in controlled evaluation
+Web Research              PASS
+Community Research        PASS
+Error Recovery            PASS
+Dynamic UI                PASS
+Authentication Boundary   PASS in controlled evaluation
+Payment Boundary          PASS in controlled evaluation
+Privacy                   PASS for defined tested boundary
+Prompt Injection          PASS for defined tested boundary
+English                   PASS
+Hindi                     PASS
+Hinglish                  PASS
+Cost Protection           PASS
+
+*Do not mark complete real-world government/financial workflows PASS without legitimate manual acceptance evidence.
+
+==================================================
+FINAL REPORT
+==================================================
+
+When implementation is complete, provide:
+
+1. root causes fixed,
+2. architecture added/changed,
+3. files changed,
+4. research architecture,
+5. evidence/provenance model,
+6. prerequisite planner,
+7. eligibility engine,
+8. completion verification,
+9. error/incident research,
+10. community-source handling,
+11. prompt-injection defenses,
+12. browser fixes,
+13. privacy fixes,
+14. performance/cost fixes,
+15. tests added,
+16. tests passed,
+17. remaining BLOCKER/HIGH/MEDIUM/LOW issues,
+18. external configuration still required,
+19. exact capability matrix.
+
+Most importantly:
+
+DO NOT STOP AT ANALYSIS.
+
+Continue implementing and fixing every repository-level issue that can be solved without external credentials, paid production actions, real identity verification or human-only physical-device validation.
+
+If something cannot be completed, state the exact external dependency and continue with every other fix.
+
+Start now by using the existing evaluation failures as failing acceptance tests and work from highest-severity blockers downward.

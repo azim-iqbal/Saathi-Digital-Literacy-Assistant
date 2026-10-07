@@ -72,6 +72,7 @@ private fun GuidanceSessionState.labelCopy() = when (this) {
     GuidanceSessionState.GUIDING -> Copy.ACTIVE
     GuidanceSessionState.WAITING_FOR_PRACTICE -> Copy.WAITING
     GuidanceSessionState.SENSITIVE_HANDOVER -> Copy.SENSITIVE
+    GuidanceSessionState.WAITING_FOR_CAPTCHA -> Copy.WAITING
     GuidanceSessionState.PAUSED -> Copy.PAUSED
     GuidanceSessionState.COMPLETED -> Copy.COMPLETED
     GuidanceSessionState.ERROR -> Copy.START_ERROR
@@ -307,7 +308,11 @@ fun SaathiApp() {
                                 Action(tr(Copy.PAUSE), secondary = true) { SaathiSession.pause() }
                             } else if (status == GuidanceSessionState.COMPLETED) {
                                 Action(tr(Copy.PRACTISE_AGAIN)) { navigate(Screen.Setup) }
-                            } else Action(tr(Copy.RESUME)) { start() }
+                            } else Action(tr(Copy.RESUME)) {
+                                if (SaathiSession.canResume()) {
+                                    if (!SaathiSession.resume(context)) navigate(Screen.Setup)
+                                } else start()
+                            }
                             Action(tr(Copy.STOP), secondary = true) { SaathiSession.stop() }
                             Body(tr(Copy.SAFETY))
                         }

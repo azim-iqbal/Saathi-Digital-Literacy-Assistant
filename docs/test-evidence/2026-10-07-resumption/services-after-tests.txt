@@ -1,0 +1,57 @@
+ACTIVITY MANAGER SERVICES (dumpsys activity services)
+  User 0 active services:
+  * ServiceRecord{d7ee7d2 u0 com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0 c:com.saathi.test}
+    intent={cmp=com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0}
+    packageName=com.saathi.test
+    processName=com.saathi.test:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+    targetSdkVersion=36
+    baseDir=/data/app/~~zc-OEfRYlXRgUD_Ubxz1dA==/com.google.android.webview-qKoAtdFrpCZV0epCmLK3DQ==/WebViewGoogle.apk
+    dataDir=/data/user/0/com.google.android.webview
+    app=ProcessRecord{b417fa0 13028:com.saathi.test:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a232i2}
+    isolationHostProc=ProcessRecord{b417fa0 13028:com.saathi.test:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a232i2}
+    useNewWiuLogic_forCapabilities()=false
+    useNewWiuLogic_forStart()=false
+    useNewBfslLogic()=false
+    mAllowWiu_noBinding=DENIED
+    mAllowWiu_inBindService=PROC_STATE_TOP
+    mAllowWiu_byBindings=DENIED
+    getFgsAllowWiu_legacy=PROC_STATE_TOP
+    getFgsAllowWiu_new=DENIED
+    getFgsAllowWiu_forStart=PROC_STATE_TOP
+    getFgsAllowWiu_forCapabilities=PROC_STATE_TOP
+    allowUiJobScheduling=false
+    recentCallingPackage=com.saathi.test
+    recentCallingUid=10232
+    mAllowStart_noBinding=DENIED
+    mAllowStart_inBindService=PROC_STATE_TOP
+    mAllowStart_byBindings=DENIED
+    getFgsAllowStart_legacy=PROC_STATE_TOP
+    getFgsAllowStart_new=DENIED
+    getFgsAllowStart=PROC_STATE_TOP
+    startForegroundCount=0
+    infoAllowStartForeground=[callingPackage: com.saathi.test; callingUid: 10232; uidState: TOP ; uidBFSL: [BFSL]; BFGS denied: false; intent: Intent { xflg=0x4 cmp=com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0 (has extras) }; code:PROC_STATE_TOP; tempAllowListReason:<null>; allowWiu:12; targetSdkVersion:36; callerTargetSdkVersion:33; startForegroundCount:0; bindFromPackage:null; isBindService:true]
+    isNativeIsolated=false
+    createTime=-41s332ms startingBgTimeout=--
+    lastActivity=-41s85ms restartTime=-41s304ms createdFromFg=true
+    Bindings:
+    * IntentBindRecord{45d4723 CREATE}:
+      intent={xflg=0x4 cmp=com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0}
+      binder=android.os.BinderProxy@f762420
+      requested=true received=true hasBound=true doRebind=false
+      * Client AppBindRecord{50f51d9 ProcessRecord{b88412e 12340:com.saathi.test/u0a232}}
+        Per-process Connections:
+          ConnectionRecord{72ce3ff u0 CR WPRI com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:@bbfaf1e flags=0x80000021}
+          ConnectionRecord{9a1ae51 u0 CR IMP com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:@acec778 flags=0x80000041}
+    All Connections:
+      ConnectionRecord{9a1ae51 u0 CR IMP com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:@acec778 flags=0x80000041}
+      ConnectionRecord{72ce3ff u0 CR WPRI com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:@bbfaf1e flags=0x80000021}
+
+  Connection bindings to services:
+  * ConnectionRecord{9a1ae51 u0 CR IMP com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:@acec778 flags=0x80000041}
+    binding=AppBindRecord{50f51d9 com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:com.saathi.test}
+    conn=android.os.BinderProxy@acec778 flags=0x80000041
+    ongoingCalls=false
+  * ConnectionRecord{72ce3ff u0 CR WPRI com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:@bbfaf1e flags=0x80000021}
+    binding=AppBindRecord{50f51d9 com.saathi.test/org.chromium.content.app.SandboxedProcessService0:0:com.saathi.test}
+    conn=android.os.BinderProxy@bbfaf1e flags=0x80000021
+    ongoingCalls=false
