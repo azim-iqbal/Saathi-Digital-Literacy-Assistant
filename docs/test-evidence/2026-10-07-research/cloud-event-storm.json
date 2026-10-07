@@ -1,0 +1,8 @@
+{
+  "events_generated": 600,
+  "events_delivered_including_overlays": 2,
+  "observations_created": 1,
+  "http_requests_started": 1,
+  "live_provider_calls": 0,
+  "scope": "actual service to bounded local synthetic gateway; no paid providers"
+}

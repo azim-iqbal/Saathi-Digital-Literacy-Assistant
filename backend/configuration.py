@@ -61,4 +61,7 @@ def configured_gateway():
     if not 2 <= total <= 10000 or not 1 <= per_provider <= 5000:
         raise ValueError("Use bounded positive call limits")
     budget = PersistentBudget(os.environ.get("SAATHI_BUDGET_DB", "backend/local-budget.sqlite3"), total, per_provider)
-    return Gateway(providers, timeout=10, global_limit=total, provider_limit=per_provider, mode=mode, budget=budget)
+    gateway = Gateway(providers, timeout=10, global_limit=total, provider_limit=per_provider, mode=mode, budget=budget)
+    from backend.research import configured_research
+    gateway.research = configured_research(budget.reserve)
+    return gateway

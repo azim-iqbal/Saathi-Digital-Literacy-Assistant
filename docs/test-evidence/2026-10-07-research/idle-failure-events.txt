@@ -1,0 +1,17 @@
+1275298 type=32 window=595 changes=0 ownOverlay=false
+1275303 type=2048 window=597 changes=1 ownOverlay=false
+1275856 type=4194304 window=599 changes=0 ownOverlay=true
+1275856 type=2048 window=600 changes=1 ownOverlay=false
+1275898 type=32 window=598 changes=0 ownOverlay=false
+1276259 type=32 window=600 changes=0 ownOverlay=false
+1276263 type=2048 window=600 changes=0 ownOverlay=false
+1276264 type=4194304 window=600 changes=0 ownOverlay=false
+1276619 type=4194304 window=600 changes=0 ownOverlay=false
+1276663 type=2048 window=600 changes=0 ownOverlay=false
+1276681 type=2048 window=600 changes=0 ownOverlay=false
+1276681 type=2048 window=600 changes=1 ownOverlay=false
+1276749 type=32 window=601 changes=0 ownOverlay=true
+IDLE_ASSERT_BEGIN 1278336 key=Ticket(session=-3225313001210690195, revision=690, packageName=com.saathi.test, windowId=600)
+1278721 type=2048 window=589 changes=1 ownOverlay=false
+1278721 type=2048 window=589 changes=0 ownOverlay=false
+IDLE_ASSERT_END 1279346 key=Ticket(session=-3225313001210690195, revision=693, packageName=com.saathi.test, windowId=600)

@@ -1,3 +1,9 @@
+## 7 October 2026 — Research architecture and deterministic remediation (overall work open)
+
+Live guards now suppress cloud dispatch for changing claims requiring research, unproven high-risk destinations, private message/document/account cues, keyboards and public error/consent/payment handovers. Error research starts from a blank description, never an automatic raw-screen upload. Only old-window content events with a different current root are filtered; current/unknown/window transitions still invalidate. Reviewed dependency checklists are not yet connected to live targets.
+
+Evidence and remaining gates: [remediation matrix](REMEDIATION_CAPABILITY_MATRIX.md).
+
 ## 7 October 2026 — Retained-task pause/resume and private challenge handover
 
 Final verification: **95 Android unit tests and all 10 focused emulator tests pass**, debug/test builds and release Kotlin compile pass. The added immediate-start/pause UI test found a real `ForegroundServiceDidNotStartInTimeException`; fixed by acknowledging pending foreground starts before service shutdown (promotion alone was insufficient). No production guidance/audio services remained after the final tests; the separate fixture WebView service remained until emulator shutdown. Evidence: `test-evidence/2026-10-07-resumption/verification.json`, `final-regression.txt`, `paused-ui-acknowledged.txt` and screenshots.

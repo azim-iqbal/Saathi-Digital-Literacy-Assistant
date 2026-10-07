@@ -137,7 +137,11 @@ class PauseResumeIntegrationTest {
                 }
                 tap("Return to choices")
                 waitFor("Guidance after resumed challenge") { guiding() }
-                repeat(3) {
+                val cycles = InstrumentationRegistry.getArguments().getString("endurance_cycles")?.toIntOrNull()?.coerceIn(3,120) ?: 3
+                val holdMs = InstrumentationRegistry.getArguments().getString("endurance_hold_ms")?.toLongOrNull()?.coerceIn(0,1000) ?: 0
+                val samples = org.json.JSONArray()
+                val enduranceStart = SystemClock.uptimeMillis()
+                repeat(cycles) { cycle ->
                     val oldSession = SaathiSession.sessionKey()
                     main {
                         SaathiSession.pause()
@@ -152,7 +156,15 @@ class PauseResumeIntegrationTest {
                     waitFor("Rapid pause/resume survives old service teardown") { guiding() }
                     assertNotEquals(oldSession, SaathiSession.sessionKey())
                     assertFalse(SaathiSession.hasSpokenGuidance())
+                    if (holdMs > 0) SystemClock.sleep(holdMs)
+                    if (cycle % 10 == 0 || cycle == cycles - 1) {
+                        val runtime = Runtime.getRuntime()
+                        samples.put(org.json.JSONObject().put("cycle",cycle+1).put("elapsed_ms",SystemClock.uptimeMillis()-enduranceStart)
+                            .put("pss_kb",android.os.Debug.getPss()).put("java_used_bytes",runtime.totalMemory()-runtime.freeMemory()))
+                    }
                 }
+                File(output(), "lifecycle-resource-samples.json").writeText(org.json.JSONObject()
+                    .put("cycles",cycles).put("samples",samples).put("scope","emulator text-mode cycles; not hours-long/OEM/speech certification").toString(2))
                 screenshot("resume-restored")
                 main { SaathiSession.pause(); SaathiSession.stop(); assertFalse(SaathiSession.resume(context)) }
                 assertFalse(SaathiSession.canResume())

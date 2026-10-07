@@ -48,7 +48,7 @@ class GatewaySetupActivity : ComponentActivity() {
             val development = com.saathi.BuildConfig.DEBUG
             var token by remember { mutableStateOf("") }
             var enabled by remember { mutableStateOf(PracticeGateway.enabled() || PracticeGateway.aiEnabled()) }
-            var ai by remember { mutableStateOf(if (development) true else PracticeGateway.aiEnabled()) }
+            var ai by remember { mutableStateOf(PracticeGateway.aiEnabled()) }
             var probeConsent by remember { mutableStateOf(false) }
             var error by remember { mutableStateOf(false) }
             MaterialTheme(colorScheme = colors) {

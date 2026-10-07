@@ -1,0 +1,15 @@
+{
+  "android_unit_tests": 116,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "new_tests": 5,
+  "debug_build": "PASS",
+  "test_build": "PASS",
+  "release_kotlin": "PASS",
+  "emulator": "NOT_RUN",
+  "backend": "UNCHANGED_NOT_RERUN",
+  "live_calls": 0,
+  "production_ready": false,
+  "phase_accepted": false
+}

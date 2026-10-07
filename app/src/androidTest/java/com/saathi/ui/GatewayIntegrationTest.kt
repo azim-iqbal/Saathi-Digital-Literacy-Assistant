@@ -133,7 +133,11 @@ class GatewayIntegrationTest {
                 onView(withId(R.id.recharge_bills)).perform(click())
                 waitFor("Backend selected category") { SaathiSession.instruction.value.startsWith("Tap Water") }
                 onView(withId(R.id.water_biller)).perform(click())
-                waitFor("Local private-form instruction") { SaathiSession.instruction.value.startsWith("Enter a made-up") }
+                waitFor("Private form hands over before any backend call") {
+                    SaathiSession.status.value == GuidanceSessionState.SENSITIVE_HANDOVER &&
+                        SaathiSession.instruction.value.startsWith("This screen contains private fields")
+                }
+                waitFor("Private form has no target marker") { !com.saathi.overlay.HighlightOverlayService.hasTarget() }
                 SystemClock.sleep(500)
                 val beforePrivate = PracticeGateway.requestsStarted.get()
                 onView(withId(R.id.account_input)).perform(scrollTo(), replaceText("123456"), closeSoftKeyboard())

@@ -174,6 +174,7 @@ class Gateway:
         self.failures = {p.id: 0 for p in self.providers}
         self.circuit_until, self.circuit_probes = {}, {}
         self.closed = False
+        self.research = None
 
     def rejected(self, reason):
         return {"status": "rejected", "reason": reason, "mode": self.mode}
@@ -277,19 +278,24 @@ class Gateway:
                 proposal = future.result()
                 from backend.live import LiveSnapshot, validate_live
                 from backend.incident import IncidentSnapshot, validate_assessment
-                error = (validate_assessment(snapshot, proposal) if isinstance(snapshot, IncidentSnapshot) else
+                from backend.planning import ResearchSnapshot, validate_plan
+                error = (validate_plan(snapshot, proposal) if isinstance(snapshot, ResearchSnapshot) else
+                         validate_assessment(snapshot, proposal) if isinstance(snapshot, IncidentSnapshot) else
                          validate_live(snapshot, proposal) if isinstance(snapshot, LiveSnapshot) else validate(snapshot, proposal))
             except ProviderFailure as failure:
                 error, proposal = failure.reason, None
-            except InvalidRequest:
-                error, proposal = "invalid_response", None
+            except InvalidRequest as invalid:
+                from backend.planning import PlanValidationError
+                error, proposal = invalid.reason if isinstance(invalid, PlanValidationError) else "invalid_response", None
             except Exception:
                 error, proposal = "provider_unavailable", None
+            if hasattr(provider, "record_validation"):
+                provider.record_validation(snapshot, proposal, error)
             if error:
                 with self.lock:
                     if event.is_set(): return [], ["cancelled"]
                     # Valid uncertainty is a task outcome, not an upstream outage.
-                    if error in ("uncertain", "invalid_target", "unobserved_completion", "stale"):
+                    if error in ("uncertain", "invalid_target", "unobserved_completion", "stale", "evidence_missing", "source_unverified", "jurisdiction_mismatch", "dependency_cycle", "safety_rejected"):
                         self._healthy(provider.id)
                     else:
                         self._failed(provider.id)
@@ -312,7 +318,10 @@ class Gateway:
                       "session_id": snapshot.session_id, "screen_revision": snapshot.screen_revision,
                       "provenance": [{"provider": p.id, "model": p.model} for p in providers]}
             from backend.incident import IncidentSnapshot
-            if isinstance(snapshot, IncidentSnapshot):
+            from backend.planning import ResearchSnapshot, plan_result
+            if isinstance(snapshot, ResearchSnapshot):
+                result.update(plan=plan_result(snapshot, proposal))
+            elif isinstance(snapshot, IncidentSnapshot):
                 result.update(category=proposal.category, signals=sorted(proposal.signals))
             else:
                 result.update(package_name=snapshot.package_name, window_id=snapshot.window_id,
@@ -377,6 +386,11 @@ class Gateway:
                 if errors: return self.rejected(errors[0])
                 a, b = proposals
                 from backend.incident import IncidentSnapshot
+                from backend.planning import ResearchSnapshot
+                planning = isinstance(snapshot, ResearchSnapshot)
+                if planning:
+                    if a.agreement_key() != b.agreement_key(): return self.rejected("disagreement")
+                    return self._accepted(snapshot, a, self.providers, event, deadline_reason)
                 incident = isinstance(snapshot, IncidentSnapshot)
                 if (incident and (a.category, set(a.signals)) != (b.category, set(b.signals))) or (
                         not incident and (a.action, a.target_id) != (b.action, b.target_id)):

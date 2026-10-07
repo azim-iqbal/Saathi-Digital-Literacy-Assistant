@@ -88,6 +88,7 @@ class HighlightOverlayService : Service() {
             val node = view.createAccessibilityNodeInfo()
             return try { node.windowId == id } finally { @Suppress("DEPRECATION") node.recycle() }
         }
+        internal fun hasTarget(): Boolean = instance?.overlay?.hasTarget() == true
         /** Clear pixels synchronously without creating window-add/remove accessibility feedback. */
         fun clearPresentation() { instance?.overlay?.setState(null, emptyList(), false, null) }
         private const val EXTRA_TARGET = "target"; private const val EXTRA_SENSITIVE = "sensitive"; private const val EXTRA_COMPLETE = "complete"; private const val EXTRA_STATUS = "status"
@@ -134,6 +135,7 @@ private class GuidanceOverlay(context: Context) : android.view.View(context) {
                 !com.saathi.ui.Preferences(context).reducedMotion) animator.start()
         }
     }
+    fun hasTarget(): Boolean = target != null
     fun calibrate() {
         val location = IntArray(2)
         getLocationOnScreen(location)

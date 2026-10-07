@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-07",
+  "backend_unit_tests": 139,
+  "android_unit_tests": {
+    "tests": 111,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "emulator_runs": {
+    "emulator-final-validation": 18,
+    "emulator-extended": 22,
+    "connection-final": 3,
+    "practice-gateway-final": 4,
+    "webview-endurance": 1
+  },
+  "evaluation_harness_tests": 5,
+  "offline_probes": {
+    "passed": 51,
+    "failed": 0
+  },
+  "builds": [
+    "debug",
+    "androidTest",
+    "release Kotlin compilation"
+  ],
+  "lint": {
+    "Error": 0,
+    "Warning": 61
+  },
+  "live_provider_calls": 0,
+  "deployed": false,
+  "pushed": false,
+  "source": "Only saved passing outputs; 142 real-world catalog workflows are not claimed passed.",
+  "remaining_weekly_usage_percent_at_handoff": 16,
+  "research_plan_browser_binding": "UNFINISHED_REPOSITORY_WORK",
+  "production_ready": false
+}

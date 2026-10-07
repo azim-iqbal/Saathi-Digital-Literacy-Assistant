@@ -48,17 +48,17 @@ internal object MockGatewayCodec {
         }
     } catch (_: Exception) { GatewayResult.Rejected("malformed") }
 
-    internal fun parse(body: String): Map<*, *> {
-        require(body.toByteArray(Charsets.UTF_8).size <= 8192)
+    internal fun parse(body: String, research: Boolean = false): Map<*, *> {
+        require(body.toByteArray(Charsets.UTF_8).size <= if (research) 65536 else 8192)
         return JsonReader(StringReader(body)).use { reader ->
             reader.isLenient = false
-            val value = read(reader, 0)
+            val value = read(reader, 0, research)
             require(reader.peek() == JsonToken.END_DOCUMENT)
             value as? Map<*, *> ?: error("object")
         }
     }
 
-    private fun read(r: JsonReader, depth: Int): Any? {
+    private fun read(r: JsonReader, depth: Int, research: Boolean): Any? {
         require(depth <= 6)
         return when (r.peek()) {
             JsonToken.BEGIN_OBJECT -> linkedMapOf<String, Any?>().apply {
@@ -66,14 +66,14 @@ internal object MockGatewayCodec {
                 while (r.hasNext()) {
                     require(size < 20)
                     val key = r.nextName(); require(key.length <= 80 && !containsKey(key))
-                    put(key, read(r, depth + 1))
+                    put(key, read(r, depth + 1, research))
                 }
                 r.endObject()
             }
             JsonToken.BEGIN_ARRAY -> mutableListOf<Any?>().apply {
-                r.beginArray(); while (r.hasNext()) { require(size < 20); add(read(r, depth + 1)) }; r.endArray()
+                r.beginArray(); while (r.hasNext()) { require(size < 20); add(read(r, depth + 1, research)) }; r.endArray()
             }
-            JsonToken.STRING -> r.nextString().also { require(it.length <= 1024) }
+            JsonToken.STRING -> r.nextString().also { require(it.length <= if (research) 4000 else 1024) }
             JsonToken.NUMBER -> r.nextString().let { require(it.matches(Regex("0|[1-9][0-9]*"))); it.toLong() }
             JsonToken.BOOLEAN -> r.nextBoolean()
             JsonToken.NULL -> { r.nextNull(); null }

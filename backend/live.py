@@ -6,6 +6,9 @@ import time
 from backend.gateway import InvalidRequest, Proposal
 
 from backend.privacy import sensitive
+from backend.request_policy import research_claim, private_context, error_status
+
+HIGH_RISK_DESTINATION = re.compile(r"(?i)\b(government|banking|bank account|credit|loan|identity verification|health benefit|scholarship|passport|licen[cs]e application)\b|सरकारी|बैंक खाता|ऋण|पहचान सत्यापन|छात्रवृत्ति|sarkari|bank khata|pehchaan satyapan")
 
 CONSEQUENTIAL = re.compile(r"(?i)\b(pay|purchase|buy|send|transfer|delete|remove|confirm|submit|install|allow|approve|accept|agree|reset|erase)\b|भुगतान|भेज|मिटा|स्वीकार|अनुमति")
 
@@ -46,18 +49,18 @@ class LiveSnapshot:
             if type(data[name]) is not int or not 0 <= data[name] <= 2**63 - 1:
                 raise InvalidRequest("Invalid metadata")
         package = data["package_name"]
-        if not isinstance(package, str) or not re.fullmatch(r"[A-Za-z0-9_.]{1,150}", package) or package in ("android", "com.android.systemui", "com.saathi") or any(x in package for x in ("permissioncontroller", "packageinstaller")):
+        if not isinstance(package, str) or not re.fullmatch(r"[A-Za-z0-9_.]{1,150}", package) or package in ("android", "com.android.systemui", "com.saathi") or any(x in package for x in ("permissioncontroller", "packageinstaller", "inputmethod")):
             raise InvalidRequest("Protected surface")
         now = int(time.time() * 1000) if now_ms is None else now_ms
         if not 0 <= now - data["observed_at_ms"] <= 15_000 or data["locale"] not in ("en-IN", "hi-IN", "hinglish"):
             raise InvalidRequest("Expired observation or locale")
-        if not safe_text(data["goal"], 160) or CONSEQUENTIAL.search(data["goal"]):
+        if not safe_text(data["goal"], 160) or CONSEQUENTIAL.search(data["goal"]) or HIGH_RISK_DESTINATION.search(data["goal"]) or research_claim(data["goal"]):
             raise InvalidRequest("Unsupported goal")
         controls = data["controls"]
         if not isinstance(controls, list) or not 1 <= len(controls) <= 32:
             raise InvalidRequest("Invalid controls")
         for control in controls:
-            if not isinstance(control, dict) or set(control) != {"id", "label"} or not re.fullmatch(r"n[0-9]{1,3}", str(control["id"])) or not safe_text(control["label"], 80) or CONSEQUENTIAL.search(control["label"]):
+            if not isinstance(control, dict) or set(control) != {"id", "label"} or not re.fullmatch(r"n[0-9]{1,3}", str(control["id"])) or not safe_text(control["label"], 80) or CONSEQUENTIAL.search(control["label"]) or HIGH_RISK_DESTINATION.search(control["label"]) or private_context(control["label"]) or error_status(control["label"]):
                 raise InvalidRequest("Private or consequential control")
         if len({c["id"] for c in controls}) != len(controls):
             raise InvalidRequest("Duplicate controls")

@@ -1,3 +1,9 @@
+## 7 October 2026 — Research architecture and deterministic remediation (overall work open)
+
+The authenticated `/v1/research` path retrieves bounded public evidence; `/v1/task-plan` accepts only a retained same-principal bundle and separate consent. Two adapters propose graphs or outage hypotheses; strict evidence/schema/freshness/jurisdiction validation and agreement are required. Outputs remain REVIEW_REQUIRED; citations do not establish semantic entailment. Fixed-category diagnostics preserve HTTP receipt/status without raw model output. Provider latency/accuracy is not newly verified.
+
+Evidence and remaining gates: [remediation matrix](REMEDIATION_CAPABILITY_MATRIX.md).
+
 ## 7 October 2026 - Connection and circuit recovery
 
 See [BACKEND_CONNECTION_RECOVERY.md](BACKEND_CONNECTION_RECOVERY.md). Emulator host discovery is debug/emulator-only and only retries pre-body connection failures. Each request/cancellation retains its original endpoint. AI opt-in leaves practice local. A physical phone without USB forwarding cannot use the default computer-local endpoint; the user chose hosted deployment next phase.

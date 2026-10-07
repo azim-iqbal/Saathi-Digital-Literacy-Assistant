@@ -54,7 +54,15 @@ class ChromeGuidanceIntegrationTest {
 
     @Test fun realChromePageTracksDetourPrivateFormAndRetarget() {
         assertTrue("Run only on a synthetic Android emulator", android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.MODEL.startsWith("sdk_"))
+        val nonce = SystemClock.uptimeMillis().toString().map { ('a'.code + it.digitToInt()).toChar() }.joinToString("")
+        val fixtureUrl = "http://127.0.0.1:8766/browser.html?fixture=$nonce"
         val service = "com.saathi/com.saathi.accessibility.SaathiAccessibilityService"
+        val priorDebugApp = shell("settings get global debug_app")
+        val flagFile = "/data/local/tmp/chrome-command-line"
+        val flagBackup = "/data/local/tmp/saathi-chrome-command-line-backup"
+        check(!shell("ls $flagBackup").contains(flagBackup)) { "Restore prior browser test backup before retrying" }
+        val hadFlags = shell("ls $flagFile").contains(flagFile)
+        if (hadFlags) shell("cp $flagFile $flagBackup")
         val priorServices = shell("settings get secure enabled_accessibility_services")
         val priorEnabled = shell("settings get secure accessibility_enabled")
         val priorOverlay = Regex("SYSTEM_ALERT_WINDOW: (allow|ignore|deny|default)")
@@ -64,6 +72,22 @@ class ChromeGuidanceIntegrationTest {
             else shell("settings put secure $key $value")
         }
         try {
+            // Chromium's debug-app global setting is required for command-line flags.
+            // Test-only first-run bypass: no sign-in, legal acceptance or production workaround.
+            shell("am set-debug-app --persistent com.android.chrome")
+            val flagPipe = automation.executeShellCommandRw("tee $flagFile")
+            ParcelFileDescriptor.AutoCloseOutputStream(flagPipe[1]).use { it.write("chrome --disable-fre --no-first-run --no-default-browser-check\n".toByteArray()) }
+            ParcelFileDescriptor.AutoCloseInputStream(flagPipe[0]).use { it.readBytes() }
+            shell("am force-stop com.android.chrome")
+            shell("am start -a android.intent.action.VIEW -d $fixtureUrl -p com.android.chrome")
+            val readyDeadline = SystemClock.uptimeMillis() + 15_000
+            while (SystemClock.uptimeMillis() < readyDeadline && nodes().none { it.text == "Help" }) {
+                if (nodes().any { it.text == "No thanks" }) tap("No thanks")
+                SystemClock.sleep(200)
+            }
+            File(output(), "chrome-readiness.txt").writeText("debug_app=" + shell("settings get global debug_app") + "\nflags=" + shell("cat $flagFile") + "\n" + nodes().joinToString("\n") { "${it.text} / ${it.resourceId} / ${it.isClickable}" })
+            screenshot("chrome-readiness")
+            assertTrue("Chrome readiness: expected synthetic Help page; no legal/onboarding acceptance is automated", nodes().any { it.text == "Help" })
             automation.serviceInfo = automation.serviceInfo.apply { flags = flags or AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS or AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS }
             shell("appops set com.saathi SYSTEM_ALERT_WINDOW allow")
             val enabled = (priorServices.takeUnless { it == "null" }.orEmpty().split(':').filter { it.isNotBlank() } + service).distinct().joinToString(":")
@@ -75,7 +99,7 @@ class ChromeGuidanceIntegrationTest {
             ActivityScenario.launch(MainActivity::class.java).use { scenario ->
                 scenario.onActivity {
                     assertTrue(SaathiSession.startLive(it, "Help", GuidanceLanguage.ENGLISH, false))
-                    it.startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("http://127.0.0.1:8766/browser.html"))
+                    it.startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(fixtureUrl))
                         .setPackage("com.android.chrome").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                 }
                 waitFor("Chrome exposes page Help control") { SaathiSession.instruction.value.startsWith("Find “Help”") }
@@ -94,6 +118,17 @@ class ChromeGuidanceIntegrationTest {
                 tap("Back to choices")
                 waitFor("Chrome return from private screen") { SaathiSession.instruction.value.startsWith("Find “Help”") }
                 val session = SaathiSession.sessionKey()
+                val retainedGoal = SaathiSession.currentRequest()
+                tap("Human challenge")
+                waitFor("Chrome CAPTCHA pauses without solving") { SaathiSession.status.value == com.saathi.core.GuidanceSessionState.WAITING_FOR_CAPTCHA }
+                waitFor("CAPTCHA has no target marker") { !com.saathi.overlay.HighlightOverlayService.hasTarget() }
+                assertEquals(retainedGoal, SaathiSession.currentRequest())
+                tap("Back to choices")
+                waitFor("Chrome CAPTCHA return restores original task") { SaathiSession.instruction.value.startsWith("Find “Help”") }
+                tap("Cookie choices")
+                waitFor("Cookie choice is left to the person") { SaathiSession.instruction.value.startsWith("This is a privacy choice") && !com.saathi.overlay.HighlightOverlayService.hasTarget() }
+                tap("Use essential cookies") // Local synthetic fixture; not acceptance on a real service.
+                waitFor("Return after synthetic consent choice") { SaathiSession.instruction.value.startsWith("Find “Help”") }
                 main { assertTrue(SaathiSession.changeLiveRequest("To", session)) }
                 tap("Travel options")
                 waitFor("Chrome travel destination remains public") { SaathiSession.instruction.value.startsWith("Find “To”") }
@@ -113,6 +148,10 @@ class ChromeGuidanceIntegrationTest {
                 File(output(), "chrome-result.txt").writeText("PASS: real Chrome package with localhost synthetic page; actual AccessibilityService; Help, detour/return, password-form suspension, Support retarget, changed label, overlay visibility/touch-through and Stop. No real account, transaction, audio or AI.\n" + shell("dumpsys package com.android.chrome").lineSequence().filter { it.contains("versionName=") }.joinToString("\n"))
             }
         } finally {
+            shell("am force-stop com.android.chrome")
+            if (hadFlags) { shell("cp $flagBackup $flagFile"); shell("rm $flagBackup") } else shell("rm -f $flagFile")
+            shell("am clear-debug-app")
+            if (priorDebugApp.matches(Regex("[A-Za-z0-9_.]+")) && priorDebugApp != "null") shell("am set-debug-app --persistent $priorDebugApp")
             File(output(), "chrome-sensitive-node-ids.txt").writeText(nodes().filter { it.isSensitive }.joinToString("\n") { "${it.resourceId} ${it.className} password=${it.isPassword}" })
             File(output(), "chrome-service-state-final.txt").writeText(shell("dumpsys accessibility"))
             main { SaathiSession.stop() }

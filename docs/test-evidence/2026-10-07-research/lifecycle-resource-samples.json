@@ -1,0 +1,84 @@
+{
+  "cycles": 120,
+  "samples": [
+    {
+      "cycle": 1,
+      "elapsed_ms": 1206,
+      "pss_kb": 103922,
+      "java_used_bytes": 6355760
+    },
+    {
+      "cycle": 11,
+      "elapsed_ms": 13315,
+      "pss_kb": 104720,
+      "java_used_bytes": 6126384
+    },
+    {
+      "cycle": 21,
+      "elapsed_ms": 25440,
+      "pss_kb": 105583,
+      "java_used_bytes": 5962544
+    },
+    {
+      "cycle": 31,
+      "elapsed_ms": 37558,
+      "pss_kb": 107055,
+      "java_used_bytes": 6929200
+    },
+    {
+      "cycle": 41,
+      "elapsed_ms": 49678,
+      "pss_kb": 107039,
+      "java_used_bytes": 6814512
+    },
+    {
+      "cycle": 51,
+      "elapsed_ms": 61790,
+      "pss_kb": 107263,
+      "java_used_bytes": 6994736
+    },
+    {
+      "cycle": 61,
+      "elapsed_ms": 73901,
+      "pss_kb": 106962,
+      "java_used_bytes": 6634288
+    },
+    {
+      "cycle": 71,
+      "elapsed_ms": 86069,
+      "pss_kb": 107346,
+      "java_used_bytes": 6683440
+    },
+    {
+      "cycle": 81,
+      "elapsed_ms": 98240,
+      "pss_kb": 106002,
+      "java_used_bytes": 6257456
+    },
+    {
+      "cycle": 91,
+      "elapsed_ms": 110365,
+      "pss_kb": 107746,
+      "java_used_bytes": 7125808
+    },
+    {
+      "cycle": 101,
+      "elapsed_ms": 122499,
+      "pss_kb": 107778,
+      "java_used_bytes": 7076656
+    },
+    {
+      "cycle": 111,
+      "elapsed_ms": 134639,
+      "pss_kb": 107441,
+      "java_used_bytes": 6699824
+    },
+    {
+      "cycle": 120,
+      "elapsed_ms": 145513,
+      "pss_kb": 108209,
+      "java_used_bytes": 7076656
+    }
+  ],
+  "scope": "emulator text-mode cycles; not hours-long\/OEM\/speech certification"
+}

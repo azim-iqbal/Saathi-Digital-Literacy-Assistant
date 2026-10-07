@@ -21,6 +21,7 @@
         <activity android:name=".DemoBillPayActivity" android:exported="false" />
         <activity android:name=".AssistantActivity" android:exported="false" android:excludeFromRecents="true" android:taskAffinity="com.saathi.assistant" />
         <activity android:name=".ComplaintDraftActivity" android:exported="false" />
+        <activity android:name=".ResearchActivity" android:exported="false" />
         <activity android:name=".CyberReportActivity" android:exported="false" />
         <activity android:name=".VoiceSetupActivity" android:exported="false" />
         <activity android:name=".TermsActivity" android:exported="false" />

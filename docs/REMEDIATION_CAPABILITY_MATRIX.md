@@ -1,0 +1,54 @@
+> Latest continuation: an exact-address source-reading companion is implemented and compiles, with 116 Android unit tests passing. Its new service/UI/browser integration is **UNTESTED on emulator** and not accepted as closing the live-plan binding gate. See NEXT_CONTINUATION.md. Earlier emulator results below describe the prior phase.
+
+# Remediation evidence — 7 October 2026
+
+**Overall remediation remains open. Saathi is not ready for arbitrary real-world task guidance.** The accepted pause/resume phase is preserved. This phase adds executable research/planning and safety components; controlled fixtures are not genuine-model accuracy or successful real applications.
+
+Final counts: **139 backend tests, 111 Android unit tests, 5 evaluation-harness tests and 51/51 offline probes pass**. Emulator results are indexed separately with overlap; debug/test builds and release Kotlin compilation pass, lint 0 errors/61 warnings.
+
+Evidence directory: `test-evidence/2026-10-07-research/`. No live provider calls, deployment, signing, commit or push in this phase. Existing 142 catalog workflows retain their independent acceptance requirements.
+
+| Capability | Passing implementation evidence | Remaining gate |
+|---|---|---|
+| Backend web retrieval | Provider-neutral broker, optional SearXNG POST search, reviewed seed crawl, public-IP TLS pinning, DNS/read/page/byte limits, cancellation | Chosen search service, reviewed real source scopes and actual hosted TLS retrieval acceptance |
+| Provenance/authority | Exact reviewed origin/path scopes; official/primary/secondary/community/unverified; original URL/title, review basis, digest and quoted excerpt; unverified hits cannot starve official seeds | Human authority review of real deployments; no automatic claim that a government-looking domain is official |
+| Freshness/current information | Claim-specific TTLs, publisher date metadata, old community outage reports excluded, invalid/future dates rejected; changing-claim intake routes to research | A fresh fetch is not proof the underlying rule remains current; interpretation and source completeness require verification |
+| General prerequisites | Paired provider extraction contract, source membership/quotes, jurisdiction checks, bounded DAG, cycle/missing-node rejection | Genuine extraction quality and applicability across real workflows |
+| Multi-level dependency planning | Three-level graph returns to the original goal; each dependency requires confirmation; seven catalog domains use the same general mechanism in three locales | Automatic binding of reviewed plans to live browser observations remains repository work |
+| Eligibility | Relevant local boolean facts only; unknown remains insufficient; source/freshness review required; positive result at most possibly eligible | Full semantic criteria coverage, alternatives/exceptions and official determination are not established |
+| Plans/completion | Explicit USER_CONFIRMATION predicates, no model COMPLETE; context/expiry checks; memory-only checklist and original goal | Verified live completion predicates and automatic plan/screen revalidation remain repository work |
+| Error/outage research | Explicit Service issue mode; paired free-prose incident hypotheses require exact current citations and authority/jurisdiction checks; conflicting/absent evidence remains unknown; public error cues offer blank consented research; no payment retry | Genuine semantic inference, actual account diagnosis and live workflow binding remain unverified |
+| Community/Reddit distinction | General community source type and attribution; anecdotes cannot support eligibility/requirements or override official policy; historical/undated reports distinguished | Live coverage of selected community sites (access restrictions may apply) |
+| Malicious destinations | Canonical HTTPS URLs, reviewed origin/path authority, no redirects/private DNS/userinfo/IDN; high-risk cross-app guidance without bound provenance fails closed | Positive browser-origin-to-evidence binding remains repository work; refusing an unknown site is not verified high-risk guidance |
+| Prompt injection | Retrieved text inert; strict schemas, no tools/actions/LLM URLs, exact evidence IDs/quotes; adversarial directives refused | No proof of universal semantic resistance or genuine-model adversarial accuracy |
+| Provider diagnostics | Request/session correlation, model/provider, latency, HTTP receipt/status, token metadata and fixed validation categories; malformed-body HTTP receipt retained without raw body | Earlier six rejected live pairs cannot be diagnosed retrospectively; new live retest needs separate scoped authorization after remaining gates |
+| Chrome readiness | Test-only flags/debug-app setup, prior settings restored, alphabetic fixture nonce avoids private-number guard; actual Chrome service guidance verified | Other browser versions and real sites require acceptance; no first-run or certificate bypass in production |
+| Browser interruption | Real Chrome synthetic CAPTCHA and cookie choice handovers have no target; retained original goal resumes afterward | Real authentication, CAPTCHA, protected pages and authenticated forms require user/manual validation |
+| Cloud storm/cost | Actual service to local fake backend: 660 emitted events, 60 content mutations, 83 delivered records, 9 observations, 3 HTTP requests, 1 cancellation (latest run); durable global/user budgets tested | No semantic request deduplication, public load test or cost-per-completed-real-task certification |
+| Privacy/telemetry | Private message/document/account cues suppress cloud; strict payloads reject raw screen additions; synthetic private payload absent from logs/DB/diagnostics; unused growing session history removed; debug AI default opt-in fixed; input-method windows/packages excluded before tree copying; research uses FLAG_SECURE | Exhaustive semantic privacy classification and external provider/host telemetry assessment remain open |
+| Lifecycle/resources | 120 pause/resume cycles with PSS/heap samples; 60 same-session WebView cycles in 77.3 seconds, PSS 106223→109262 KB; reproduced late-old-window content event fix preserves real root/window invalidation | Hours-long mixed-fault, physical-device/OEM, actual audio and performance validation remain open; historical post-tap failure cause not established |
+| English/Hindi/Hinglish | Same evidence graph/fact logic across three locales; category routing, checklist and report labels/glossary localized; Hindi 200% font test | Real language intent/extraction equivalence and source translation quality not certified; quotations deliberately remain original |
+| Hosted readiness | Existing HTTPS/per-user auth, reauthentication after work, durable quotas, isolation and bounded workers extended to research; optional deployment configuration documented | Real chosen host/TLS, account provisioning, operational testing and release connectivity external configuration |
+| Existing boundaries/UI | Existing green/glass components retained; content-sized actions, local secret handling, stale/cancellation guards and pause/resume regressions | TalkBack, device performance and full design parity retain previous manual gates |
+
+## Failures investigated, not erased
+
+- Missing research modules at baseline: `baseline.txt`. New retrieval/planning/search implementations and deterministic tests now exist.
+- Chrome preparation needed persistent debug-app setting and a pipe-written flag file; earlier shell redirection did not write the flags. Browser setup is test infrastructure only.
+- Cached browser fixture omitted new buttons. A unique URL fixes cache reuse. Numeric nonce was rejected by the existing private-value guard; changed only the fixture identifier to letters.
+- CAPTCHA test incorrectly assumed no presentation identity. Corrected it to inspect the actual no-target overlay; a text-only handover legitimately retains observation identity.
+- A new idle trace showed an old window's late content event invalidating a newer active root. `ObservationEventPolicy` filters that case only. Unknown/current roots and window transitions still invalidate. This is not proof of the historical WebView post-tap cause.
+- Extended UI run exposed preselected AI in debug setup. Restored explicit opt-in; updated an obsolete text selector without removing the consent assertion. The failing run is retained in `emulator-extended-before-consent-fix.txt`.
+- The DNS regression reproduced multicast addresses being accepted by Python’s `is_global`. Retrieval now explicitly excludes multicast/reserved/unspecified addresses; failing and passing evidence is retained.
+- Practice gateway tests expected an obsolete instruction on private forms. They now assert the accepted SENSITIVE_HANDOVER/no-target behavior while preserving no-private-HTTP and observed-completion checks.
+- One local permission-review attempt timed out; retry succeeded. A sandbox-only socket test failure was rerun with localhost permissions. Neither is reported as an application defect.
+
+## Next repository work (not external blockers)
+
+1. Bind a reviewed plan's current step and destination provenance to a fresh browser observation; preserve original goal and require revalidation on redirect/detour/error. Do not pass an unconstrained plan to the screen model or relax existing high-risk guards.
+2. Integrate incident hypotheses with plan/screen revalidation; preserve unknown scope and do not treat exact citations as verified semantic entailment.
+3. Expand mixed-fault, long-session, changing-screen and semantic privacy acceptance; add coverage without calling fixture success real-model correctness.
+
+## External/manual work
+
+Choose and review source/search hosting and source-authority records; configure the actual HTTPS backend/accounts; review current official policies and protected workflows; separately authorize genuine-model evaluation after architecture gates; validate physical speech/OEM/TalkBack/performance. No real private data, transaction, CAPTCHA solving or complaint submission should be used as automated tests.

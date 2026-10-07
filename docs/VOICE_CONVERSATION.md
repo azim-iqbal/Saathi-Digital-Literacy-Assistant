@@ -1,3 +1,9 @@
+## 7 October 2026 — Research architecture and deterministic remediation (overall work open)
+
+The accepted pause/resume and challenge handover regressions remain passing. This phase adds no evidence of actual microphone/TTS delivery, natural streaming conversation or OEM background survival. Research pauses active guidance and uses explicit sharing/review; keyboard content is excluded before tree copying. Physical speech remains a manual gate.
+
+Evidence and remaining gates: [remediation matrix](REMEDIATION_CAPABILITY_MATRIX.md).
+
 ## 7 October 2026 — Retained-task pause/resume and private challenge handover
 
 Final verification: **95 Android unit tests and all 10 focused emulator tests pass**, debug/test builds and release Kotlin compile pass. The added immediate-start/pause UI test found a real `ForegroundServiceDidNotStartInTimeException`; fixed by acknowledging pending foreground starts before service shutdown (promotion alone was insufficient). No production guidance/audio services remained after the final tests; the separate fixture WebView service remained until emulator shutdown. Evidence: `test-evidence/2026-10-07-resumption/verification.json`, `final-regression.txt`, `paused-ui-acknowledged.txt` and screenshots.

@@ -47,7 +47,24 @@ class SaathiAccessibilityService : AccessibilityService() {
                 com.saathi.overlay.CyberLinkOverlayService.ownsAccessibilityWindow(event.windowId)
         ObservationDiagnostics.event(event.eventType, event.windowId, event.contentChangeTypes, ownOverlay)
         if (ownOverlay) return
+        // Old WebView/background windows can emit delayed content events. Compare
+        // against the actual current root, never an earlier presentation ticket.
+        // Window transitions and missing roots still take the invalidation path.
+        val root = runCatching { rootInActiveWindow }.getOrNull()
+        val rootWindow = try { root?.windowId } finally { @Suppress("DEPRECATION") root?.recycle() }
+        if (!com.saathi.core.ObservationEventPolicy.relevant(event.eventType, event.windowId, rootWindow)) return
         refreshScreen()
+    }
+
+    private fun inputMethodSurface(root: AccessibilityNodeInfo): Boolean {
+        val window = runCatching { root.window }.getOrNull()
+        val type = try { window?.type } finally { @Suppress("DEPRECATION") window?.recycle() }
+        val keyboards = runCatching {
+            getSystemService(android.view.inputmethod.InputMethodManager::class.java).inputMethodList.map { it.packageName }.toSet()
+        }.getOrDefault(emptySet())
+        val configured = android.provider.Settings.Secure.getString(contentResolver, android.provider.Settings.Secure.DEFAULT_INPUT_METHOD)
+            ?.let(android.content.ComponentName::unflattenFromString)?.packageName
+        return !com.saathi.core.WindowObservationPolicy.allows(type, root.packageName?.toString().orEmpty(), keyboards + listOfNotNull(configured))
     }
 
     private fun scheduleCopy() {
@@ -63,7 +80,7 @@ class SaathiAccessibilityService : AccessibilityService() {
                 SaathiSession.onScreenUnavailable()
                 return@postDelayed
             }
-            if (!SaathiSession.canObserve(root.packageName?.toString().orEmpty())) {
+            if (inputMethodSurface(root) || !SaathiSession.canObserve(root.packageName?.toString().orEmpty())) {
                 @Suppress("DEPRECATION") root.recycle()
                 SaathiSession.onScreenUnavailable()
                 return@postDelayed
@@ -78,7 +95,9 @@ class SaathiAccessibilityService : AccessibilityService() {
                     val started = android.os.SystemClock.elapsedRealtime()
                     val nodes = NodeMasker.flatten(snapshot)
                     ObservationDiagnostics.snapshot(android.os.SystemClock.elapsedRealtime() - started)
-                    SaathiSession.onScreenChanged(nodes, ticket)
+                    val browserLocation = if (SaathiSession.wantsBrowserLocation() &&
+                        com.saathi.core.ScreenInterruption.reason(nodes) == null) BrowserLocationReader.read(snapshot) else null
+                    SaathiSession.onScreenChanged(nodes, ticket, browserLocation)
                 }
                 catch (_: RuntimeException) { SaathiSession.onObservationFailed(ticket) }
                 finally {

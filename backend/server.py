@@ -69,7 +69,7 @@ def make_server(token, gateway, host=None, port=8765):
             pass  # Never print bearer tokens, requests, screen IDs, or provider output.
 
         def reply(self, code, payload):
-            encoded = json.dumps(payload, separators=(",", ":")).encode()
+            encoded = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode()
             try:
                 self.send_response(code)
                 self.send_header("Content-Type", "application/json")

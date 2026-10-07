@@ -6,8 +6,10 @@
 <script>
 const content = document.getElementById('content');
 function choices() {
-  content.innerHTML = '<button onclick="this.textContent=\'Help opened\'">Help</button><button onclick="detour()">Explore</button><a href="#support" onclick="this.textContent=\'Support opened\';return false;">Support</a><button onclick="privateForm()">Private example</button><button onclick="travel()">Travel options</button>';
+  content.innerHTML = '<button onclick="this.textContent=\'Help opened\'">Help</button><button onclick="detour()">Explore</button><a href="#support" onclick="this.textContent=\'Support opened\';return false;">Support</a><button onclick="privateForm()">Private example</button><button onclick="travel()">Travel options</button><button onclick="humanChallenge()">Human challenge</button><button onclick="cookieChoice()">Cookie choices</button>';
 }
+function humanChallenge() { content.innerHTML = '<h2>CAPTCHA · Verify you are human</h2><p>Synthetic challenge. No solver, account or private input.</p><button onclick="choices()">Back to choices</button>'; }
+function cookieChoice() { content.innerHTML = '<h2>Cookie preferences</h2><p>Synthetic consent choice only.</p><button onclick="choices()">Use essential cookies</button>'; }
 function travel() { content.innerHTML = '<h2>Public travel examples</h2><button>To</button><button>01/10/2026</button><button>Cheapest from ₹5221</button><button>₹6,398</button><button onclick="choices()">Back to choices</button>'; }
 function detour() { content.innerHTML = '<h2>Another page</h2><button onclick="choices()">Back to choices</button>'; }
 function privateForm() { content.innerHTML = '<label>Password (synthetic; leave empty)<input type="password" autocomplete="off"></label><button onclick="choices()">Back to choices</button>'; }

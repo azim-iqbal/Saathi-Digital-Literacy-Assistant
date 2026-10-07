@@ -17,7 +17,7 @@ object LiveGuide {
     }
     fun allowedPackage(name: String, own: String) = name.isNotBlank() && name != own &&
         name != "com.android.systemui" && name != "android" &&
-        !name.contains("permissioncontroller") && !name.contains("packageinstaller")
+        !name.contains("permissioncontroller") && !name.contains("packageinstaller") && !name.contains("inputmethod")
     private fun normalized(value: String) = value.trim().lowercase(Locale.ROOT).replace(Regex("\\s+"), " ")
 
     private fun matches(desired: String, nodes: List<UiNode>): List<IndexedValue<UiNode>> =
@@ -40,6 +40,22 @@ object LiveGuide {
             return Plan(GuideStep(com.saathi.core.ScreenInterruption.message(it, language), language, null,
                 "Wait for a fresh screen after private user action.", false), useCloud = false)
         }
+        if (com.saathi.core.BrowserConsentPolicy.present(nodes)) return Plan(
+            GuideStep(com.saathi.core.BrowserConsentPolicy.message(language), language, null,
+                "Wait for the user's privacy choice.", false), useCloud = false)
+        com.saathi.core.PaymentSafety.state(nodes)?.let {
+            return Plan(GuideStep(com.saathi.core.PaymentSafety.explanation(it, language), language, null,
+                "Verify the transaction privately; no automatic retry or success inference.", false), useCloud = false)
+        }
+        if (com.saathi.core.ScreenErrorPolicy.present(nodes)) return Plan(
+            GuideStep(com.saathi.core.ScreenErrorPolicy.message(language), language, null,
+                "The user may choose consented research; no inferred retry or diagnosis.", false), useCloud = false)
+        if (com.saathi.core.DestinationPolicy.requiresProvenance(request, nodes)) return Plan(
+            GuideStep(com.saathi.core.DestinationPolicy.explanation(language), language, null,
+                "Verified destination provenance is required.", false), useCloud = false)
+        if (com.saathi.core.ResearchIntent.claimType(request) != null) return Plan(
+            GuideStep(com.saathi.core.ResearchIntent.message(language), language, null,
+                "Explicit consent and current evidence are required.", false), useCloud = false)
         // Form progression uses only local field metadata. Editable contents never go to a model.
         if (FormGuide.isRequest(request)) return Plan(FormGuide.next(nodes, language), useCloud = false)
         val local = next(request, nodes, language)

@@ -14,6 +14,9 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /** Process-only credentials. Release destinations are fixed at build time and require HTTPS. */
 object PracticeGateway {
+    internal val requestsAttempted = java.util.concurrent.atomic.AtomicInteger()
+    internal val requestsCancelled = java.util.concurrent.atomic.AtomicInteger()
+    internal val requestsRejectedLocally = java.util.concurrent.atomic.AtomicInteger()
     internal val requestsStarted = java.util.concurrent.atomic.AtomicInteger()
     @Volatile private var token: String? = null
     @Volatile private var ai = false
@@ -91,8 +94,29 @@ object PracticeGateway {
             if (consent) token else null, 11000, { ConnectionCodec.decode(it, id) }, callback)
     }
 
+    private fun researchText(value: String, limit: Int) = value.isNotBlank() && value.length <= limit &&
+        value.none { it.code < 32 } && !com.saathi.accessibility.SensitiveContent.isSensitive(false, value)
+
+    fun research(goal: String, jurisdiction: String, locale: String, consent: Boolean, claimType: String = "requirements",
+                 callback: (GatewayResult) -> Unit): GatewayCancellation {
+        val id = java.util.UUID.randomUUID().toString()
+        val body = JSONObject().put("request_id", id).put("goal", goal).put("jurisdiction", jurisdiction)
+            .put("locale", locale).put("claim_type", claimType).put("consent", consent).toString()
+        return submit("/v1/research", id, body,
+            if (consent && aiEnabled() && researchText(goal, 160) && researchText(jurisdiction, 80)) token else null,
+            8000, { ResearchCodec.decode(it, id, false, locale) }, callback)
+    }
+
+    fun planResearch(researchId: String, consent: Boolean, locale: String = "en-IN", callback: (GatewayResult) -> Unit): GatewayCancellation {
+        val id = java.util.UUID.randomUUID().toString()
+        val body = JSONObject().put("request_id", id).put("research_id", researchId).put("consent", consent).toString()
+        return submit("/v1/task-plan", id, body, if (consent && aiEnabled()) token else null,
+            11000, { ResearchCodec.decode(it, id, true, locale) }, callback)
+    }
+
     private fun submit(path: String, requestId: String, encoded: String, secret: String?, timeoutMs: Int,
                        decode: (String) -> GatewayResult, callback: (GatewayResult) -> Unit): GatewayCancellation {
+        requestsAttempted.incrementAndGet()
         val cancelled = AtomicBoolean(false)
         val ticket = generation.get()
         val origin = activeEndpoint ?: defaultEndpoint
@@ -104,6 +128,7 @@ object PracticeGateway {
             else -> null
         }
         if (rejection != null) {
+            requestsRejectedLocally.incrementAndGet()
             main.post { if (current()) callback(GatewayResult.Rejected(rejection)) }
             return GatewayCancellation { cancelled.set(true) }
         }
@@ -124,7 +149,9 @@ object PracticeGateway {
             }
         }
         val cancellation = GatewayCancellation {
-            if (cancelled.compareAndSet(false, true) && cancellationSlots.tryAcquire()) {
+            val firstCancellation = cancelled.compareAndSet(false, true)
+            if (firstCancellation) requestsCancelled.incrementAndGet()
+            if (firstCancellation && cancellationSlots.tryAcquire()) {
                 cancellationIo.execute {
                     try { activeConnection.get()?.disconnect(); sendCancel() }
                     finally { cancellationSlots.release() }

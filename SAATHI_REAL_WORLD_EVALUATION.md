@@ -1,3 +1,9 @@
+## 7 October remediation update — component evidence, not full acceptance
+
+The original evaluation below is historical. New bounded retrieval, provenance/freshness, paired cited dependency/eligibility proposals, reviewed checklists and incident hypotheses are implemented. Safe diagnostics, deterministic Chrome fixtures, privacy controls and local cloud/endurance tests now have evidence. **Overall release verdict remains NOT READY.** Reviewed plans are not yet bound to live browser destinations/observations; genuine provider failures/accuracy, comprehensive privacy and production/device acceptance remain unresolved.
+
+Current evidence: 139 backend tests, 111 Android unit tests, 5 harness tests and 51 offline probes pass, plus the scoped emulator groups in [the evidence index](docs/test-evidence/2026-10-07-research/README.md). No live model calls were used. See [the current detailed matrix](docs/REMEDIATION_CAPABILITY_MATRIX.md); the original 142 workflow acceptance cases are not automatically passed by these tests.
+
 # Saathi real-world capability evaluation
 
 **7 October 2026 · Evaluation baseline: `935863a` plus the local changes described below.**
@@ -174,30 +180,30 @@ No real secrets appear in retained provider results. Current privacy rules are c
 4. On-device cloud event-storm/cost tests, long-session lifecycle/heap testing, broader private-data/telemetry audit and adversarial source/navigation evaluation.
 5. Hosted HTTPS/auth setup and standalone phone acceptance (current phone without USB has no deployed server); signing, real audio quality, OEM background behavior and device performance.
 
-### Final capability matrix
+### Updated capability matrix — 7 October remediation
 
-PASS would mean the category's claimed behavior has adequate scoped evidence; PARTIAL means useful components passed with material gaps; FAIL means a required capability is absent or failed. Individual real-world scenarios remain BLOCKED where not executed.
+PARTIAL means implemented components have passing scoped evidence with material gates still open. Individual real-world scenarios remain BLOCKED where not executed. Historical findings above describe the earlier evaluation; this table and the linked detailed matrix supersede claims that retrieval/planning are wholly absent.
 
-| Capability | Verdict | Basis |
+| Capability | Verdict | Current evidence and remaining gate |
 |---|---|---|
-| Government Services | FAIL | No evidence-backed process/dependency discovery; manual workflows blocked |
-| Financial Navigation | PARTIAL | Conservative boundaries; eligibility and end-to-end acceptance missing |
-| Eligibility Reasoning | FAIL | No verified eligibility/source contract |
-| Prerequisite Discovery | FAIL | No general dependency planner/retrieval |
-| Web Research | FAIL | No current-web retrieval path |
-| Community Research | FAIL | No attribution/retrieval capability |
-| Error Recovery | PARTIAL | Offline transport/fallback passes; genuine failures unresolved |
-| Dynamic UI | PARTIAL | Real native/WebView detour/retarget pass; Chrome onboarding blocks browser run |
-| Authentication Boundary | PARTIAL | Private-field pause/revocation pass; live authentication/CAPTCHA resume unverified |
-| Payment Boundary | PARTIAL | Conservative withholding; no real transaction workflow acceptance |
-| Privacy | PARTIAL | Five reproduced boundary failures fixed; broader semantic/telemetry audit open |
-| Prompt Injection | PARTIAL | Schema guard passes; genuine adversarial guidance not accepted/verified |
-| English | PARTIAL | Local guidance passes; genuine pair failed |
-| Hindi | PARTIAL | Existing local language coverage; genuine pair timed out |
-| Hinglish | PARTIAL | Existing local language coverage; genuine pair rejected uncertain output |
-| Accessibility | PARTIAL | Real-service lifecycle passes; broad assistive-user acceptance open |
-| Performance | PARTIAL | Scoped event/tree/PSS measurements only |
-| Cost Protection | PARTIAL | Replay/caps pass; cloud event storm and per-completed-task cost unverified |
+| Government Services | PARTIAL | General cited requirements/dependency contract implemented; live workflow applicability and browser integration open |
+| Financial Navigation | PARTIAL | Conservative payment/destination boundaries; no real transaction acceptance |
+| Eligibility Reasoning | PARTIAL | Cited criteria and local boolean facts; positive result only possibly eligible, semantic coverage unverified |
+| Prerequisite Discovery | PARTIAL | General bounded DAG/review engine; extraction quality and live observation binding open |
+| Web Research | PARTIAL | Bounded TLS retrieval/search/provenance/freshness; real reviewed source/search deployment open |
+| Community Research | PARTIAL | General attributed community class with historical/unknown dates; real coverage unverified |
+| Error Recovery | PARTIAL | Safe diagnostics and cited incident hypotheses; prior genuine failures and actual diagnosis unresolved |
+| Dynamic UI | PARTIAL | Actual Chrome fixture guidance and WebView regressions; historical post-tap cause unproven |
+| Authentication Boundary | PARTIAL | Accepted pause/resume and synthetic CAPTCHA/private handovers pass; real protected workflows manual |
+| Payment Boundary | PARTIAL | Pending/unknown states withhold retry; no real transaction acceptance |
+| Privacy | PARTIAL | Input-method/private-context suppression, secure research UI, bounded payload/log tests; semantic/provider telemetry audit open |
+| Prompt Injection | PARTIAL | Inert evidence, strict no-tool schemas and quoted citations; genuine semantic resistance unverified |
+| English | PARTIAL | General graph/research contracts and UI tests; genuine extraction unverified |
+| Hindi | PARTIAL | Equivalent controlled graph contracts and 200% font UI; real language coverage unverified |
+| Hinglish | PARTIAL | Equivalent controlled graph contracts and localized controls; real language coverage unverified |
+| Accessibility | PARTIAL | Real-service lifecycle and large-font checks; TalkBack/user acceptance open |
+| Performance | PARTIAL | 60 WebView cycles and 120 pause/resume cycles sampled; hours/OEM/physical speech open |
+| Cost Protection | PARTIAL | Durable quotas and local cloud storm pass; semantic deduplication and real task costs open |
 
 ## Evidence screenshots
 

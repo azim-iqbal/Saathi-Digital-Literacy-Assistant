@@ -47,6 +47,17 @@ class ExternalSurfaceActivity : Activity() {
         })
         layout.addView(Button(this).apply {
             isAllCaps = false
+            text = "Changing event storm"
+            setOnClickListener {
+                val handler = android.os.Handler(mainLooper)
+                repeat(60) { index -> handler.postDelayed({
+                    layout.contentDescription = if (index % 2 == 0) "Updated fixture north" else "Updated fixture south"
+                    layout.sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED)
+                }, (index * 20).toLong()) }
+            }
+        })
+        layout.addView(Button(this).apply {
+            isAllCaps = false
             text = "Explore"
             setOnClickListener { showDetour() }
         })

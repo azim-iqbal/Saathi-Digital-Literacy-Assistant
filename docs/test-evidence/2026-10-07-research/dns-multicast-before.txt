@@ -1,0 +1,23 @@
+FF
+======================================================================
+FAIL: test_multicast_and_reserved_dns_answers_are_not_public_web_destinations (backend.tests.test_research_planning.ResearchTests.test_multicast_and_reserved_dns_answers_are_not_public_web_destinations) (ip='224.0.0.1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_planning.py", line 72, in test_multicast_and_reserved_dns_answers_are_not_public_web_destinations
+    with self.subTest(ip=ip), self.assertRaises(InvalidRequest):
+                              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+======================================================================
+FAIL: test_multicast_and_reserved_dns_answers_are_not_public_web_destinations (backend.tests.test_research_planning.ResearchTests.test_multicast_and_reserved_dns_answers_are_not_public_web_destinations) (ip='ff02::1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_planning.py", line 72, in test_multicast_and_reserved_dns_answers_are_not_public_web_destinations
+    with self.subTest(ip=ip), self.assertRaises(InvalidRequest):
+                              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=2)

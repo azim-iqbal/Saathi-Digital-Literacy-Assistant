@@ -156,6 +156,34 @@ class LiveAccessibilityIntegrationTest {
                 screenshot("live-service-retarget")
                 main { assertTrue(SaathiSession.changeLiveRequest("Help", session)) }
                 waitFor("Typed-style replacement returns to native control") { SaathiSession.instruction.value.startsWith("Find “Help”") }
+                val webCycles = InstrumentationRegistry.getArguments().getString("webview_cycles")?.toIntOrNull()?.coerceIn(0,120) ?: 0
+                if (webCycles > 0) {
+                    val samples = org.json.JSONArray()
+                    val start = SystemClock.uptimeMillis()
+                    main { assertTrue(SaathiSession.changeLiveRequest("Support", session)) }
+                    repeat(webCycles) { cycle ->
+                        waitFor("Endurance WebView target") { SaathiSession.instruction.value.startsWith("Find “Support”") }
+                        tap("Support")
+                        waitFor("Endurance tap mutates WebView") { nodes().any { it.text == "Support opened" } }
+                        waitFor("Endurance stale marker clears") { SaathiSession.instruction.value.startsWith("I cannot find") }
+                        tap("Explore")
+                        waitFor("Endurance detour") { nodes().any { it.text == "Back to choices" } }
+                        tap("Back to choices")
+                        waitFor("Endurance original goal resumes") { SaathiSession.instruction.value.startsWith("Find “Support”") }
+                        assertEquals(session, SaathiSession.sessionKey())
+                        if (cycle % 10 == 0 || cycle == webCycles-1) {
+                            val runtime=Runtime.getRuntime()
+                            samples.put(org.json.JSONObject().put("cycle",cycle+1)
+                                .put("elapsed_ms",SystemClock.uptimeMillis()-start).put("pss_kb",android.os.Debug.getPss())
+                                .put("heap_used_bytes",runtime.totalMemory()-runtime.freeMemory()))
+                        }
+                    }
+                    File(output(), "webview-endurance.json").writeText(org.json.JSONObject()
+                        .put("cycles",webCycles).put("samples",samples).put("same_guidance_session",true)
+                        .put("scope","synthetic WebView mutation/detour/return; not proof of historical failure cause or OEM endurance").toString(2))
+                    main { assertTrue(SaathiSession.changeLiveRequest("Help", session)) }
+                    waitFor("Endurance returns to native task") { SaathiSession.instruction.value.startsWith("Find “Help”") }
+                }
                 tap("Explore")
                 waitFor("Detour correction from external event") { SaathiSession.instruction.value.startsWith("I cannot find") }
                 screenshot("live-service-detour")

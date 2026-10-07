@@ -116,3 +116,47 @@ class HostedTests(unittest.TestCase):
             return result
         with patch("backend.hosted.dispatch", side_effect=revoke):
             self.assertEqual(self.request()[0], 401)
+
+    def test_research_routes_require_auth_consent_and_do_not_expose_other_users_bundles(self):
+        from backend.research import ResearchService,RegistryRetriever,SourceRegistry
+        from backend.tests.test_research_planning import source,request
+        for user in ('alice','bob'):
+            gateway=self.app.gateway(user,4)
+            gateway.research=ResearchService(RegistryRetriever(SourceRegistry([source()]),lambda *a:'<p>Application requires registration.</p>'),gateway.budget.reserve)
+        self.assertEqual(self.request('/v1/research',request(),user='wrong')[0],401)
+        self.assertEqual(self.request('/v1/research',{**request(),'consent':False})[0],400)
+        self.assertEqual(self.request('/v1/research',request())[1]['status'],'researched')
+        self.assertEqual(self.request('/v1/task-plan',{'request_id':'plan','research_id':'research_one','consent':True},user='bob')[0],400)
+        self.assertFalse(self.sent)
+        self.assertEqual(dict(self.budget.db.execute('SELECT provider,count FROM calls')),{'research':1})
+
+    def test_research_revocation_discards_results_after_fetch(self):
+        from backend.research import ResearchService,RegistryRetriever,SourceRegistry
+        from backend.tests.test_research_planning import source,request
+        gateway=self.app.gateway('alice',4)
+        def fetch(*args):
+            self.accounts.revoke('alice')
+            return '<p>Application requires registration.</p>'
+        gateway.research=ResearchService(RegistryRetriever(SourceRegistry([source()]),fetch),gateway.budget.reserve)
+        self.assertEqual(self.request('/v1/research',request())[0],401)
+        self.assertFalse(self.sent)
+
+    def test_rejected_private_payloads_never_reach_logs_databases_or_diagnostics(self):
+        import contextlib
+        sentinel='synthetic private conversation about an appointment'
+        from backend.tests.test_providers import live
+        # An added raw field is forbidden even when it contains no numerical secret.
+        original=live()
+        payload={name:getattr(original,name) for name in original.__dataclass_fields__}
+        payload['controls']=[dict(c) for c in original.controls]
+        payload['previous_steps']=list(original.previous_steps)
+        payload['raw_screen']=sentinel
+        output=io.StringIO()
+        with contextlib.redirect_stdout(output),contextlib.redirect_stderr(output):
+            status,response=self.request('/v1/live-proposals',payload)
+        self.assertEqual(status,400)
+        self.assertFalse(self.sent)
+        retained=output.getvalue()+json.dumps(response)+json.dumps(self.request()[1])
+        retained+='\n'.join(self.accounts.db.iterdump())+'\n'.join(self.budget.db.iterdump())
+        self.assertNotIn(sentinel,retained)
+        self.assertNotIn(self.tokens['alice'],retained)

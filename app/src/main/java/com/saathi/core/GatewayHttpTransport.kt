@@ -61,7 +61,7 @@ internal class GatewayHttpTransport(
                         val size = input.read(buffer)
                         remaining()
                         if (size < 0) break
-                        require(out.size() + size <= 8192)
+                        require(out.size() + size <= if (path in setOf("/v1/research", "/v1/task-plan")) 65536 else 8192)
                         out.write(buffer, 0, size)
                     }
                     out.toString("UTF-8")

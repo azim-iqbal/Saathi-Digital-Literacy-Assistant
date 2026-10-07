@@ -33,7 +33,24 @@ internal object ConnectionCodec {
                 val last = row["last"] as? Map<*, *>
                 if (last == null) appendLine(if (mode == "mock") "No external API request." else "No API evidence for this check. Use Check APIs after configuring both providers.")
                 else {
-                    require(last.keys == setOf("request_id", "outcome", "real_api", "http_received", "checked_at_ms", "elapsed_ms", "input_tokens", "output_tokens", "total_tokens"))
+                    val legacyFields = setOf("request_id", "outcome", "real_api", "http_received", "checked_at_ms", "elapsed_ms", "input_tokens", "output_tokens", "total_tokens")
+                    val diagnosticFields = setOf("session_id", "validation_reason", "response_category")
+                    require(last.keys == legacyFields || last.keys == legacyFields + diagnosticFields || last.keys == legacyFields + diagnosticFields + "http_status")
+                    if (last.containsKey("validation_reason")) {
+                        require((last["session_id"] as String).matches(Regex("[A-Za-z0-9_-]{1,64}")))
+                        val validation = last["validation_reason"] as String
+                        require(validation in setOf("NOT_VALIDATED", "ACCEPTED", "PROVIDER_TIMEOUT", "PROVIDER_UNAVAILABLE", "PROVIDER_HTTP_ERROR",
+                            "TARGET_NOT_FOUND", "LOW_CONFIDENCE", "STALE_OBSERVATION", "COMPLETION_UNPROVEN", "SCHEMA_INVALID",
+                            "EVIDENCE_MISSING", "SOURCE_UNVERIFIED", "SAFETY_REJECTED", "DEPENDENCY_CYCLE", "JURISDICTION_MISMATCH",
+                            "UNSUPPORTED_ACTION", "OUTPUT_INCOMPLETE"))
+                        require(last["response_category"] in setOf("NONE", "STRUCTURED", "HIGHLIGHT", "HANDOVER", "COMPLETE"))
+                        appendLine("Validation: $validation · ${last["response_category"]}")
+                    }
+                    if (last.containsKey("http_status")) {
+                        val statusCode = last["http_status"] as? Long
+                        require(last["http_status"] == null || statusCode in 100L..599L)
+                        statusCode?.let { appendLine("HTTP response: $it") }
+                    }
                     val id = last["request_id"] as String
                     require(id.matches(Regex("[A-Za-z0-9_-]{1,64}")) && (expectedId == null || id == expectedId))
                     val real = last["real_api"] as Boolean

@@ -77,6 +77,9 @@ class AssistantActivity : ComponentActivity() {
                     .imePadding().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
                     SaathiBrand()
                     GlassButton("Report cyber fraud", primary = false, onClick = { startActivity(Intent(this@AssistantActivity, CyberReportActivity::class.java)) })
+                    val issueResearch = com.saathi.core.ScreenErrorPolicy.isNotice(lastReply)
+                    GlassButton(if (issueResearch) "Research this issue" else "Research requirements", primary = false,
+                        onClick = { ResearchActivity.open(this@AssistantActivity, if (issueResearch) "" else request, if (issueResearch) "outage" else null) })
                     Text("What would you like to do?", style = MaterialTheme.typography.titleLarge)
                     Text(if (aiConfigured) "Describe your navigation task. Form-filling help stays on this device and can mark safe visible fields. Other unresolved navigation tasks may use the configured AI route for one grounded next step. You perform every action." else "For apps and browsers, tell me a visible option’s name—such as Settings, Help or Search. For form filling, I can mark safe visible fields locally. Configure the backend to enable AI navigation for other tasks.")
                     GlassPanel(Modifier.fillMaxWidth()) {
@@ -115,7 +118,8 @@ class AssistantActivity : ComponentActivity() {
                         GlassButton("Discard paused task", primary = false, onClick = { SaathiSession.stop(); request = "" })
                     }
                     GlassButton(if (SaathiSession.isActive() && SaathiSession.isLive()) "Update on-screen help" else "Start on-screen help", enabled = overlay && accessibility && request.isNotBlank(), onClick = {
-                        if (!SaathiSession.acceptsLiveRequest(request)) error = "Name a visible navigation option. Payments, deletion, permissions and secrets must be handled yourself."
+                        if (com.saathi.core.ResearchIntent.claimType(request) != null) ResearchActivity.open(this@AssistantActivity, request)
+                        else if (!SaathiSession.acceptsLiveRequest(request)) error = "Name a visible navigation option. Payments, deletion, permissions and secrets must be handled yourself."
                         else runCatching {
                             if (SaathiSession.isActive() && SaathiSession.isLive()) SaathiSession.changeLiveRequest(request, SaathiSession.sessionKey())
                             else SaathiSession.startLive(this@AssistantActivity, request, preferences.language, spoken)

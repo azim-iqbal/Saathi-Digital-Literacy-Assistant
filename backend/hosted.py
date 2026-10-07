@@ -41,6 +41,8 @@ class HostedApplication:
                 self.users[principal] = Gateway(self.provider_factory(), timeout=10, mode="dual_ai",
                     budget=UserBudget(self.budget, principal, limit), executor=self.pool, slots=self.slots,
                     global_limit=10000, provider_limit=5000)
+                from backend.research import configured_research
+                self.users[principal].research = configured_research(self.users[principal].budget.reserve)
             self.users[principal].budget.limit = limit
             return self.users[principal]
 
@@ -91,7 +93,7 @@ class HostedApplication:
                     code, payload = 400, {"error": "invalid_request"}
                 except Exception:
                     code, payload = 503, {"error": "unavailable"}
-            data = json.dumps(payload, separators=(",", ":")).encode()
+            data = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode()
             titles = {200: "OK", 400: "Bad Request", 401: "Unauthorized", 403: "Forbidden", 404: "Not Found",
                       405: "Method Not Allowed", 413: "Content Too Large", 415: "Unsupported Media Type", 503: "Service Unavailable"}
             start_response(f"{code} {titles[code]}", [("Content-Type", "application/json"), ("Content-Length", str(len(data))),
@@ -115,6 +117,8 @@ def create_app():
     if not state.is_dir():
         raise ValueError("Create a private persistent state directory first")
     provider_order()  # Reject invalid routing configuration at startup.
+    from backend.research import configured_research
+    configured_research()  # Validate research configuration before admitting any user; no network call.
     def providers():
         result = []
         for name in provider_order():

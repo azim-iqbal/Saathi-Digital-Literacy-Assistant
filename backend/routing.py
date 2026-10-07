@@ -5,10 +5,17 @@ from backend.live import LiveSnapshot
 from backend.incident import IncidentSnapshot
 from backend.diagnostics import status, check
 
-PATHS = frozenset(("/v1/proposals", "/v1/live-proposals", "/v1/incident-assessment", "/v1/cancel", "/v1/connection-status", "/v1/provider-check"))
+PATHS = frozenset(("/v1/proposals", "/v1/live-proposals", "/v1/incident-assessment", "/v1/cancel", "/v1/connection-status", "/v1/provider-check", "/v1/research", "/v1/task-plan"))
 
 
 def dispatch(gateway, path, data):
+    if path in ("/v1/research", "/v1/task-plan"):
+        if gateway.research is None:
+            return {"status": "rejected", "reason": "research_not_configured"}
+        if path == "/v1/research": return gateway.research.run(data)
+        from backend.planning import ResearchSnapshot
+        if gateway.mode != "dual_ai": return gateway.rejected("not_configured")
+        return gateway.decide(ResearchSnapshot.from_request(data, gateway.research))
     if path == "/v1/connection-status":
         if data != {}:
             raise InvalidRequest("Empty status request required")
@@ -18,7 +25,8 @@ def dispatch(gateway, path, data):
     if path == "/v1/cancel":
         if not isinstance(data, dict) or set(data) != {"request_id"} or not isinstance(data["request_id"], str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", data["request_id"]):
             raise InvalidRequest("Invalid cancellation")
-        return {"cancelled": gateway.cancel(data["request_id"]), "mode": gateway.mode}
+        research_cancelled = gateway.research.cancel(data["request_id"]) if gateway.research else False
+        return {"cancelled": gateway.cancel(data["request_id"]) or research_cancelled, "mode": gateway.mode}
     if path in ("/v1/live-proposals", "/v1/incident-assessment"):
         if gateway.mode != "dual_ai":
             return gateway.rejected("not_configured")

@@ -1,0 +1,27 @@
+..E.......................
+======================================================================
+ERROR: test_http_routes_require_auth_and_explicit_consent (backend.tests.test_diagnostics.DiagnosticsTests.test_http_routes_require_auth_and_explicit_consent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_diagnostics.py", line 97, in test_http_routes_require_auth_and_explicit_consent
+    server = make_server(secret, gateway, port=0)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.382s
+
+FAILED (errors=1)

@@ -17,7 +17,6 @@ import com.saathi.core.DualProposalValidator
 import com.saathi.core.GuideTarget
 import com.saathi.core.GuideStep
 import com.saathi.core.GuideAction
-import com.saathi.core.StepHistory
 import com.saathi.core.UiNode
 import com.saathi.core.GuidanceSessionState
 import com.saathi.guardrails.GuardrailAuditLog
@@ -42,8 +41,23 @@ object SaathiSession {
     val lastReply: kotlinx.coroutines.flow.StateFlow<String> = mutableReply
     fun currentRequest() = if (active) goal else pausedTask?.goal.orEmpty()
     private data class PausedTask(val goal: String, val language: GuidanceLanguage, val spoken: Boolean,
-                                  val rate: Float, val live: Boolean)
+                                  val rate: Float, val live: Boolean, val sourcePlan: com.saathi.core.ReviewedPlanNavigation?)
     private var pausedTask: PausedTask? = null
+    private var sourcePlan: com.saathi.core.ReviewedPlanNavigation? = null
+    fun reviewedPlan(): com.saathi.core.EvidencePlan? = (sourcePlan ?: pausedTask?.sourcePlan)?.plan
+    fun wantsBrowserLocation() = active && sourcePlan != null
+    /** Explicit source-reading consent; no model call, target selection or automatic action. */
+    fun startReviewedSource(app: Context, plan: com.saathi.core.EvidencePlan, stepId: String,
+                            language: GuidanceLanguage): Boolean {
+        if (!android.provider.Settings.canDrawOverlays(app) ||
+            !com.saathi.accessibility.SaathiAccessibilityService.isConnected() ||
+            app.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked ||
+            plan.next(System.currentTimeMillis())?.id != stepId) return false
+        val binding = runCatching { com.saathi.core.ReviewedPlanNavigation(plan, stepId) }.getOrNull() ?: return false
+        start(app, plan.originalGoal, language, false, liveMode = true, reviewedSource = binding)
+        if (active) com.saathi.accessibility.SaathiAccessibilityService.requestCurrentScreen()
+        return active
+    }
     fun canResume() = !active && pausedTask != null && mutableStatus.value == GuidanceSessionState.PAUSED
     private var live = false
     private var liveAi = false
@@ -73,6 +87,7 @@ object SaathiSession {
             !acceptsLiveRequest(request) || !com.saathi.accessibility.SaathiAccessibilityService.isConnected()) return false
         if (expectedPresentation != null && (!observationGate.matchesPresentation(expectedPresentation) ||
                 latestNodes.any { it.isSensitive || it.isPassword })) return false
+        sourcePlan = null // An explicit replacement request cannot inherit evidence from another task.
         goal = request
         previousAiTargets.clear()
         lastSpokenTargetId = null
@@ -84,7 +99,7 @@ object SaathiSession {
     }
     fun pause() {
         if (!active) return // Repeated Pause must not erase an already paused task.
-        val task = PausedTask(goal, language, spokenPromptsEnabled, speechRate, live)
+        val task = PausedTask(goal, language, spokenPromptsEnabled, speechRate, live, sourcePlan)
         clearSession(GuidanceSessionState.PAUSED)
         pausedTask = task
     }
@@ -96,7 +111,7 @@ object SaathiSession {
         if (app.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked ||
             !android.provider.Settings.canDrawOverlays(app) ||
             !com.saathi.accessibility.SaathiAccessibilityService.isConnected()) return false
-        start(app, task.goal, task.language, task.spoken, task.rate, task.live)
+        start(app, task.goal, task.language, task.spoken, task.rate, task.live, task.sourcePlan)
         if (!active) return false
         com.saathi.accessibility.SaathiAccessibilityService.requestCurrentScreen()
         return true
@@ -113,7 +128,6 @@ object SaathiSession {
     private var active = false
     private var latestNodes: List<UiNode> = emptyList()
     private var lastStep: GuideStep? = null
-    private var history = mutableListOf<StepHistory>()
     private var pendingRunnable: Runnable? = null
     private var currentPackage: String? = null
     private var pendingGateway: GatewayCancellation? = null
@@ -125,20 +139,27 @@ object SaathiSession {
         languageMode: GuidanceLanguage,
         speakPrompts: Boolean = false,
         requestedSpeechRate: Float = TtsManager.DEFAULT_SPEECH_RATE,
-        liveMode: Boolean = false
+        liveMode: Boolean = false,
+        reviewedSource: com.saathi.core.ReviewedPlanNavigation? = null
     ): GuardrailResult {
         stop()
         context = appContext.applicationContext
         live = liveMode
-        liveAi = liveMode && PracticeGateway.aiEnabled()
+        sourcePlan = reviewedSource
+        sourcePlan?.invalidate()
+        liveAi = liveMode && reviewedSource == null && PracticeGateway.aiEnabled()
         useGateway = !liveMode && PracticeGateway.enabled()
         goal = goalText
         language = languageMode
         speechRate = requestedSpeechRate.coerceIn(TtsManager.MIN_SPEECH_RATE, TtsManager.MAX_SPEECH_RATE)
         mutableStatus.value = GuidanceSessionState.PREPARING
 
-        val scope = (if (liveMode && acceptsLiveRequest(goalText))
+        val scope = (if (liveMode && reviewedSource != null && reviewedSource.plan.originalGoal == goalText &&
+                reviewedSource.plan.next(System.currentTimeMillis())?.id == reviewedSource.stepId)
+            GuardrailResult(GuardrailDecision.ALLOW, "reviewed_source", "explicit_source_reading")
+            else if (liveMode && reviewedSource == null && acceptsLiveRequest(goalText))
             GuardrailResult(GuardrailDecision.ALLOW, "visible_option", "explicit_local_option")
+            else if (reviewedSource != null) GuardrailResult(GuardrailDecision.REFUSE, null, "source_review_expired")
             else GuardrailEngine.classify(goalText)).also(GuardrailAuditLog::record)
         if (scope.decision == GuardrailDecision.REFUSE) {
             clearSession(GuidanceSessionState.ERROR)
@@ -150,7 +171,6 @@ object SaathiSession {
         mutableStatus.value = GuidanceSessionState.OBSERVING
         spokenPromptsEnabled = speakPrompts
         lastSpokenTargetId = null
-        history.clear()
         lastStep = null
         currentPackage = null
         if (spokenPromptsEnabled) ensureTts()
@@ -167,6 +187,7 @@ object SaathiSession {
 
     private fun clearSession(terminalState: GuidanceSessionState) {
         pausedTask = null // Stop/error/process death never offers an automatic restart.
+        sourcePlan?.invalidate(); sourcePlan = null
         val app = context
         pendingGateway?.cancel(); pendingGateway = null
         useGateway = false
@@ -180,7 +201,6 @@ object SaathiSession {
         observationGate.stop()
         latestNodes = emptyList()
         lastStep = null
-        history.clear()
         currentPackage = null
         lastSpokenTargetId = null
         spokenPromptsEnabled = false
@@ -210,6 +230,7 @@ object SaathiSession {
 
     /** Called on the main thread at the event boundary, before copying a replacement tree. */
     fun invalidateScreen() {
+        sourcePlan?.invalidate()
         pendingGateway?.cancel(); pendingGateway = null
         observationGate.invalidate()
         pendingRunnable?.let(handler::removeCallbacks)
@@ -232,6 +253,7 @@ object SaathiSession {
     /** A secure, empty, or transitioning window is never treated as a continuation of guidance. */
     fun onScreenUnavailable() {
             if (!active) return
+            sourcePlan?.invalidate()
             pendingGateway?.cancel(); pendingGateway = null
             observationGate.invalidate()
             pendingRunnable?.let(handler::removeCallbacks)
@@ -253,7 +275,7 @@ object SaathiSession {
             com.saathi.core.ScreenInterruption.reason(latestNodes) == null && !FormGuide.isRequest(goal))
     }
 
-    fun onScreenChanged(nodes: List<UiNode>, ticket: ObservationGate.Ticket) {
+    fun onScreenChanged(nodes: List<UiNode>, ticket: ObservationGate.Ticket, browserLocation: String? = null) {
         val observedAtMs = System.currentTimeMillis()
         // Accessibility copying runs off-thread. All session state and presentation stay on main.
         handler.post {
@@ -276,6 +298,21 @@ object SaathiSession {
                         language.apiTag, null, "Wait for a fresh screen after the user finishes privately.", false), true)
                     mutableStatus.value = if (interruption == com.saathi.core.ScreenInterruption.Reason.CAPTCHA)
                         GuidanceSessionState.WAITING_FOR_CAPTCHA else GuidanceSessionState.SENSITIVE_HANDOVER
+                    return@Runnable
+                }
+                sourcePlan?.let { binding ->
+                    // Every interruption/error choice retains its existing local boundary.
+                    // Even a matching source address never authorizes an application/payment target.
+                    val safety = LiveGuide.plan(goal, nodes, language.apiTag, false)
+                    val guarded = com.saathi.core.BrowserConsentPolicy.present(nodes) ||
+                        com.saathi.core.PaymentSafety.state(nodes) != null ||
+                        com.saathi.core.ScreenErrorPolicy.present(nodes) ||
+                        com.saathi.core.PrivateContextPolicy.blocksCloud(nodes)
+                    binding.observe(if (guarded) null else browserLocation, System.currentTimeMillis())
+                    val text = if (com.saathi.core.PrivateContextPolicy.blocksCloud(nodes))
+                        com.saathi.core.ScreenInterruption.message(com.saathi.core.ScreenInterruption.Reason.PRIVATE, language.apiTag)
+                    else if (guarded) safety.local.speechText else binding.message(language.apiTag)
+                    present(GuideStep(text, language.apiTag, null, "Review the cited source; the user confirms progress in Saathi.", false), guarded)
                     return@Runnable
                 }
                 val livePlan = if (live) LiveGuide.plan(goal, nodes, language.apiTag, liveAi) else null
@@ -407,7 +444,6 @@ object SaathiSession {
             return
         }
 
-        lastStep?.let { history += StepHistory(it.speechText, it.expectedOutcome) }
         lastStep = step
         mutableInstruction.value = step.speechText
         mutableReply.value = step.speechText

@@ -12,6 +12,13 @@ class LiveAiPolicyTest {
         assertFalse(plan.useCloud)
         assertNull(plan.local.target)
     }
+    @Test fun privateMessageContextsDoNotNeedNumericSecretsToBlockCloud() {
+        for (context in listOf("Inbox", "conversation", "email_subject", "personal information", "निजी जानकारी", "niji jaankari")) {
+            val nodes = listOf(node("Help"), node("I have a confidential medical concern").copy(resourceId = context))
+            assertNull(context, LiveAiPolicy.snapshot(ticket, nodes, "Open Help", "en-IN", 1, emptyList()))
+        }
+        assertNotNull(LiveAiPolicy.snapshot(ticket, listOf(node("Help"), node("Public travel choices")), "Open Help", "en-IN", 1, emptyList()))
+    }
     private val ticket = ObservationGate.Ticket(1, 2, "app.test", 3)
     private fun node(label: String) = UiNode(Rect(), label, null, null, "private.resource.id", "Button", false, true, true)
     @Test fun whitespaceCannotBypassRequestControlOrHistoryLimits() {

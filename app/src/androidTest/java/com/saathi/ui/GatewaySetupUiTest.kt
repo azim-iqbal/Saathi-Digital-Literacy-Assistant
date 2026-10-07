@@ -21,7 +21,7 @@ class GatewaySetupUiTest {
             assertFalse(PracticeGateway.aiEnabled())
             val before = PracticeGateway.requestsStarted.get()
             ui.onNodeWithText("Use AI navigation in other apps").performScrollTo().performClick().assertIsSelected()
-            ui.onNode(hasText("By enabling AI navigation", substring = true)).assertExists()
+            ui.onNode(hasText("AI requests for non-form navigation", substring = true)).assertExists()
             ui.onNode(hasSetTextAction()).performScrollTo().performTextInput("synthetic-ui-token-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
             androidx.test.espresso.Espresso.closeSoftKeyboard()
             ui.onNodeWithText("Enable AI navigation").performScrollTo().performClick()

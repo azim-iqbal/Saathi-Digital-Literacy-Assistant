@@ -1,0 +1,6 @@
+test_catalog_domains_share_the_same_dependency_and_eligibility_engine (evaluation.test_research_acceptance.ResearchAcceptanceTests.test_catalog_domains_share_the_same_dependency_and_eligibility_engine) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.025s
+
+OK

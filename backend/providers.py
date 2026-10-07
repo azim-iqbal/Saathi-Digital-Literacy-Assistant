@@ -82,12 +82,13 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         raise InvalidRequest("Provider redirect refused")
 
 
-def post_json(url, headers, data, timeout=8):
+def post_json(url, headers, data, timeout=8, observer=None):
     deadline = time.monotonic() + timeout
     request = urllib.request.Request(url, data=json.dumps(data).encode(), headers={"Content-Type": "application/json", "User-Agent": "Saathi-Gateway/0.1", **headers})
     # Ignore environment proxy overrides; only fixed HTTPS provider endpoints are permitted.
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
     with opener.open(request, timeout=timeout) as response:
+        if observer is not None: observer(response.status)
         raw = bytearray()
         while True:
             if time.monotonic() >= deadline:
@@ -122,6 +123,20 @@ class RestProvider:
             record = self._records.get(request_id) if request_id else next(reversed(self._records.values()), None)
             return dict(record) if record else None
 
+    def record_validation(self, snapshot, proposal, reason):
+        from backend.validation_diagnostics import validation_code
+        with self._record_lock:
+            record = self._records.get(snapshot.request_id)
+            if record is not None:
+                if not (reason == "invalid_response" and record.get("validation_reason") != "NOT_VALIDATED"):
+                    record["validation_reason"] = validation_code(snapshot, proposal, reason)
+                category = getattr(proposal, "action", None)
+                record["response_category"] = category if category in ("HIGHLIGHT", "HANDOVER", "COMPLETE") else "STRUCTURED" if proposal is not None else "NONE"
+
+    def _received(self, status):
+        self._local.record["http_received"] = True
+        self._local.record["http_status"] = status if type(status) is int and 100 <= status <= 599 else None
+
     def _usage(self, result):
         self._local.record["http_received"] = True
         usage = result.get("usageMetadata" if self.id == "gemini" else "usage", {}) if isinstance(result, dict) else {}
@@ -133,8 +148,8 @@ class RestProvider:
 
     def propose(self, snapshot, cancelled):
         started = time.monotonic()
-        record = dict(request_id=snapshot.request_id, outcome="in_progress", real_api=self._transport is post_json,
-                      http_received=False, checked_at_ms=int(time.time()*1000), elapsed_ms=0,
+        record = dict(request_id=snapshot.request_id, session_id=snapshot.session_id, validation_reason="NOT_VALIDATED", response_category="NONE", outcome="in_progress", real_api=self._transport is post_json,
+                      http_received=False, http_status=None, checked_at_ms=int(time.time()*1000), elapsed_ms=0,
                       input_tokens=None, output_tokens=None, total_tokens=None)
         self._local.record = record
         with self._record_lock:
@@ -148,24 +163,31 @@ class RestProvider:
             code = error.code
             error.close()
             record["http_received"] = True
+            record["http_status"] = code
+            record["validation_reason"] = "PROVIDER_HTTP_ERROR"
             reason = "provider_auth" if code in (401, 403) else "provider_rate_limited" if code == 429 else "provider_model" if code == 404 else "provider_request" if code == 400 else "provider_unavailable"
             record["outcome"] = reason
             raise ProviderFailure(reason) from None
         except TimeoutError:
             record["outcome"] = "provider_timeout"
+            record["validation_reason"] = "PROVIDER_TIMEOUT"
             raise ProviderFailure("provider_timeout") from None
         except urllib.error.URLError as error:
             reason = "provider_timeout" if isinstance(error.reason, TimeoutError) else "provider_unavailable"
             record["outcome"] = reason
+            record["validation_reason"] = "PROVIDER_TIMEOUT" if reason == "provider_timeout" else "PROVIDER_UNAVAILABLE"
             raise ProviderFailure(reason) from None
         except InterruptedError:
             record["outcome"] = "cancelled"
             raise
-        except InvalidRequest:
+        except InvalidRequest as error:
+            from backend.validation_diagnostics import schema_code
+            record["validation_reason"] = schema_code(error)
             record["outcome"] = "invalid_response"
             raise
         except Exception:
             record["outcome"] = "provider_unavailable"
+            record["validation_reason"] = "PROVIDER_UNAVAILABLE"
             raise ProviderFailure("provider_unavailable") from None
         finally:
             record["elapsed_ms"] = int((time.monotonic() - started)*1000)
@@ -183,7 +205,7 @@ class RestProvider:
         timeout = deadline - now
         if timeout <= 0:
             raise TimeoutError("Decision expired before transport")
-        result = self._transport(url, headers, payload, timeout)
+        result = self._transport(url, headers, payload, timeout, observer=self._received) if self._transport is post_json else self._transport(url, headers, payload, timeout)
         # Preserve usage evidence even when a late reply cannot become guidance.
         self._usage(result)
         if cancelled.is_set():
@@ -196,9 +218,14 @@ class RestProvider:
         if cancelled.is_set():
             raise InterruptedError()
         from backend.incident import IncidentSnapshot, SYSTEM as INCIDENT_SYSTEM, parse_assessment
+        from backend.planning import ResearchSnapshot, SYSTEM as PLAN_SYSTEM, parse_plan
+        planning = isinstance(snapshot, ResearchSnapshot)
         incident = isinstance(snapshot, IncidentSnapshot)
-        system = INCIDENT_SYSTEM if incident else SYSTEM
-        if incident:
+        from backend.incident_research import SYSTEM as RESEARCH_INCIDENT_SYSTEM
+        system = (RESEARCH_INCIDENT_SYSTEM if snapshot.incident_mode else PLAN_SYSTEM) if planning else INCIDENT_SYSTEM if incident else SYSTEM
+        if planning:
+            payload = snapshot.payload()
+        elif incident:
             payload = {"locale": snapshot.locale, "summary": snapshot.summary, "concern": snapshot.concern}
         else:
             payload = {"locale": snapshot.locale, "task": snapshot.task, "eligible_node_ids": sorted(snapshot.eligible_node_ids)}
@@ -209,7 +236,7 @@ class RestProvider:
             result = self._request("https://generativelanguage.googleapis.com/v1beta/models/" + self.model + ":generateContent",
                 {"x-goog-api-key": self._key}, {"systemInstruction": {"parts": [{"text": system}]},
                 "contents": [{"role": "user", "parts": [{"text": data}]}],
-                "generationConfig": {"temperature": 0, "maxOutputTokens": 1024, "responseMimeType": "application/json"}}, cancelled)
+                "generationConfig": {"temperature": 0, "maxOutputTokens": 4096 if planning else 1024, "responseMimeType": "application/json"}}, cancelled)
             if not isinstance(result, dict):
                 raise InvalidRequest("Invalid provider envelope")
             candidates = result.get("candidates", [])
@@ -234,7 +261,7 @@ class RestProvider:
         else:
             result = self._request("https://api.groq.com/openai/v1/chat/completions", {"Authorization": "Bearer " + self._key},
                 {"model": self.model, "messages": [{"role": "system", "content": system}, {"role": "user", "content": data}],
-                 "temperature": 0, "max_completion_tokens": 1024, "response_format": {"type": "json_object"}}, cancelled)
+                 "temperature": 0, "max_completion_tokens": 4096 if planning else 1024, "response_format": {"type": "json_object"}}, cancelled)
             if not isinstance(result, dict):
                 raise InvalidRequest("Invalid provider envelope")
             choices = result.get("choices", [])
@@ -246,4 +273,4 @@ class RestProvider:
             text = message.get("content")
         if cancelled.is_set():
             raise InterruptedError()
-        return parse_assessment(text, snapshot) if incident else proposal_from_text(text, snapshot)
+        return parse_plan(text, snapshot) if planning else parse_assessment(text, snapshot) if incident else proposal_from_text(text, snapshot)

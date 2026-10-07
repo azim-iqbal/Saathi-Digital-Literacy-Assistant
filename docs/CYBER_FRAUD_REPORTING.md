@@ -1,3 +1,9 @@
+## 7 October 2026 — Research architecture and deterministic remediation (overall work open)
+
+General service-incident research can now return evidence-cited, review-required scope hypotheses from paired adapters. This does not determine whether a person's experience is legally cybercrime, create legal testimony or submit a complaint. Existing local user-fact worksheet, exact per-field copy consent, private-form safeguards and manual portal boundaries remain unchanged. Authenticated portal forms and genuine incident-assessment accuracy remain unverified.
+
+Evidence and remaining gates: [remediation matrix](REMEDIATION_CAPABILITY_MATRIX.md).
+
 ## 3 October — reviewed complaint worksheet and per-field copy
 
 `Prepare complaint draft` opens a secure, memory-only worksheet from the optional typed/dictated incident account. It asks when/contact/impact/actions/evidence follow-ups, leaves unknown facts blank and composes an incident narrative verbatim from supplied sections. Date/time and impact notes are offered separately when known. It never invents an amount, date, intent, guilt or evidence. This is local fact assembly; optional paired AI assessment remains on the reporting screen with separate summary-sharing consent, not a claim of model-written or legally verified complaints.

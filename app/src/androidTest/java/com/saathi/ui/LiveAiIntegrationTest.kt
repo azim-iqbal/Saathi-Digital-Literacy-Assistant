@@ -96,6 +96,36 @@ class LiveAiIntegrationTest {
                 }
                 waitFor("Primary backend proposes Help for a free-form goal") { SaathiSession.instruction.value.contains("choose “Help”") }
                 screenshot("ai-fixture-help")
+                val requestsBeforeStorm = com.saathi.gateway.PracticeGateway.requestsStarted.get()
+                val attemptsBefore = com.saathi.gateway.PracticeGateway.requestsAttempted.get()
+                val cancellationsBefore = com.saathi.gateway.PracticeGateway.requestsCancelled.get()
+                val localRejectionsBefore = com.saathi.gateway.PracticeGateway.requestsRejectedLocally.get()
+                val serviceEvents = java.util.concurrent.atomic.AtomicInteger()
+                val observations = java.util.concurrent.atomic.AtomicInteger()
+                com.saathi.accessibility.ObservationDiagnostics.observer = { _, _, _, _ -> serviceEvents.incrementAndGet() }
+                com.saathi.accessibility.ObservationDiagnostics.snapshotObserver = { observations.incrementAndGet() }
+                try {
+                    tap("Event storm")
+                    SystemClock.sleep(1800)
+                    waitFor("Cloud guidance recovers after burst") { SaathiSession.instruction.value.contains("choose “Help”") }
+                    tap("Changing event storm")
+                    SystemClock.sleep(1800)
+                    waitFor("Cloud guidance recovers after changing-content burst") { SaathiSession.instruction.value.contains("choose “Help”") }
+                    val dispatched = com.saathi.gateway.PracticeGateway.requestsStarted.get() - requestsBeforeStorm
+                    assertTrue("Burst must not become hundreds of cloud requests: $dispatched", dispatched in 0..12)
+                    File(output(), "cloud-event-storm.json").writeText(org.json.JSONObject()
+                        .put("events_generated",660).put("actual_content_mutations",60).put("events_delivered_including_overlays",serviceEvents.get())
+                        .put("observations_created",observations.get()).put("http_requests_started",dispatched)
+                        .put("requests_attempted",com.saathi.gateway.PracticeGateway.requestsAttempted.get()-attemptsBefore)
+                        .put("requests_cancelled",com.saathi.gateway.PracticeGateway.requestsCancelled.get()-cancellationsBefore)
+                        .put("requests_rejected_locally",com.saathi.gateway.PracticeGateway.requestsRejectedLocally.get()-localRejectionsBefore)
+                        .put("request_semantic_deduplication_implemented",false)
+                        .put("live_provider_calls",0).put("scope","actual service to bounded local synthetic gateway; no paid providers").toString(2))
+                } finally {
+                    com.saathi.accessibility.ObservationDiagnostics.observer = null
+                    com.saathi.accessibility.ObservationDiagnostics.snapshotObserver = null
+                }
+
                 tap("Explore")
                 waitFor("Backend adapts to detour with observed Back control") { SaathiSession.instruction.value.contains("choose “Back to choices”") }
                 screenshot("ai-fixture-recovery")
