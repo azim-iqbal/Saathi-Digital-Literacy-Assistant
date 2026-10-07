@@ -12,6 +12,7 @@ class ExternalSurfaceActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent.getBooleanExtra("close_fixture", false)) { finish(); return }
+        if (intent.getBooleanExtra("resume_fixture", false)) { showResumeChoices(); return }
         if (intent.getBooleanExtra("travel_fixture", false)) {
             val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 100, 32, 32) }
             for (label in arrayOf("From", "To", "01/10/2026", "Cheapest from ₹5221", "₹6,398", "10:20 AM", "Shopping")) {
@@ -35,6 +36,17 @@ class ExternalSurfaceActivity : Activity() {
         })
         layout.addView(Button(this).apply {
             isAllCaps = false
+            text = "Event storm"
+            setOnClickListener {
+                // Actual external accessibility events, with unchanged safe fixture content.
+                val handler = android.os.Handler(mainLooper)
+                repeat(600) { index -> handler.postDelayed({
+                    layout.sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED)
+                }, (index * 2).toLong()) }
+            }
+        })
+        layout.addView(Button(this).apply {
+            isAllCaps = false
             text = "Explore"
             setOnClickListener { showDetour() }
         })
@@ -54,8 +66,32 @@ class ExternalSurfaceActivity : Activity() {
         })
         setContentView(layout)
     }
+    private fun showResumeChoices() {
+        val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 100, 32, 32) }
+        val labels = arrayOf("Help", "Private interruption", "Human challenge")
+        for (index in labels.indices) {
+            val label = labels[index]
+            layout.addView(Button(this).apply {
+                text = label; isAllCaps = false
+                setOnClickListener {
+                    if (index != 0) showInterruption(index == 1)
+                }
+            })
+        }
+        setContentView(layout)
+    }
+    private fun showInterruption(privateField: Boolean) {
+        val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 100, 32, 32) }
+        if (privateField) layout.addView(android.widget.EditText(this).apply {
+            hint = "OTP"; inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
+            setText("582139")
+        }) else layout.addView(TextView(this).apply { text = "CAPTCHA · Verify you are human" })
+        layout.addView(Button(this).apply { text = "Return to choices"; isAllCaps = false; setOnClickListener { showResumeChoices() } })
+        setContentView(layout)
+    }
     override fun onNewIntent(intent: android.content.Intent?) {
         super.onNewIntent(intent)
         if (intent?.getBooleanExtra("close_fixture", false) == true) finish()
+        else if (intent?.getBooleanExtra("resume_fixture", false) == true) showResumeChoices()
     }
 }

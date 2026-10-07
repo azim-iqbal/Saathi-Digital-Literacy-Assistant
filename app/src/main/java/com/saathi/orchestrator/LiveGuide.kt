@@ -36,6 +36,10 @@ object LiveGuide {
 
     /** AI opt-in never overrides an exact local match or a privacy/ambiguity handover. */
     fun plan(request: String, nodes: List<UiNode>, language: String, cloudEnabled: Boolean): Plan {
+        com.saathi.core.ScreenInterruption.reason(nodes)?.let {
+            return Plan(GuideStep(com.saathi.core.ScreenInterruption.message(it, language), language, null,
+                "Wait for a fresh screen after private user action.", false), useCloud = false)
+        }
         // Form progression uses only local field metadata. Editable contents never go to a model.
         if (FormGuide.isRequest(request)) return Plan(FormGuide.next(nodes, language), useCloud = false)
         val local = next(request, nodes, language)

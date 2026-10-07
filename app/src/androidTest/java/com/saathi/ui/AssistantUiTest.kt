@@ -16,6 +16,23 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class AssistantUiTest {
     @get:Rule val ui = createAndroidComposeRule<AssistantActivity>()
+    @Test fun pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening() {
+        try {
+            ui.runOnUiThread {
+                SaathiSession.startLive(ui.activity, "Help", com.saathi.language.GuidanceLanguage.ENGLISH, false)
+                SaathiSession.pause()
+            }
+            ui.activityRule.scenario.recreate()
+            ui.onNode(hasSetTextAction()).assertTextContains("Help")
+            ui.onNodeWithText("Resume guidance").performScrollTo().assertExists()
+            assertFalse(SaathiSession.isActive())
+            assertEquals(VoicePhase.OFF, VoiceConversationService.phase.value)
+            screenshot("assistant-paused")
+            ui.onNodeWithText("Discard paused task").performScrollTo().performClick()
+            ui.onNodeWithText("Resume guidance").assertDoesNotExist()
+            assertFalse(SaathiSession.canResume())
+        } finally { ui.runOnUiThread { SaathiSession.stop() } }
+    }
     @Test fun taskIntakeDefaultsToTextAndDoesNotStartListening() {
         val priorTheme = Preferences(ui.activity).theme
         try {

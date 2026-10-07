@@ -36,15 +36,29 @@ class GuidanceForegroundService : Service() {
                 NotificationChannel(CHANNEL, "Saathi guidance", NotificationManager.IMPORTANCE_LOW)
             )
         }
+        // startForegroundService can arrive after the user has already paused/stopped.
+        // Fulfil Android's foreground-start contract before any inactive/permission early
+        // return in onStartCommand; otherwise that race can kill the process later.
+        runCatching {
+            startForeground(NOTIFICATION_ID, android.app.Notification.Builder(this, CHANNEL)
+                .setSmallIcon(com.saathi.R.drawable.ic_saathi_mark)
+                .setContentTitle("Saathi guidance")
+                .setContentText("Checking the current session…")
+                .setOnlyAlertOnce(true).build())
+        }.onFailure { stopSelf() }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (intent?.action != ACTION_STOP) pendingStarts = (pendingStarts - 1).coerceAtLeast(0)
         if (intent?.action == ACTION_STOP) {
             SaathiSession.stopForSession(intent.getStringExtra(EXTRA_SESSION))
             if (!SaathiSession.isActive()) { stopForeground(STOP_FOREGROUND_REMOVE); stopSelf() }
             return START_NOT_STICKY
         }
-        if (!SaathiSession.isActive()) { stopSelf(); return START_NOT_STICKY }
+        if (!SaathiSession.isActive()) {
+            if (pendingStarts == 0) { stopForeground(STOP_FOREGROUND_REMOVE); stopSelf() }
+            return START_NOT_STICKY
+        }
         ownedSession = SaathiSession.sessionKey()
         // Covers permission loss before the watcher was registered, even without a new tree.
         if (!android.provider.Settings.canDrawOverlays(this)) {
@@ -85,10 +99,24 @@ class GuidanceForegroundService : Service() {
         private const val NOTIFICATION_ID = 43
         private const val EXTRA_SESSION = "session_key"
         private const val ACTION_STOP = "com.saathi.action.STOP_GUIDANCE"
+        // Main-thread start/stop calls can precede service creation. Stopping the service
+        // before it acknowledges startForegroundService can itself trigger Android's
+        // foreground-start exception, even if onCreate would immediately promote it.
+        private var pendingStarts = 0
         fun start(context: Context) {
             val intent = Intent(context, GuidanceForegroundService::class.java)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent) else context.startService(intent)
+            pendingStarts++
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent) else context.startService(intent)
+            } catch (failure: RuntimeException) {
+                pendingStarts = (pendingStarts - 1).coerceAtLeast(0)
+                throw failure
+            }
         }
-        fun stop(context: Context) = context.stopService(Intent(context, GuidanceForegroundService::class.java))
+        fun stop(context: Context) {
+            if (pendingStarts == 0) context.stopService(Intent(context, GuidanceForegroundService::class.java))
+            // Otherwise onStartCommand sees the inactive session and removes the service
+            // after promotion; observation/audio have already been stopped synchronously.
+        }
     }
 }

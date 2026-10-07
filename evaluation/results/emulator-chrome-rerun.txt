@@ -1,0 +1,44 @@
+INSTRUMENTATION_STATUS: class=com.saathi.ui.ChromeGuidanceIntegrationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.ChromeGuidanceIntegrationTest:
+INSTRUMENTATION_STATUS: test=realChromePageTracksDetourPrivateFormAndRetarget
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.ChromeGuidanceIntegrationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Chrome exposes page Help control; state=GUIDING; instruction=I cannot find that option on this screen. If you opened a different page, go back; or open Saathi to change your request.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.waitFor(ChromeGuidanceIntegrationTest.kt:35)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:81)
+
+INSTRUMENTATION_STATUS: stream=
+Error in realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest):
+java.lang.AssertionError: Chrome exposes page Help control; state=GUIDING; instruction=I cannot find that option on this screen. If you opened a different page, go back; or open Saathi to change your request.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.waitFor(ChromeGuidanceIntegrationTest.kt:35)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:81)
+
+INSTRUMENTATION_STATUS: test=realChromePageTracksDetourPrivateFormAndRetarget
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 13.587
+There was 1 failure:
+1) realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest)
+java.lang.AssertionError: Chrome exposes page Help control; state=GUIDING; instruction=I cannot find that option on this screen. If you opened a different page, go back; or open Saathi to change your request.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.waitFor(ChromeGuidanceIntegrationTest.kt:35)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:81)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

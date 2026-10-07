@@ -61,6 +61,8 @@ class LiveSnapshot:
                 raise InvalidRequest("Private or consequential control")
         if len({c["id"] for c in controls}) != len(controls):
             raise InvalidRequest("Duplicate controls")
+        if len({c["label"].strip().casefold() for c in controls}) != len(controls):
+            raise InvalidRequest("Ambiguous controls")
         previous = data["previous_steps"]
         if not isinstance(previous, list) or len(previous) > 3 or any(not safe_text(p, 80) or CONSEQUENTIAL.search(p) for p in previous):
             raise InvalidRequest("Invalid history")

@@ -1,0 +1,86 @@
+INSTRUMENTATION_STATUS: class=com.saathi.ui.AssistantUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.saathi.ui.AssistantUiTest:
+INSTRUMENTATION_STATUS: test=pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.saathi.ui.AssistantUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=android.app.RemoteServiceException$ForegroundServiceDidNotStartInTimeException: Context.startForegroundService() did not then call Service.startForeground(): ServiceRecord{7fcd344 u0 com.saathi/.orchestrator.GuidanceForegroundService c:com.saathi}
+	at android.app.ActivityThread.generateForegroundServiceDidNotStartInTimeException(ActivityThread.java:2525)
+	at android.app.ActivityThread.throwRemoteServiceException(ActivityThread.java:2487)
+	at android.app.ActivityThread.-$$Nest$mthrowRemoteServiceException(ActivityThread.java:0)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2860)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+	at android.os.Handler.dispatchMessage(Handler.java:126)
+	at android.os.Looper.loopOnce(Looper.java:285)
+	at android.os.Looper.loop(Looper.java:390)
+	at android.app.ActivityThread.main(ActivityThread.java:9884)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+Caused by: android.app.StackTrace: Last startServiceCommon() call for this service was made here
+	at android.app.ContextImpl.startServiceCommon(ContextImpl.java:2309)
+	at android.app.ContextImpl.startForegroundService(ContextImpl.java:2263)
+	at android.content.ContextWrapper.startForegroundService(ContextWrapper.java:888)
+	at com.saathi.orchestrator.GuidanceForegroundService$Companion.start(GuidanceForegroundService.kt:90)
+	at com.saathi.orchestrator.SaathiSession.start(SaathiSession.kt:157)
+	at com.saathi.orchestrator.SaathiSession.startLive(SaathiSession.kt:66)
+	at com.saathi.ui.AssistantUiTest.pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening$lambda$0(AssistantUiTest.kt:22)
+	at com.saathi.ui.AssistantUiTest.$r8$lambda$Y4VuVWBWkhMl9_64Lt5ZP8Tjxgg(AssistantUiTest.kt:0)
+	at com.saathi.ui.AssistantUiTest$$ExternalSyntheticLambda4.invoke(D8$$SyntheticClass:0)
+	at androidx.compose.ui.test.AndroidSynchronization_androidKt.runOnUiThread$lambda$0(AndroidSynchronization.android.kt:37)
+	at androidx.compose.ui.test.AndroidSynchronization_androidKt.$r8$lambda$opyMdTZ52jorqLaIG4SKpPr_Zno(AndroidSynchronization.android.kt:0)
+	at androidx.compose.ui.test.AndroidSynchronization_androidKt$$ExternalSyntheticLambda0.call(D8$$SyntheticClass:0)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2721)
+	at android.os.Handler.handleCallback(Handler.java:1080)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:135)
+	... 7 more
+
+INSTRUMENTATION_STATUS: stream=
+Process crashed while executing pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening(com.saathi.ui.AssistantUiTest):
+android.app.RemoteServiceException$ForegroundServiceDidNotStartInTimeException: Context.startForegroundService() did not then call Service.startForeground(): ServiceRecord{7fcd344 u0 com.saathi/.orchestrator.GuidanceForegroundService c:com.saathi}
+	at android.app.ActivityThread.generateForegroundServiceDidNotStartInTimeException(ActivityThread.java:2525)
+	at android.app.ActivityThread.throwRemoteServiceException(ActivityThread.java:2487)
+	at android.app.ActivityThread.-$$Nest$mthrowRemoteServiceException(ActivityThread.java:0)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2860)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+	at android.os.Handler.dispatchMessage(Handler.java:126)
+	at android.os.Looper.loopOnce(Looper.java:285)
+	at android.os.Looper.loop(Looper.java:390)
+	at android.app.ActivityThread.main(ActivityThread.java:9884)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+Caused by: android.app.StackTrace: Last startServiceCommon() call for this service was made here
+	at android.app.ContextImpl.startServiceCommon(ContextImpl.java:2309)
+	at android.app.ContextImpl.startForegroundService(ContextImpl.java:2263)
+	at android.content.ContextWrapper.startForegroundService(ContextWrapper.java:888)
+	at com.saathi.orchestrator.GuidanceForegroundService$Companion.start(GuidanceForegroundService.kt:90)
+	at com.saathi.orchestrator.SaathiSession.start(SaathiSession.kt:157)
+	at com.saathi.orchestrator.SaathiSession.startLive(SaathiSession.kt:66)
+	at com.saathi.ui.AssistantUiTest.pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening$lambda$0(AssistantUiTest.kt:22)
+	at com.saathi.ui.AssistantUiTest.$r8$lambda$Y4VuVWBWkhMl9_64Lt5ZP8Tjxgg(AssistantUiTest.kt:0)
+	at com.saathi.ui.AssistantUiTest$$ExternalSyntheticLambda4.invoke(D8$$SyntheticClass:0)
+	at androidx.compose.ui.test.AndroidSynchronization_androidKt.runOnUiThread$lambda$0(AndroidSynchronization.android.kt:37)
+	at androidx.compose.ui.test.AndroidSynchronization_androidKt.$r8$lambda$opyMdTZ52jorqLaIG4SKpPr_Zno(AndroidSynchronization.android.kt:0)
+	at androidx.compose.ui.test.AndroidSynchronization_androidKt$$ExternalSyntheticLambda0.call(D8$$SyntheticClass:0)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2721)
+	at android.os.Handler.handleCallback(Handler.java:1080)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:135)
+	... 7 more
+
+INSTRUMENTATION_STATUS: test=pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+INSTRUMENTATION_CODE: 0

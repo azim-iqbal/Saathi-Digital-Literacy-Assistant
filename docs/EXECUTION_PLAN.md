@@ -1,3 +1,23 @@
+## 7 October 2026 — Retained-task pause/resume and private challenge handover
+
+Final verification: **95 Android unit tests and all 10 focused emulator tests pass**, debug/test builds and release Kotlin compile pass. The added immediate-start/pause UI test found a real `ForegroundServiceDidNotStartInTimeException`; fixed by acknowledging pending foreground starts before service shutdown (promotion alone was insufficient). No production guidance/audio services remained after the final tests; the separate fixture WebView service remained until emulator shutdown. Evidence: `test-evidence/2026-10-07-resumption/verification.json`, `final-regression.txt`, `paused-ui-acknowledged.txt` and screenshots.
+
+Latest user priority: reliable resumption. Implemented memory-only paused task settings, explicit permission/unlock/service checks, fresh session identity/current-tree request, same-theme Resume/Discard controls and paused speech preference preservation. Private/password and CAPTCHA screens now intercept guidance before gateway dispatch, disable listening, preserve the original goal and re-observe to resume after a safe screen returns. Manual Pause never auto-resumes; Stop, permission-loss safety stops and process death do not revive tasks.
+
+95 Android unit tests and debug/test/release Kotlin builds pass. Nine focused emulator regression tests pass, including three OTP-like/private and three CAPTCHA round trips plus three rapid manual cycles, missing-permission refusal with retained task, stale identity rejection and Stop cleanup. Additional paused-screen UI evidence is in `test-evidence/2026-10-07-resumption/paused-ui.txt`. See PAUSE_RESUME.md for limits and failed fixture attempts: separate test APK needed array iteration instead of unavailable Kotlin collections runtime. No live provider calls, deployment or push.
+
+Broader implementation brief saved at specs/IMPLEMENTATION_REMEDIATION_REQUEST.txt; research/planning/eligibility/provider diagnostics/browser readiness remain unfinished. Actual speech/device/OEM and real-site auth/CAPTCHA acceptance remain unverified. Preserve all existing evaluation fixes and evidence.
+
+## 7 October 2026 — Real-world capability evaluation
+
+Created `SAATHI_REAL_WORLD_EVALUATION.md` and `evaluation/` with 142 structured scenarios (28 prerequisite, 37 eligibility), repeatable offline probes, manual scorecard gates and CI. Five reproduced boundary failures fixed: Unicode/spaced-secret privacy bypasses and backend duplicate-label ambiguity. UI/theme preserved; instrumentation fixture changes only.
+
+Evidence: 51/51 offline probes after correction (initial 46/51), 95 backend + 91 Android unit + 4 harness tests pass; debug/test builds and release Kotlin compile pass. Seven distinct emulator tests pass; Chrome blocked by first-run onboarding in two attempts (first server setup also corrected). 600 emitted external fixture events yielded two service records/two analyses, local cloud-disabled scope. Native/WebView guidance passed; historical WebView failure cause still unknown.
+
+User explicitly authorized at most 12 genuine provider calls: all 12 attempts used across six paired synthetic cases, ZERO accepted. Failure reasons: unavailable, two timeouts, two uncertain, provider_request. 4,566 reported tokens is incomplete billing evidence. No further live calls under this authorization. This probe used paired gateway validation, not ordinary primary/fallback Android E2E. Keys stayed private; exact debug APK scan found neither key.
+
+Read the report before further work: arbitrary research, prerequisite/eligibility reasoning and source provenance are missing. 142 catalog workflows remain blocked, not passed. Next: safe per-provider validation diagnostics, separately authorized genuine retest, Chrome onboarding/browser acceptance, cloud event-storm/privacy audit, dependency/retrieval architecture, hosted/phone/voice acceptance. No deploy, signing or push occurred. Working changes remain on `fix/backend-response-time`; its prior baseline 935863a was already pushed.
+
 ## 7 October 2026 - Latest backend priority
 
 Completed and checked the connectivity/recovery fixes in [BACKEND_CONNECTION_RECOVERY.md](BACKEND_CONNECTION_RECOVERY.md) against Umair's latest commits. The user confirmed phone testing without USB and requested hosted-connection preparation, with deployment next phase. A standalone phone requires the hosted HTTPS origin; do not represent a computer-local debug endpoint as a deployed backend. Next phase must verify actual HTTPS/per-user access before the connected APK. Current evidence is 95 backend, 90 Android unit and 12 emulator executions; no live provider/physical-device certification.

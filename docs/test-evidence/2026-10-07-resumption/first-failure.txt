@@ -1,0 +1,29 @@
+Initial guidance
+class=android.widget.FrameLayout bounds=Rect(0, 0 - 1280, 2856) clickable=false parent=null
+class=android.widget.LinearLayout bounds=Rect(0, 0 - 1280, 2856) clickable=false parent=null
+class=android.widget.FrameLayout bounds=Rect(0, 0 - 1280, 2856) clickable=false parent=null
+class=androidx.compose.ui.platform.ComposeView bounds=Rect(0, 0 - 1280, 2856) clickable=false parent=null
+class=android.view.View bounds=Rect(0, 0 - 1280, 2856) clickable=false parent=null
+class=android.widget.ScrollView bounds=Rect(0, 156 - 1280, 2784) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(216, 233 - 454, 332) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(72, 408 - 1108, 654) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(72, 726 - 1208, 863) clickable=false parent=null
+class=android.view.View bounds=Rect(72, 935 - 1208, 1585) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(144, 1007 - 1023, 1322) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(144, 1376 - 1136, 1513) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(72, 1657 - 732, 1734) clickable=false parent=null
+class=android.view.View bounds=Rect(72, 1806 - 1208, 1974) clickable=false parent=null
+class=android.view.View bounds=Rect(72, 1806 - 1208, 1974) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(228, 1861 - 392, 1920) clickable=false parent=null
+class=android.widget.RadioButton bounds=Rect(72, 1806 - 1208, 1974) clickable=false parent=null
+class=android.view.View bounds=Rect(72, 2010 - 1208, 2178) clickable=false parent=null
+class=android.view.View bounds=Rect(72, 2010 - 1208, 2178) clickable=true parent=null
+class=android.widget.TextView bounds=Rect(228, 2060 - 324, 2128) clickable=false parent=Rect(72, 2010 - 1208, 2178)
+class=android.widget.RadioButton bounds=Rect(72, 2010 - 1208, 2178) clickable=false parent=Rect(72, 2010 - 1208, 2178)
+class=android.view.View bounds=Rect(72, 2214 - 1208, 2382) clickable=false parent=null
+class=android.view.View bounds=Rect(72, 2214 - 1208, 2382) clickable=true parent=null
+class=android.widget.TextView bounds=Rect(228, 2269 - 411, 2328) clickable=false parent=Rect(72, 2214 - 1208, 2382)
+class=android.widget.RadioButton bounds=Rect(72, 2214 - 1208, 2382) clickable=false parent=Rect(72, 2214 - 1208, 2382)
+class=android.view.View bounds=Rect(72, 2454 - 562, 2646) clickable=true parent=null
+class=android.widget.TextView bounds=Rect(144, 2522 - 376, 2579) clickable=false parent=Rect(72, 2454 - 562, 2646)
+class=android.widget.Button bounds=Rect(72, 2454 - 562, 2646) clickable=false parent=Rect(72, 2454 - 562, 2646)
