@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.saathi.core.GatewayHttpTransportTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-07T07:20:46" hostname="Azims-Air.bbrouter" time="0.024">
+  <properties/>
+  <testcase name="failureDoesNotPoisonNextRequestRoute" classname="com.saathi.core.GatewayHttpTransportTest" time="0.01"/>
+  <testcase name="physicalPhoneAndHostedReleaseNeverTryEmulatorAddress" classname="com.saathi.core.GatewayHttpTransportTest" time="0.001"/>
+  <testcase name="refusedConnectCanDiscoverEmulatorWithoutSendingFirstPost" classname="com.saathi.core.GatewayHttpTransportTest" time="0.003"/>
+  <testcase name="connectionCancellationDoesNotDispatchOrTryAnotherOrigin" classname="com.saathi.core.GatewayHttpTransportTest" time="0.002"/>
+  <testcase name="zeroMissingResponseAndOversizedOrWrongBodiesAreRejected" classname="com.saathi.core.GatewayHttpTransportTest" time="0.001"/>
+  <testcase name="redirectsAndUnauthorizedResponsesDoNotReadOrReplayBodies" classname="com.saathi.core.GatewayHttpTransportTest" time="0.001"/>
+  <testcase name="debugOverridesRejectCredentialBearingAndUntrustedCleartextOrigins" classname="com.saathi.core.GatewayHttpTransportTest" time="0.002"/>
+  <testcase name="writeFailureNeverReplaysPossiblySubmittedProviderCall" classname="com.saathi.core.GatewayHttpTransportTest" time="0.0"/>
+  <testcase name="slowBodyHasOneDeadlineAcrossReadsAndReleasesConnection" classname="com.saathi.core.GatewayHttpTransportTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

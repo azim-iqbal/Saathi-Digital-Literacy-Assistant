@@ -1,3 +1,13 @@
+## 7 October 2026 - Phone backend diagnosis and recovery fixes
+
+Latest user priority: fix intermittent backend failures before the APK phase. User confirmed the phone was used **without USB** and no hosted server exists; chose **prepare hosted connection, deploy next phase**. The computer-local debug endpoint cannot serve that phone configuration. Read [BACKEND_CONNECTION_RECOVERY.md](BACKEND_CONNECTION_RECOVERY.md) first.
+
+Based on Umair's latest `5a37d93` (form/spoken guidance preserved). Fixed its form-guide compile error, emulator-only endpoint discovery, failed-connection cleanup, request-pinned cancellation, unsafe/sticky POST fallback, and AI opt-in inadvertently enabling networked practice. Provider circuits now recover after a bounded cooldown and count consecutive failures; uncertainty does not poison provider health. Existing UI/brand unchanged; recovery wording is clearer.
+
+Verified: **95 backend tests, 90 Android unit tests, 12 emulator executions (11 distinct), debug/test build, lint 0 errors/61 warnings**. Includes ten status requests after server recovery, endpoint replacement, mock practice/auth/cancellation, actual-service synthetic primary guidance and an additional emulator-host-route run without adb reverse. No real provider calls, deployment, signed release or push. Evidence: `test-evidence/2026-10-07-backend-recovery`.
+
+Next: chosen HTTPS host and real-TLS/auth connection acceptance, then connected/signed APK and physical-phone checks. The original intermittent WebView cause, genuine model accuracy, voice/OEM acceptance and other release audit gates remain open. Passing the earlier primary integration test now does not establish its historical failure cause. Changes are local on `fix/backend-response-time`.
+
 ## 5 October 2026 — Local-First Guidance and Conditional Cloud Navigation
 
 Implemented: `LiveGuide.plan` and `SaathiSession` prioritize exact deterministic local matching before initiating cloud guidance, with private/ambiguous screen handover. Backend live navigation queries the configured primary provider (`SAATHI_PRIMARY_PROVIDER`, default `gemini`) and conditionally invokes a secondary provider only upon primary failure, uncertain/invalid output, or explicit handover. Both share the original deadline and budget tracking; quota exhaustion, cancellation, or stale observations do not trigger fallback. Incident assessment and explicit provider checks retain dual-provider validation. Navigation responses declare `decision_policy` and provider provenance, decoded by the Android client. Consent copy reflects local/primary/fallback routing while preserving existing UI styling and colors.

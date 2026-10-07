@@ -93,8 +93,8 @@ internal object FormGuide {
         fields: List<IndexedValue<UiNode>>,
         nodes: List<UiNode>
     ): String? {
-        label(node.hint)?.let { return it }
-        val id = node.resourceId?.substringAfterLast('/')?.substringAfterLast(':')
+        label(field.hint)?.let { return it }
+        val id = field.resourceId?.substringAfterLast('/')?.substringAfterLast(':')
         label(id)?.let { return it }
 
         val labels = nodes.mapIndexedNotNull { index, candidate ->

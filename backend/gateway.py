@@ -172,6 +172,7 @@ class Gateway:
         self.session_seen, self.session_ttl = {}, session_ttl
         self.calls = {p.id: 0 for p in self.providers}
         self.failures = {p.id: 0 for p in self.providers}
+        self.circuit_until, self.circuit_probes = {}, {}
         self.closed = False
 
     def rejected(self, reason):
@@ -210,8 +211,12 @@ class Gateway:
                 return [], deadline_reason
             if any(not getattr(p, "configured", True) for p in providers):
                 return [], "not_configured"
-            if any(self.failures[p.id] >= self.failure_limit for p in providers):
-                return [], "circuit_open"
+            now = time.monotonic()
+            recovering = [p.id for p in providers if self.failures[p.id] >= self.failure_limit]
+            for name in recovering:
+                until = self.circuit_until.setdefault(name, now + 30)
+                if now < until or name in self.circuit_probes:
+                    return [], "circuit_open"
             if sum(self.calls.values()) + len(providers) > self.global_limit or any(self.calls[p.id] >= self.provider_limit for p in providers):
                 return [], "quota_exhausted"
             acquired = 0
@@ -233,6 +238,8 @@ class Gateway:
                 return [], deadline_reason if time.monotonic() >= event.deadline else "stale"
             futures = []
             try:
+                for name in recovering:
+                    self.circuit_probes[name] = event
                 for provider in providers:
                     futures.append(self.pool.submit(self._call, provider, snapshot, event))
                     self.calls[provider.id] += 1
@@ -242,6 +249,16 @@ class Gateway:
                 return [], "provider_unavailable"
             return futures, None
 
+    def _failed(self, name):
+        """Called under lock. Consecutive upstream failures pause new calls briefly."""
+        self.failures[name] += 1
+        if self.failures[name] >= self.failure_limit:
+            self.circuit_until[name] = time.monotonic() + 30
+
+    def _healthy(self, name):
+        self.failures[name] = 0
+        self.circuit_until.pop(name, None)
+
     def _collect(self, providers, futures, snapshot, event, deadline_reason):
         while not all(f.done() for f in futures):
             if event.wait(min(.01, max(0, event.deadline - time.monotonic()))):
@@ -250,7 +267,7 @@ class Gateway:
                 if deadline_reason == "timeout":
                     with self.lock:
                         for p, f in zip(providers, futures):
-                            if not f.done(): self.failures[p.id] += 1
+                            if not f.done(): self._failed(p.id)
                 return [], [deadline_reason]
         if event.is_set(): return [], ["cancelled"]
         if time.monotonic() >= event.deadline: return [], [deadline_reason]
@@ -271,9 +288,16 @@ class Gateway:
             if error:
                 with self.lock:
                     if event.is_set(): return [], ["cancelled"]
-                    self.failures[provider.id] += 1
+                    # Valid uncertainty is a task outcome, not an upstream outage.
+                    if error in ("uncertain", "invalid_target", "unobserved_completion", "stale"):
+                        self._healthy(provider.id)
+                    else:
+                        self._failed(provider.id)
                 errors.append(error)
             else:
+                with self.lock:
+                    if event.is_set(): return [], ["cancelled"]
+                    self._healthy(provider.id)
                 proposals.append(proposal)
         return proposals, errors
 
@@ -362,6 +386,9 @@ class Gateway:
             event.set()
             with self.lock:
                 self.active.pop(snapshot.request_id, None)
+                for name, probe in list(self.circuit_probes.items()):
+                    if probe is event:
+                        del self.circuit_probes[name]
 
     def close(self):
         with self.lock:

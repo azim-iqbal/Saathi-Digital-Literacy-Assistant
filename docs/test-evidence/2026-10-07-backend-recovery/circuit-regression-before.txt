@@ -1,0 +1,83 @@
+test_cooldown_probe_recovers_without_resetting_call_count (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_cooldown_probe_recovers_without_resetting_call_count) ... ERROR
+test_failed_probe_reopens_circuit (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_failed_probe_reopens_circuit) ... ERROR
+test_only_one_probe_runs_and_cancellation_releases_probe (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_only_one_probe_runs_and_cancellation_releases_probe) ... ERROR
+test_quota_still_blocks_probe (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_quota_still_blocks_probe) ... ERROR
+test_success_breaks_the_failure_streak (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_success_breaks_the_failure_streak) ... FAIL
+test_uncertain_answer_does_not_mark_healthy_transport_as_failed (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_uncertain_answer_does_not_mark_healthy_transport_as_failed) ... FAIL
+
+======================================================================
+ERROR: test_cooldown_probe_recovers_without_resetting_call_count (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_cooldown_probe_recovers_without_resetting_call_count)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 54, in test_cooldown_probe_recovers_without_resetting_call_count
+    self.expire(); self.provider.fail = False
+    ~~~~~~~~~~~^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 39, in expire
+    self.gateway.circuit_until["a"] = 0
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Gateway' object has no attribute 'circuit_until'
+
+======================================================================
+ERROR: test_failed_probe_reopens_circuit (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_failed_probe_reopens_circuit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 60, in test_failed_probe_reopens_circuit
+    self.trip(); self.expire()
+                 ~~~~~~~~~~~^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 39, in expire
+    self.gateway.circuit_until["a"] = 0
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Gateway' object has no attribute 'circuit_until'
+
+======================================================================
+ERROR: test_only_one_probe_runs_and_cancellation_releases_probe (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_only_one_probe_runs_and_cancellation_releases_probe)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 65, in test_only_one_probe_runs_and_cancellation_releases_probe
+    self.trip(); self.expire(); self.provider.fail = False
+                 ~~~~~~~~~~~^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 39, in expire
+    self.gateway.circuit_until["a"] = 0
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Gateway' object has no attribute 'circuit_until'
+
+======================================================================
+ERROR: test_quota_still_blocks_probe (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_quota_still_blocks_probe)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 82, in test_quota_still_blocks_probe
+    self.trip(); self.expire()
+                 ~~~~~~~~~~~^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 39, in expire
+    self.gateway.circuit_until["a"] = 0
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Gateway' object has no attribute 'circuit_until'
+
+======================================================================
+FAIL: test_success_breaks_the_failure_streak (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_success_breaks_the_failure_streak)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 49, in test_success_breaks_the_failure_streak
+    self.assertEqual(self.decide()["status"], "accepted")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'rejected' != 'accepted'
+- rejected
++ accepted
+
+
+======================================================================
+FAIL: test_uncertain_answer_does_not_mark_healthy_transport_as_failed (backend.tests.test_circuit_recovery.CircuitRecoveryTests.test_uncertain_answer_does_not_mark_healthy_transport_as_failed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_circuit_recovery.py", line 91, in test_uncertain_answer_does_not_mark_healthy_transport_as_failed
+    for _ in range(4): self.assertEqual(self.decide()["reason"], "uncertain")
+                       ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'circuit_open' != 'uncertain'
+- circuit_open
++ uncertain
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.127s
+
+FAILED (failures=2, errors=4)

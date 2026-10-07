@@ -26,14 +26,26 @@ object PracticeGateway {
     private val cancellationIo = Executors.newFixedThreadPool(2)
     private val cancellationSlots = Semaphore(2)
     private val main = Handler(Looper.getMainLooper())
-    fun enabled() = token != null
+    fun enabled() = token != null && !ai
     fun aiEnabled() = token != null && ai
     fun available() = defaultEndpoint != null || activeEndpoint != null
     fun serverLabel() = activeEndpoint ?: defaultEndpoint ?: "Server not configured for this build"
-    fun setCustomEndpoint(url: String?) {
-        if (!com.saathi.BuildConfig.DEBUG) return
-        activeEndpoint = if (url.isNullOrBlank()) defaultEndpoint else url.trim().trimEnd('/')
+    fun setCustomEndpoint(url: String?): Boolean {
+        if (!com.saathi.BuildConfig.DEBUG) return false
+        val replacement = if (url.isNullOrBlank()) defaultEndpoint else GatewayEndpoint.debugOverride(url) ?: return false
+        if (replacement != activeEndpoint) {
+            invalidateConnection()
+            com.saathi.orchestrator.SaathiSession.stop()
+            token = null; ai = false
+            activeEndpoint = replacement
+        }
+        return true
     }
+    private fun emulator() = android.os.Build.FINGERPRINT.startsWith("generic") ||
+        android.os.Build.FINGERPRINT.startsWith("google/sdk_gphone") ||
+        android.os.Build.MODEL.startsWith("sdk_") || android.os.Build.MODEL.startsWith("sdk_gphone")
+    private val transport = GatewayHttpTransport()
+
     fun openSetup(context: Context) { context.startActivity(Intent(context, GatewaySetupActivity::class.java)) }
     fun configure(value: String, enableAi: Boolean = false): Boolean {
         if (!available() || (!com.saathi.BuildConfig.DEBUG && !enableAi)) return false
@@ -83,9 +95,10 @@ object PracticeGateway {
                        decode: (String) -> GatewayResult, callback: (GatewayResult) -> Unit): GatewayCancellation {
         val cancelled = AtomicBoolean(false)
         val ticket = generation.get()
+        val origin = activeEndpoint ?: defaultEndpoint
         fun current() = !cancelled.get() && generation.get() == ticket
         val rejection = when {
-            secret == null -> "not_configured"
+            secret == null || origin == null -> "not_configured"
             encoded.toByteArray().size > 8192 -> "invalid_request"
             !slots.tryAcquire() -> "busy"
             else -> null
@@ -97,10 +110,11 @@ object PracticeGateway {
         val credential = requireNotNull(secret)
         val cancelSent = AtomicBoolean(false)
         val activeConnection = java.util.concurrent.atomic.AtomicReference<HttpURLConnection?>()
+        val dispatchedOrigin = java.util.concurrent.atomic.AtomicReference<String?>()
         fun sendCancel() {
+            val target = dispatchedOrigin.get() ?: return
             if (!cancelSent.compareAndSet(false, true)) return
             runCatching {
-                val target = activeEndpoint ?: defaultEndpoint ?: return@runCatching
                 val cancel = openHttp(target, "/v1/cancel", credential, 1000)
                 try {
                     val body = JSONObject().put("request_id", requestId).toString().toByteArray()
@@ -119,63 +133,26 @@ object PracticeGateway {
         }
         pending[requestId] = cancellation
         io.execute {
-            val deadline = android.os.SystemClock.elapsedRealtime() + timeoutMs + 1000
-            var connection: HttpURLConnection? = null
             try {
                 if (!current()) return@execute
                 requestsStarted.incrementAndGet()
-                var target = activeEndpoint ?: defaultEndpoint
-                if (target == null) {
-                    main.post { if (current()) callback(GatewayResult.Rejected("not_configured")) }
-                    return@execute
-                }
-                val body = encoded.toByteArray(Charsets.UTF_8)
-                connection = try {
-                    openHttp(target, path, credential, timeoutMs).apply {
-                        activeConnection.set(this)
-                        setFixedLengthStreamingMode(body.size)
-                        outputStream.use { it.write(body) }
-                    }
-                } catch (ioe: java.io.IOException) {
-                    if (com.saathi.BuildConfig.DEBUG && target == "http://127.0.0.1:8765") {
-                        val fallback = "http://10.0.2.2:8765"
-                        target = fallback
-                        activeEndpoint = fallback
-                        openHttp(fallback, path, credential, timeoutMs).apply {
-                            activeConnection.set(this)
-                            setFixedLengthStreamingMode(body.size)
-                            outputStream.use { it.write(body) }
-                        }
-                    } else {
-                        throw ioe
-                    }
-                }
-                if (!current()) return@execute
-                val result = if (connection.responseCode == 200) {
-                    require(connection.contentType?.substringBefore(';') == "application/json")
-                    val data = connection.inputStream.use { input ->
-                        val out = java.io.ByteArrayOutputStream()
-                        val buffer = ByteArray(1024)
-                        while (true) {
-                            require(current() && android.os.SystemClock.elapsedRealtime() < deadline)
-                            val size = input.read(buffer); if (size < 0) break
-                            require(out.size() + size <= 8192); out.write(buffer, 0, size)
-                        }
-                        out.toString("UTF-8")
-                    }
-                    require(current() && android.os.SystemClock.elapsedRealtime() < deadline)
-                    decode(data)
-                } else GatewayResult.Rejected(GatewayRecovery.httpStatus(connection.responseCode))
+                val response = transport.post(
+                    GatewayEndpoint.candidates(requireNotNull(origin), com.saathi.BuildConfig.DEBUG, emulator()),
+                    path, credential, encoded.toByteArray(Charsets.UTF_8), timeoutMs + 1000,
+                    ::current, { activeConnection.set(it) }, { dispatchedOrigin.set(it) }
+                )
+                val result = if (response.status == 200) decode(response.body)
+                    else GatewayResult.Rejected(GatewayRecovery.httpStatus(response.status))
                 main.post { if (current()) callback(result) }
             } catch (error: Exception) {
                 val reason = when (error) {
+                    is javax.net.ssl.SSLException -> "secure_connection_failed"
                     is java.net.SocketTimeoutException -> "timeout"
-                    is java.io.IOException -> "connection_failed"
+                    is java.io.IOException -> if (origin != null && GatewayEndpoint.isLocal(origin)) "local_backend_unreachable" else "connection_failed"
                     else -> "invalid_response"
                 }
                 main.post { if (current()) callback(GatewayResult.Rejected(reason)) }
             } finally {
-                connection?.disconnect()
                 activeConnection.set(null)
                 pending.remove(requestId, cancellation)
                 if (cancelled.get()) sendCancel()
