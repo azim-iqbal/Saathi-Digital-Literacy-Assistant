@@ -1,3 +1,9 @@
+## 7 October 2026 - Connection and circuit recovery
+
+See [BACKEND_CONNECTION_RECOVERY.md](BACKEND_CONNECTION_RECOVERY.md). Emulator host discovery is debug/emulator-only and only retries pre-body connection failures. Each request/cancellation retains its original endpoint. AI opt-in leaves practice local. A physical phone without USB forwarding cannot use the default computer-local endpoint; the user chose hosted deployment next phase.
+
+Provider circuits count consecutive upstream failures, clear the streak on healthy results, and allow one new request to probe after 30 seconds. Valid uncertainty/grounding handover does not imply a transport outage. A failed probe starts another cooldown; cancellation releases the probe; quotas/deadlines remain mandatory. There is no automatic timed model call. This supersedes historical statements that circuits remain open until restart. Verified with synthetic failure injection only; no new real provider accuracy or latency evidence.
+
 ## 5 October — primary-navigation update, integration not yet accepted
 
 Live requests now use local-first Android matching and primary/conditional-secondary server routing. Incident assessment and explicit API checks remain paired. SAATHI_PRIMARY_PROVIDER selects gemini or groq; the other is fallback. decision_policy=primary/fallback accompanies single-provider provenance. Legacy paired responses remain supported. No numeric confidence is invented; uncertainty or HANDOVER can trigger fallback. Cancellation, freshness and budget limits remain mandatory. See NEXT_CONTINUATION.md for the one failing emulator integration and exact evidence; do not treat historical always-paired descriptions below as current live routing.

@@ -1,3 +1,9 @@
+## 7 October 2026 - Backend recovery on latest teammate code
+
+**95 backend tests / 90 Android unit tests / 12 emulator test executions (11 distinct) pass**; debug/test builds pass; lint **0 errors / 61 warnings**. New regressions first reproduced failure streaks surviving success and task uncertainty incorrectly opening permanent circuits. Cooldown recovery, single-probe concurrency, failed-probe reopening, cancellation and quota enforcement now pass. Android verifies disconnected local server -> restart -> ten successful status calls -> server shutdown; old-endpoint cancellation; no networked practice from AI opt-in. Existing live primary/decoder and mock-practice tests pass, plus the full synthetic live flow over the emulator host route without adb reverse.
+
+[Evidence and exact scope](BACKEND_CONNECTION_RECOVERY.md), [verification](test-evidence/2026-10-07-backend-recovery/verification.json). Current teammate code initially failed compilation due to `FormGuide.fieldName` referencing an undefined `node`; corrected to its `field` parameter. No tests skipped. No live model calls, public HTTPS test, physical phone, signed release or deployment. The user's physical-phone configuration had no USB/hosted endpoint; standalone phone cloud use awaits the agreed next deployment phase. Historical WebView/primary failure causes are not claimed solved by passing reruns.
+
 ## In-progress handoff — 5 October 2026, local-first and conditional cloud navigation
 
 The user authorized this manual run down to **8% weekly remaining**. Current usage is **6%**, so stop implementation and resume after allowance is available or the user explicitly changes the limit. Do not consume reset credits. The scheduled automation still has its separate 25% rule.

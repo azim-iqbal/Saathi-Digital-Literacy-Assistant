@@ -1,3 +1,7 @@
+## 7 October 2026 - Latest backend priority
+
+Completed and checked the connectivity/recovery fixes in [BACKEND_CONNECTION_RECOVERY.md](BACKEND_CONNECTION_RECOVERY.md) against Umair's latest commits. The user confirmed phone testing without USB and requested hosted-connection preparation, with deployment next phase. A standalone phone requires the hosted HTTPS origin; do not represent a computer-local debug endpoint as a deployed backend. Next phase must verify actual HTTPS/per-user access before the connected APK. Current evidence is 95 backend, 90 Android unit and 12 emulator executions; no live provider/physical-device certification.
+
 ## Milestone — Local-First Guidance and Conditional Cloud Navigation
 
 Implemented: `LiveGuide.plan` and `SaathiSession` prioritize exact deterministic local matching before initiating cloud guidance, with private/ambiguous screen handover. Backend live navigation queries the configured primary provider (`SAATHI_PRIMARY_PROVIDER`, default `gemini`) and conditionally invokes a secondary provider only upon primary failure, uncertain/invalid output, or explicit handover. Both share the original deadline and budget tracking; quota exhaustion, cancellation, or stale observations do not trigger fallback. Incident assessment and explicit provider checks retain dual-provider validation. Navigation responses declare `decision_policy` and provider provenance, decoded by the Android client. Consent copy reflects local/primary/fallback routing while preserving existing UI styling and colors.

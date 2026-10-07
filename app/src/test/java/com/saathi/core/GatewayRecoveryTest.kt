@@ -23,4 +23,10 @@ class GatewayRecoveryTest {
         assertNotEquals(GatewayRecovery.message("provider_auth", GuidanceLanguage.ENGLISH),
             GatewayRecovery.message("timeout", GuidanceLanguage.ENGLISH))
     }
+    @Test fun phoneLocalServerFailureExplainsUsbAndHostedOptions() {
+        val message = GatewayRecovery.message("local_backend_unreachable", GuidanceLanguage.ENGLISH)
+        assertTrue(message.contains("USB")); assertTrue(message.contains("HTTPS"))
+        assertNotEquals(message, GatewayRecovery.message("provider_timeout", GuidanceLanguage.ENGLISH))
+        assertTrue(GatewayRecovery.message("circuit_open", GuidanceLanguage.ENGLISH).contains("30 seconds"))
+    }
 }
