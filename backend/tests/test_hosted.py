@@ -126,7 +126,7 @@ class HostedTests(unittest.TestCase):
         self.assertEqual(self.request('/v1/research',request(),user='wrong')[0],401)
         self.assertEqual(self.request('/v1/research',{**request(),'consent':False})[0],400)
         self.assertEqual(self.request('/v1/research',request())[1]['status'],'researched')
-        self.assertEqual(self.request('/v1/task-plan',{'request_id':'plan','research_id':'research_one','consent':True},user='bob')[0],400)
+        self.assertEqual(self.request('/v1/task-plan',{'request_id':'plan','research_id':'research_one','consent':True},user='bob')[1]['reason'],'research_expired')
         self.assertFalse(self.sent)
         self.assertEqual(dict(self.budget.db.execute('SELECT provider,count FROM calls')),{'research':1})
 

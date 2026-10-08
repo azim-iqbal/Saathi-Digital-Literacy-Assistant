@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.saathi.core.EvidencePlan
 import com.saathi.core.GatewayCancellation
+import com.saathi.core.ResearchRecovery
 import com.saathi.core.GatewayResult
 import com.saathi.gateway.PracticeGateway
 import com.saathi.language.GuidanceLanguage
@@ -43,6 +44,7 @@ class ResearchActivity : ComponentActivity() {
     private var pending: GatewayCancellation? = null
     private var busy by mutableStateOf(false)
     private var report by mutableStateOf("")
+    private var sourceReport = ""
     private var researchId by mutableStateOf<String?>(null)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +73,7 @@ class ResearchActivity : ComponentActivity() {
                 }
             }
             var explainTerms by remember { mutableStateOf(false) }
+            var guideSource by remember { mutableStateOf(false) }
             var sourcePrompt by remember { mutableStateOf<com.saathi.core.EvidenceStep?>(null) }
             var purpose by remember { mutableStateOf(initialPurpose ?: com.saathi.core.ResearchIntent.claimType(initialGoal) ?: "requirements") }
             var consent by remember { mutableStateOf(false) }
@@ -88,9 +91,9 @@ class ResearchActivity : ComponentActivity() {
                         Text(local("Describe the task without personal details. Your server checks its reviewed sources; results may be incomplete.",
                             "निजी जानकारी दिए बिना काम बताएं। सर्वर जाँचे हुए स्रोत खोजता है; नतीजे अधूरे हो सकते हैं।",
                             "Niji jaankari ke bina kaam batayein. Server jaanche hue sources khojta hai; natije adhoore ho sakte hain."))
-                        OutlinedTextField(goal, { goal = it.take(160); researchId = null; report = ""; discardPlan() }, enabled = !busy,
+                        OutlinedTextField(goal, { goal = it.take(160); researchId = null; report = ""; sourceReport = ""; discardPlan() }, enabled = !busy,
                             shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp), label = { Text(local("Task", "काम", "Kaam")) }, modifier = Modifier.fillMaxWidth())
-                        OutlinedTextField(jurisdiction, { jurisdiction = it.take(80); researchId = null; report = ""; discardPlan() }, enabled = !busy,
+                        OutlinedTextField(jurisdiction, { jurisdiction = it.take(80); researchId = null; report = ""; sourceReport = ""; discardPlan() }, enabled = !busy,
                             shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp), label = { Text(local("Country / state or region", "देश / राज्य या क्षेत्र", "Desh / rajya ya kshetra")) }, modifier = Modifier.fillMaxWidth())
                         for ((kind, label) in listOf(
                             "requirements" to local("Requirements", "ज़रूरी शर्तें", "Zaroori shartein"),
@@ -99,17 +102,17 @@ class ResearchActivity : ComponentActivity() {
                             "pricing" to local("Fees / pricing", "शुल्क / कीमत", "Shulk / keemat"),
                             "outage" to local("Service issue", "सेवा की समस्या", "Service ki samasya"))) {
                             FilterChip(selected = purpose == kind, enabled = !busy,
-                                onClick = { purpose = kind; researchId = null; report = ""; discardPlan() }, label = { Text(label) })
+                                onClick = { purpose = kind; researchId = null; report = ""; sourceReport = ""; discardPlan() }, label = { Text(label) })
                         }
                         Text(local("Only this task and region go to your backend. No screen content is sent. A proposed plan uses both configured AI providers only after a separate tap.",
                             "सिर्फ यह काम और क्षेत्र बैकएंड को भेजे जाएंगे, स्क्रीन की जानकारी नहीं। योजना बनाने के लिए अलग से सहमति देने पर दोनों AI सेवाएं इस्तेमाल होंगी।",
                             "Sirf yeh kaam aur kshetra backend ko jayenge, screen ki jaankari nahin. Plan ke liye alag se tap karne par dono AI services istemaal hongi."))
                         Row { Checkbox(consent, { consent = it }, enabled = !busy); Text(local("Allow this research request", "इस खोज की अनुमति दें", "Is khoj ki anumati dein")) }
                         GlassButton(local("Find sources", "स्रोत खोजें", "Sources khojein"), enabled = consent && !busy && goal.isNotBlank() && jurisdiction.isNotBlank(), onClick = {
-                            busy = true; report = ""; researchId = null; discardPlan()
+                            busy = true; report = ""; sourceReport = ""; researchId = null; discardPlan()
                             pending = PracticeGateway.research(goal, jurisdiction, preferences.language.apiTag, consent, purpose) { result ->
                                 busy = false; pending = null
-                                if (result is GatewayResult.Research) { report = result.report; if (result.hasEvidence) researchId = result.requestId }
+                                if (result is GatewayResult.Research) { report = result.report; sourceReport = result.report; if (result.hasEvidence) researchId = result.requestId }
                                 else report = failure(result)
                             }
                         })
@@ -122,7 +125,10 @@ class ResearchActivity : ComponentActivity() {
                                 pending = PracticeGateway.planResearch(id, true, preferences.language.apiTag) { result ->
                                     busy = false; pending = null
                                     if (result is GatewayResult.Research) { report = result.report; plan = result.plan; planRevision++ }
-                                    else report = failure(result)
+                                    else {
+                                        report = listOf(sourceReport, failure(result)).filter { it.isNotBlank() }.joinToString("\n\n")
+                                        if (ResearchRecovery.canRetryPlan((result as? GatewayResult.Rejected)?.reason)) researchId = id
+                                    }
                                 }
                             })
                         }
@@ -142,7 +148,8 @@ class ResearchActivity : ComponentActivity() {
                                 Text(local("Next prerequisite / step", "अगली शर्त / कदम", "Agli shart / kadam"), style = MaterialTheme.typography.titleMedium)
                                 Text(step.title)
                                 Text("“${step.quote}”\n${step.sourceTitle}\n${step.sourceUrl}")
-                                GlassButton(local("Read source in browser", "ब्राउज़र में स्रोत पढ़ें", "Browser mein source padhein"), primary = false, onClick = { sourcePrompt = step })
+                                GlassButton(local("Read source in browser", "ब्राउज़र में स्रोत पढ़ें", "Browser mein source padhein"), primary = false, onClick = { guideSource = false; sourcePrompt = step })
+                                if (step.navigation != null) GlassButton(local("Guide this step", "इस कदम में मदद करें", "Is step mein madad karein"), primary = false, onClick = { guideSource = true; sourcePrompt = step })
                                 GlassButton(local("I completed this step", "मैंने यह कदम पूरा किया", "Maine yeh kadam poora kiya"), onClick = {
                                     checklist.confirm(step.id, System.currentTimeMillis()); planRevision = revision + 1
                                 })
@@ -167,15 +174,18 @@ class ResearchActivity : ComponentActivity() {
                         }
                         sourcePrompt?.let { proposed ->
                             AlertDialog(onDismissRequest = { sourcePrompt = null },
-                                title = { Text(local("Open this source?", "यह स्रोत खोलें?", "Yeh source kholein?")) },
-                                text = { Text(proposed.sourceUrl + "\n\n" + local(
+                                title = { Text(if (guideSource) local("Allow step highlighting?", "कदम चिह्नित करने दें?", "Step mark karne dein?") else local("Open this source?", "यह स्रोत खोलें?", "Yeh source kholein?")) },
+                                text = { Text(proposed.sourceUrl + "\n\n" + if (guideSource) local(
+                                    "Saathi may highlight the exact source-cited option on this page only after checking its full browser address. It will not tap, type, paste or mark a step complete. Unknown, private or protected pages require you to continue manually.",
+                                    "पूरा ब्राउज़र पता जाँचने के बाद साथी इसी पेज पर स्रोत में दिया विकल्प चिह्नित कर सकता है। वह टैप, टाइप, पेस्ट या कदम पूरा नहीं करेगा। अज्ञात, निजी या सुरक्षित पेज पर स्वयं आगे बढ़ें।",
+                                    "Poora browser pata jaanchne ke baad Saathi isi page par source mein diya option mark kar sakta hai. Woh tap, type, paste ya step complete nahin karega. Unknown, private ya protected page par khud aage badhein.") else local(
                                     "Your browser will contact this website. Saathi can help you keep your current prerequisite in view, but will not fill forms, select actions or mark it complete. If the full address is hidden, source matching is unavailable.",
                                     "ब्राउज़र इस वेबसाइट से जुड़ेगा। साथी मौजूदा शर्त याद रखने में मदद करेगा, लेकिन फॉर्म नहीं भरेगा, विकल्प नहीं चुनेगा और काम पूरा नहीं मानेगा। पूरा पता न दिखने पर स्रोत का मिलान संभव नहीं है।",
                                     "Browser is website se judega. Saathi maujooda shart yaad rakhne mein madad karega, lekin form nahin bharega, option nahin chunega aur kaam poora nahin maanega. Poora pata na dikhne par source match mumkin nahin hai.")) },
                                 confirmButton = { GlassButton(local("Open source", "स्रोत खोलें", "Source kholein"), onClick = {
                                     sourcePrompt = null
                                     val current = plan
-                                    if (current == null || !SaathiSession.startReviewedSource(this@ResearchActivity, current, proposed.id, preferences.language)) {
+                                    if (current == null || !SaathiSession.startReviewedSource(this@ResearchActivity, current, proposed.id, preferences.language, allowHighlights = guideSource)) {
                                         report = local("Review current sources and enable Saathi's accessibility and floating guidance permissions first.",
                                             "पहले मौजूदा स्रोत जाँचें और साथी की एक्सेसिबिलिटी तथा फ़्लोटिंग मार्गदर्शन अनुमतियाँ चालू करें।",
                                             "Pehle maujooda sources jaanchein aur Saathi ki accessibility aur floating guidance permissions chalu karein.")
@@ -202,18 +212,8 @@ class ResearchActivity : ComponentActivity() {
             }
         }
     }
-    private fun failure(result: GatewayResult): String {
-        fun local(en: String, hi: String, hinglish: String) = when (Preferences(this).language) {
-            GuidanceLanguage.HINDI -> hi; GuidanceLanguage.HINGLISH -> hinglish; else -> en
-        }
-        return when ((result as? GatewayResult.Rejected)?.reason) {
-            "research_not_configured" -> local("Research sources are not configured on this server. No model call was made.", "सर्वर पर स्रोत तय नहीं हैं। किसी AI सेवा को नहीं बुलाया गया।", "Server par sources tay nahin hain. Kisi AI service ko nahin bulaya gaya.")
-            "not_configured" -> local("Connect your configured backend first. No plan is available.", "पहले अपना बैकएंड जोड़ें। अभी कोई योजना उपलब्ध नहीं है।", "Pehle apna backend jodein. Abhi koi plan uplabdh nahin hai.")
-            "rate_limited", "busy" -> local("A request is running or was made recently. Wait before trying again.", "अनुरोध जारी है या हाल में किया गया है। दोबारा कोशिश से पहले प्रतीक्षा करें।", "Request chal rahi hai ya haal mein ki gayi hai. Dobara koshish se pehle intezaar karein.")
-            "source_unverified", "evidence_missing", "disagreement" -> local("Evidence was insufficient or the proposed plans disagreed. No plan was accepted.", "प्रमाण अधूरे थे या योजनाएं अलग थीं। कोई योजना स्वीकार नहीं की गई।", "Pramaan adhoore the ya plans alag the. Koi plan sweekar nahin kiya gaya.")
-            else -> local("Research could not be verified. This does not establish eligibility or completion.", "खोज सत्यापित नहीं हो पाई। इससे पात्रता या काम पूरा होना तय नहीं होता।", "Khoj verify nahin ho payi. Isse patrata ya kaam poora hona tay nahin hota.")
-        }
-    }
+    private fun failure(result: GatewayResult): String = ResearchRecovery.message(
+        (result as? GatewayResult.Rejected)?.reason, Preferences(this).language.apiTag)
     private fun discardPlan() { SaathiSession.discardReviewedPlan(plan); plan = null }
     override fun onDestroy() {
         if (isFinishing) discardPlan()

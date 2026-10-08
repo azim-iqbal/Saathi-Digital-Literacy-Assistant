@@ -1,0 +1,13 @@
+
+com.saathi.ui.ResearchRecoveryUiTest:..
+com.saathi.ui.ResearchUiTest:...
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+
+Time: 83.64
+
+OK (10 tests)
+
+

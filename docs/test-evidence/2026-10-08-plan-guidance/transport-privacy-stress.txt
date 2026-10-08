@@ -1,0 +1,11 @@
+
+com.saathi.ui.LiveAiIntegrationTest:..
+com.saathi.ui.GatewayTransportIntegrationTest:...
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+
+Time: 16.993
+
+OK (7 tests)
+
+

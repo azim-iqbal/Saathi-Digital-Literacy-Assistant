@@ -1,0 +1,23 @@
+
+com.saathi.ui.ResearchUiTest:...
+com.saathi.ui.ResearchRecoveryUiTest:.
+Error in leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(com.saathi.ui.ResearchRecoveryUiTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "STOPPED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at com.saathi.ui.ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(ResearchRecoveryUiTest.kt:108)
+
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+
+Time: 124.437
+There was 1 failure:
+1) leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(com.saathi.ui.ResearchRecoveryUiTest)
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "STOPPED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at com.saathi.ui.ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(ResearchRecoveryUiTest.kt:108)
+
+FAILURES!!!
+Tests run: 6,  Failures: 1
+
+

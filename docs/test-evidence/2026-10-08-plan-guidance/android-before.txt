@@ -1,0 +1,64 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+Daemon JVM discovery is an incubating feature.
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:processDebugJavaRes UP-TO-DATE
+
+> Task :app:compileDebugUnitTestKotlin FAILED
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:8:28 Unresolved reference 'NavigationHint'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:8:45 Unresolved reference 'NavigationHint'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:9:137 Too many arguments for 'constructor(id: String, title: String, dependencies: List<String>, quote: String, evidenceId: String, sourceTitle: String = ..., sourceUrl: String = ...): EvidenceStep'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:12:59 Too many arguments for 'constructor(plan: EvidencePlan, stepId: String): ReviewedPlanNavigation'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:13:26 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:14:51 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:15:22 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:16:22 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:17:22 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:18:45 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:19:68 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:22:50 Too many arguments for 'constructor(plan: EvidencePlan, stepId: String): ReviewedPlanNavigation'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:23:26 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:28:26 Unresolved reference 'targetIndex'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:33:18 Unresolved reference 'NavigationHint'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:39:21 Unresolved reference 'NavigationHint'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:40:65 Unresolved reference 'NavigationHint'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:44:24 Unresolved reference 'NavigationHint'.
+e: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/test/java/com/saathi/core/PlanNavigationTest.kt:46:21 Unresolved reference 'NavigationHint'.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugUnitTestKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 6s
+22 actionable tasks: 1 executed, 21 up-to-date

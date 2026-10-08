@@ -1,10 +1,11 @@
 package com.saathi.core
 
 /** Local review checklist, not proof of model correctness or an official eligibility verdict. */
-data class EvidenceStep(val id: String, val title: String, val dependencies: List<String>, val quote: String, val evidenceId: String, val sourceTitle: String = "", val sourceUrl: String = "")
+data class EvidenceStep(val id: String, val title: String, val dependencies: List<String>, val quote: String, val evidenceId: String, val sourceTitle: String = "", val sourceUrl: String = "", val navigation: NavigationHint? = null)
 data class EvidenceCriterion(val id: String, val quote: String, val evidenceId: String, val sourceTitle: String = "", val sourceUrl: String = "")
 class EvidencePlan(val originalGoal: String, val steps: List<EvidenceStep>, val criteria: List<EvidenceCriterion>,
                    val expiresAtMs: Long, val retrievedAtMs: Long = Long.MIN_VALUE) {
+    private var expired = false
     private val completed = mutableSetOf<String>()
     private val facts = mutableMapOf<String, Boolean>()
     var reviewed = false; private set
@@ -23,7 +24,11 @@ class EvidencePlan(val originalGoal: String, val steps: List<EvidenceStep>, val 
         }
         ids.forEach(::visit)
     }
-    fun isCurrent(nowMs: Long) = nowMs >= retrievedAtMs && nowMs < expiresAtMs
+    fun isCurrent(nowMs: Long): Boolean {
+        // Once expiry is observed, a clock correction must not revive old evidence.
+        if (nowMs >= expiresAtMs) { expired = true; reviewed = false }
+        return !expired && nowMs >= retrievedAtMs && nowMs < expiresAtMs
+    }
     fun review(nowMs: Long): Boolean { reviewed = isCurrent(nowMs); return reviewed }
     fun invalidateContext() { reviewed = false }
     fun next(nowMs: Long): EvidenceStep? = if (!reviewed || !isCurrent(nowMs)) null else

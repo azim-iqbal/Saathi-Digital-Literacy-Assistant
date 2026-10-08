@@ -1,0 +1,10 @@
+
+com.saathi.ui.ResearchRecoveryUiTest:.
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.PauseResumeIntegrationTest:.
+
+Time: 35.155
+
+OK (4 tests)
+
+

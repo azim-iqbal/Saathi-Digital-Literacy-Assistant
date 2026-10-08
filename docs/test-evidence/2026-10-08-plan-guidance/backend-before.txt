@@ -1,0 +1,28 @@
+EE.
+======================================================================
+ERROR: test_optional_hint_is_grounded_in_exact_cited_label_and_survives_contract (backend.tests.test_plan_navigation.PlanNavigationTests.test_optional_hint_is_grounded_in_exact_cited_label_and_survives_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_plan_navigation.py", line 21, in test_optional_hint_is_grounded_in_exact_cited_label_and_survives_contract
+    plan=parse_plan(json.dumps(body),snap)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/planning.py", line 125, in parse_plan
+    except (TypeError, KeyError): raise InvalidRequest('Invalid plan schema') from None
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend.gateway.InvalidRequest: Invalid plan schema
+
+======================================================================
+ERROR: test_two_providers_must_agree_on_highlight_hint_too (backend.tests.test_plan_navigation.PlanNavigationTests.test_two_providers_must_agree_on_highlight_hint_too)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_plan_navigation.py", line 25, in test_two_providers_must_agree_on_highlight_hint_too
+    snap,body=self.request(); first=parse_plan(json.dumps(body),snap)
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/planning.py", line 125, in parse_plan
+    except (TypeError, KeyError): raise InvalidRequest('Invalid plan schema') from None
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend.gateway.InvalidRequest: Invalid plan schema
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (errors=2)

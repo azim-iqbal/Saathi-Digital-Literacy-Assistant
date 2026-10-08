@@ -1,0 +1,37 @@
+{
+  "cycles": 40,
+  "samples": [
+    {
+      "cycle": 1,
+      "elapsed_ms": 1362,
+      "pss_kb": 118389,
+      "heap_used_bytes": 6077232
+    },
+    {
+      "cycle": 11,
+      "elapsed_ms": 11137,
+      "pss_kb": 119461,
+      "heap_used_bytes": 6404912
+    },
+    {
+      "cycle": 21,
+      "elapsed_ms": 20219,
+      "pss_kb": 120036,
+      "heap_used_bytes": 6322992
+    },
+    {
+      "cycle": 31,
+      "elapsed_ms": 30913,
+      "pss_kb": 121572,
+      "heap_used_bytes": 7469872
+    },
+    {
+      "cycle": 40,
+      "elapsed_ms": 40261,
+      "pss_kb": 121108,
+      "heap_used_bytes": 7043888
+    }
+  ],
+  "same_guidance_session": true,
+  "scope": "synthetic WebView mutation\/detour\/return; not proof of historical failure cause or OEM endurance"
+}

@@ -307,6 +307,15 @@ class RegistryRetriever:
         return tuple(evidence), tuple(errors)
 
 
+class ResearchUnavailable(InvalidRequest):
+    """Expected evidence-lifecycle failure, safe to expose as a fixed protocol reason."""
+    def __init__(self, reason):
+        if reason not in ('research_expired', 'research_cancelled', 'evidence_missing'):
+            raise ValueError('Invalid research failure category')
+        self.reason = reason
+        super().__init__(reason)
+
+
 class ResearchService:
     def __init__(self, retriever, reserve=None):
         self.retriever = retriever
@@ -325,9 +334,10 @@ class ResearchService:
             self.cancelled = {k: t for k, t in self.cancelled.items() if t > now}
             if len(self.cancelled) >= 64: del self.cancelled[next(iter(self.cancelled))]
             self.cancelled[request_id] = now + 60
+            removed = self.records.pop(request_id, None) is not None
             event = self.active.get(request_id)
             if event: event.set()
-            return event is not None
+            return event is not None or removed
 
     def _reserve(self):
         if self.calls >= 32: return False
@@ -340,8 +350,9 @@ class ResearchService:
         if not self.lock.acquire(blocking=False): return {'status': 'rejected', 'reason': 'busy'}
         try:
             now = time.monotonic()
-            self.records = {k: v for k, v in self.records.items() if now - v[0] < 300}
-            if query.request_id in self.records: return {'status': 'rejected', 'reason': 'duplicate_request'}
+            with self.control_lock:
+                self.records = {k: v for k, v in self.records.items() if now - v[0] < 300}
+                if query.request_id in self.records: return {'status': 'rejected', 'reason': 'duplicate_request'}
             if now - self.last_started < 10: return {'status': 'rejected', 'reason': 'rate_limited'}
             event = threading.Event()
             with self.control_lock:
@@ -349,10 +360,16 @@ class ResearchService:
                     return {'status': 'rejected', 'reason': 'cancelled'}
                 self.active[query.request_id] = event
             self.last_started = now
-            evidence, errors = self.retriever.retrieve(query, now + 6, self._reserve, event)
-            if event.is_set(): return {'status': 'rejected', 'reason': 'cancelled'}
-            if len(self.records) >= 8: del self.records[next(iter(self.records))]
-            self.records[query.request_id] = (now, query, evidence)
+            try:
+                evidence, errors = self.retriever.retrieve(query, now + 6, self._reserve, event)
+            except Exception:
+                return {'status': 'rejected', 'reason': 'cancelled' if event.is_set() else 'research_unavailable'}
+            with self.control_lock:
+                # Cancellation and bundle publication share one boundary. A cancelled result
+                # cannot reappear after the short request tombstone expires.
+                if event.is_set(): return {'status': 'rejected', 'reason': 'cancelled'}
+                if len(self.records) >= 8: del self.records[next(iter(self.records))]
+                self.records[query.request_id] = (now, query, evidence)
             result = {'status': 'researched', 'request_id': query.request_id,
                     'evidence': [dict(asdict(e), freshness=e.freshness(int(time.time()*1000))) for e in evidence],
                     'limitations': list(errors) + ['bounded_web_discovery' if self.retriever.search else 'bounded_reviewed_sources', 'content_is_untrusted', 'coverage_not_established']}
@@ -365,9 +382,14 @@ class ResearchService:
             self.lock.release()
 
     def bundle(self, request_id):
-        with self.lock:
+        # Metadata reads must not inherit the deadline of an unrelated network retrieval.
+        with self.control_lock:
+            now = time.monotonic()
+            if self.cancelled.get(request_id, 0) > now: raise ResearchUnavailable('research_cancelled')
             record = self.records.get(request_id)
-            if record is None or time.monotonic() - record[0] >= 300 or self.cancelled.get(request_id, 0) > time.monotonic(): raise InvalidRequest('Research expired')
+            if record is None or not 0 <= now - record[0] < 300:
+                self.records.pop(request_id, None)
+                raise ResearchUnavailable('research_expired')
             return record[1], record[2]
 
 

@@ -1,3 +1,54 @@
+## 8 October 2026 — Source-cited control guidance and bounded live evaluation
+
+The user asked to finish remaining pre-deployment work; **deployment/release remain deferred and overall remediation remains open**. Preserve this run and the earlier uncommitted recovery/expiry changes. The 8% short-window stop floor still applies. No reset credits, publishing, commits or pushes were used.
+
+### Implemented and verified
+
+- Optional `NavigationHint` on a researched step: a READ_OPTION or blank public FIELD_LABEL with an exact label in an explicit source quotation. Both plan providers must agree on the hint as well as the dependency graph. Extra actions/URLs, absent citations, sensitive/consequential labels and Unicode disguises fail closed. Existing plans without hints remain readable.
+- Existing Research UI offers a separate **Guide this step** consent dialog, using the same green/glass/content-sized controls. Local matching requires the current reviewed prerequisite, fresh evidence/observation, an exact full HTTPS browser address, and one enabled matching control. Filled fields, private/CAPTCHA/payment/consent/error/security-warning screens and high-risk contexts retain handover. It never clicks, types, pastes or infers completion. Step confirmation remains explicit in Saathi.
+- New live-navigation-only provider prompt removes synthetic-practice completion instructions and explicitly requires empty completion evidence. The validator still rejects unsupported evidence. Offline tests verify both provider payloads and unchanged rejection; the revised prompt has NOT had another genuine call.
+- Source/pause emulator regression on the previously accepted expiry fix passed. A lifecycle test's forced ActivityScenario return failed in a combined run; the test now uses actual Home/explicit return and passes. This is a harness fix, not a claimed production lifecycle defect.
+
+### Evidence and limits
+
+`test-evidence/2026-10-08-plan-guidance/`: 132 Android unit tests, 152 backend tests, 6 evaluation tests (4 harness, multilingual architecture, four-call probe harness), 51/51 offline probes; debug/test builds and lint 0 errors/61 warnings. Nine final emulator tests pass, including research consent, recovery, source/pause and voice lifecycle. A separate seven-test local cloud/transport/privacy/permission suite also passes. The public HTTPS test's PASS means observation completed, not that site provenance was established.
+
+A real-service WebView run completed **40 mutation/detour/return cycles in about 40 seconds** with stale-marker clearing and preserved session. PSS sampled about 118–122 MB; this short sample proves neither a leak nor long-term stability. The original historical post-tap failure did not reproduce and its cause remains unknown. One unrelated lifecycle-harness failure in the combined run is retained in `ui-endurance.txt`.
+
+The newly authorized **4 genuine provider calls are fully consumed**. Both Gemini and Groq returned HTTP 200 for both fictional cases. The cited-plan case passed paired validation with the Requirements hint. Basic navigation failed paired acceptance because Gemini returned unsupported completion evidence (`COMPLETION_UNPROVEN`); Groq passed. Safe diagnostics include timings/tokens; no raw model replies or keys. Do not reuse this authorization or delete the exclusive run marker. Genuine overall accuracy and prompt-fix efficacy are not certified by one passing plan.
+
+Public Chrome inspection observed the cybercrime portal entry page without a security warning. Chrome exposed scheme-less editable address metadata, so exact full-HTTPS binding correctly stayed unavailable. The example.org content was not established by this run. No certificate bypass, declaration acceptance, private entry, authenticated-form walkthrough or complaint submission took place.
+
+### Remaining work, not hidden by deployment deferral
+
+1. Reliable full-destination evidence in supported real browsers; the new binding currently provides safe fallbacks when Chrome omits its scheme. Positive source-bound highlights have controlled policy/contract tests, not real-HTTPS service-to-overlay certification. High-risk/private flows are still manual.
+2. Broader live semantic planning/incident accuracy and a separately authorized retest of the corrected live prompt. Never call test fixtures genuine AI or assume all provider failures share this cause.
+3. Reproduce/diagnose the historical WebView post-tap failure with current input/window traces; broaden mixed-fault, hours-long resource and semantic privacy coverage. A short passing repetition does not close this gate.
+4. Physical microphone/TTS, OEM background survival, TalkBack/performance and actual protected portal/form acceptance. No physical phone was available; emulator results do not certify them.
+5. Deployment, production host/TLS/accounts and release execution remain deferred by user request. Do not claim the project is fully production-ready.
+
+## 8 October 2026 — Expired-plan revival fixed; 8% usage-floor handoff
+
+Latest user priority covers actionable browser planning, HTTPS/WebView reliability, genuine provider quality, stress/privacy, device validation and protected cybercrime guidance. Deployment/release remain deferred. This run began with only 20% short-window usage remaining; at 10% new work stopped to preserve a handoff above the requested 8% floor. No resets or live provider calls were used; all earlier uncommitted changes are preserved.
+
+Reproduced and fixed an additional lifecycle defect: a plan already observed as expired could become current again after the wall clock moved backward. Android EvidencePlan now latches observed expiry and clears review; backend TaskPlan similarly latches stale evidence across review, eligibility and completion checks. Fresh research is required. No UI changes or weakened privacy/pause/action boundaries. Android regression repeats 10,000 review/progression attempts; backend repeats 100. These are deterministic state tests, not physical-device endurance measurements.
+
+Evidence: `test-evidence/2026-10-08-plan-expiry/`. Both failing baseline tests are saved. Final 128 Android unit tests, 148 backend tests and 5 evaluation tests pass; debug build passes. Existing pause/resume unit coverage remains passing. Emulator integration was NOT rerun after this small expiry change; the preceding 10-test emulator result belongs to the prior phase.
+
+Next: run the focused source/pause emulator regression on the expiry change, then continue verified actionable plan/browser binding and full HTTPS address acceptance. The saved historical WebView failure directory contains a passing rerun and tap geometry, not enough input/window evidence to prove the original cause; do not call it resolved. Broader mixed-fault/semantic privacy and long-session integration remain open. Genuine provider evaluation has not been rerun: establish deterministic architecture readiness and a new explicit bounded call budget before calls. No phone was connected/validated in this run; physical voice/OEM/performance and protected portal steps remain manual/unverified. All six requested workstreams remain partially open, not completed by this expiry fix.
+
+## 8 October 2026 — Research cancellation and explicit retry recovery
+
+Continued from clean `b7f18be`. Deployment and release are deferred by the user. This phase changes research/backend recovery only; existing Saathi colors, glass controls, navigation and privacy/action boundaries remain intact.
+
+**Fixed with reproduced failures:** cancelled completed evidence bundles survived their short cancellation tombstone; reading a saved bundle blocked behind unrelated retrieval; unexpected retrieval exceptions escaped the research recovery contract; an explicit second plan request reused the first attempt's session and was rejected as stale. Cancellation now deletes the bundle under the publication lock, metadata reads use a separate short lock, retrieval errors return fixed safe categories, and each explicit attempt has a bounded identity hashed from its complete request ID. Replays, consent, freshness, principal isolation and provider budgets remain enforced.
+
+**App recovery:** planning failures retain source excerpts for manual reading. Only temporary failures expose the existing consent button for another explicit request. There is no automatic retry. Expiry/cancellation require new research; configuration, quota, certificate and evidence failures have fixed English/Hindi/Hinglish instructions. Editing the task clears old sources. Leaving the activity cancels work and suppresses late responses.
+
+**Validation:** 147 offline backend tests; 127 Android unit tests; 51/51 offline capability probes; 4 evaluation-harness tests plus 1 multilingual architecture acceptance test; debug/test builds and lint (0 errors, 61 existing warnings). All 10 final focused emulator tests passed, including cancellation while away, explicit retry, source reading and pause/resume. Evidence is in `test-evidence/2026-10-08-research-recovery/`. No live provider calls or deployment/release validation occurred. A separate pre-existing incident test timestamp race was fixed in fixtures without weakening production freshness rules.
+
+**Next:** actionable reviewed-plan-to-browser binding and real HTTPS full-address acceptance remain repository work; source reading is not arbitrary task navigation. Continue mixed-fault/long-session and semantic privacy acceptance and investigate the historical intermittent WebView transition. Real provider accuracy/failure evaluation requires separate authorization; real protected workflows and physical speech/OEM/TalkBack/performance remain manual. Deployment, hosting and release are explicitly scheduled for a later phase. Overall remediation remains open.
+
 ## 8 October 2026 — Source companion validation and browser/privacy fixes
 
 Started from clean commit `d91b216`. Current run uses the user's **15% remaining five-hour usage stop rule**; no resets used. At handoff preparation 24% remained; final check after verification showed 13%, so work stopped. Preserve all current changes; no commit/push/deploy or live provider calls were made.

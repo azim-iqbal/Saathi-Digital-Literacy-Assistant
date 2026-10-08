@@ -1,0 +1,32 @@
+..FFF
+======================================================================
+FAIL: test_unknown_extra_unsafe_and_uncited_actions_are_rejected (backend.tests.test_plan_navigation.PlanNavigationTests.test_unknown_extra_unsafe_and_uncited_actions_are_rejected) (label='Su\u200bbmit', kind='READ_OPTION')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_plan_navigation.py", line 35, in test_unknown_extra_unsafe_and_uncited_actions_are_rejected
+    with self.subTest(label=label,kind=kind),self.assertRaises(InvalidRequest): parse_plan(json.dumps(body),snap)
+                                             ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+======================================================================
+FAIL: test_unknown_extra_unsafe_and_uncited_actions_are_rejected (backend.tests.test_plan_navigation.PlanNavigationTests.test_unknown_extra_unsafe_and_uncited_actions_are_rejected) (label='Ｓｕｂｍｉｔ', kind='READ_OPTION')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_plan_navigation.py", line 35, in test_unknown_extra_unsafe_and_uncited_actions_are_rejected
+    with self.subTest(label=label,kind=kind),self.assertRaises(InvalidRequest): parse_plan(json.dumps(body),snap)
+                                             ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+======================================================================
+FAIL: test_unknown_extra_unsafe_and_uncited_actions_are_rejected (backend.tests.test_plan_navigation.PlanNavigationTests.test_unknown_extra_unsafe_and_uncited_actions_are_rejected) (label='Bhejein', kind='READ_OPTION')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_plan_navigation.py", line 35, in test_unknown_extra_unsafe_and_uncited_actions_are_rejected
+    with self.subTest(label=label,kind=kind),self.assertRaises(InvalidRequest): parse_plan(json.dumps(body),snap)
+                                             ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.003s
+
+FAILED (failures=3)

@@ -51,12 +51,12 @@ object SaathiSession {
     }
     /** Explicit source-reading consent; no model call, target selection or automatic action. */
     fun startReviewedSource(app: Context, plan: com.saathi.core.EvidencePlan, stepId: String,
-                            language: GuidanceLanguage): Boolean {
+                            language: GuidanceLanguage, allowHighlights: Boolean = false): Boolean {
         if (!android.provider.Settings.canDrawOverlays(app) ||
             !com.saathi.accessibility.SaathiAccessibilityService.isConnected() ||
             app.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked ||
             plan.next(System.currentTimeMillis())?.id != stepId) return false
-        val binding = runCatching { com.saathi.core.ReviewedPlanNavigation(plan, stepId) }.getOrNull() ?: return false
+        val binding = runCatching { com.saathi.core.ReviewedPlanNavigation(plan, stepId, allowHighlights) }.getOrNull() ?: return false
         start(app, plan.originalGoal, language, false, liveMode = true, reviewedSource = binding)
         if (active) com.saathi.accessibility.SaathiAccessibilityService.requestCurrentScreen()
         return active
@@ -322,11 +322,16 @@ object SaathiSession {
                         com.saathi.core.PaymentSafety.state(nodes) != null ||
                         com.saathi.core.ScreenErrorPolicy.present(nodes) ||
                         com.saathi.core.PrivateContextPolicy.blocksCloud(nodes)
-                    binding.observe(if (guarded) null else browserLocation, System.currentTimeMillis())
+                    val targetIndex=binding.targetIndex(nodes,if (guarded) null else browserLocation,System.currentTimeMillis(),observedAtMs)
+                    val target=targetIndex?.let { index ->
+                        val node=nodes[index]
+                        val bounds=if (node.isClickable || node.isEditable) node.bounds else node.clickableAncestorBounds
+                        bounds?.takeUnless { it.isEmpty }?.let { GuideTarget(android.graphics.Rect(it),node.resourceId,binding.step.navigation!!.label,index) }
+                    }
                     val text = if (com.saathi.core.PrivateContextPolicy.blocksCloud(nodes))
                         com.saathi.core.ScreenInterruption.message(com.saathi.core.ScreenInterruption.Reason.PRIVATE, language.apiTag)
-                    else if (guarded) safety.local.speechText else binding.message(language.apiTag)
-                    present(GuideStep(text, language.apiTag, null, "Review the cited source; the user confirms progress in Saathi.", false), guarded)
+                    else if (guarded) safety.local.speechText else binding.guidanceMessage(language.apiTag,target!=null)
+                    present(GuideStep(text, language.apiTag, target, "Review the cited source; the user confirms progress in Saathi.", false), guarded)
                     return@Runnable
                 }
                 val livePlan = if (live) LiveGuide.plan(goal, nodes, language.apiTag, liveAi) else null

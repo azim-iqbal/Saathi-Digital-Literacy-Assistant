@@ -1,0 +1,17 @@
+...E..............................
+======================================================================
+ERROR: test_retrieval_exception_is_sanitized_and_lane_recovers (backend.tests.test_research_recovery.ResearchRecoveryTests.test_retrieval_exception_is_sanitized_and_lane_recovers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_recovery.py", line 37, in test_retrieval_exception_is_sanitized_and_lane_recovers
+    self.assertEqual(service.run(request(request_id='retry'))['status'],'researched')
+                                 ~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_planning.py", line 22, in request
+    return dict(request_id='research_one', goal='Understand application requirements', locale='en-IN',
+                jurisdiction='Region A', claim_type='requirements', consent=True, **change)
+TypeError: dict() got multiple values for keyword argument 'request_id'
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.042s
+
+FAILED (errors=1)

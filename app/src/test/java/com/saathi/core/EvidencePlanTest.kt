@@ -39,4 +39,14 @@ class EvidencePlanTest {
             EvidencePlan("Task",listOf(EvidenceStep("s1","Step",listOf(dependency),"Quote","e1")),emptyList(),1000)
         }
     }
+    @Test fun observedExpiryCannotBeUndoneByClockRollbackOrRepeatedReview() {
+        val p=plan(); assertTrue(p.review(10)); p.setFact("c1",true)
+        assertFalse(p.isCurrent(1000))
+        repeat(10000) {
+            assertFalse(p.review(900))
+            assertNull(p.next(900)); assertFalse(p.confirm("s3",900))
+            assertEquals("NOT_EVALUATED",p.eligibility(900)); assertFalse(p.complete(900))
+        }
+    }
+
 }

@@ -1,0 +1,21 @@
+..........F.......................
+======================================================================
+FAIL: test_official_status_can_support_possible_outage_but_community_cannot_establish_policy (backend.tests.test_research_planning.IncidentResearchTests.test_official_status_can_support_possible_outage_but_community_cannot_establish_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_planning.py", line 288, in test_official_status_can_support_possible_outage_but_community_cannot_establish_policy
+    self.assertEqual(result['anecdotal'],['e2'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['e2']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'e2'
+
+- []
++ ['e2']
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.039s
+
+FAILED (failures=1)

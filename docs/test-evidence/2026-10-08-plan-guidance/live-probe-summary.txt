@@ -1,0 +1,1 @@
+{"provider_reservations": 4, "cases": [{"case": "navigation", "status": "FAIL", "reason": "uncertain"}, {"case": "cited-plan", "status": "PASS", "reason": null}], "blocker": null}

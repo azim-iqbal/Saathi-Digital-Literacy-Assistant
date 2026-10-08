@@ -107,7 +107,8 @@ internal object ResearchCodec {
                     require(steps.size in 1..12)
                     steps.forEach { item ->
                         val step = item as Map<*, *>
-                        require(step.keys == setOf("id","title","depends_on","evidence_id","quote","completion"))
+                        val fields = setOf("id","title","depends_on","evidence_id","quote","completion")
+                        require(step.keys == fields || step.keys == fields+"navigation")
                         require(step["completion"] == "USER_CONFIRMATION")
                         val id = text(step["id"],3); require(id.matches(Regex("s([1-9]|1[0-2])")))
                         val dependencies = (step["depends_on"] as List<*>).map { text(it,3).also { d -> require(d.matches(Regex("s([1-9]|1[0-2])"))) } }
@@ -115,7 +116,12 @@ internal object ResearchCodec {
                         require(e["source_type"] in setOf("official", "primary"))
                         require(e["jurisdiction"] == container["jurisdiction"] || e["jurisdiction"] == "global")
                         val quote = text(step["quote"],300); require(text(e["snippet"]).contains(quote))
-                        planSteps += EvidenceStep(id, text(step["title"],120), dependencies, quote, text(step["evidence_id"],24), text(e["source_title"],160), text(e["source_url"],1024))
+                        val navigation = step["navigation"]?.let { raw ->
+                            val hint=raw as Map<*, *>
+                            require(hint.keys==setOf("kind","label"))
+                            com.saathi.core.NavigationHint(text(hint["kind"],20),text(hint["label"],80)).also { require(it.valid(quote)) }
+                        }
+                        planSteps += EvidenceStep(id, text(step["title"],120), dependencies, quote, text(step["evidence_id"],24), text(e["source_title"],160), text(e["source_url"],1024), navigation)
                         appendLine("\n$id · ${text(step["title"],120)}\n${local("Prerequisites", "पहले की शर्तें", "Pehle ki shartein")}: ${dependencies.joinToString().ifBlank { local("None proposed","कोई प्रस्तावित नहीं","Koi sujhaav nahin") }}")
                         appendLine("${local("Source excerpt", "स्रोत का अंश", "Source ka ansh")}: “$quote”\n${text(e["source_url"],1024)}\n${local("Completion requires your confirmation.", "पूरा होने की पुष्टि आपको करनी है।", "Poora hone ki pushti aapko karni hai.")}")
                     }

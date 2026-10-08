@@ -1,0 +1,43 @@
+.FFE
+======================================================================
+ERROR: test_retrieval_exception_is_sanitized_and_lane_recovers (backend.tests.test_research_recovery.ResearchRecoveryTests.test_retrieval_exception_is_sanitized_and_lane_recovers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_recovery.py", line 34, in test_retrieval_exception_is_sanitized_and_lane_recovers
+    self.assertEqual(service.run(request()),{'status':'rejected','reason':'research_unavailable'})
+                     ~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/research.py", line 352, in run
+    evidence, errors = self.retriever.retrieve(query, now + 6, self._reserve, event)
+                       ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/mock.py", line 1241, in _execute_mock_call
+    raise effect
+RuntimeError: synthetic secret not for client
+
+======================================================================
+FAIL: test_cancelling_completed_bundle_cannot_resurrect_after_tombstone_expires (backend.tests.test_research_recovery.ResearchRecoveryTests.test_cancelling_completed_bundle_cannot_resurrect_after_tombstone_expires)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_recovery.py", line 15, in test_cancelling_completed_bundle_cannot_resurrect_after_tombstone_expires
+    self.assertTrue(service.cancel('research_one'))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_reading_existing_bundle_does_not_wait_for_unrelated_retrieval (backend.tests.test_research_recovery.ResearchRecoveryTests.test_reading_existing_bundle_does_not_wait_for_unrelated_retrieval)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_recovery.py", line 27, in test_reading_existing_bundle_does_not_wait_for_unrelated_retrieval
+    try: self.assertTrue(done.wait(.3),'Bundle reads must not queue behind a six-second retrieval')
+         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Bundle reads must not queue behind a six-second retrieval
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.322s
+
+FAILED (failures=2, errors=1)

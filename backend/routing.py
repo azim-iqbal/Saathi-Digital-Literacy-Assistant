@@ -15,7 +15,12 @@ def dispatch(gateway, path, data):
         if path == "/v1/research": return gateway.research.run(data)
         from backend.planning import ResearchSnapshot
         if gateway.mode != "dual_ai": return gateway.rejected("not_configured")
-        return gateway.decide(ResearchSnapshot.from_request(data, gateway.research))
+        from backend.research import ResearchUnavailable
+        try:
+            snapshot = ResearchSnapshot.from_request(data, gateway.research)
+        except ResearchUnavailable as error:
+            return gateway.rejected(error.reason)
+        return gateway.decide(snapshot)
     if path == "/v1/connection-status":
         if data != {}:
             raise InvalidRequest("Empty status request required")

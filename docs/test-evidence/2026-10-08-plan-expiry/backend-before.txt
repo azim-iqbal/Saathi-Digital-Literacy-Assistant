@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_observed_staleness_cannot_be_reversed_by_clock_adjustment (backend.tests.test_plan_lifetime.PlanLifetimeTests.test_observed_staleness_cannot_be_reversed_by_clock_adjustment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_plan_lifetime.py", line 15, in test_observed_staleness_cannot_be_reversed_by_clock_adjustment
+    self.assertFalse(plan.review('page',True))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

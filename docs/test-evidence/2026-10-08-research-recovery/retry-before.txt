@@ -1,0 +1,14 @@
+..F..
+======================================================================
+FAIL: test_explicit_plan_attempts_have_distinct_identity_with_same_reviewed_bundle (backend.tests.test_research_recovery.ResearchRecoveryTests.test_explicit_plan_attempts_have_distinct_identity_with_same_reviewed_bundle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_research_recovery.py", line 56, in test_explicit_plan_attempts_have_distinct_identity_with_same_reviewed_bundle
+    self.assertNotEqual(first.session_id,second.session_id)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'plan_research_one' == 'plan_research_one'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+FAILED (failures=1)

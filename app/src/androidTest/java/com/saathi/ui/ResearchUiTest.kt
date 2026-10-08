@@ -37,6 +37,11 @@ class ResearchUiTest {
             ui.waitUntil(12000) { ui.onAllNodesWithText("I reviewed applicability").fetchSemanticsNodes().isNotEmpty() }
             ui.onNodeWithText("I reviewed applicability").performScrollTo().performClick()
             ui.onNodeWithText("Verification").performScrollTo().assertExists()
+            ui.onNodeWithText("Guide this step").performScrollTo().performClick()
+            ui.onNodeWithText("Allow step highlighting?").assertExists()
+            ui.onNodeWithText("It will not tap, type, paste or mark a step complete.",substring=true).assertExists()
+            ui.onNodeWithText("Not now").performClick()
+            assertFalse(com.saathi.orchestrator.SaathiSession.isActive())
             ui.onNodeWithText("Read source in browser").performScrollTo().performClick()
             ui.onNodeWithText("Open this source?").assertExists()
             ui.onNodeWithText("Not now").performClick()

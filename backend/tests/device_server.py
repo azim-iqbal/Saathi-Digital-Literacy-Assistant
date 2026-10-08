@@ -12,6 +12,7 @@ class FixtureProvider:
     def propose(self, s, cancelled):
         if cancelled.is_set(): raise InterruptedError()
         from backend.planning import ResearchSnapshot, PlanProposal, Step, Criterion
+        from backend.navigation_hint import NavigationHint
         if isinstance(s, ResearchSnapshot):
             eid = s.evidence[0].evidence_id
             if s.incident_mode:
@@ -19,7 +20,7 @@ class FixtureProvider:
                 return IncidentHypothesis('REGIONAL',(Citation(eid,'A regional interruption is affecting this service.'),))
             return PlanProposal((Step('s1', 'Application', ('s2',), eid, 'Application requires registration.', 'USER_CONFIRMATION'),
                 Step('s2', 'Registration', ('s3',), eid, 'Registration requires verification.', 'USER_CONFIRMATION'),
-                Step('s3', 'Verification', (), eid, 'Registration requires verification.', 'USER_CONFIRMATION')),
+                Step('s3', 'Verification', (), eid, 'Registration requires verification. Select “Requirements”.', 'USER_CONFIRMATION', NavigationHint('READ_OPTION','Requirements'))),
                 (Criterion('c1', eid, 'Applicants must meet the local residency condition.'),))
         from backend.incident import IncidentSnapshot, IncidentProposal
         if isinstance(s, IncidentSnapshot):
@@ -39,7 +40,7 @@ if __name__ == "__main__":
     from backend.research import ResearchService, RegistryRetriever, SourceRegistry, Source
     registry = SourceRegistry([Source('https://fixture.example.test/', 'Synthetic requirements', 'official', 'Region A', 'synthetic test review')])
     gateway.research = ResearchService(RegistryRetriever(registry, lambda *args:
-        '<p>Application requires registration. Registration requires verification. Applicants must meet the local residency condition. A regional interruption is affecting this service.</p>'))
+        '<p>Application requires registration. Registration requires verification. Select “Requirements”. Applicants must meet the local residency condition. A regional interruption is affecting this service.</p>'))
     server = make_server(token_file.read_text(), gateway, port=8767)
     print("Synthetic AI protocol fixture at loopback:8767; no external calls", flush=True)
     try: server.serve_forever()

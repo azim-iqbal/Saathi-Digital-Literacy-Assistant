@@ -1,0 +1,26 @@
+[
+  {
+    "requested_url": "https:\/\/example.org\/",
+    "public_content_observed": false,
+    "security_warning": false,
+    "network_error": false,
+    "verified_full_browser_address_available": false,
+    "exact_requested_address_match": false,
+    "address_form": "scheme_omitted",
+    "address_editable": true,
+    "address_focused": false,
+    "scope": "Read-only public entry; no protected walkthrough or source-authority certification"
+  },
+  {
+    "requested_url": "https:\/\/cybercrime.gov.in\/",
+    "public_content_observed": true,
+    "security_warning": false,
+    "network_error": false,
+    "verified_full_browser_address_available": false,
+    "exact_requested_address_match": false,
+    "address_form": "scheme_omitted",
+    "address_editable": true,
+    "address_focused": false,
+    "scope": "Read-only public entry; no protected walkthrough or source-authority certification"
+  }
+]

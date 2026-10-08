@@ -1,3 +1,13 @@
+## 8 October — Optional source-cited navigation and live diagnostics
+
+Plan steps optionally carry `{kind: READ_OPTION|FIELD_LABEL, label}`. Exact cited quotation/instruction, safe label, paired agreement and Android contract checks are mandatory. This is only a local highlight hint; no action, completion, URL or private value is authorized. Browser address/step/expiry/context are rechecked on every observation, with explicit consent. Unknown/full-address-unavailable Chrome remains manual. Existing high-risk/secret/action guards remain enabled.
+
+Four newly authorized synthetic-case calls were executed: all four HTTP 200; paired cited plan passed; basic navigation rejected Gemini's unsupported completion evidence while Groq passed. The live-only prompt was clarified afterward, without changing rejection rules. Its genuine retest is unverified and needs new bounded authorization. See [handoff](NEXT_CONTINUATION.md) and `test-evidence/2026-10-08-plan-guidance/live-four-call/results.json`.
+
+## 8 October 2026 — Research recovery protocol
+
+Completed evidence cancellation deletes retained data; reads no longer share the network retrieval admission lock. `/v1/task-plan` returns fixed `research_expired`, `research_cancelled` or `evidence_missing` rejections before provider dispatch; malformed/unconsented requests still fail validation. Retrieval exceptions become `research_unavailable`, without exception text. Each explicitly consented plan attempt hashes its full request ID into a distinct bounded session ID; identical-ID replay and provider budgets still apply. Android retains excerpts and offers manual retry only for transient failures, never automatically. See [handoff](NEXT_CONTINUATION.md) and [evidence](test-evidence/2026-10-08-research-recovery/README.md). Deployment/release remain deferred.
+
 ## 8 October 2026 update
 
 Source companion lifecycle/browser acceptance and additional security/privacy fixes are recorded in [the latest handoff](NEXT_CONTINUATION.md) and [evidence index](test-evidence/2026-10-08-browser/README.md). Semantic private contexts now use the existing private/listening handover. Certificate warnings block local targets and cloud dispatch; raw warning controls are rejected server-side. Overall workflow/hosting/device gates remain open. Earlier dated counts below are historical.

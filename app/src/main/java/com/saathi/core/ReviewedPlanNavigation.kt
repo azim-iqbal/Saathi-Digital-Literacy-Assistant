@@ -6,7 +6,7 @@ import java.net.URI
  * Only browser-chrome metadata may be passed as the location; page text is not an address.
  * Exact source-document matching does not prove TLS health, applicability or task completion.
  */
-class ReviewedPlanNavigation(val plan: EvidencePlan, val stepId: String) {
+class ReviewedPlanNavigation(val plan: EvidencePlan, val stepId: String, val allowHighlights: Boolean = false) {
     enum class State { UNAVAILABLE, SOURCE_MATCH, DETOUR, REVIEW_REQUIRED, EXPIRED }
     val step = requireNotNull(plan.steps.singleOrNull { it.id == stepId })
     val sourceUrl = requireNotNull(canonical(step.sourceUrl))
@@ -22,6 +22,14 @@ class ReviewedPlanNavigation(val plan: EvidencePlan, val stepId: String) {
             else -> State.DETOUR
         }
         return state
+    }
+    fun targetIndex(nodes: List<UiNode>, browserLocation: String?, nowMs: Long, observedAtMs: Long): Int? {
+        if (observe(browserLocation,nowMs) != State.SOURCE_MATCH || !allowHighlights ||
+            nowMs < observedAtMs || nowMs-observedAtMs > 15000 || ScreenInterruption.reason(nodes)!=null ||
+            BrowserSafetyPolicy.present(nodes) || BrowserConsentPolicy.present(nodes) || PaymentSafety.state(nodes)!=null ||
+            ScreenErrorPolicy.present(nodes) || PrivateContextPolicy.blocksCloud(nodes) || DestinationPolicy.requiresProvenance(plan.originalGoal,nodes)) return null
+        val hint=step.navigation?.takeIf { it.valid(step.quote) } ?: return null
+        return hint.targetIndex(nodes)
     }
     fun message(locale: String): String {
         fun local(en: String, hi: String, hinglish: String) = when(locale) { "hi-IN" -> hi; "hinglish" -> hinglish; else -> en }
@@ -40,6 +48,16 @@ class ReviewedPlanNavigation(val plan: EvidencePlan, val stepId: String) {
         }
         return local("Original goal: ", "मूल काम: ", "Mool kaam: ") + plan.originalGoal + "\n" +
             local("Current prerequisite: ", "मौजूदा शर्त: ", "Maujooda shart: ") + step.title + "\n" + status
+    }
+    fun guidanceMessage(locale: String, targetFound: Boolean): String {
+        if (!allowHighlights || state!=State.SOURCE_MATCH) return message(locale)
+        val label=step.navigation?.label.orEmpty()
+        val extra=when(locale) {
+            "hi-IN" -> if (targetFound) "स्रोत में दिया विकल्प ‘$label’ चिह्नित है। हर टैप या लिखना आपको स्वयं करना है। यह कदम पूरा होने का प्रमाण नहीं है।" else "इस कदम का सुरक्षित, अलग पहचाना जा सकने वाला विकल्प नहीं मिला। खुद जाँचें या साथी में लौटें।"
+            "hinglish" -> if (targetFound) "Source mein diya option ‘$label’ marked hai. Har tap ya typing aapko khud karni hai. Yeh step poora hone ka pramaan nahin hai." else "Is step ka safe, alag pehchaana ja sakne wala option nahin mila. Khud jaanchein ya Saathi mein lautein."
+            else -> if (targetFound) "The cited option ‘$label’ is highlighted. You control every tap or text entry. This does not confirm the step is complete." else "I could not find a safe, unambiguous control for this step. Review manually or return to Saathi."
+        }
+        return message(locale)+"\n"+extra
     }
     companion object {
         fun canonical(value: String): String? = try {

@@ -1,0 +1,8 @@
+
+com.saathi.ui.PublicHttpsReadinessTest:.
+
+Time: 16.375
+
+OK (1 test)
+
+
