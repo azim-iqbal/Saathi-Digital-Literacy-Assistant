@@ -6,7 +6,7 @@ import time
 from backend.gateway import InvalidRequest, Proposal
 
 from backend.privacy import sensitive
-from backend.request_policy import research_claim, private_context, error_status
+from backend.request_policy import research_claim, private_context, error_status, browser_warning
 
 HIGH_RISK_DESTINATION = re.compile(r"(?i)\b(government|banking|bank account|credit|loan|identity verification|health benefit|scholarship|passport|licen[cs]e application)\b|सरकारी|बैंक खाता|ऋण|पहचान सत्यापन|छात्रवृत्ति|sarkari|bank khata|pehchaan satyapan")
 
@@ -60,7 +60,7 @@ class LiveSnapshot:
         if not isinstance(controls, list) or not 1 <= len(controls) <= 32:
             raise InvalidRequest("Invalid controls")
         for control in controls:
-            if not isinstance(control, dict) or set(control) != {"id", "label"} or not re.fullmatch(r"n[0-9]{1,3}", str(control["id"])) or not safe_text(control["label"], 80) or CONSEQUENTIAL.search(control["label"]) or HIGH_RISK_DESTINATION.search(control["label"]) or private_context(control["label"]) or error_status(control["label"]):
+            if not isinstance(control, dict) or set(control) != {"id", "label"} or not re.fullmatch(r"n[0-9]{1,3}", str(control["id"])) or not safe_text(control["label"], 80) or CONSEQUENTIAL.search(control["label"]) or HIGH_RISK_DESTINATION.search(control["label"]) or private_context(control["label"]) or error_status(control["label"]) or browser_warning(control["label"]):
                 raise InvalidRequest("Private or consequential control")
         if len({c["id"] for c in controls}) != len(controls):
             raise InvalidRequest("Duplicate controls")

@@ -41,7 +41,7 @@ class AssistantBubbleService : Service() {
             contentDescription = "Saathi assistant. Tap to ask for help; drag to move."
             isFocusable = true
             setOnClickListener {
-                runCatching { startActivity(Intent(this@AssistantBubbleService, AssistantActivity::class.java)
+                runCatching { startActivity(Intent(this@AssistantBubbleService, if (SaathiSession.reviewedPlan() != null) com.saathi.ResearchActivity::class.java else AssistantActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)) }
             }
         }

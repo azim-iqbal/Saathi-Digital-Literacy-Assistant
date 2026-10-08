@@ -92,6 +92,7 @@ class PauseResumeIntegrationTest {
                 val original = SaathiSession.sessionKey()
                 repeat(3) {
                     for ((label, expected) in listOf("Private interruption" to com.saathi.core.GuidanceSessionState.SENSITIVE_HANDOVER,
+                    "Message example" to com.saathi.core.GuidanceSessionState.SENSITIVE_HANDOVER,
                         "Human challenge" to com.saathi.core.GuidanceSessionState.WAITING_FOR_CAPTCHA)) {
                         val old = SaathiSession.presentationKey()
                         tap(label)

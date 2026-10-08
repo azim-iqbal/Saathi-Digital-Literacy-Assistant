@@ -6,7 +6,7 @@ object ScreenInterruption {
     private val challenge = Regex("(?i)captcha|recaptcha|hcaptcha|verify (that )?you are human|i.?m not a robot|मानव सत्यापन|कैप्चा")
     fun reason(nodes: List<UiNode>): Reason? {
         // The private flag survives masking even when the field label/value has been removed.
-        if (nodes.any { it.isSensitive || it.isPassword }) return Reason.PRIVATE
+        if (nodes.any { it.isSensitive || it.isPassword } || PrivateContextPolicy.blocksCloud(nodes)) return Reason.PRIVATE
         if (nodes.any { node -> listOfNotNull(node.text, node.description, node.hint, node.resourceId)
                 .any { challenge.containsMatchIn(it) } }) return Reason.CAPTCHA
         return null

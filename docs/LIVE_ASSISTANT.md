@@ -1,3 +1,7 @@
+## 8 October 2026 update
+
+Source companion lifecycle/browser acceptance and additional security/privacy fixes are recorded in [the latest handoff](NEXT_CONTINUATION.md) and [evidence index](test-evidence/2026-10-08-browser/README.md). Semantic private contexts now use the existing private/listening handover. Certificate warnings block local targets and cloud dispatch; raw warning controls are rejected server-side. Overall workflow/hosting/device gates remain open. Earlier dated counts below are historical.
+
 ## 7 October 2026 — Research architecture and deterministic remediation (overall work open)
 
 Live guards now suppress cloud dispatch for changing claims requiring research, unproven high-risk destinations, private message/document/account cues, keyboards and public error/consent/payment handovers. Error research starts from a blank description, never an automatic raw-screen upload. Only old-window content events with a different current root are filtered; current/unknown/window transitions still invalidate. Reviewed dependency checklists are not yet connected to live targets.

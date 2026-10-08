@@ -11,11 +11,11 @@ class ReviewedPlanNavigation(val plan: EvidencePlan, val stepId: String) {
     val step = requireNotNull(plan.steps.singleOrNull { it.id == stepId })
     val sourceUrl = requireNotNull(canonical(step.sourceUrl))
     var state = State.UNAVAILABLE; private set
-    init { require(plan.reviewed && plan.next(Long.MIN_VALUE)?.id == stepId) }
+    init { require(plan.reviewed && plan.next(plan.retrievedAtMs)?.id == stepId) }
     fun invalidate() { state = State.UNAVAILABLE }
     fun observe(browserLocation: String?, nowMs: Long): State {
         state = when {
-            nowMs >= plan.expiresAtMs -> State.EXPIRED
+            !plan.isCurrent(nowMs) -> State.EXPIRED
             !plan.reviewed || plan.next(nowMs)?.id != stepId -> State.REVIEW_REQUIRED
             browserLocation == null -> State.UNAVAILABLE
             canonical(browserLocation) == sourceUrl -> State.SOURCE_MATCH
@@ -47,7 +47,12 @@ class ReviewedPlanNavigation(val plan: EvidencePlan, val stepId: String) {
             val url=URI(value)
             require(url.scheme == "https" && url.userInfo == null && url.rawQuery == null && url.rawFragment == null && url.port in setOf(-1,443))
             val host=requireNotNull(url.host).lowercase(java.util.Locale.ROOT)
-            require(host.contains('.') && host.split('.').all { it.isNotEmpty() && !it.startsWith("xn--") } && !host.endsWith('.'))
+            require(host.length <= 253 && host.contains('.') && host.split('.').all {
+                it.matches(Regex("[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?")) && !it.startsWith("xn--")
+            })
+            // Require an ordinary DNS suffix; reject numeric/IP shorthand and local/special-use names.
+            require(host.substringAfterLast('.').matches(Regex("[a-z]{2,63}")))
+            require(listOf("local", "localhost", "internal", "onion", "home.arpa").none { host == it || host.endsWith(".$it") })
             val path=url.rawPath.ifEmpty { "/" }
             require(path.split('/').none { it == "." || it == ".." } && !path.contains("//"))
             "https://$host$path"

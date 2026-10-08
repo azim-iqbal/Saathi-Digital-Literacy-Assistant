@@ -40,6 +40,9 @@ object LiveGuide {
             return Plan(GuideStep(com.saathi.core.ScreenInterruption.message(it, language), language, null,
                 "Wait for a fresh screen after private user action.", false), useCloud = false)
         }
+        if (com.saathi.core.BrowserSafetyPolicy.present(nodes)) return Plan(
+            GuideStep(com.saathi.core.BrowserSafetyPolicy.message(language), language, null,
+                "Do not bypass browser security warnings.", false), useCloud = false)
         if (com.saathi.core.BrowserConsentPolicy.present(nodes)) return Plan(
             GuideStep(com.saathi.core.BrowserConsentPolicy.message(language), language, null,
                 "Wait for the user's privacy choice.", false), useCloud = false)

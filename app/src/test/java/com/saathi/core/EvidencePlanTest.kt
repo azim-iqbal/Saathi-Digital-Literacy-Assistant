@@ -26,6 +26,14 @@ class EvidencePlanTest {
         p.setFact("c1",null); assertEquals("INSUFFICIENT_INFORMATION",p.eligibility(10))
         assertThrows(IllegalArgumentException::class.java) { p.setFact("password",true) }
     }
+    @Test fun clockRollbackBeforeRetrievedEvidenceInvalidatesReviewAndProgress() {
+        val p=EvidencePlan("Task",listOf(EvidenceStep("s1","Read",emptyList(),"Quote","e1")),emptyList(),1000, retrievedAtMs=500)
+        assertTrue(p.review(600)); assertNotNull(p.next(600))
+        assertNull(p.next(499)); assertFalse(p.confirm("s1",499)); assertFalse(p.review(499))
+        assertEquals("NOT_EVALUATED",p.eligibility(499)); assertFalse(p.complete(499))
+        assertTrue(p.review(600)); assertTrue(p.confirm("s1",600)); assertTrue(p.complete(600))
+        assertFalse(p.complete(1000))
+    }
     @Test fun cyclesAndMissingDependenciesAreRejected() {
         for (dependency in listOf("s1", "missing")) assertThrows(IllegalArgumentException::class.java) {
             EvidencePlan("Task",listOf(EvidenceStep("s1","Step",listOf(dependency),"Quote","e1")),emptyList(),1000)

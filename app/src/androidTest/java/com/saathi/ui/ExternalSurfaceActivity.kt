@@ -79,16 +79,23 @@ class ExternalSurfaceActivity : Activity() {
     }
     private fun showResumeChoices() {
         val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 100, 32, 32) }
-        val labels = arrayOf("Help", "Private interruption", "Human challenge")
+        val labels = arrayOf("Help", "Private interruption", "Human challenge", "Message example")
         for (index in labels.indices) {
             val label = labels[index]
             layout.addView(Button(this).apply {
                 text = label; isAllCaps = false
                 setOnClickListener {
-                    if (index != 0) showInterruption(index == 1)
+                    if (index == 3) showMessages() else if (index != 0) showInterruption(index == 1)
                 }
             })
         }
+        setContentView(layout)
+    }
+    private fun showMessages() {
+        val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32,100,32,32) }
+        layout.addView(TextView(this).apply { text = "Inbox" })
+        layout.addView(TextView(this).apply { text = "A fictional private conversation with no numbers." })
+        layout.addView(Button(this).apply { text = "Return to choices"; isAllCaps = false; setOnClickListener { showResumeChoices() } })
         setContentView(layout)
     }
     private fun showInterruption(privateField: Boolean) {

@@ -143,6 +143,18 @@ class ChromeGuidanceIntegrationTest {
                 screenshot("chrome-support")
                 tap("Support")
                 waitFor("Chrome link mutation clears target") { SaathiSession.instruction.value.startsWith("I cannot find") }
+                val plan = com.saathi.core.EvidencePlan("Understand requirements", listOf(
+                    com.saathi.core.EvidenceStep("s1", "Read the requirements", emptyList(), "Synthetic source quote.", "e1", "Synthetic source", "https://fixture.example/requirements")),
+                    emptyList(), System.currentTimeMillis() + 120000).also { it.review(System.currentTimeMillis()) }
+                main { assertTrue(SaathiSession.startReviewedSource(context, plan, "s1", GuidanceLanguage.ENGLISH)) }
+                waitFor("HTTP fixture cannot establish HTTPS source provenance") { SaathiSession.instruction.value.contains("cannot verify a full HTTPS address") }
+                assertFalse(com.saathi.overlay.HighlightOverlayService.hasTarget())
+                tap("Human challenge")
+                waitFor("Source companion preserves Chrome challenge handover") { SaathiSession.status.value == com.saathi.core.GuidanceSessionState.WAITING_FOR_CAPTCHA }
+                tap("Back to choices")
+                waitFor("Source companion reobserves after Chrome challenge") { SaathiSession.instruction.value.contains("cannot verify a full HTTPS address") }
+                assertSame(plan, SaathiSession.reviewedPlan())
+                assertFalse(plan.complete(System.currentTimeMillis()))
                 main { SaathiSession.stop() }
                 waitFor("Stop clears Chrome overlay") { !shell("dumpsys window windows").contains("Saathi guidance}") }
                 File(output(), "chrome-result.txt").writeText("PASS: real Chrome package with localhost synthetic page; actual AccessibilityService; Help, detour/return, password-form suspension, Support retarget, changed label, overlay visibility/touch-through and Stop. No real account, transaction, audio or AI.\n" + shell("dumpsys package com.android.chrome").lineSequence().filter { it.contains("versionName=") }.joinToString("\n"))

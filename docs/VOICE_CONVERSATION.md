@@ -1,3 +1,7 @@
+## 8 October 2026 update
+
+Source companion lifecycle/browser acceptance and additional security/privacy fixes are recorded in [the latest handoff](NEXT_CONTINUATION.md) and [evidence index](test-evidence/2026-10-08-browser/README.md). Semantic private contexts now use the existing private/listening handover. Certificate warnings block local targets and cloud dispatch; raw warning controls are rejected server-side. Overall workflow/hosting/device gates remain open. Earlier dated counts below are historical.
+
 ## 7 October 2026 — Research architecture and deterministic remediation (overall work open)
 
 The accepted pause/resume and challenge handover regressions remain passing. This phase adds no evidence of actual microphone/TTS delivery, natural streaming conversation or OEM background survival. Research pauses active guidance and uses explicit sharing/review; keyboard content is excluded before tree copying. Physical speech remains a manual gate.

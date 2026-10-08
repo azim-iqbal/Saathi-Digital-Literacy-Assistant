@@ -1,3 +1,17 @@
+## 8 October 2026 — Source companion validation and browser/privacy fixes
+
+Started from clean commit `d91b216`. Current run uses the user's **15% remaining five-hour usage stop rule**; no resets used. At handoff preparation 24% remained; final check after verification showed 13%, so work stopped. Preserve all current changes; no commit/push/deploy or live provider calls were made.
+
+**Implemented and tested:** public hostname restrictions for source opening; bounded browser-chrome inspection that rejects truncated/ambiguous trees, edited addresses and WebView-spoofed address bars; certificate/malware-warning handover and backend control rejection; evidence retrieval-time bounds against clock rollback; source expiry on quiet pages; retained plan on temporarily blocked resume; explicit return-to-plan from bubble/assistant; discard stale plan on new research, edit or finish. Semantic message/document/account contexts now enter the shared private/listening handover even without numeric secrets.
+
+**Evidence:** 125 Android unit tests, 140 backend tests, 5 evaluation-harness tests, 51/51 offline probes and the controlled multilingual research acceptance test pass. Debug/test builds and release Kotlin compilation pass; lint 0 errors/61 warnings. Three initial source/Chrome/pause-resume integration tests and a broader 10-test research/protocol/source/Chrome/voice-lifecycle/permission suite passed. The final **four private-message/source/Chrome/pause-resume/voice regression tests passed** on the final build (`test-evidence/2026-10-08-browser/privacy-final.txt`). Groups overlap. Earlier fixture failures (wrong label and destroyed ActivityScenario) remain saved and were fixed in the harness.
+
+**Scope:** source-reading mode retains the original goal/current prerequisite and never sends cloud requests, chooses a target or marks completion. Real Chrome's local HTTP fixture correctly fails HTTPS provenance matching and preserves challenge handover. Positive exact-address matching and Brave traversal have controlled unit evidence, not real HTTPS browser/site authority certification. No real microphone speech, CAPTCHA solving, private entry or transactions were tested.
+
+**Next repository priorities:** verified browser origin/source/step binding for actionable guidance remains open; do not bypass high-risk or stale-response guards. Add actual supported-browser full-address acceptance without assuming hidden HTTPS or bypassing certificates; keep unknown destinations blocked. Expand mixed-fault/long-session and semantic privacy acceptance. Original intermittent WebView post-tap cause is still unproven. The local source companion is progress, not closure of arbitrary workflow planning.
+
+**External/manual gates:** selected reviewed search/source configuration and actual HTTPS hosting/user provisioning; separately authorized genuine provider failure/accuracy evaluation; real protected workflows; physical speech/OEM/TalkBack/performance. No new live-call authorization exists. Overall remediation and production readiness remain open.
+
 ## 7 October 2026 — Browser source companion in progress; usage-limited handoff
 
 User changed this run's stop rule to **10% remaining in the short (five-hour) usage window**. Started at 33%; last check was 11%, so new implementation stopped to save this handoff. This supersedes the older 25% floor for this run only. Do not treat this phase or the full remediation as complete.

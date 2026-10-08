@@ -19,3 +19,7 @@ def private_context(value):
 _ERROR_STATUS = re.compile(r'(?i)^(service unavailable|temporarily unavailable|something went wrong|try again later|network error|सेवा उपलब्ध नहीं है|कुछ गलत हो गया|बाद में कोशिश करें|service uplabdh nahin|baad mein koshish karein)[.!। ]*$')
 def error_status(value):
     return bool(_ERROR_STATUS.fullmatch(value.strip()))
+
+_BROWSER_WARNING = re.compile(r'(?i)your connection is not private|connection (?:is )?not secure|(?:net::)?err_(?:cert|ssl)_[a-z_]+|deceptive site ahead|dangerous site|suspected phishing|आपका कनेक्शन निजी नहीं है|कनेक्शन सुरक्षित नहीं है|धोखाधड़ी वाली साइट|connection surakshit nahin hai')
+def browser_warning(value):
+    return bool(_BROWSER_WARNING.search(value))

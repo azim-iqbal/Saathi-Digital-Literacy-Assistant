@@ -4,11 +4,12 @@ package com.saathi.core
 data class EvidenceStep(val id: String, val title: String, val dependencies: List<String>, val quote: String, val evidenceId: String, val sourceTitle: String = "", val sourceUrl: String = "")
 data class EvidenceCriterion(val id: String, val quote: String, val evidenceId: String, val sourceTitle: String = "", val sourceUrl: String = "")
 class EvidencePlan(val originalGoal: String, val steps: List<EvidenceStep>, val criteria: List<EvidenceCriterion>,
-                   val expiresAtMs: Long) {
+                   val expiresAtMs: Long, val retrievedAtMs: Long = Long.MIN_VALUE) {
     private val completed = mutableSetOf<String>()
     private val facts = mutableMapOf<String, Boolean>()
     var reviewed = false; private set
     init {
+        require(expiresAtMs > retrievedAtMs)
         require(steps.size in 1..12 && criteria.size <= 12)
         val ids = steps.map { it.id }.toSet()
         require(ids.size == steps.size && criteria.map { it.id }.toSet().size == criteria.size)
@@ -22,9 +23,10 @@ class EvidencePlan(val originalGoal: String, val steps: List<EvidenceStep>, val 
         }
         ids.forEach(::visit)
     }
-    fun review(nowMs: Long): Boolean { reviewed = nowMs < expiresAtMs; return reviewed }
+    fun isCurrent(nowMs: Long) = nowMs >= retrievedAtMs && nowMs < expiresAtMs
+    fun review(nowMs: Long): Boolean { reviewed = isCurrent(nowMs); return reviewed }
     fun invalidateContext() { reviewed = false }
-    fun next(nowMs: Long): EvidenceStep? = if (!reviewed || nowMs >= expiresAtMs) null else
+    fun next(nowMs: Long): EvidenceStep? = if (!reviewed || !isCurrent(nowMs)) null else
         steps.firstOrNull { it.id !in completed && it.dependencies.all(completed::contains) }
     fun confirm(id: String, nowMs: Long): Boolean {
         if (next(nowMs)?.id != id) return false
@@ -36,10 +38,10 @@ class EvidencePlan(val originalGoal: String, val steps: List<EvidenceStep>, val 
     }
     fun fact(id: String): Boolean? = facts[id]
     fun eligibility(nowMs: Long): String = when {
-        !reviewed || nowMs >= expiresAtMs -> "NOT_EVALUATED"
+        !reviewed || !isCurrent(nowMs) -> "NOT_EVALUATED"
         criteria.isEmpty() || facts.size < criteria.size -> "INSUFFICIENT_INFORMATION"
         facts.values.any { !it } -> "CONDITION_NOT_MET"
         else -> "POSSIBLY_ELIGIBLE"
     }
-    fun complete(nowMs: Long) = reviewed && nowMs < expiresAtMs && completed.size == steps.size
+    fun complete(nowMs: Long) = reviewed && isCurrent(nowMs) && completed.size == steps.size
 }

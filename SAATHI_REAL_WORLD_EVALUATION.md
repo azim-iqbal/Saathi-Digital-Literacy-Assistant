@@ -1,3 +1,7 @@
+## 8 October scoped follow-up
+
+Browser/source companion, expiry, return/review, private-context handover and security-warning regressions are tracked in [the current matrix](docs/REMEDIATION_CAPABILITY_MATRIX.md) and [evidence index](docs/test-evidence/2026-10-08-browser/README.md). 125 Android unit and 140 backend tests pass. No genuine-model calls or full real workflow certification were added. Overall verdict stays NOT READY; historical evaluation evidence follows.
+
 ## 7 October remediation update — component evidence, not full acceptance
 
 The original evaluation below is historical. New bounded retrieval, provenance/freshness, paired cited dependency/eligibility proposals, reviewed checklists and incident hypotheses are implemented. Safe diagnostics, deterministic Chrome fixtures, privacy controls and local cloud/endurance tests now have evidence. **Overall release verdict remains NOT READY.** Reviewed plans are not yet bound to live browser destinations/observations; genuine provider failures/accuracy, comprehensive privacy and production/device acceptance remain unresolved.

@@ -46,6 +46,9 @@ object SaathiSession {
     private var sourcePlan: com.saathi.core.ReviewedPlanNavigation? = null
     fun reviewedPlan(): com.saathi.core.EvidencePlan? = (sourcePlan ?: pausedTask?.sourcePlan)?.plan
     fun wantsBrowserLocation() = active && sourcePlan != null
+    fun discardReviewedPlan(plan: com.saathi.core.EvidencePlan?) {
+        if (plan != null && reviewedPlan() === plan) stop()
+    }
     /** Explicit source-reading consent; no model call, target selection or automatic action. */
     fun startReviewedSource(app: Context, plan: com.saathi.core.EvidencePlan, stepId: String,
                             language: GuidanceLanguage): Boolean {
@@ -108,6 +111,7 @@ object SaathiSession {
      * Microphone conversation still requires its separate visible-activity opt-in. */
     fun resume(app: Context): Boolean {
         val task = pausedTask?.takeIf { canResume() } ?: return false
+        if (task.sourcePlan?.let { it.plan.next(System.currentTimeMillis())?.id != it.stepId } == true) return false
         if (app.getSystemService(android.app.KeyguardManager::class.java).isKeyguardLocked ||
             !android.provider.Settings.canDrawOverlays(app) ||
             !com.saathi.accessibility.SaathiAccessibilityService.isConnected()) return false
@@ -179,6 +183,16 @@ object SaathiSession {
         if (active) runCatching { context!!.startService(Intent(context, com.saathi.overlay.AssistantBubbleService::class.java)) }
             .onFailure { clearSession(GuidanceSessionState.ERROR) }
 
+        sourcePlan?.let { binding ->
+            // Expiry must invalidate a quiet page too; no browser event is required.
+            val delayMs = (binding.plan.expiresAtMs - System.currentTimeMillis()).coerceIn(0, 300_000)
+            handler.postDelayed({
+                if (active && sourcePlan === binding) {
+                    invalidateScreen()
+                    com.saathi.accessibility.SaathiAccessibilityService.requestCurrentScreen()
+                }
+            }, delayMs)
+        }
         // Conversation is enabled separately by a visible activity after microphone consent.
         return scope
     }
@@ -304,7 +318,7 @@ object SaathiSession {
                     // Every interruption/error choice retains its existing local boundary.
                     // Even a matching source address never authorizes an application/payment target.
                     val safety = LiveGuide.plan(goal, nodes, language.apiTag, false)
-                    val guarded = com.saathi.core.BrowserConsentPolicy.present(nodes) ||
+                    val guarded = com.saathi.core.BrowserSafetyPolicy.present(nodes) || com.saathi.core.BrowserConsentPolicy.present(nodes) ||
                         com.saathi.core.PaymentSafety.state(nodes) != null ||
                         com.saathi.core.ScreenErrorPolicy.present(nodes) ||
                         com.saathi.core.PrivateContextPolicy.blocksCloud(nodes)

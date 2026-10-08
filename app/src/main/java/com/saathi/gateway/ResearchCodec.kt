@@ -171,7 +171,7 @@ internal object ResearchCodec {
                 append(local("\nSearch was bounded. Coverage, applicability and interpretation are not established. An empty result does not mean no requirements exist.", "\nखोज सीमित थी। पूरी जानकारी, लागू शर्तें और व्याख्या की शुद्धता तय नहीं हैं। खाली नतीजे का मतलब कोई शर्त न होना नहीं है।", "\nKhoj seemit thi. Poori jaankari, lagu shartein aur samajh ki sahi hone ki pushti nahin hai. Khaali natije ka matlab koi shart na hona nahin hai."))
             }
             GatewayResult.Research(expectedId, report, evidence.isNotEmpty(), if (planning && !incidentPlan)
-                EvidencePlan(text(container["original_goal"],160), planSteps, planCriteria, oldest + 300_000) else null)
+                EvidencePlan(text(container["original_goal"],160), planSteps, planCriteria, oldest + 300_000, retrievedAtMs = oldest) else null)
         }
     } catch (_: Exception) { GatewayResult.Rejected("invalid_response") }
 }

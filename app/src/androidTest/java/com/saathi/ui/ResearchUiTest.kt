@@ -37,6 +37,12 @@ class ResearchUiTest {
             ui.waitUntil(12000) { ui.onAllNodesWithText("I reviewed applicability").fetchSemanticsNodes().isNotEmpty() }
             ui.onNodeWithText("I reviewed applicability").performScrollTo().performClick()
             ui.onNodeWithText("Verification").performScrollTo().assertExists()
+            ui.onNodeWithText("Read source in browser").performScrollTo().performClick()
+            ui.onNodeWithText("Open this source?").assertExists()
+            ui.onNodeWithText("Not now").performClick()
+            ui.onNodeWithText("Open this source?").assertDoesNotExist()
+            assertFalse(com.saathi.orchestrator.SaathiSession.isActive())
+
             ui.onNodeWithText("I completed this step").performScrollTo().assertIsDisplayed()
             screenshot("research-dependency-dark")
             ui.onNodeWithText("I completed this step").performScrollTo().performClick()

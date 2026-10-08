@@ -1,0 +1,50 @@
+FFFFF
+======================================================================
+FAIL: test_warning_controls_do_not_reach_providers (backend.tests.test_browser_safety.BrowserSafetyTests.test_warning_controls_do_not_reach_providers) (label='Your connection is not private')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_browser_safety.py", line 13, in test_warning_controls_do_not_reach_providers
+    with self.subTest(label=label), self.assertRaises(InvalidRequest):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+======================================================================
+FAIL: test_warning_controls_do_not_reach_providers (backend.tests.test_browser_safety.BrowserSafetyTests.test_warning_controls_do_not_reach_providers) (label='NET::ERR_CERT_DATE_INVALID')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_browser_safety.py", line 13, in test_warning_controls_do_not_reach_providers
+    with self.subTest(label=label), self.assertRaises(InvalidRequest):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+======================================================================
+FAIL: test_warning_controls_do_not_reach_providers (backend.tests.test_browser_safety.BrowserSafetyTests.test_warning_controls_do_not_reach_providers) (label='Deceptive site ahead')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_browser_safety.py", line 13, in test_warning_controls_do_not_reach_providers
+    with self.subTest(label=label), self.assertRaises(InvalidRequest):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+======================================================================
+FAIL: test_warning_controls_do_not_reach_providers (backend.tests.test_browser_safety.BrowserSafetyTests.test_warning_controls_do_not_reach_providers) (label='आपका कनेक्शन निजी नहीं है')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_browser_safety.py", line 13, in test_warning_controls_do_not_reach_providers
+    with self.subTest(label=label), self.assertRaises(InvalidRequest):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+======================================================================
+FAIL: test_warning_controls_do_not_reach_providers (backend.tests.test_browser_safety.BrowserSafetyTests.test_warning_controls_do_not_reach_providers) (label='Connection surakshit nahin hai')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_browser_safety.py", line 13, in test_warning_controls_do_not_reach_providers
+    with self.subTest(label=label), self.assertRaises(InvalidRequest):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=5)

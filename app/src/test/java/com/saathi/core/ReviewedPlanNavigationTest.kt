@@ -42,6 +42,12 @@ class ReviewedPlanNavigationTest {
         val unsafe=EvidencePlan("Task",listOf(EvidenceStep("s1","Read", emptyList(),"Quote","e1",sourceUrl="javascript:alert(1)")),emptyList(),1000).also { it.review(1) }
         assertThrows(IllegalArgumentException::class.java) { ReviewedPlanNavigation(unsafe,"s1") }
     }
+    @Test fun localNumericAndSpecialUseHostsAreNotPublicSources() {
+        for (host in listOf("127.0.0.1", "192.168.0.1", "169.254.169.254", "2130706433", "0x7f000001", "127.1",
+            "router.local", "router.localhost", "service.internal", "hidden.onion", "a.123")) {
+            assertNull(host, ReviewedPlanNavigation.canonical("https://$host/requirements"))
+        }
+    }
     @Test fun explanationsPreserveGoalAndUnknownAcrossLocales() {
         val guide=ReviewedPlanNavigation(plan(),"s2")
         for (locale in listOf("en-IN","hi-IN","hinglish")) {

@@ -27,7 +27,7 @@ object LiveAiPolicy {
 
     fun snapshot(ticket: ObservationGate.Ticket, nodes: List<UiNode>, goal: String, locale: String,
                  observedAtMs: Long, previous: List<String>): LiveAiSnapshot? {
-        if (!allowed(goal) || ResearchIntent.claimType(goal) != null || ScreenInterruption.reason(nodes) != null || ScreenErrorPolicy.present(nodes) || PrivateContextPolicy.blocksCloud(nodes) || PaymentSafety.state(nodes) != null || BrowserConsentPolicy.present(nodes) || DestinationPolicy.requiresProvenance(goal, nodes) ||
+        if (!allowed(goal) || ResearchIntent.claimType(goal) != null || ScreenInterruption.reason(nodes) != null || ScreenErrorPolicy.present(nodes) || BrowserSafetyPolicy.present(nodes) || PrivateContextPolicy.blocksCloud(nodes) || PaymentSafety.state(nodes) != null || BrowserConsentPolicy.present(nodes) || DestinationPolicy.requiresProvenance(goal, nodes) ||
             !com.saathi.orchestrator.LiveGuide.allowedPackage(ticket.packageName, "com.saathi")) return null
         val controls = nodes.mapIndexedNotNull { index, node ->
             // Text-entry values, including browser address bars, never become cloud controls.

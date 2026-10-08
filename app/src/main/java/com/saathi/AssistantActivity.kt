@@ -77,6 +77,11 @@ class AssistantActivity : ComponentActivity() {
                     .imePadding().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
                     SaathiBrand()
                     GlassButton("Report cyber fraud", primary = false, onClick = { startActivity(Intent(this@AssistantActivity, CyberReportActivity::class.java)) })
+                    if (SaathiSession.reviewedPlan() != null) GlassButton(when(preferences.language) {
+                        com.saathi.language.GuidanceLanguage.HINDI -> "जाँची हुई योजना पर लौटें"
+                        com.saathi.language.GuidanceLanguage.HINGLISH -> "Jaanche hue plan par lautein"
+                        else -> "Return to reviewed plan"
+                    }, primary = false, onClick = { ResearchActivity.open(this@AssistantActivity, "") })
                     val issueResearch = com.saathi.core.ScreenErrorPolicy.isNotice(lastReply)
                     GlassButton(if (issueResearch) "Research this issue" else "Research requirements", primary = false,
                         onClick = { ResearchActivity.open(this@AssistantActivity, if (issueResearch) "" else request, if (issueResearch) "outage" else null) })

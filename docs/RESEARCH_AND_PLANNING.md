@@ -1,4 +1,10 @@
-> In-progress continuation: Research now offers an explicit “Read source in browser” consent path and a local source-reading companion. It preserves the current dependency/original goal and compares only supported browser-chrome full HTTPS addresses, without targets, cloud calls or completion inference. UI/service behavior is compiled but not yet emulator-verified; this does not establish live task navigation. See NEXT_CONTINUATION.md for required tests and hardening.
+## 8 October hardening
+
+The browser reader only examines supported browser chrome, excludes WebView subtrees and rejects incomplete/ambiguous traversal or edited address fields. Public DNS hostname syntax is required; local/numeric/special-use addresses are refused. No omitted HTTPS scheme is inferred. A visible address match is not proof of certificate health, source applicability or completion. Browser security warnings invoke a no-target handover.
+
+Research retains its original goal/current dependency during source reading and explicit pause/resume, rechecks expiry even on quiet pages, and returns through the bubble to applicability review. New research or abandoning the review discards its own retained plan; a temporarily blocked resume preserves the task for review. Local evidence rejects clock rollback before retrieval. Source mode remains local and never sends browser address values to providers.
+
+> In-progress continuation: Research now offers an explicit “Read source in browser” consent path and a local source-reading companion. It preserves the current dependency/original goal and compares only supported browser-chrome full HTTPS addresses, without targets, cloud calls or completion inference. UI/service behavior now has controlled emulator evidence; this does not establish actionable live task navigation or positive real HTTPS site verification. See NEXT_CONTINUATION.md for required tests and hardening.
 
 # Research and proposed plans
 

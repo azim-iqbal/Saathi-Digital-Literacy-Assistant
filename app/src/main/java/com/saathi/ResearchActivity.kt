@@ -52,6 +52,9 @@ class ResearchActivity : ComponentActivity() {
         plan = SaathiSession.reviewedPlan()?.also { it.invalidateContext() }
         val initialGoal = nextGoal.also { nextGoal = "" }
         val initialPurpose = nextPurpose.also { nextPurpose = null }
+        if (initialGoal.isNotBlank() || initialPurpose != null) {
+            SaathiSession.discardReviewedPlan(plan); plan = null
+        }
         setContent {
             val preferences = remember { Preferences(this) }
             fun local(en: String, hi: String, hinglish: String) = when(preferences.language) {
@@ -85,9 +88,9 @@ class ResearchActivity : ComponentActivity() {
                         Text(local("Describe the task without personal details. Your server checks its reviewed sources; results may be incomplete.",
                             "निजी जानकारी दिए बिना काम बताएं। सर्वर जाँचे हुए स्रोत खोजता है; नतीजे अधूरे हो सकते हैं।",
                             "Niji jaankari ke bina kaam batayein. Server jaanche hue sources khojta hai; natije adhoore ho sakte hain."))
-                        OutlinedTextField(goal, { goal = it.take(160); researchId = null; report = ""; plan = null }, enabled = !busy,
+                        OutlinedTextField(goal, { goal = it.take(160); researchId = null; report = ""; discardPlan() }, enabled = !busy,
                             shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp), label = { Text(local("Task", "काम", "Kaam")) }, modifier = Modifier.fillMaxWidth())
-                        OutlinedTextField(jurisdiction, { jurisdiction = it.take(80); researchId = null; report = ""; plan = null }, enabled = !busy,
+                        OutlinedTextField(jurisdiction, { jurisdiction = it.take(80); researchId = null; report = ""; discardPlan() }, enabled = !busy,
                             shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp), label = { Text(local("Country / state or region", "देश / राज्य या क्षेत्र", "Desh / rajya ya kshetra")) }, modifier = Modifier.fillMaxWidth())
                         for ((kind, label) in listOf(
                             "requirements" to local("Requirements", "ज़रूरी शर्तें", "Zaroori shartein"),
@@ -96,14 +99,14 @@ class ResearchActivity : ComponentActivity() {
                             "pricing" to local("Fees / pricing", "शुल्क / कीमत", "Shulk / keemat"),
                             "outage" to local("Service issue", "सेवा की समस्या", "Service ki samasya"))) {
                             FilterChip(selected = purpose == kind, enabled = !busy,
-                                onClick = { purpose = kind; researchId = null; report = ""; plan = null }, label = { Text(label) })
+                                onClick = { purpose = kind; researchId = null; report = ""; discardPlan() }, label = { Text(label) })
                         }
                         Text(local("Only this task and region go to your backend. No screen content is sent. A proposed plan uses both configured AI providers only after a separate tap.",
                             "सिर्फ यह काम और क्षेत्र बैकएंड को भेजे जाएंगे, स्क्रीन की जानकारी नहीं। योजना बनाने के लिए अलग से सहमति देने पर दोनों AI सेवाएं इस्तेमाल होंगी।",
                             "Sirf yeh kaam aur kshetra backend ko jayenge, screen ki jaankari nahin. Plan ke liye alag se tap karne par dono AI services istemaal hongi."))
                         Row { Checkbox(consent, { consent = it }, enabled = !busy); Text(local("Allow this research request", "इस खोज की अनुमति दें", "Is khoj ki anumati dein")) }
                         GlassButton(local("Find sources", "स्रोत खोजें", "Sources khojein"), enabled = consent && !busy && goal.isNotBlank() && jurisdiction.isNotBlank(), onClick = {
-                            busy = true; report = ""; researchId = null; plan = null
+                            busy = true; report = ""; researchId = null; discardPlan()
                             pending = PracticeGateway.research(goal, jurisdiction, preferences.language.apiTag, consent, purpose) { result ->
                                 busy = false; pending = null
                                 if (result is GatewayResult.Research) { report = result.report; if (result.hasEvidence) researchId = result.requestId }
@@ -180,7 +183,7 @@ class ResearchActivity : ComponentActivity() {
                                         openingSource = true
                                         try { startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(proposed.sourceUrl))
                                             .addCategory(android.content.Intent.CATEGORY_BROWSABLE)) }
-                                        catch (_: android.content.ActivityNotFoundException) {
+                                        catch (_: RuntimeException) {
                                             openingSource = false; SaathiSession.pause(); current.invalidateContext(); planRevision++
                                             report = local("No browser is available. Keep the source here for manual review.", "ब्राउज़र उपलब्ध नहीं है। स्रोत यहीं पढ़कर जाँचें।", "Browser uplabdh nahin hai. Source yahin padhkar jaanchein.")
                                         }
@@ -193,7 +196,7 @@ class ResearchActivity : ComponentActivity() {
                         if (explainTerms) for (term in com.saathi.core.PlainLanguage.terms) {
                             Text(com.saathi.core.PlainLanguage.explain(term, preferences.language.apiTag).orEmpty())
                         }
-                        GlassButton(local("Back", "वापस", "Wapas"), primary = false, onClick = { finish() })
+                        GlassButton(local("Back", "वापस", "Wapas"), primary = false, onClick = { discardPlan(); finish() })
                     }
                 }
             }
@@ -210,6 +213,11 @@ class ResearchActivity : ComponentActivity() {
             "source_unverified", "evidence_missing", "disagreement" -> local("Evidence was insufficient or the proposed plans disagreed. No plan was accepted.", "प्रमाण अधूरे थे या योजनाएं अलग थीं। कोई योजना स्वीकार नहीं की गई।", "Pramaan adhoore the ya plans alag the. Koi plan sweekar nahin kiya gaya.")
             else -> local("Research could not be verified. This does not establish eligibility or completion.", "खोज सत्यापित नहीं हो पाई। इससे पात्रता या काम पूरा होना तय नहीं होता।", "Khoj verify nahin ho payi. Isse patrata ya kaam poora hona tay nahin hota.")
         }
+    }
+    private fun discardPlan() { SaathiSession.discardReviewedPlan(plan); plan = null }
+    override fun onDestroy() {
+        if (isFinishing) discardPlan()
+        super.onDestroy()
     }
     private fun cancelRequest() { pending?.cancel(); pending = null; busy = false; researchId = null }
     override fun onStart() {

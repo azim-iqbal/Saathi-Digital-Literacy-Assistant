@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-08",
+  "base_commit": "d91b216",
+  "android_unit_tests": 125,
+  "backend_tests": 140,
+  "evaluation_harness_tests": 5,
+  "offline_probes_passed": 51,
+  "research_acceptance_tests": 1,
+  "emulator_broad_tests": 10,
+  "emulator_final_build_regressions": 4,
+  "emulator_groups_overlap": true,
+  "builds": [
+    "debug",
+    "androidTest",
+    "release Kotlin compilation"
+  ],
+  "lint_errors": 0,
+  "lint_warnings": 61,
+  "live_provider_calls": 0,
+  "production_ready": false,
+  "remaining_short_window_percent_at_final_check": 13,
+  "requested_stop_remaining_percent": 15,
+  "remaining_repository_gate": "Verified actionable plan/browser binding and broader mixed-fault/privacy acceptance"
+}
