@@ -77,6 +77,10 @@ class SaathiAccessibilityService : AccessibilityService() {
             if (destroyed || !SaathiSession.isActive()) return@postDelayed
             if (getSystemService(KeyguardManager::class.java).isKeyguardLocked) { SaathiSession.stop(); return@postDelayed }
             dirty = false
+            // A WebView event may leave old descendants in the service cache even
+            // though the renderer has changed. Fetch this observation from the
+            // accessibility connection rather than reusing those cached children.
+            if (android.os.Build.VERSION.SDK_INT >= 33) clearCache()
             val root = runCatching { rootInActiveWindow }.getOrNull() ?: run {
                 SaathiSession.onScreenUnavailable()
                 return@postDelayed

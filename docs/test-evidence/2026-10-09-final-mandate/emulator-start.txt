@@ -145,3 +145,36 @@ ERROR        | Failed to find ColorBuffer: 25684
 ERROR        | Failed to find ColorBuffer: 25727
 ERROR        | Failed to find ColorBuffer: 26027
 ERROR        | Failed to find ColorBuffer: 26064
+ERROR        | Failed to find ColorBuffer: 26758
+ERROR        | Failed to find ColorBuffer: 26824
+ERROR        | Failed to find ColorBuffer: 27168
+ERROR        | Failed to find ColorBuffer: 27796
+ERROR        | Failed to find ColorBuffer: 28134
+ERROR        | Failed to find ColorBuffer: 28540
+ERROR        | Failed to find ColorBuffer: 28611
+ERROR        | Failed to find ColorBuffer: 28694
+ERROR        | Failed to find ColorBuffer: 29237
+ERROR        | Failed to find ColorBuffer: 30175
+ERROR        | Failed to find ColorBuffer: 30265
+ERROR        | Failed to find ColorBuffer: 30426
+ERROR        | Failed to find ColorBuffer: 30501
+ERROR        | Failed to find ColorBuffer: 31119
+ERROR        | Failed to find ColorBuffer: 32961
+ERROR        | Failed to find ColorBuffer: 33175
+ERROR        | Failed to find ColorBuffer: 35743
+ERROR        | Failed to find ColorBuffer: 36096
+ERROR        | Failed to find ColorBuffer: 36165
+ERROR        | Failed to find ColorBuffer: 38037
+ERROR        | Failed to find ColorBuffer: 38374
+ERROR        | Failed to find ColorBuffer: 38554
+ERROR        | Failed to find ColorBuffer: 38837
+INFO         | Created VkInstance:0x7bd7424000 for application:'' engine:''.
+INFO         | Destroyed VkInstance:0x7bd7424000 for application:'' engine:''.
+INFO         | Created VkInstance:0x7bd742d000 for application:'Chromium' engine:''.
+INFO         | Created VkDevice:0x7bdd2de000 for application:'Chromium' instance:0x7bd742d000. ASTC emulation:on CPU decoding:off. Protected memory:off
+INFO         | Destroyed VkDevice:0x7bdd2de000
+INFO         | Destroyed VkInstance:0x7bd742d000 for application:'Chromium' engine:''.
+INFO         | Created VkInstance:0x7bd743d800 for application:'Chromium' engine:''.
+INFO         | Created VkDevice:0x7bdd2de000 for application:'Chromium' instance:0x7bd743d800. ASTC emulation:on CPU decoding:off. Protected memory:off
+INFO         | Destroyed VkDevice:0x7bdd2de000
+INFO         | Destroyed VkInstance:0x7bd743d800 for application:'Chromium' engine:''.

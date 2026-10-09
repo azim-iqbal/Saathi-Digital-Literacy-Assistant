@@ -1,0 +1,1 @@
+Synthetic connection-check fixture at loopback:8767; no model calls

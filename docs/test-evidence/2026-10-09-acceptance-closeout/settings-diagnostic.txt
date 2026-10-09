@@ -1,0 +1,23 @@
+
+com.saathi.ui.CrossAppGuidanceTest:
+Error in settingsTargetRemainsAvailableWhenSystemHidesOverlay(com.saathi.ui.CrossAppGuidanceTest):
+java.lang.AssertionError: Expected Settings/overlay transition; state=GUIDING; instruction=Find “Search Settings” on this screen. Follow the marker if visible; if the app hides it, open Saathi for text help.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.CrossAppGuidanceTest.waitUntil(CrossAppGuidanceTest.kt:37)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay(CrossAppGuidanceTest.kt:91)
+.
+
+Time: 18.939
+There was 1 failure:
+1) settingsTargetRemainsAvailableWhenSystemHidesOverlay(com.saathi.ui.CrossAppGuidanceTest)
+java.lang.AssertionError: Expected Settings/overlay transition; state=GUIDING; instruction=Find “Search Settings” on this screen. Follow the marker if visible; if the app hides it, open Saathi for text help.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.CrossAppGuidanceTest.waitUntil(CrossAppGuidanceTest.kt:37)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay(CrossAppGuidanceTest.kt:91)
+
+FAILURES!!!
+Tests run: 2,  Failures: 1
+
+

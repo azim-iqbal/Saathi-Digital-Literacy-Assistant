@@ -1,0 +1,44 @@
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugBuildConfig
+> Task :app:generateDebugResValues
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:checkDebugAarMetadata
+> Task :app:packageDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:parseDebugLocalResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:processDebugManifestForPackage
+> Task :app:javaPreCompileDebug
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:mergeDebugResources
+> Task :app:processDebugResources
+
+> Task :app:compileDebugKotlin
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/DemoBillPayActivity.kt:80:27 'fun onBackPressed(): Unit' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/accessibility/NodeMasker.kt:13:42 'fun recycle(): Unit' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/accessibility/SaathiAccessibilityService.kt:92:50 'static fun obtain(p0: AccessibilityNodeInfo!): AccessibilityNodeInfo!' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/orchestrator/GuidanceForegroundService.kt:77:14 'fun addAction(p0: Int, p1: CharSequence!, p2: PendingIntent!): Notification.Builder!' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/overlay/HighlightOverlayService.kt:159:79 'field scaledDensity: Float' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/overlay/HighlightOverlayService.kt:184:57 'field scaledDensity: Float' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/speech/VoiceConversationService.kt:249:14 'fun addAction(p0: Int, p1: CharSequence!, p2: PendingIntent!): Notification.Builder!' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/speech/VoiceConversationService.kt:250:14 'fun addAction(p0: Int, p1: CharSequence!, p2: PendingIntent!): Notification.Builder!' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/ui/SaathiApp.kt:190:24 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///Users/azimiqbal/Documents/Saathi-%20Digital%20Literacy%20Co-Pilot/app/src/main/java/com/saathi/ui/SaathiApp.kt:191:24 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+
+BUILD SUCCESSFUL in 16s
+24 actionable tasks: 24 executed

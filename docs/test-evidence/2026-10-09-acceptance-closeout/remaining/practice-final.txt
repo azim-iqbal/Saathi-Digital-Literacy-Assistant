@@ -1,0 +1,9 @@
+
+com.saathi.ui.GatewayIntegrationTest:....
+com.saathi.ui.PracticeRecoveryTest:...
+
+Time: 33.721
+
+OK (7 tests)
+
+

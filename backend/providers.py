@@ -103,38 +103,39 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 def post_json(url, headers, data, timeout=8, observer=None, trace=None, cancelled=None):
-    from backend.provider_network import NetworkTrace, ObservedHTTPSHandler
+    from backend.provider_network import NetworkTrace, ObservedHTTPSHandler, TransportDeadline
     trace = trace or NetworkTrace()
     deadline = time.monotonic() + timeout
     request = urllib.request.Request(url, data=json.dumps(data).encode(), headers={"Content-Type": "application/json", "User-Agent": "Saathi-Gateway/0.1", **headers})
     # Ignore environment proxy overrides; only fixed HTTPS provider endpoints are permitted.
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect(),
-                                        ObservedHTTPSHandler(deadline, trace, cancelled))
-    with opener.open(request, timeout=timeout) as response:
-        if observer is not None: observer(response.status)
-        raw = bytearray()
-        while True:
-            if cancelled is not None and cancelled.is_set(): raise InterruptedError()
+    with TransportDeadline(deadline, cancelled) as guard:
+        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect(),
+                                            ObservedHTTPSHandler(deadline, trace, cancelled, guard))
+        with opener.open(request, timeout=timeout) as response:
+            if observer is not None: observer(response.status)
+            raw = bytearray()
+            while True:
+                if cancelled is not None and cancelled.is_set(): raise InterruptedError()
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("Provider deadline")
+                # urllib's response socket may already be detached from its connection.
+                # Reset it before each read so a late header cannot start a fresh full timeout.
+                response_socket = getattr(getattr(getattr(response, 'fp', None), 'raw', None), '_sock', None)
+                if response_socket is not None: response_socket.settimeout(max(.001, deadline-time.monotonic()))
+                chunk = response.read1(min(4096, 65_537 - len(raw)))
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("Provider deadline")
+                if not chunk:
+                    break
+                raw.extend(chunk)
+                if len(raw) > 65_536:
+                    raise InvalidRequest("Provider response too large")
+            trace.enter('json')
+            result = strict_json(raw.decode("utf-8"))
             if time.monotonic() >= deadline:
                 raise TimeoutError("Provider deadline")
-            # urllib's response socket may already be detached from its connection.
-            # Reset it before each read so a late header cannot start a fresh full timeout.
-            response_socket = getattr(getattr(getattr(response, 'fp', None), 'raw', None), '_sock', None)
-            if response_socket is not None: response_socket.settimeout(max(.001, deadline-time.monotonic()))
-            chunk = response.read1(min(4096, 65_537 - len(raw)))
-            if time.monotonic() >= deadline:
-                raise TimeoutError("Provider deadline")
-            if not chunk:
-                break
-            raw.extend(chunk)
-            if len(raw) > 65_536:
-                raise InvalidRequest("Provider response too large")
-        trace.enter('json')
-        result = strict_json(raw.decode("utf-8"))
-        if time.monotonic() >= deadline:
-            raise TimeoutError("Provider deadline")
-        trace.enter('complete')
-        return result
+            trace.enter('complete')
+            return result
 
 
 class RestProvider:

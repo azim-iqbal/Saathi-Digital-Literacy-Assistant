@@ -131,3 +131,12 @@ INFO         | Created VkInstance:0x767cd89800 for application:'Chromium' engine
 INFO         | Created VkDevice:0x7690738000 for application:'Chromium' instance:0x767cd89800. ASTC emulation:on CPU decoding:off. Protected memory:off
 INFO         | Destroyed VkDevice:0x7690738000
 INFO         | Destroyed VkInstance:0x767cd89800 for application:'Chromium' engine:''.
+ERROR        | Failed to find ColorBuffer: 5340
+INFO         | Created VkInstance:0x767cd92800 for application:'' engine:''.
+INFO         | Destroyed VkInstance:0x767cd92800 for application:'' engine:''.
+INFO         | Created VkInstance:0x767cd8f800 for application:'' engine:''.
+INFO         | Destroyed VkInstance:0x767cd8f800 for application:'' engine:''.
+INFO         | Created VkInstance:0x767cd8f800 for application:'' engine:''.
+INFO         | Destroyed VkInstance:0x767cd8f800 for application:'' engine:''.
+INFO         | Created VkInstance:0x767cd8e000 for application:'' engine:''.
+INFO         | Destroyed VkInstance:0x767cd8e000 for application:'' engine:''.

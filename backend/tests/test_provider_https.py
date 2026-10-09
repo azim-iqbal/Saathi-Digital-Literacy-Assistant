@@ -25,6 +25,16 @@ class ProviderHttpsTests(unittest.TestCase):
             def log_message(self,*args):pass
             def do_POST(self):
                 self.rfile.read(int(self.headers['Content-Length']))
+                if self.path == '/drip-headers':
+                    try:
+                        self.wfile.write(b'HTTP/1.1 200 OK\r\n')
+                        for _ in range(20):
+                            self.wfile.write(b'X-Fixture: waiting\r\n')
+                            self.wfile.flush()
+                            time.sleep(.025)
+                        self.wfile.write(b'Content-Length: 2\r\n\r\n{}')
+                    except (OSError, ssl.SSLError): pass
+                    return
                 if self.path=='/headers':time.sleep(.2)
                 body=b'{not JSON' if self.path=='/invalid' else json.dumps({'ok':True}).encode()
                 try:
@@ -41,14 +51,35 @@ class ProviderHttpsTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.server.shutdown();cls.server.server_close();cls.worker.join();cls.folder.cleanup()
-    def request(self,path,trace,timeout=1,context=None):
+    def request(self,path,trace,timeout=1,context=None,cancelled=None):
         with patch('backend.provider_network.public_addresses',return_value=['127.0.0.1']),patch('ssl._create_default_https_context',return_value=context or self.context):
-            return post_json(self.url+path,{},dict(fictional=True),timeout,trace=trace)
+            return post_json(self.url+path,{},dict(fictional=True),timeout,trace=trace,cancelled=cancelled)
+    def test_trickling_headers_cannot_extend_total_deadline(self):
+        trace=NetworkTrace();start=time.monotonic()
+        with self.assertRaises(TimeoutError): self.request('/drip-headers',trace,timeout=.12)
+        self.assertLess(time.monotonic()-start,.3)
+        self.assertEqual(trace.phase,'first_byte')
+    def test_cancellation_interrupts_inflight_headers_and_body(self):
+        for path in ('/headers','/body'):
+            cancelled=threading.Event()
+            timer=threading.Timer(.05,cancelled.set);timer.start()
+            start=time.monotonic()
+            try:
+                with self.assertRaises(InterruptedError): self.request(path,NetworkTrace(),timeout=2,cancelled=cancelled)
+                self.assertLess(time.monotonic()-start,.18)
+            finally: timer.cancel();timer.join()
     def test_verified_tls_full_request_and_fixed_phase_diagnostics(self):
         trace=NetworkTrace()
         self.assertEqual(self.request('/',trace),{'ok':True})
         self.assertEqual(set(trace.snapshot()['phase_ms']),{'dns','connect','tls','write','first_byte','body','json','complete'})
         self.assertNotIn('localhost',str(trace.snapshot()))
+    def test_watchers_are_released_after_success_timeout_and_cancellation(self):
+        for _ in range(8):
+            self.request('/',NetworkTrace())
+            with self.assertRaises(TimeoutError): self.request('/headers',NetworkTrace(),timeout=.04)
+            cancelled=threading.Event();cancelled.set()
+            with self.assertRaises(InterruptedError): self.request('/',NetworkTrace(),cancelled=cancelled)
+            self.assertFalse(any(t.name=='saathi-provider-deadline' for t in threading.enumerate()))
     def test_header_and_body_delays_use_one_deadline(self):
         for path,phase in [('/headers','first_byte'),('/body','body')]:
             trace=NetworkTrace();start=time.monotonic()

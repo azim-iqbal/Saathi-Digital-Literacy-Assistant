@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "duration_ms": 7209179,
+  "samples": 111,
+  "rounds": 111,
+  "stats": {
+    "pss_kb": {
+      "first": 112118,
+      "last": 120329,
+      "minimum": 112118,
+      "maximum": 120777,
+      "first_quartile_median": 115466,
+      "last_quartile_median": 119910
+    },
+    "heap_used_bytes": {
+      "first": 7207184,
+      "last": 8190224,
+      "minimum": 6158608,
+      "maximum": 8272144,
+      "first_quartile_median": 7092496,
+      "last_quartile_median": 8010000
+    },
+    "open_fds": {
+      "first": 135,
+      "last": 136,
+      "minimum": 131,
+      "maximum": 136,
+      "first_quartile_median": 135,
+      "last_quartile_median": 135
+    },
+    "live_threads": {
+      "first": 40,
+      "last": 41,
+      "minimum": 40,
+      "maximum": 41,
+      "first_quartile_median": 41,
+      "last_quartile_median": 41
+    }
+  }
+}

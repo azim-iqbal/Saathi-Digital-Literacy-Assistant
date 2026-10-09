@@ -1,0 +1,10 @@
+10924449: plan_received
+10924478: test_observed_plan
+10924514: home_command_completed
+10924519: activity_PAUSED
+10925016: test_releasing_response
+10925016: plan_released signal=true
+10925101: activity_STOPPED
+10926230: activity_RESTARTED
+10926230: activity_STARTED
+10926231: activity_RESUMED

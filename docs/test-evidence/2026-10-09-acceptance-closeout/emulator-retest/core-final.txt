@@ -1,0 +1,52 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.GatewayTransportIntegrationTest:....
+com.saathi.ui.LiveAccessibilityIntegrationTest:
+Error in realServiceTracksExternalDetourReturnAndWebChangeThenStops(com.saathi.ui.LiveAccessibilityIntegrationTest):
+java.lang.AssertionError: Web mutation clears old target; state=GUIDING; instruction=Find “Support” on this screen. Follow the marker if visible; if the app hides it, open Saathi for text help.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.waitFor(LiveAccessibilityIntegrationTest.kt:48)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops(LiveAccessibilityIntegrationTest.kt:218)
+
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.LiveGatewayCodecTest:..
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.CrossAppGuidanceTest:..
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.ResearchRecoveryUiTest:..
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.SpeechEngineSmokeTest:.
+com.saathi.ui.PortalWorkflowIntegrationTest:
+Error in reportingWebFormPreservesGoalAndPrivateUserBoundaries(com.saathi.ui.PortalWorkflowIntegrationTest):
+java.lang.AssertionError: Human challenge; status=SENSITIVE_HANDOVER
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.waitFor(PortalWorkflowIntegrationTest.kt:34)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.reportingWebFormPreservesGoalAndPrivateUserBoundaries(PortalWorkflowIntegrationTest.kt:100)
+
+com.saathi.ui.ComplaintDraftUiTest:...
+
+Time: 127.873
+There were 2 failures:
+1) realServiceTracksExternalDetourReturnAndWebChangeThenStops(com.saathi.ui.LiveAccessibilityIntegrationTest)
+java.lang.AssertionError: Web mutation clears old target; state=GUIDING; instruction=Find “Support” on this screen. Follow the marker if visible; if the app hides it, open Saathi for text help.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.waitFor(LiveAccessibilityIntegrationTest.kt:48)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops(LiveAccessibilityIntegrationTest.kt:218)
+2) reportingWebFormPreservesGoalAndPrivateUserBoundaries(com.saathi.ui.PortalWorkflowIntegrationTest)
+java.lang.AssertionError: Human challenge; status=SENSITIVE_HANDOVER
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.waitFor(PortalWorkflowIntegrationTest.kt:34)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.reportingWebFormPreservesGoalAndPrivateUserBoundaries(PortalWorkflowIntegrationTest.kt:100)
+
+FAILURES!!!
+Tests run: 29,  Failures: 2
+
+

@@ -1,0 +1,6 @@
+ENGLISH: ttsCompletionSuccess=true
+HINDI: ttsCompletionSuccess=true
+HINGLISH: ttsCompletionSuccess=true
+onDeviceRecognitionAvailable=true
+recognizerError=13
+No human audio supplied or recorded by test. Emulator muted; quality, transcript accuracy and physical-device behavior unverified.

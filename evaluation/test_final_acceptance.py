@@ -28,3 +28,9 @@ class FinalAcceptanceTests(unittest.TestCase):
             self.assertEqual([r['status'] for r in value['cases']],['PASS']*4)
             self.assertNotIn('private response canary',(Path(tmp)/'results.json').read_text())
             with self.assertRaises(FileExistsError):run(tmp,lambda:self.fail('No replay'))
+        with tempfile.TemporaryDirectory() as tmp:
+            value=run(tmp,lambda:Gateway([Provider('gemini'),Provider('groq')],mode='dual_ai'),suite='reasoning')
+            self.assertEqual(value['maximum_provider_calls'],4)
+            self.assertEqual(value['provider_reservations'],4)
+            self.assertEqual([r['case'] for r in value['cases']],['plan','incident'])
+            self.assertEqual([r['status'] for r in value['cases']],['PASS','PASS'])

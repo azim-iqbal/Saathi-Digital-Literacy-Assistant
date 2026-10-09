@@ -1,0 +1,100 @@
+ACTIVITY MANAGER PROCESS EXIT INFO (dumpsys activity exit-info)
+Last Timestamp of Persistence Into Persistent Storage: 2026-10-09 21:32:36.799
+  package: com.saathi
+    Historical Process Exit for uid=10231
+        ApplicationExitInfo #0:
+          timestamp=2026-10-09 19:43:27.922 pid=23332 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=625
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=252MB state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #1:
+          timestamp=2026-10-09 17:25:50.660 pid=21937 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=582
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #2:
+          timestamp=2026-10-09 17:23:48.492 pid=20587 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=543
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #3:
+          timestamp=2026-10-08 19:36:21.729 pid=18117 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=476
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #4:
+          timestamp=2026-10-08 19:34:52.775 pid=16032 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=422
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #5:
+          timestamp=2026-10-08 19:32:31.958 pid=13917 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=359
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #6:
+          timestamp=2026-10-08 19:29:28.972 pid=12689 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=325
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #7:
+          timestamp=2026-10-08 19:23:29.598 pid=8736 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=195
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #8:
+          timestamp=2026-10-08 14:27:33.833 pid=6225 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=131
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #9:
+          timestamp=2026-10-08 14:23:54.342 pid=3604 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=66
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #10:
+          timestamp=2026-10-07 21:44:54.447 pid=2098 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=1861
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=237MB state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #11:
+          timestamp=2026-10-07 21:43:21.956 pid=32537 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=1845
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #12:
+          timestamp=2026-10-07 21:40:01.940 pid=30171 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=1778
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #13:
+          timestamp=2026-10-07 21:34:27.321 pid=25561 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=1655
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #14:
+          timestamp=2026-10-07 21:12:33.229 pid=13489 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=1236
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null
+        ApplicationExitInfo #15:
+          timestamp=2026-10-07 21:05:24.905 pid=7732 realUid=10231 packageUid=10231 definingUid=10231 user=0 startSeq=1073
+          process=com.saathi reason=10 (USER REQUESTED) subreason=21 (FORCE STOP) status=0
+          importance=125 pss=0.00 rss=0.00 state=empty trace=null
+          description=stop com.saathi due to finished inst
+          anrInfo=null

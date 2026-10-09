@@ -1,0 +1,15 @@
+
+com.saathi.ui.LiveAiIntegrationTest:..
+com.saathi.ui.ResearchUiTest:...
+com.saathi.ui.IncidentAssessmentUiTest:..
+com.saathi.ui.CyberReportUiTest:....
+com.saathi.ui.CyberLinkOverlayTest:..
+com.saathi.ui.AssistantUiTest:...
+com.saathi.ui.VoiceSetupUiTest:.
+com.saathi.ui.GatewaySetupUiTest:.
+
+Time: 153.854
+
+OK (18 tests)
+
+

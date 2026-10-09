@@ -1,0 +1,152 @@
+[
+  {
+    "name": "assistant-dark.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-research-verified/assistant-dark.png",
+    "size": [
+      1280,
+      2628
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "assistant-light.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-research-verified/assistant-light.png",
+    "size": [
+      1280,
+      2628
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "assistant-paused.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-research-verified/assistant-paused.png",
+    "size": [
+      1280,
+      2628
+    ],
+    "identical": false,
+    "bbox": [
+      0,
+      0,
+      1280,
+      2628
+    ]
+  },
+  {
+    "name": "glass-clear-dialog.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/glass-clear-dialog.png",
+    "size": [
+      960,
+      684
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "glass-disabled-dark.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/glass-disabled-dark.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "glass-home-opaque.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/glass-home-opaque.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": false,
+    "bbox": [
+      66,
+      2514,
+      448,
+      2730
+    ]
+  },
+  {
+    "name": "glass-intake-dark.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/glass-intake-dark.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "home-dark.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/home-dark.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "home-hindi-200.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/home-hindi-200.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "home-light.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/home-light.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "language-dark.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/language-dark.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "onboarding-dark-narrow.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/onboarding-dark-narrow.png",
+    "size": [
+      960,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "onboarding-dark.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/onboarding-dark.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "voice-settings.png",
+    "after": "docs/test-evidence/2026-10-09-final-mandate/device-clean/mandate-visual-verified/voice-settings.png",
+    "size": [
+      1280,
+      2856
+    ],
+    "identical": true,
+    "bbox": null
+  }
+]

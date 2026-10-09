@@ -1,0 +1,10 @@
+
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.PortalWorkflowIntegrationTest:.
+com.saathi.ui.PauseResumeIntegrationTest:.
+
+Time: 164.688
+
+OK (3 tests)
+
+

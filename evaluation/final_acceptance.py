@@ -51,16 +51,19 @@ class ScoredProvider:
         self.rows[self.id]=score(self.kind,proposal)
         return proposal
 
-def run(output,factory=configured_gateway):
+def run(output,factory=configured_gateway,*,suite='all'):
+    if suite not in ('all','reasoning'): raise ValueError('Unknown evaluation suite')
+    cases=('plan','incident') if suite=='reasoning' else ('navigation-en','navigation-hinglish','plan','incident')
+    cap=2*len(cases)
     output=Path(output);output.mkdir(parents=True,exist_ok=True)
-    with (output/'authorized-run.started').open('x') as marker:marker.write('At most eight authorized fictional provider calls. No retries.\n')
-    gateway=factory();gateway.global_limit=min(8,gateway.global_limit);gateway.provider_limit=min(4,gateway.provider_limit)
+    with (output/'authorized-run.started').open('x') as marker:marker.write(f'At most {cap} authorized fictional provider calls. Suite: {suite}. No retries.\n')
+    gateway=factory();gateway.global_limit=min(cap,gateway.global_limit);gateway.provider_limit=min(len(cases),gateway.provider_limit)
     providers=gateway.providers
-    result=dict(maximum_provider_calls=8,provider_reservations=0,cases=[],provenance='Genuine provider adapters; fictional evidence; paired validation, not Android E2E')
+    result=dict(maximum_provider_calls=cap,provider_reservations=0,cases=[],provenance='Genuine provider adapters; fictional evidence; paired validation, not Android E2E')
     try:
         if gateway.mode!='dual_ai' or any(not getattr(p,'configured',True) for p in providers):
             result['blocker']='not_configured';return result
-        for kind in ('navigation-en','navigation-hinglish','plan','incident'):
+        for kind in cases:
             scores={};gateway.providers=tuple(ScoredProvider(p,kind,scores) for p in providers)
             snapshot=case_snapshot(kind);start=time.monotonic();response=gateway.decide(snapshot)
             result['cases'].append(dict(case=kind,request_id=snapshot.request_id,elapsed_ms=int((time.monotonic()-start)*1000),
@@ -76,7 +79,8 @@ def run(output,factory=configured_gateway):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--authorized',action='store_true');parser.add_argument('--output',required=True)
+    parser.add_argument('--suite',choices=('all','reasoning'),default='all')
     args=parser.parse_args()
-    if not args.authorized:raise SystemExit('New explicit eight-call authorization required')
-    result=run(args.output)
+    if not args.authorized:raise SystemExit('New explicit authorization for the selected call cap required')
+    result=run(args.output,suite=args.suite)
     print(json.dumps(dict(provider_reservations=result['provider_reservations'],cases=[dict(case=r['case'],status=r['status'],reason=r['reason']) for r in result['cases']],blocker=result.get('blocker'))))

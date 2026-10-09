@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/docs/test-evidence/2026-10-09-final-mandate/run_emulator_groups.py", line 38, in <module>
+    group('core', ['ObservationFailureIntegrationTest','NodeMaskerPrivacyTest','PauseResumeIntegrationTest','PermissionLossIntegrationTest','GatewayTransportIntegrationTest','LiveAccessibilityIntegrationTest','VoiceLifecycleTest','LiveGatewayCodecTest','ResearchProtocolTest','CrossAppGuidanceTest','ReviewedSourceIntegrationTest','PausedRequestUiTest','ResearchRecoveryUiTest','TravelPrivacyUiTest','SpeechEngineSmokeTest','PortalWorkflowIntegrationTest','ComplaintDraftUiTest'])
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/docs/test-evidence/2026-10-09-final-mandate/run_emulator_groups.py", line 28, in group
+    assert 'OK (' in result and 'FAILURES!!!' not in result,name+' failed: see saved evidence'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: core-final failed: see saved evidence

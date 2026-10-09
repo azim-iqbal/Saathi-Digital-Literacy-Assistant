@@ -1,3 +1,27 @@
+## 9 October 2026 — Acceptance closeout, usage-floor handoff
+
+**NOT COMPLETE / NOT READY.** Latest short-window usage is 7% remaining (weekly 70%); the user's 8% floor was crossed between checks. No resets, new live model calls, deployment, signing, commit or push. Stop new work and inspect active results on the next authorized continuation. Preserve all current changes on baseline `7012254`.
+
+Completed: provider slow-header/cancellation defects reproduced and fixed with absolute-deadline TLS interruption and joined per-call watchers. 168 backend tests, 9 evaluation tests, 51/51 probes, 147 Android unit tests (explicit uncached rerun), six local hosted checks, five repetitions of 11 TLS/diagnostic tests, 2,000 recovery plus 2,000 pre-cancelled requests pass. Emulator TalkBack coexistence passed (not audible/human usability). The earlier two-hour run finished: 111 rounds, 7,209,179 ms, 1,554 local requests, 111 cancellations, zero model calls; file descriptors/threads bounded, PSS/heap increased modestly, no heap-leak certification. See `test-evidence/2026-10-09-acceptance-closeout/README.md` and JSON evidence.
+
+**New active failure:** full core rerun reproduced stale guidance after a genuine WebView DOM change. `core-failure-device/mandate-core-final/transition-failure.png` visibly shows **Support opened** while Saathi still marks **Support**. `transition-input.txt`, windows, event and tap traces preserved. A separate portal fixture stopped at SENSITIVE_HANDOVER instead of CAPTCHA. Do not label either fixed by earlier passes. Settings test also failed; its corrected driver waits for the actual unique control and rechecks tap geometry. Its focused two-test retest passes and the next combined run passes Settings; this is a harness improvement, not proof of historical WebView causality.
+
+**Unverified production candidate:** `SaathiAccessibilityService.scheduleCopy()` calls `clearCache()` on API33+ before reading the current root to avoid cached WebView descendants. Build/unit/release compilation/lint pass (`cache-build.txt`). This is a cache-staleness hypothesis pending functional verification, not an established root cause. Android <33 remains unchanged. Do not weaken privacy, old-window filtering or freshness to force acceptance.
+
+Active tests at stop:
+- emulator-5556, exec session **74450**: `cache-focused.txt`; LiveAccessibilityIntegrationTest with **40 WebView cycles**, PortalWorkflowIntegrationTest and PauseResumeIntegrationTest with **10 handoff rounds**. Output `/data/user/0/com.saathi/files/closeout-cache`. Last observed still running first test. Read final result and export evidence before any new install/test on this device.
+- emulator-5554, exec session **54796**: `remaining-progress.txt`, runner `run_remaining.py`; practice **7 PASS**, research/reporting, connection, visual and browser groups pending/running. Output app files `mandate-<group>-final`; local fixture servers/reverse mapping are owned and cleaned by this runner. No genuine providers. Do not install/run another test there until finished.
+- Original two-hour run is DONE; its data was exported before installing this final candidate on 5554. Original evidence belongs to the earlier APK, not this cache candidate.
+
+UI: no design/layout/style/logo changes. Initial comparison 12/14 pairs identical; paused screenshot mismatch was Light vs Dark persisted preference, now the test explicitly selects/restores Dark; Home difference is inspected pressed shading. Final same-theme capture comparison is pending. `ui-source-preservation.json` was captured before the cache candidate; only new production Android edit since it is accessibility cache invalidation, not UI. Do not cite that earlier JSON as proving zero current production edits.
+
+Next required work:
+1. Inspect those two final test outputs. If WebView/portal still fail, collect traces and diagnose; do not keep a speculative fix just because it compiles. If passing, add deterministic cache/fresh-observation coverage and repeat affected combined core/service/privacy/cost checks; a passing rerun alone is not root-cause evidence.
+2. Export final screenshots and perform same-theme paused comparison. Consolidate counts only after all final groups finish. Earlier core runs failed (one Settings failure, then WebView and portal failures); they must not be counted as 29 passing.
+3. Update report/matrix with actual final evidence. Complete code/doc diff and secret checks after any new changes. Current code/doc diff check passed; raw completed log files retain normal trailing blank lines.
+4. Genuine planning/incident retest awaits a fresh scoped answer. An asynchronous request for **up to four calls** was issued, but no answer was received before stopping. Previous eight-call allowance is exhausted. `evaluation.final_acceptance --suite reasoning` now enforces four reservations and has passing fixture tests; DO NOT execute absent explicit authorization.
+5. Physical voice/OEM, legitimate protected portal, browser full HTTPS metadata limitations and Docker/runtime acceptance remain unverified. Single-host SQLite pilot is not stateless Cloud Run support; shared durable state/ownership architecture remains necessary for that target. No deployment.
+
 ## 9 October 2026 — Final mandate continuation (verification in progress)
 
 Latest engineering/evidence report: [PREDEPLOYMENT_VALIDATION.md](PREDEPLOYMENT_VALIDATION.md). This section supersedes older counts and next-step lists below; historical records are retained.

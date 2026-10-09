@@ -1,0 +1,16 @@
+Web mutation clears old target
+class=android.widget.FrameLayout bounds=Rect(0, 0 - 1280, 2856) clickable=false parent=null
+class=android.widget.LinearLayout bounds=Rect(0, 0 - 1280, 2784) clickable=false parent=null
+class=android.widget.FrameLayout bounds=Rect(0, 156 - 1280, 2784) clickable=false parent=null
+class=android.widget.LinearLayout bounds=Rect(0, 156 - 1280, 2784) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(32, 256 - 1248, 353) clickable=false parent=null
+class=android.widget.Button bounds=Rect(32, 353 - 1248, 497) clickable=true parent=null
+class=android.widget.Button bounds=Rect(32, 497 - 1248, 641) clickable=true parent=null
+class=android.widget.Button bounds=Rect(32, 641 - 1248, 785) clickable=true parent=null
+class=android.widget.Button bounds=Rect(32, 785 - 1248, 929) clickable=true parent=null
+class=android.webkit.WebView bounds=Rect(32, 929 - 1248, 1529) clickable=false parent=null
+class=android.webkit.WebView bounds=Rect(32, 929 - 1248, 1529) clickable=false parent=null
+class=android.widget.TextView bounds=Rect(56, 953 - 1226, 1040) clickable=false parent=null
+class=android.view.View bounds=Rect(56, 1097 - 398, 1157) clickable=true parent=null
+class=android.widget.TextView bounds=Rect(56, 1097 - 398, 1157) clickable=false parent=Rect(56, 1097 - 398, 1157)
+class=android.view.View bounds=Rect(0, 2784 - 1280, 2856) clickable=false parent=null

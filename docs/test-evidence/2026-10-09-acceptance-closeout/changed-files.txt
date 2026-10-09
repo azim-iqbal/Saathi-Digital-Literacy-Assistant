@@ -1,0 +1,20 @@
+ M app/src/androidTest/java/com/saathi/ui/AssistantUiTest.kt
+ M app/src/androidTest/java/com/saathi/ui/CrossAppGuidanceTest.kt
+ M app/src/main/java/com/saathi/accessibility/SaathiAccessibilityService.kt
+ M backend/provider_network.py
+ M backend/providers.py
+ M backend/tests/test_provider_https.py
+ M backend/tests/test_provider_network.py
+ M docs/EXECUTION_PLAN.md
+ M docs/FINAL_RELIABILITY_REPORT.md
+ M docs/NEXT_CONTINUATION.md
+ M docs/PREDEPLOYMENT_VALIDATION.md
+ M docs/REMEDIATION_CAPABILITY_MATRIX.md
+ M docs/TEST_RESULTS.md
+ M docs/test-evidence/2026-10-09-final-mandate/emulator-start.txt
+ M docs/test-evidence/2026-10-09-final-mandate/isolated-emulator.txt
+ M docs/test-evidence/2026-10-09-final-mandate/two-hour.txt
+ M evaluation/final_acceptance.py
+ M evaluation/test_final_acceptance.py
+?? app/src/androidTest/java/com/saathi/ui/TalkBackCoexistenceTest.kt
+?? docs/test-evidence/2026-10-09-acceptance-closeout/

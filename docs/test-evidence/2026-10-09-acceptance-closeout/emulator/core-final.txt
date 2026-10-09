@@ -1,0 +1,39 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.GatewayTransportIntegrationTest:....
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.LiveGatewayCodecTest:..
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.CrossAppGuidanceTest:
+Error in settingsTargetRemainsAvailableWhenSystemHidesOverlay(com.saathi.ui.CrossAppGuidanceTest):
+java.lang.AssertionError: Expected Settings/overlay transition
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.CrossAppGuidanceTest.waitUntil(CrossAppGuidanceTest.kt:32)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay(CrossAppGuidanceTest.kt:73)
+.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.ResearchRecoveryUiTest:..
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.SpeechEngineSmokeTest:.
+com.saathi.ui.PortalWorkflowIntegrationTest:.
+com.saathi.ui.ComplaintDraftUiTest:...
+
+Time: 107.914
+There was 1 failure:
+1) settingsTargetRemainsAvailableWhenSystemHidesOverlay(com.saathi.ui.CrossAppGuidanceTest)
+java.lang.AssertionError: Expected Settings/overlay transition
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.CrossAppGuidanceTest.waitUntil(CrossAppGuidanceTest.kt:32)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay(CrossAppGuidanceTest.kt:73)
+
+FAILURES!!!
+Tests run: 29,  Failures: 1
+
+

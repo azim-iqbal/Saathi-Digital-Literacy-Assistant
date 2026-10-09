@@ -1,0 +1,23 @@
+F..F..
+======================================================================
+FAIL: test_cancellation_interrupts_inflight_headers_and_body (backend.tests.test_provider_https.ProviderHttpsTests.test_cancellation_interrupts_inflight_headers_and_body)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_provider_https.py", line 69, in test_cancellation_interrupts_inflight_headers_and_body
+    self.assertLess(time.monotonic()-start,.18)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.20467495801858604 not less than 0.18
+
+======================================================================
+FAIL: test_trickling_headers_cannot_extend_total_deadline (backend.tests.test_provider_https.ProviderHttpsTests.test_trickling_headers_cannot_extend_total_deadline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_provider_https.py", line 60, in test_trickling_headers_cannot_extend_total_deadline
+    self.assertLess(time.monotonic()-start,.3)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.5629497500194702 not less than 0.3
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.507s
+
+FAILED (failures=2)

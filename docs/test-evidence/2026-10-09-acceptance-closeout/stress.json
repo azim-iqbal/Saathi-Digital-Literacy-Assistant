@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "recovery_requests": 2000,
+  "precancelled_requests": 2000,
+  "synthetic_provider_reservations": 3200,
+  "genuine_provider_calls": 0,
+  "elapsed_seconds": 41.335,
+  "timing": {
+    "navigation_primary": {
+      "n": 1000,
+      "p50_ms": 13.157,
+      "p95_ms": 15.333,
+      "max_ms": 20.333
+    },
+    "navigation_fallback": {
+      "n": 1000,
+      "p50_ms": 26.337,
+      "p95_ms": 30.452,
+      "max_ms": 38.044
+    },
+    "precancel": {
+      "n": 2000,
+      "p50_ms": 0.022,
+      "p95_ms": 0.069,
+      "max_ms": 2.491
+    },
+    "planning": {
+      "n": 50,
+      "p50_ms": 13.912,
+      "p95_ms": 16.124,
+      "max_ms": 21.095
+    },
+    "incident": {
+      "n": 50,
+      "p50_ms": 13.481,
+      "p95_ms": 15.328,
+      "max_ms": 16.958
+    },
+    "retrieval": {
+      "n": 50,
+      "p50_ms": 0.088,
+      "p95_ms": 0.192,
+      "max_ms": 0.313
+    }
+  },
+  "retained_sessions": 3,
+  "retained_cancel_ids": 256,
+  "scope": "Backend production dispatch with instantaneous fictional providers/retrieval; not network/model/Android performance"
+}

@@ -29,7 +29,12 @@ class CrossAppGuidanceTest {
     private fun waitUntil(condition: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + 10_000
         while (!condition() && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100)
-        assertTrue("Expected Settings/overlay transition", condition())
+        if (!condition()) {
+            val output = File(InstrumentationRegistry.getArguments().getString("additionalTestOutputDir") ?: context.filesDir.path).apply { mkdirs() }
+            File(output, "settings-transition-failure.txt").writeText("state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}; active=${SaathiSession.isActive()}; service=${com.saathi.accessibility.SaathiAccessibilityService.isConnected()}")
+            File(output, "settings-transition-windows.txt").writeText(shell("dumpsys window windows"))
+        }
+        assertTrue("Expected Settings/overlay transition; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", condition())
     }
     @Test fun settingsTargetRemainsAvailableWhenSystemHidesOverlay() {
         val previous = shell("appops get com.saathi SYSTEM_ALERT_WINDOW")
@@ -63,9 +68,21 @@ class CrossAppGuidanceTest {
                     it.startActivity(Intent(Settings.ACTION_SETTINGS))
                 }
                 waitUntil { automation.rootInActiveWindow?.packageName?.toString() == "com.android.settings" }
-                val currentRoot = requireNotNull(automation.rootInActiveWindow)
-                val currentWindow = currentRoot.windowId
-                val currentNodes = try { NodeMasker.flatten(currentRoot) } finally { currentRoot.recycle() }
+                var currentWindow = -1
+                var currentNodes = emptyList<com.saathi.core.UiNode>()
+                // A Settings package switch precedes its search control becoming ready.
+                // Keep the same complete tree that established the target, not a second read.
+                waitUntil {
+                    val currentRoot = automation.rootInActiveWindow ?: return@waitUntil false
+                    try {
+                        val copied = NodeMasker.flatten(currentRoot)
+                        if (LiveGuide.next(request, copied, "en-IN").target == null) false
+                        else { currentWindow = currentRoot.windowId; currentNodes = copied; true }
+                    } catch (error: IllegalStateException) {
+                        if (error.message != "Missing observation branch") throw error
+                        false
+                    } finally { currentRoot.recycle() }
+                }
                 instrumentation.runOnMainSync {
                     val ticket = requireNotNull(SaathiSession.beginObservation("com.android.settings", currentWindow))
                     SaathiSession.onScreenChanged(currentNodes, ticket)
@@ -77,7 +94,12 @@ class CrossAppGuidanceTest {
                 automation.waitForIdle(500, 5_000)
                 File(output, "settings-windows.txt").writeText(shell("dumpsys window windows"))
                 automation.takeScreenshot()?.let { bitmap -> File(output, "live-settings.png").outputStream().use { bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, it) } }
-                val bounds = requireNotNull(LiveGuide.next(request, currentNodes, "en-IN").target).bounds
+                // Settings animates its search bar while opening. Revalidate geometry at
+                // the user's tap rather than using coordinates from before that animation.
+                val tapRoot = requireNotNull(automation.rootInActiveWindow)
+                val tapNodes = try { NodeMasker.flatten(tapRoot) } finally { tapRoot.recycle() }
+                val bounds = requireNotNull(LiveGuide.next(request, tapNodes, "en-IN").target).bounds
+                File(output, "settings-tap-geometry.txt").writeText("observed=${LiveGuide.next(request,currentNodes,"en-IN").target?.bounds}; tapped=$bounds")
                 val down = SystemClock.uptimeMillis()
                 listOf(MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP).forEach { action ->
                     val event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), action, bounds.exactCenterX(), bounds.exactCenterY(), 0)

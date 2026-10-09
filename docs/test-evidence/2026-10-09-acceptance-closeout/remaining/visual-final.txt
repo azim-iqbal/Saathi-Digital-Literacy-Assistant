@@ -1,0 +1,9 @@
+
+com.saathi.ui.SaathiUiTest:.............
+com.saathi.ui.LaunchUiTest:..
+
+Time: 86.263
+
+OK (15 tests)
+
+
