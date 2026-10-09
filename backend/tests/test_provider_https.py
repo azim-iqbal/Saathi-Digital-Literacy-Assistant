@@ -28,7 +28,7 @@ class ProviderHttpsTests(unittest.TestCase):
                 if self.path == '/drip-headers':
                     try:
                         self.wfile.write(b'HTTP/1.1 200 OK\r\n')
-                        for _ in range(20):
+                        for _ in range(30):
                             self.wfile.write(b'X-Fixture: waiting\r\n')
                             self.wfile.flush()
                             time.sleep(.025)

@@ -101,7 +101,40 @@ class NetworkTrace:
         return dict(phase=self.phase, phase_ms=durations, failure_stage=self.failure_stage,
                     failure_kind=self.failure_kind)
 
+class TrackedHTTPResponse(http.client.HTTPResponse):
+    def read(self, *args, **kwargs):
+        trace = getattr(self, '_trace', None)
+        if trace is not None and trace.phase != 'body':
+            trace.enter('body')
+        return super().read(*args, **kwargs)
+
+    def read1(self, *args, **kwargs):
+        trace = getattr(self, '_trace', None)
+        if trace is not None and trace.phase != 'body':
+            trace.enter('body')
+        return super().read1(*args, **kwargs)
+
+    def readinto(self, *args, **kwargs):
+        trace = getattr(self, '_trace', None)
+        if trace is not None and trace.phase != 'body':
+            trace.enter('body')
+        return super().readinto(*args, **kwargs)
+
+    def readline(self, *args, **kwargs):
+        trace = getattr(self, '_trace', None)
+        if trace is not None and trace.phase != 'body':
+            trace.enter('body')
+        return super().readline(*args, **kwargs)
+
+    def readlines(self, *args, **kwargs):
+        trace = getattr(self, '_trace', None)
+        if trace is not None and trace.phase != 'body':
+            trace.enter('body')
+        return super().readlines(*args, **kwargs)
+
 class ObservedHTTPSConnection(http.client.HTTPSConnection):
+    response_class = TrackedHTTPResponse
+
     def __init__(self,*args,deadline,trace,cancelled=None,guard=None,**kwargs):
         super().__init__(*args,**kwargs)
         self.deadline,self.trace,self.cancelled=deadline,trace,cancelled
@@ -149,7 +182,7 @@ class ObservedHTTPSConnection(http.client.HTTPSConnection):
         self.trace.enter('first_byte')
         self.sock.settimeout(self.remaining())
         response=super().getresponse()
-        self.trace.enter('body')
+        response._trace=self.trace
         return response
 
 class ObservedHTTPSHandler(urllib.request.HTTPSHandler):
