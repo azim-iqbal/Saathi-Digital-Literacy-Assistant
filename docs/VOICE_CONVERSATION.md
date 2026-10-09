@@ -1,3 +1,17 @@
+## 9 October 2026 — Final mandate continuation (verification in progress)
+
+Latest engineering/evidence report: [PREDEPLOYMENT_VALIDATION.md](PREDEPLOYMENT_VALIDATION.md). This section supersedes older counts and next-step lists below; historical records are retained.
+
+Implemented: bounded primary attempt/fallback within the original screen deadline; Groq-first navigation default (explicit config preserved); private-safe phased HTTPS diagnostics; narrative private handoff; explicit prerequisite/denial guards; accurate capability copy using unchanged styles; controlled portal/copy/paste/rotation/lock tests; allowlisted non-root pilot container template.
+
+Verified: 147 Android unit tests, 165 backend tests, 9 evaluation tests, 51/51 probes, 2,000 recovery plus 2,000 pre-cancelled synthetic requests, six local Gunicorn checks, zero lint errors/61 warnings, debug/test builds and release compilation. No configured-key matches in source/non-ignored files or decompressed APKs. Current emulator reruns and two-hour target must be read from `test-evidence/2026-10-09-final-mandate/`; do not call ongoing runs complete.
+
+New eight-call allowance EXHAUSTED: English/Hinglish paired navigation passed; Gemini planning/incident timed out waiting for headers, and Groq failed independent plan/signal expectations. Post-run reasoning guard/prompt changes are offline-tested only. No more live calls without new scoped authorization. Physical audio/OEM, legitimate protected portal, browser-dependent full HTTPS origin, historical post-tap causality and deployment acceptance remain unresolved; do not declare production readiness.
+
+## 9 October privacy verification
+
+See FINAL_RELIABILITY_REPORT.md for the current passing evidence and remaining blockers. Editable/private value getters are skipped; private context content is discarded before session storage. A private/challenge handoff requires explicit microphone reactivation. Original task continuity and structure-only private markers have emulator evidence; actual speech and OEM behaviour remain unverified.
+
 ## 8 October 2026 update
 
 Source companion lifecycle/browser acceptance and additional security/privacy fixes are recorded in [the latest handoff](NEXT_CONTINUATION.md) and [evidence index](test-evidence/2026-10-08-browser/README.md). Semantic private contexts now use the existing private/listening handover. Certificate warnings block local targets and cloud dispatch; raw warning controls are rejected server-side. Overall workflow/hosting/device gates remain open. Earlier dated counts below are historical.

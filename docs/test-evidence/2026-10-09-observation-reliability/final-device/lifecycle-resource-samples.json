@@ -1,0 +1,18 @@
+{
+  "cycles": 3,
+  "samples": [
+    {
+      "cycle": 1,
+      "elapsed_ms": 215,
+      "pss_kb": 107276,
+      "java_used_bytes": 6601520
+    },
+    {
+      "cycle": 3,
+      "elapsed_ms": 719,
+      "pss_kb": 107516,
+      "java_used_bytes": 6503216
+    }
+  ],
+  "scope": "emulator text-mode cycles; not hours-long\/OEM\/speech certification"
+}

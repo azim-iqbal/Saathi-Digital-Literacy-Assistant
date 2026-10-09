@@ -1,0 +1,37 @@
+ M PRIVACY.md
+ M app/src/androidTest/java/com/saathi/ui/ChromeGuidanceIntegrationTest.kt
+ M app/src/androidTest/java/com/saathi/ui/LiveAiIntegrationTest.kt
+ M app/src/androidTest/java/com/saathi/ui/PauseResumeIntegrationTest.kt
+ M app/src/androidTest/java/com/saathi/ui/ReviewedSourceIntegrationTest.kt
+ M app/src/androidTest/java/com/saathi/ui/SaathiUiTest.kt
+ M app/src/debug/java/com/saathi/accessibility/ObservationDiagnostics.kt
+ M app/src/main/java/com/saathi/AssistantActivity.kt
+ M app/src/main/java/com/saathi/accessibility/NodeMasker.kt
+ M app/src/main/java/com/saathi/core/Models.kt
+ M app/src/main/java/com/saathi/core/NavigationHint.kt
+ M app/src/main/java/com/saathi/core/PrivateContextPolicy.kt
+ M app/src/main/java/com/saathi/core/ScreenInterruption.kt
+ M app/src/main/java/com/saathi/gateway/PracticeGateway.kt
+ M app/src/main/java/com/saathi/orchestrator/FormGuide.kt
+ M app/src/main/java/com/saathi/orchestrator/SaathiSession.kt
+ M app/src/main/java/com/saathi/speech/VoiceConversationService.kt
+ M app/src/release/java/com/saathi/accessibility/ObservationDiagnostics.kt
+ M app/src/test/java/com/saathi/core/BrowserChromeInspectorTest.kt
+ M app/src/test/java/com/saathi/core/PrivateContextHandoverTest.kt
+ M docs/CURRENT_STATE_AUDIT.md
+ M docs/EXECUTION_PLAN.md
+ M docs/LIVE_ASSISTANT.md
+ M docs/NEXT_CONTINUATION.md
+ M docs/REMEDIATION_CAPABILITY_MATRIX.md
+ M docs/TEST_RESULTS.md
+ M docs/VOICE_CONVERSATION.md
+?? app/src/androidTest/java/com/saathi/ui/NodeMaskerPrivacyTest.kt
+?? app/src/main/java/com/saathi/accessibility/NodeContentPolicy.kt
+?? app/src/main/java/com/saathi/speech/VoicePrivacyGate.kt
+?? app/src/test/java/com/saathi/accessibility/NodeContentPolicyTest.kt
+?? app/src/test/java/com/saathi/accessibility/ObservationDiagnosticsTest.kt
+?? app/src/test/java/com/saathi/speech/VoicePrivacyGateTest.kt
+?? docs/FINAL_RELIABILITY_REPORT.md
+?? docs/PRIVATE_HANDOFF_DEVICE_CHECKLIST.md
+?? docs/specs/FINAL_RELIABILITY_PRIVACY_HANDOFF_REQUEST.txt
+?? docs/test-evidence/2026-10-09-private-handoff/

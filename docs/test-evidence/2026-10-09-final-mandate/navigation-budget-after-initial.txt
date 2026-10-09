@@ -1,0 +1,26 @@
+......F..E...........
+======================================================================
+ERROR: test_overall_timeout_does_not_start_another_call (backend.tests.test_primary_navigation.PrimaryNavigationTests.test_overall_timeout_does_not_start_another_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_primary_navigation.py", line 81, in test_overall_timeout_does_not_start_another_call
+    self.assertEqual(self.decide()["reason"], "timeout")
+                     ~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'reason'
+
+======================================================================
+FAIL: test_fallback_does_not_get_a_new_deadline_or_bypass_quota (backend.tests.test_primary_navigation.PrimaryNavigationTests.test_fallback_does_not_get_a_new_deadline_or_bypass_quota)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_primary_navigation.py", line 107, in test_fallback_does_not_get_a_new_deadline_or_bypass_quota
+    self.assertEqual(self.decide()["status"], "accepted")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'rejected' != 'accepted'
+- rejected
++ accepted
+
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.025s
+
+FAILED (failures=1, errors=1)

@@ -77,7 +77,8 @@ class ProviderTests(unittest.TestCase):
         base = dict(request_id="x", session_id="s", screen_revision=1, observed_at_ms=int(time.time()*1000), package_name="app.test", window_id=1,
                     locale="en-IN", goal="Open Help", controls=[dict(id="n1", label="Help")], previous_steps=[])
         for change in [dict(audio="secret"), dict(goal="my PIN is 1234"), dict(controls=[dict(id="n1", label="Send")]),
-                       dict(controls=[dict(id="n1", label="Help", bounds=[1,2])]), dict(package_name="com.android.systemui")]:
+                       dict(controls=[dict(id="n1", label="Help", bounds=[1,2])]), dict(package_name="com.android.systemui"),
+                       dict(controls=[dict(id="n1", label="Incident description")])]:
             with self.assertRaises(InvalidRequest):
                 LiveSnapshot.parse({**base, **change})
         # Prompt-injection text remains data; no system policy is sourced from these labels.

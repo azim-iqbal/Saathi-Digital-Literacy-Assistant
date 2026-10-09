@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/hosted_smoke.py", line 66, in <module>
+    if __name__ == "__main__": main()
+                               ~~~~^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/hosted_smoke.py", line 40, in main
+    if server.poll() is not None: raise RuntimeError("Gunicorn exited before readiness")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Gunicorn exited before readiness

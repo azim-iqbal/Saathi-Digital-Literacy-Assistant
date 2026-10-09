@@ -1,0 +1,51 @@
+diff --git a/app/src/main/java/com/saathi/CyberReportActivity.kt b/app/src/main/java/com/saathi/CyberReportActivity.kt
+index 37d7d1a..9d19256 100644
+--- a/app/src/main/java/com/saathi/CyberReportActivity.kt
++++ b/app/src/main/java/com/saathi/CyberReportActivity.kt
+@@ -224,9 +224,10 @@ class CyberReportActivity : ComponentActivity() {
+         // available when the user returns to their browser.
+         if (SaathiSession.isActive()) SaathiSession.onScreenUnavailable()
+     }
+-    override fun onStop() {
++    override fun onPause() {
++        // Stop can follow Pause much later during a window transition.
+         if (assessing) message = "AI assessment cancelled when you left. You can request it again after reviewing the summary."
+-        cancelAssessment(); tts?.stop(); super.onStop()
++        cancelAssessment(); tts?.stop(); super.onPause()
+     }
+     override fun onDestroy() { tts?.stop(); tts?.shutdown(); tts = null; super.onDestroy() }
+ }
+diff --git a/app/src/main/java/com/saathi/ResearchActivity.kt b/app/src/main/java/com/saathi/ResearchActivity.kt
+index 2e32cd8..64c4463 100644
+--- a/app/src/main/java/com/saathi/ResearchActivity.kt
++++ b/app/src/main/java/com/saathi/ResearchActivity.kt
+@@ -220,6 +220,12 @@ class ResearchActivity : ComponentActivity() {
+         super.onDestroy()
+     }
+     private fun cancelRequest() { pending?.cancel(); pending = null; busy = false; researchId = null }
++    override fun onPause() {
++        // onStop can be delayed by the next window's transition. A response arriving
++        // after the user leaves must not restore retry/plan state during that gap.
++        cancelRequest()
++        super.onPause()
++    }
+     override fun onStart() {
+         super.onStart()
+         // Returning from a browser requires review again. No screen observation confirms a step.
+diff --git a/app/src/main/java/com/saathi/gateway/GatewaySetupActivity.kt b/app/src/main/java/com/saathi/gateway/GatewaySetupActivity.kt
+index 905f33d..675aaec 100644
+--- a/app/src/main/java/com/saathi/gateway/GatewaySetupActivity.kt
++++ b/app/src/main/java/com/saathi/gateway/GatewaySetupActivity.kt
+@@ -33,9 +33,10 @@ class GatewaySetupActivity : ComponentActivity() {
+         }
+         check = if (providers) PracticeGateway.checkProviders(true, callback) else PracticeGateway.connectionStatus(callback)
+     }
+-    override fun onStop() {
++    override fun onPause() {
++        // Suppress results as soon as the visible request screen loses foreground control.
+         if (checking) report = "Check cancelled when you left. Refresh server status on return; calls already sent may still count."
+-        cancelCheck(); super.onStop()
++        cancelCheck(); super.onPause()
+     }
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)

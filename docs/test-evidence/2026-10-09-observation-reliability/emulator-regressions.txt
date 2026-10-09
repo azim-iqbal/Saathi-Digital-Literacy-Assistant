@@ -1,0 +1,100 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.LiveAccessibilityIntegrationTest:
+Error in realServiceTracksExternalDetourReturnAndWebChangeThenStops(com.saathi.ui.LiveAccessibilityIntegrationTest):
+java.lang.IllegalStateException: Missing observation branch
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:15)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit(CompleteTreeWalk.kt:19)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$default(CompleteTreeWalk.kt:5)
+	at com.saathi.accessibility.NodeMasker.flatten(NodeMasker.kt:12)
+	at com.saathi.accessibility.NodeMasker.flatten$default(NodeMasker.kt:10)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.nodes(LiveAccessibilityIntegrationTest.kt:47)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops$lambda$55$lambda$38$lambda$36(LiveAccessibilityIntegrationTest.kt:170)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.$r8$lambda$OjK3XW3WegrZhRxxVF3TdH2V60Y(LiveAccessibilityIntegrationTest.kt:0)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest$$ExternalSyntheticLambda2.invoke(D8$$SyntheticClass:0)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.waitFor(LiveAccessibilityIntegrationTest.kt:34)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops(LiveAccessibilityIntegrationTest.kt:170)
+
+com.saathi.ui.ChromeGuidanceIntegrationTest:.
+com.saathi.ui.LiveAiIntegrationTest:..
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.ResearchRecoveryUiTest:.
+Error in leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(com.saathi.ui.ResearchRecoveryUiTest):
+java.lang.AssertionError: Failed: assertDoesNotExist.
+Reason: Did not expect any node but found '1' node that satisfies: (Text + EditableText contains 'Nothing will retry automatically.' (ignoreCase: false) as substring)
+Node found:
+Node #1437 at (l=132.0, t=2382.0, r=1148.0, b=4182.0)px
+Text = '[
+Synthetic requirements · Official
+https://fixture.example.test/
+Region: Region A
+Authority review record: Synthetic test review
+Retrieval does not independently verify truth or current applicability.
+Retrieved: Fri Oct 09 16:11:33 GMT+05:30 2026
+Publisher date: Unknown
+Original source excerpt (untrusted; original language):
+“Registration requires verification.”
+
+Search was bounded. Coverage, applicability and interpretation are not established. An empty result does not mean no requirements exist.
+
+The request could not finish. Check the connection or wait, then choose whether to request it again. Nothing will retry automatically. Read the available sources meanwhile.]'
+Actions = [SetTextSubstitution, ShowTextSubstitution, ClearTextSubstitution, GetTextLayoutResult]
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertDoesNotExist(SemanticsNodeInteraction.kt:100)
+	at com.saathi.ui.ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(ResearchRecoveryUiTest.kt:114)
+
+com.saathi.ui.ResearchProtocolTest:..
+
+Time: 119.023
+There were 2 failures:
+1) realServiceTracksExternalDetourReturnAndWebChangeThenStops(com.saathi.ui.LiveAccessibilityIntegrationTest)
+java.lang.IllegalStateException: Missing observation branch
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:15)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit(CompleteTreeWalk.kt:19)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$default(CompleteTreeWalk.kt:5)
+	at com.saathi.accessibility.NodeMasker.flatten(NodeMasker.kt:12)
+	at com.saathi.accessibility.NodeMasker.flatten$default(NodeMasker.kt:10)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.nodes(LiveAccessibilityIntegrationTest.kt:47)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops$lambda$55$lambda$38$lambda$36(LiveAccessibilityIntegrationTest.kt:170)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.$r8$lambda$OjK3XW3WegrZhRxxVF3TdH2V60Y(LiveAccessibilityIntegrationTest.kt:0)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest$$ExternalSyntheticLambda2.invoke(D8$$SyntheticClass:0)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.waitFor(LiveAccessibilityIntegrationTest.kt:34)
+	at com.saathi.ui.LiveAccessibilityIntegrationTest.realServiceTracksExternalDetourReturnAndWebChangeThenStops(LiveAccessibilityIntegrationTest.kt:170)
+2) leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(com.saathi.ui.ResearchRecoveryUiTest)
+java.lang.AssertionError: Failed: assertDoesNotExist.
+Reason: Did not expect any node but found '1' node that satisfies: (Text + EditableText contains 'Nothing will retry automatically.' (ignoreCase: false) as substring)
+Node found:
+Node #1437 at (l=132.0, t=2382.0, r=1148.0, b=4182.0)px
+Text = '[
+Synthetic requirements · Official
+https://fixture.example.test/
+Region: Region A
+Authority review record: Synthetic test review
+Retrieval does not independently verify truth or current applicability.
+Retrieved: Fri Oct 09 16:11:33 GMT+05:30 2026
+Publisher date: Unknown
+Original source excerpt (untrusted; original language):
+“Registration requires verification.”
+
+Search was bounded. Coverage, applicability and interpretation are not established. An empty result does not mean no requirements exist.
+
+The request could not finish. Check the connection or wait, then choose whether to request it again. Nothing will retry automatically. Read the available sources meanwhile.]'
+Actions = [SetTextSubstitution, ShowTextSubstitution, ClearTextSubstitution, GetTextLayoutResult]
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertDoesNotExist(SemanticsNodeInteraction.kt:100)
+	at com.saathi.ui.ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(ResearchRecoveryUiTest.kt:114)
+
+FAILURES!!!
+Tests run: 16,  Failures: 2
+
+

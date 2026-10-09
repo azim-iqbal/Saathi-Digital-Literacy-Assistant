@@ -1,0 +1,10 @@
+8363939: plan_received
+8364021: test_observed_plan
+8364102: home_command_completed
+8364238: activity_PAUSED
+8364604: test_releasing_response
+8364604: plan_released signal=true
+8365171: activity_STOPPED
+8365817: activity_RESTARTED
+8365817: activity_STARTED
+8365819: activity_RESUMED

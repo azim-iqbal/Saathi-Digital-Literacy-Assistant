@@ -1,0 +1,148 @@
+{
+  "rounds": 20,
+  "handoffs": 60,
+  "samples": [
+    {
+      "round": 1,
+      "elapsed_ms": 3658,
+      "pss_kb": 105679,
+      "heap_bytes": 6306608,
+      "thread_count": 27
+    },
+    {
+      "round": 2,
+      "elapsed_ms": 7119,
+      "pss_kb": 105127,
+      "heap_bytes": 6044464,
+      "thread_count": 26
+    },
+    {
+      "round": 3,
+      "elapsed_ms": 10599,
+      "pss_kb": 105511,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 4,
+      "elapsed_ms": 13759,
+      "pss_kb": 105302,
+      "heap_bytes": 6077232,
+      "thread_count": 26
+    },
+    {
+      "round": 5,
+      "elapsed_ms": 17099,
+      "pss_kb": 105702,
+      "heap_bytes": 6290224,
+      "thread_count": 26
+    },
+    {
+      "round": 6,
+      "elapsed_ms": 20579,
+      "pss_kb": 105766,
+      "heap_bytes": 6306608,
+      "thread_count": 26
+    },
+    {
+      "round": 7,
+      "elapsed_ms": 24098,
+      "pss_kb": 105782,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 8,
+      "elapsed_ms": 27635,
+      "pss_kb": 105782,
+      "heap_bytes": 6290224,
+      "thread_count": 26
+    },
+    {
+      "round": 9,
+      "elapsed_ms": 31267,
+      "pss_kb": 105878,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 10,
+      "elapsed_ms": 34811,
+      "pss_kb": 105670,
+      "heap_bytes": 6093616,
+      "thread_count": 26
+    },
+    {
+      "round": 11,
+      "elapsed_ms": 38311,
+      "pss_kb": 105544,
+      "heap_bytes": 6093616,
+      "thread_count": 26
+    },
+    {
+      "round": 12,
+      "elapsed_ms": 41770,
+      "pss_kb": 105800,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 13,
+      "elapsed_ms": 45327,
+      "pss_kb": 105832,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 14,
+      "elapsed_ms": 48713,
+      "pss_kb": 105848,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 15,
+      "elapsed_ms": 52356,
+      "pss_kb": 105896,
+      "heap_bytes": 6355760,
+      "thread_count": 26
+    },
+    {
+      "round": 16,
+      "elapsed_ms": 55883,
+      "pss_kb": 105912,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 17,
+      "elapsed_ms": 59288,
+      "pss_kb": 105672,
+      "heap_bytes": 6060848,
+      "thread_count": 26
+    },
+    {
+      "round": 18,
+      "elapsed_ms": 62716,
+      "pss_kb": 105944,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    },
+    {
+      "round": 19,
+      "elapsed_ms": 66023,
+      "pss_kb": 105720,
+      "heap_bytes": 6093616,
+      "thread_count": 26
+    },
+    {
+      "round": 20,
+      "elapsed_ms": 69753,
+      "pss_kb": 105864,
+      "heap_bytes": 6322992,
+      "thread_count": 26
+    }
+  ],
+  "cloud_requests": 0,
+  "scope": "Synthetic private\/message\/CAPTCHA round trips; no audio, account login or hours-long leak certification"
+}

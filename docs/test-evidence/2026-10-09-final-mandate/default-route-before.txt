@@ -1,0 +1,21 @@
+.F........
+======================================================================
+FAIL: test_configurable_primary_order_is_strict (backend.tests.test_primary_navigation.PrimaryNavigationTests.test_configurable_primary_order_is_strict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_primary_navigation.py", line 47, in test_configurable_primary_order_is_strict
+    self.assertEqual(provider_order(), ("groq", "gemini"))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('gemini', 'groq') != ('groq', 'gemini')
+
+First differing element 0:
+'gemini'
+'groq'
+
+- ('gemini', 'groq')
++ ('groq', 'gemini')
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.142s
+
+FAILED (failures=1)

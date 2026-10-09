@@ -1,0 +1,30 @@
+{
+  "checked_on": "2026-10-09",
+  "method": "Read-only TinyFish fetch of public official pages",
+  "protected_access": false,
+  "complaints_submitted": 0,
+  "sources": [
+    {
+      "url": "https://cybercrime.gov.in/webform/FAQ.aspx",
+      "final_url": "https://cybercrime.gov.in/webform/FAQ.aspx",
+      "title": "Cyber Crime Portal",
+      "published_date": null,
+      "fetch_latency_ms": 7936.616983000007
+    },
+    {
+      "url": "https://cybercrime.gov.in/webform/crime_authologin.aspx",
+      "final_url": "https://cybercrime.gov.in/webform/crime_authologin.aspx",
+      "title": "Cyber Crime Portal",
+      "published_date": null,
+      "fetch_latency_ms": 3550.392856000002
+    }
+  ],
+  "limits": [
+    "Public checklist wording does not certify authenticated form fields, limits, or current workflow.",
+    "No login, OTP, CAPTCHA, legal attestation or submission attempted."
+  ],
+  "observations": [
+    "Official public guidance describes registration, reporting categories, evidence preparation and complaint tracking.",
+    "The public reporting checklist requests incident chronology and supporting evidence. Financial reports require transaction details. Sensitive details remain with the user; controlled tests use fictional data only."
+  ]
+}

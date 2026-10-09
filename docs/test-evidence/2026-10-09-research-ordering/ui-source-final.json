@@ -1,0 +1,9 @@
+{
+  "baseline_files": 58,
+  "changed": [
+    "app/src/main/java/com/saathi/CyberReportActivity.kt",
+    "app/src/main/java/com/saathi/ResearchActivity.kt"
+  ],
+  "changed_shared_style_or_resource_files": [],
+  "scope": "Request Activity files may change lifecycle methods; see lifecycle-only.patch. No visual rendering edits in this continuation."
+}

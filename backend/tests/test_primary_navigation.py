@@ -43,6 +43,8 @@ class PrimaryNavigationTests(unittest.TestCase):
 
     def test_configurable_primary_order_is_strict(self):
         from backend.configuration import provider_order
+        with patch.dict("os.environ", {}, clear=True):
+            self.assertEqual(provider_order(), ("groq", "gemini"))
         with patch.dict("os.environ", {"SAATHI_PRIMARY_PROVIDER": "groq"}):
             self.assertEqual(provider_order(), ("groq", "gemini"))
         with patch.dict("os.environ", {"SAATHI_PRIMARY_PROVIDER": "unknown"}):
@@ -77,8 +79,13 @@ class PrimaryNavigationTests(unittest.TestCase):
         self.assertEqual(self.decide()["reason"], "invalid_target")
 
     def test_overall_timeout_does_not_start_another_call(self):
-        self.primary.action = lambda s, stop: (stop.wait(1), Provider("fixture").propose(s, stop))[1]
-        self.assertEqual(self.decide()["reason"], "timeout")
+        now = [100.0]
+        def expire(s, stop):
+            now[0] = stop.overall_deadline + .01
+            raise ProviderFailure("provider_timeout")
+        self.primary.action = expire
+        with patch("time.monotonic", side_effect=lambda: now[0]):
+            self.assertEqual(self.decide()["reason"], "timeout")
         self.assertEqual(self.secondary.calls, 0)
 
     def test_cancel_during_primary_prevents_fallback_and_clears_active(self):
@@ -97,7 +104,8 @@ class PrimaryNavigationTests(unittest.TestCase):
 
     def test_fallback_does_not_get_a_new_deadline_or_bypass_quota(self):
         def fail(s, stop):
-            self.deadline = stop.deadline
+            self.deadline = stop.overall_deadline
+            self.assertLess(stop.deadline, stop.overall_deadline)
             raise ProviderFailure("provider_unavailable")
         self.primary.action = fail
         def fallback(s, stop):

@@ -1,0 +1,14 @@
+{
+  "fixture_events_emitted": 600,
+  "service_event_records_including_overlay": 1,
+  "screens_analyzed": 1,
+  "elapsed_including_fixture_ms": 1652,
+  "pss_before_kb": 111980,
+  "pss_after_kb": 113756,
+  "snapshot_analysis_ms": [
+    102,
+    3,
+    2
+  ],
+  "scope": "Real service; local exact-match task with cloud disabled. No claim about paid-cloud event-storm behavior."
+}

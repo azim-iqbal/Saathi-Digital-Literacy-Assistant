@@ -31,8 +31,12 @@ class ReviewedSourceIntegrationTest {
         .bufferedReader().use { it.readText().trim() }
     private fun waitFor(description: String, condition: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + 12_000
-        while (!condition() && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100)
-        if (!condition()) {
+        var ready = condition()
+        while (!ready && SystemClock.uptimeMillis() < deadline) {
+            SystemClock.sleep(100)
+            ready = condition()
+        }
+        if (!ready) {
             File(output(), "transition-failure.txt").writeText(description + "\n" + nodes().joinToString("\n") {
                 "class=${it.className} bounds=${it.bounds} clickable=${it.isClickable} parent=${it.clickableAncestorBounds}"
             })
@@ -41,14 +45,38 @@ class ReviewedSourceIntegrationTest {
             File(output(), "transition-logcat.txt").writeText(shell("logcat -d -t 500 -s InputDispatcher chromium ViewRootImpl"))
             screenshot("transition-failure")
         }
-        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", condition())
+        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", ready)
     }
     private fun nodes() = automation.rootInActiveWindow?.let { root ->
-        try { NodeMasker.flatten(root) } finally { @Suppress("DEPRECATION") root.recycle() }
+        try { NodeMasker.flatten(root) } catch (error: IllegalStateException) {
+            // A transitioning tree is unavailable; the bounded poll still requires a complete result.
+            if (error.message != "Missing observation branch") throw error
+            emptyList()
+        } finally { @Suppress("DEPRECATION") root.recycle() }
     }.orEmpty()
     private fun tap(label: String) {
-        waitFor("Visible $label") { nodes().any { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) } }
-        val node = nodes().first { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+        // Test driver only: the production snapshot intentionally removes all message-screen
+        // content. Locate this fixed fixture navigation button without reading the message.
+        if (label == "Return to choices" && nodes().any { it.privateContext }) {
+            val root = requireNotNull(automation.rootInActiveWindow)
+            val matches = root.findAccessibilityNodeInfosByText(label)
+            val bounds = android.graphics.Rect()
+            try { matches.single { it.isClickable }.getBoundsInScreen(bounds) }
+            finally { matches.forEach { it.recycle() }; root.recycle() }
+            val down = SystemClock.uptimeMillis()
+            for (action in listOf(MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP)) {
+                val event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), action, bounds.exactCenterX(), bounds.exactCenterY(), 0)
+                try { assertTrue(automation.injectInputEvent(event, true)) } finally { event.recycle() }
+            }
+            return
+        }
+        var observed: com.saathi.core.UiNode? = null
+        waitFor("Visible $label") {
+            observed = nodes().firstOrNull { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+            observed != null
+        }
+        // Keep the complete snapshot that satisfied the wait; a second tree can be mid-transition.
+        val node = requireNotNull(observed)
         val bounds = if (node.isClickable) node.bounds else requireNotNull(node.clickableAncestorBounds)
         File(output(), "tap-geometry.txt").appendText("$label: text=${node.bounds}; clickable=${node.isClickable}; tap=$bounds\n")
         val down = SystemClock.uptimeMillis()
@@ -93,7 +121,10 @@ class ReviewedSourceIntegrationTest {
                     "Message example" to com.saathi.core.GuidanceSessionState.SENSITIVE_HANDOVER,
                     "Human challenge" to com.saathi.core.GuidanceSessionState.WAITING_FOR_CAPTCHA)) {
                     tap(label); waitFor("Source mode preserves challenge handover") { SaathiSession.status.value==state }
-                    assertFalse(com.saathi.overlay.HighlightOverlayService.hasTarget())
+                    waitFor("Only the single structural private field may have a marker") {
+                        com.saathi.overlay.HighlightOverlayService.hasTarget() == (label == "Private interruption")
+                    }
+                    assertFalse("Private entry never completes the researched plan", plan.complete(System.currentTimeMillis()))
                     tap("Return to choices"); waitFor("Source context returns after private action") { companion() }
                     assertEquals(original,SaathiSession.sessionKey())
                 }

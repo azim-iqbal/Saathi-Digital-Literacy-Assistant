@@ -27,7 +27,12 @@ class TravelPrivacyUiTest {
                 val deadline = SystemClock.uptimeMillis() + 10000
                 do {
                     val root = automation.rootInActiveWindow
-                    nodes = if (root != null) try { NodeMasker.flatten(root) } finally { root.recycle() } else emptyList()
+                    nodes = if (root != null) try { NodeMasker.flatten(root) } catch (error: IllegalStateException) {
+                        // A transitioning tree is unavailable, not a complete privacy observation.
+                        // Keep the existing deadline and assertions; retry only this known transition.
+                        if (error.message != "Missing observation branch") throw error
+                        emptyList()
+                    } finally { root.recycle() } else emptyList()
                     if (nodes.any { it.text == "Shopping" } && (!privateScreen || nodes.any { it.isSensitive })) break
                     SystemClock.sleep(100)
                 } while (SystemClock.uptimeMillis() < deadline)

@@ -1,3 +1,63 @@
+## Usage-floor stop — final state
+
+Further work stopped after the usage check returned 5% weekly remaining. No daily window was available. See NEXT_CONTINUATION.md for active test processes, completed groups, unresolved Chrome diagnostics and pending screenshot/endurance verification. This is NOT a completed pre-deployment certification.
+
+## 9 October 2026 — Final mandate continuation (verification in progress)
+
+Latest engineering/evidence report: [PREDEPLOYMENT_VALIDATION.md](PREDEPLOYMENT_VALIDATION.md). This section supersedes older counts and next-step lists below; historical records are retained.
+
+Implemented: bounded primary attempt/fallback within the original screen deadline; Groq-first navigation default (explicit config preserved); private-safe phased HTTPS diagnostics; narrative private handoff; explicit prerequisite/denial guards; accurate capability copy using unchanged styles; controlled portal/copy/paste/rotation/lock tests; allowlisted non-root pilot container template.
+
+Verified: 147 Android unit tests, 165 backend tests, 9 evaluation tests, 51/51 probes, 2,000 recovery plus 2,000 pre-cancelled synthetic requests, six local Gunicorn checks, zero lint errors/61 warnings, debug/test builds and release compilation. No configured-key matches in source/non-ignored files or decompressed APKs. Current emulator reruns and two-hour target must be read from `test-evidence/2026-10-09-final-mandate/`; do not call ongoing runs complete.
+
+New eight-call allowance EXHAUSTED: English/Hinglish paired navigation passed; Gemini planning/incident timed out waiting for headers, and Groq failed independent plan/signal expectations. Post-run reasoning guard/prompt changes are offline-tested only. No more live calls without new scoped authorization. Physical audio/OEM, legitimate protected portal, browser-dependent full HTTPS origin, historical post-tap causality and deployment acceptance remain unresolved; do not declare production readiness.
+
+## Current evidence — 9 October 2026, request lifecycle/transport continuation
+
+The older dated matrix below is historical. Overall: **PARTIAL, not production-ready**; deployment/release not executed.
+
+| Area | Current result | Evidence / limit |
+|---|---|---|
+| Research/incident/status cancellation | PASS | Response-after-Pause-before-Stop regressions reproduced, fixed and retested; existing UI preserved |
+| Masked private practice handoff | PASS | Four integration tests; package boundary retained, no guessed target/no HTTP during private entry, safe receipt completion |
+| Gateway capacity/callback ordering | PASS | Forced worker pause reproduced premature completion; cleanup-before-notification passes, including 1000 recovery requests |
+| Core/privacy/browser/research regression | PASS within tested scope | 27 core/research/incident, 4 practice and 21 connection/reporting/recovery tests pass; 147 Android unit, 152 backend, 7 evaluation, 51 offline probes |
+| UI preservation | PASS within captured scope | 8 tests, 12/14 PNG pairs identical; remaining two are inspected pressed-state shading; no rendering/style source changes |
+| Genuine corrected live prompt | PARTIAL | English paired PASS, Groq Hinglish accepted; Gemini Hinglish timeout; four-call allowance exhausted |
+| Mixed failure/resource coverage | PARTIAL | Eight-round retest passes (140 s, 112 local requests). Earlier recovery failure lacks definitive root attribution; no hours-long/OEM certification |
+| Historical WebView/cloud intermittence | OPEN | Current WebView loops and cloud storm pass; original causes are not established |
+| Trusted full browser destination | SAFE FALLBACK / PARTIAL | Missing/edited/scheme-less metadata still withholds source-bound highlights; do not invent HTTPS provenance |
+| Protected portal and physical speech/device acceptance | BLOCKED / MANUAL | Legitimate portal access and physical Android phone unavailable |
+| Deployment/production operations | DEFERRED | User requested stopping before deployment; no host/TLS/account/release execution |
+
+Detailed failures, fixes, commands and per-suite scope: [evidence](test-evidence/2026-10-09-research-ordering/README.md), [latest handoff](NEXT_CONTINUATION.md). Fixture counts do not prove real semantic accuracy or completed real-world tasks.
+
+## 9 October 2026 — Complete-tree privacy and resource cleanup
+
+Implemented fail-closed complete accessibility traversal: node/depth limits, missing children and cancelled/expired copies cannot produce a partial safe screen. Child references are released on every unwind; accepted service work runs cleanup after destruction. Capture timestamps precede copying and stale delivery is rejected. No UI layout/theme changes, live provider calls, commits or deployment.
+
+Verified so far: 147 Android unit tests, 152 backend tests, six evaluation tests and 51/51 offline probes pass. Debug/test builds, release Kotlin and lint pass (0 errors/61 warnings). Pattern scan found no matching secrets in tracked/nonignored text. New real-service oversized-tree regression passes with actual rejection evidence and original-task recovery. Ten thousand mixed traversal tests balance child ownership; this is not proof of Android heap leak freedom.
+
+The first combined emulator run was 16 tests / 2 failures. One was a polling helper treating an incomplete transitional WebView tree as an exception; helpers now retry only missing-branch observations under the existing timeout. The other is OPEN: ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry showed late error copy after returning. Inspect whether the fixture's five-second release/Compose idle waiting completes before Home/onStop; do not assume that hypothesis is the cause or weaken cancellation assertions. Production ResearchActivity was not changed.
+
+Final affected browser/service rerun is in test-evidence/2026-10-09-observation-reliability/emulator-final.txt. See that directory's REPRODUCE.md for baseline failures, fixture-runtime diagnosis and commands. Initial separate test-APK crash was missing Kotlin Intrinsics in a new provider; Java fixture fixed it. This is unrelated to the historical WebView failure.
+
+NEXT FIRST: collect final rerun if still running, then diagnose the research cancellation regression with request-release and activity-stop ordering. Keep accepted pause/resume/privacy tests. Historical WebView/cloud intermittence, broader hours-long/resource checks, genuine provider prompt retest, browser full-HTTPS metadata limitations, physical voice/OEM and authenticated portal steps remain open. No claim of production readiness or zero bugs. Stop above the user's 8% five-hour floor; deployment/release remain deferred.
+
+## 9 October 2026 — Handoff verification completed; broader remediation remains open
+
+Collected the previously unfinished run: 120 WebView cycles passed in 198 seconds, 60 private/message/CAPTCHA handoffs passed. Fixed Chrome's outdated privacy-copy assertion. Added debug-only gateway reason counts with an allowlist test; release diagnostics are no-op, no bodies/credentials saved. The earlier synthetic-cloud failure did not reproduce in the focused or combined rerun: cause remains unresolved, not claimed fixed.
+
+Final evidence: **140 Android unit, 152 backend, six evaluation, 17 combined emulator and 10 reporting/consent tests pass**. Debug/test builds, release Kotlin compilation and lint (0 errors/61 warnings) pass. 660 synthetic events produced four local-backend requests, two cancellations, zero genuine provider calls. The earlier 51/51 offline probes remain passing; no architecture changes there. Eight UI methods passed before/after; 11/14 PNG pairs pixel-identical, remaining differences inspected as privacy-copy/scroll and pressed-state tint. No design changes. See test-evidence/2026-10-09-private-handoff/UI_COMPARISON.md and continuation-* logs. Fixture servers, mappings and temporary token cleaned up. No commit/deploy/live model calls/reset credits.
+
+Stop reason: weekly usage reached 2% remaining despite 50% five-hour remaining; preserve this verified phase. Still OPEN: historical WebView failure cause, earlier intermittent cloud-fixture cause, broader mixed-fault/hours-long and retained-resource testing, full real-HTTPS destination binding where Chrome omits metadata, genuine provider prompt/accuracy retest (new authorization required), physical voice/OEM/TalkBack and authenticated cybercrime portal steps. Current checks do not prove absence of all leaks, universal compatibility or production readiness. Deployment remains deferred.
+
+Next: use existing sanitized diagnostics to reproduce unresolved failures; complete remaining privacy/resource coverage without repeating accepted pause/resume. Real provider retest requires a new bounded allowance; previous four calls were consumed. No hardware or legitimate protected portal session is available.
+
+## 9 October 2026 — Private handoff fixes; usage-floor handoff
+
+See FINAL_RELIABILITY_REPORT.md for the 15-area audit, fixes, evidence and open gates. 139 Android unit, 152 backend, six evaluation tests and 51/51 offline probes pass; build/release compilation/lint pass. New masking regression reproduced before fixing. 60 handoffs pass with zero cloud calls. Current UI preserved; functional privacy copy updated. Final stress/browser run and after-screenshot captures were still executing at the 9% usage check: inspect their logs, collect images and compare pixels before declaring this phase complete. Physical-device, genuine provider retest, authenticated portal and real HTTPS positive binding remain open. No commit/deploy/live calls. Prior pause/resume remains accepted. Exact brief saved in specs/FINAL_RELIABILITY_PRIVACY_HANDOFF_REQUEST.txt.
+
 > Latest 8 October: optional paired source-cited control hints, per-step consent and local fresh/current/source-address matching are implemented. 132 Android unit / 152 backend / 6 evaluation tests and 51 offline probes pass; nine final emulator tests pass. Chrome's observed scheme-less editable address fails closed, so real HTTPS positive highlight certification remains OPEN. Four newly authorized genuine calls returned HTTP 200: cited plan PASS; navigation pair FAIL (Gemini completion evidence). Clarified prompt only has offline retest. Protected portal/device/endurance gates remain OPEN; deployment deferred.
 
 > Latest expiry regression: observed expired plans cannot revive after clock rollback; 128 Android unit / 148 backend / 5 evaluation tests pass. Debug build passes. No new emulator, live provider, portal or physical-device evidence in this subphase. All broader gates remain open.

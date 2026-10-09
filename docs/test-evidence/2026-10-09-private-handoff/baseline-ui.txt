@@ -1,0 +1,252 @@
+
+com.saathi.ui.SaathiUiTest:
+Error in glassActionsKeepSemanticsAndOpaqueFallback(com.saathi.ui.SaathiUiTest):
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/glass-intake-dark.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.glassActionsKeepSemanticsAndOpaqueFallback(SaathiUiTest.kt:201)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+
+Error in hindiLargeTextRemainsScrollable(com.saathi.ui.SaathiUiTest):
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/home-hindi-200.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.hindiLargeTextRemainsScrollable(SaathiUiTest.kt:105)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+
+Error in preservedOnboardingScreenshots(com.saathi.ui.SaathiUiTest):
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/onboarding-dark.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.preservedOnboardingScreenshots(SaathiUiTest.kt:34)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+
+Error in speechSpeedPersistsWithoutStartingConversation(com.saathi.ui.SaathiUiTest):
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/voice-settings.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.speechSpeedPersistsWithoutStartingConversation(SaathiUiTest.kt:48)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+
+Error in homeScreenshots(com.saathi.ui.SaathiUiTest):
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/home-light.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.homeScreenshots(SaathiUiTest.kt:93)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+
+com.saathi.ui.AssistantUiTest:
+Error in taskIntakeDefaultsToTextAndDoesNotStartListening(com.saathi.ui.AssistantUiTest):
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/assistant-light.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.AssistantUiTest.screenshot(AssistantUiTest.kt:63)
+	at com.saathi.ui.AssistantUiTest.taskIntakeDefaultsToTextAndDoesNotStartListening(AssistantUiTest.kt:49)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 58 more
+.
+Error in pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening(com.saathi.ui.AssistantUiTest):
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/assistant-paused.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.AssistantUiTest.screenshot(AssistantUiTest.kt:63)
+	at com.saathi.ui.AssistantUiTest.pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening(AssistantUiTest.kt:30)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 58 more
+
+
+Time: 42.107
+There were 7 failures:
+1) glassActionsKeepSemanticsAndOpaqueFallback(com.saathi.ui.SaathiUiTest)
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/glass-intake-dark.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.glassActionsKeepSemanticsAndOpaqueFallback(SaathiUiTest.kt:201)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+2) hindiLargeTextRemainsScrollable(com.saathi.ui.SaathiUiTest)
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/home-hindi-200.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.hindiLargeTextRemainsScrollable(SaathiUiTest.kt:105)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+3) preservedOnboardingScreenshots(com.saathi.ui.SaathiUiTest)
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/onboarding-dark.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.preservedOnboardingScreenshots(SaathiUiTest.kt:34)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+4) speechSpeedPersistsWithoutStartingConversation(com.saathi.ui.SaathiUiTest)
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/voice-settings.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.speechSpeedPersistsWithoutStartingConversation(SaathiUiTest.kt:48)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+5) homeScreenshots(com.saathi.ui.SaathiUiTest)
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/home-light.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.SaathiUiTest.screenshot(SaathiUiTest.kt:81)
+	at com.saathi.ui.SaathiUiTest.screenshot$default(SaathiUiTest.kt:76)
+	at com.saathi.ui.SaathiUiTest.homeScreenshots(SaathiUiTest.kt:93)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 59 more
+6) taskIntakeDefaultsToTextAndDoesNotStartListening(com.saathi.ui.AssistantUiTest)
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/assistant-light.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.AssistantUiTest.screenshot(AssistantUiTest.kt:63)
+	at com.saathi.ui.AssistantUiTest.taskIntakeDefaultsToTextAndDoesNotStartListening(AssistantUiTest.kt:49)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 58 more
+7) pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening(com.saathi.ui.AssistantUiTest)
+java.io.FileNotFoundException: /sdcard/Android/data/com.saathi/files/handoff-baseline/assistant-paused.png: open failed: ENOENT (No such file or directory)
+	at libcore.io.IoBridge.open(IoBridge.java:571)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:259)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:208)
+	at com.saathi.ui.AssistantUiTest.screenshot(AssistantUiTest.kt:63)
+	at com.saathi.ui.AssistantUiTest.pausedTaskIsVisibleAndCanBeDiscardedWithoutRestartingListening(AssistantUiTest.kt:30)
+	... 53 trimmed
+Caused by: android.system.ErrnoException: open failed: ENOENT (No such file or directory)
+	at libcore.io.Linux.open(Native Method)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:276)
+	at libcore.io.ForwardingOs.open(ForwardingOs.java:412)
+	at android.app.AndroidForwardingOs.open(AndroidForwardingOs.java:120)
+	at libcore.io.IoBridge.open(IoBridge.java:557)
+	... 58 more
+
+FAILURES!!!
+Tests run: 8,  Failures: 7
+
+

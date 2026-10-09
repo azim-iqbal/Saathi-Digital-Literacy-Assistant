@@ -1,0 +1,31 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.ChromeGuidanceIntegrationTest:
+Error in realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest):
+java.util.NoSuchElementException: Collection contains no element matching the predicate.
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.tap(ChromeGuidanceIntegrationTest.kt:186)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:148)
+
+com.saathi.ui.LiveAiIntegrationTest:..
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.ResearchRecoveryUiTest:..
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.GatewayTransportIntegrationTest:...
+com.saathi.ui.LiveGatewayCodecTest:..
+
+Time: 378.856
+There was 1 failure:
+1) realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest)
+java.util.NoSuchElementException: Collection contains no element matching the predicate.
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.tap(ChromeGuidanceIntegrationTest.kt:186)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:148)
+
+FAILURES!!!
+Tests run: 21,  Failures: 1
+
+

@@ -1,3 +1,19 @@
+## 9 October 2026 — Final mandate continuation (verification in progress)
+
+Latest engineering/evidence report: [PREDEPLOYMENT_VALIDATION.md](PREDEPLOYMENT_VALIDATION.md). This section supersedes older counts and next-step lists below; historical records are retained.
+
+Implemented: bounded primary attempt/fallback within the original screen deadline; Groq-first navigation default (explicit config preserved); private-safe phased HTTPS diagnostics; narrative private handoff; explicit prerequisite/denial guards; accurate capability copy using unchanged styles; controlled portal/copy/paste/rotation/lock tests; allowlisted non-root pilot container template.
+
+Verified: 147 Android unit tests, 165 backend tests, 9 evaluation tests, 51/51 probes, 2,000 recovery plus 2,000 pre-cancelled synthetic requests, six local Gunicorn checks, zero lint errors/61 warnings, debug/test builds and release compilation. No configured-key matches in source/non-ignored files or decompressed APKs. Current emulator reruns and two-hour target must be read from `test-evidence/2026-10-09-final-mandate/`; do not call ongoing runs complete.
+
+New eight-call allowance EXHAUSTED: English/Hinglish paired navigation passed; Gemini planning/incident timed out waiting for headers, and Groq failed independent plan/signal expectations. Post-run reasoning guard/prompt changes are offline-tested only. No more live calls without new scoped authorization. Physical audio/OEM, legitimate protected portal, browser-dependent full HTTPS origin, historical post-tap causality and deployment acceptance remain unresolved; do not declare production readiness.
+
+> Final 9 October verification: 27 core/research/incident, 4 practice and 21 connection/reporting/recovery emulator tests pass after the latest production edits. Private practice handoff is local and precedes minimized-ID eligibility; no private values/IDs were restored. See NEXT_CONTINUATION.md and test-evidence/2026-10-09-research-ordering/README.md for earlier failures, final evidence and remaining gates. UI unchanged; no deployment.
+
+## 9 October — Foreground request boundary
+
+Incident assessment now cancels at Pause rather than waiting for Stop. A deterministic local-response test reproduced the gap and passes after the fix. Existing sharing/copy consent, local complaint facts, fallback advice, legal-submission boundaries and UI remain unchanged. The 14-test reporting/cancellation run passes; authenticated portal steps still require legitimate human access and are not certified by fixtures. See `test-evidence/2026-10-09-research-ordering/`.
+
 ## 7 October 2026 — Research architecture and deterministic remediation (overall work open)
 
 General service-incident research can now return evidence-cited, review-required scope hypotheses from paired adapters. This does not determine whether a person's experience is legally cybercrime, create legal testimony or submit a complaint. Existing local user-fact worksheet, exact per-field copy consent, private-form safeguards and manual portal boundaries remain unchanged. Authenticated portal forms and genuine incident-assessment accuracy remain unverified.

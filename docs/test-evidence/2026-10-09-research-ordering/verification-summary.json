@@ -1,0 +1,21 @@
+{
+  "android_unit": 147,
+  "backend_offline": 152,
+  "evaluation_tests": 7,
+  "offline_probes_pass": 51,
+  "final_emulator_groups": {
+    "core_private_final": 27,
+    "private_practice_after": 4,
+    "reporting_verified": 21
+  },
+  "ui_checks": 8,
+  "lint_errors": 0,
+  "lint_warnings": 61,
+  "genuine_calls_authorized": 4,
+  "genuine_calls_used": 4,
+  "genuine_result": "English paired PASS; Hinglish Groq accepted, Gemini timeout",
+  "deployment": "not_executed",
+  "readiness": "PARTIAL",
+  "ui_design": "unchanged",
+  "temporary_fixture_cleanup": "completed"
+}

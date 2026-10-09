@@ -1,0 +1,10 @@
+7996369: plan_received
+7996405: test_observed_plan
+7996440: home_command_completed
+7996450: activity_PAUSED
+7996946: test_releasing_response
+7996946: plan_released signal=true
+7997282: activity_STOPPED
+7998164: activity_RESTARTED
+7998164: activity_STARTED
+7998165: activity_RESUMED

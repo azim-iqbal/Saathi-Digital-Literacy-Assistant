@@ -31,8 +31,12 @@ class LiveAccessibilityIntegrationTest {
         .bufferedReader().use { it.readText().trim() }
     private fun waitFor(description: String, condition: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + 12_000
-        while (!condition() && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100)
-        if (!condition()) {
+        var ready = condition()
+        while (!ready && SystemClock.uptimeMillis() < deadline) {
+            SystemClock.sleep(100)
+            ready = condition()
+        }
+        if (!ready) {
             File(output(), "transition-failure.txt").writeText(description + "\n" + nodes().joinToString("\n") {
                 "class=${it.className} bounds=${it.bounds} clickable=${it.isClickable} parent=${it.clickableAncestorBounds}"
             })
@@ -41,14 +45,23 @@ class LiveAccessibilityIntegrationTest {
             File(output(), "transition-logcat.txt").writeText(shell("logcat -d -t 500 -s InputDispatcher chromium ViewRootImpl"))
             screenshot("transition-failure")
         }
-        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", condition())
+        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", ready)
     }
     private fun nodes() = automation.rootInActiveWindow?.let { root ->
-        try { NodeMasker.flatten(root) } finally { @Suppress("DEPRECATION") root.recycle() }
+        try { NodeMasker.flatten(root) } catch (error: IllegalStateException) {
+            // A transitioning tree is unavailable; the bounded poll still requires a complete result.
+            if (error.message != "Missing observation branch") throw error
+            emptyList()
+        } finally { @Suppress("DEPRECATION") root.recycle() }
     }.orEmpty()
     private fun tap(label: String) {
-        waitFor("Visible $label") { nodes().any { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) } }
-        val node = nodes().first { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+        var observed: com.saathi.core.UiNode? = null
+        waitFor("Visible $label") {
+            observed = nodes().firstOrNull { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+            observed != null
+        }
+        // Keep the complete snapshot that satisfied the wait; a second tree can be mid-transition.
+        val node = requireNotNull(observed)
         val bounds = if (node.isClickable) node.bounds else requireNotNull(node.clickableAncestorBounds)
         File(output(), "tap-geometry.txt").appendText("$label: text=${node.bounds}; clickable=${node.isClickable}; tap=$bounds\n")
         val down = SystemClock.uptimeMillis()

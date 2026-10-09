@@ -1,0 +1,26 @@
+
+com.saathi.ui.PortalWorkflowIntegrationTest:
+Error in reportingWebFormPreservesGoalAndPrivateUserBoundaries(com.saathi.ui.PortalWorkflowIntegrationTest):
+java.lang.AssertionError: Synthetic next control; status=GUIDING
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.waitFor(PortalWorkflowIntegrationTest.kt:34)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.next(PortalWorkflowIntegrationTest.kt:39)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.reportingWebFormPreservesGoalAndPrivateUserBoundaries(PortalWorkflowIntegrationTest.kt:73)
+
+com.saathi.ui.ComplaintDraftUiTest:...
+
+Time: 124.616
+There was 1 failure:
+1) reportingWebFormPreservesGoalAndPrivateUserBoundaries(com.saathi.ui.PortalWorkflowIntegrationTest)
+java.lang.AssertionError: Synthetic next control; status=GUIDING
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.waitFor(PortalWorkflowIntegrationTest.kt:34)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.next(PortalWorkflowIntegrationTest.kt:39)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.reportingWebFormPreservesGoalAndPrivateUserBoundaries(PortalWorkflowIntegrationTest.kt:73)
+
+FAILURES!!!
+Tests run: 4,  Failures: 1
+
+

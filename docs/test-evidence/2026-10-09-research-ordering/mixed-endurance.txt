@@ -1,0 +1,23 @@
+
+com.saathi.ui.MixedLifecycleEnduranceTest:
+Error in permissionRecreationIncompleteScreensAndNetworkRecoveryStayIsolated(com.saathi.ui.MixedLifecycleEnduranceTest):
+java.lang.AssertionError: Recovery request 9
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.GatewayTransportIntegrationTest.disconnectedPhoneStyleLoopbackRecoversWhenServerReturnsWithoutReconfiguration(GatewayTransportIntegrationTest.kt:79)
+	at com.saathi.ui.MixedLifecycleEnduranceTest.permissionRecreationIncompleteScreensAndNetworkRecoveryStayIsolated(MixedLifecycleEnduranceTest.kt:47)
+
+
+Time: 113.576
+There was 1 failure:
+1) permissionRecreationIncompleteScreensAndNetworkRecoveryStayIsolated(com.saathi.ui.MixedLifecycleEnduranceTest)
+java.lang.AssertionError: Recovery request 9
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.GatewayTransportIntegrationTest.disconnectedPhoneStyleLoopbackRecoversWhenServerReturnsWithoutReconfiguration(GatewayTransportIntegrationTest.kt:79)
+	at com.saathi.ui.MixedLifecycleEnduranceTest.permissionRecreationIncompleteScreensAndNetworkRecoveryStayIsolated(MixedLifecycleEnduranceTest.kt:47)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+

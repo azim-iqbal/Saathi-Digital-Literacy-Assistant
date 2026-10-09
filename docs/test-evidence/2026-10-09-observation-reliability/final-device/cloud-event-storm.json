@@ -1,0 +1,13 @@
+{
+  "events_generated": 660,
+  "actual_content_mutations": 60,
+  "events_delivered_including_overlays": 75,
+  "observations_created": 7,
+  "http_requests_started": 4,
+  "requests_attempted": 4,
+  "requests_cancelled": 2,
+  "requests_rejected_locally": 0,
+  "request_semantic_deduplication_implemented": false,
+  "live_provider_calls": 0,
+  "scope": "actual service to bounded local synthetic gateway; no paid providers"
+}

@@ -18,20 +18,26 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class PracticeRecoveryTest {
-    private fun step(goal: String): com.saathi.core.GuideStep {
+    private fun nodes(): List<com.saathi.core.UiNode> {
         val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
         automation.serviceInfo = automation.serviceInfo.apply { flags = flags or AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS }
         InstrumentationRegistry.getInstrumentation().waitForIdleSync()
         val root = requireNotNull(automation.rootInActiveWindow)
-        return try { DemoGuide.next(goal, NodeMasker.flatten(root), "en-IN", false) }
+        return try { NodeMasker.flatten(root) }
         finally { @Suppress("DEPRECATION") root.recycle() }
     }
+    private fun step(goal: String) = DemoGuide.next(goal, nodes(), "en-IN", false)
 
-    @Test fun wrongBillerGuidesBackThenToChosenBiller() {
+    @Test fun wrongPrivateBillerHandsOverThenResumesChosenBillerAfterManualBack() {
         ActivityScenario.launch(DemoBillPayActivity::class.java).use {
             onView(withId(R.id.recharge_bills)).perform(click())
             onView(withId(R.id.electricity_biller)).perform(click())
-            assertEquals("practice_back", step("Pay my water bill").target?.description)
+            val privateForm = nodes()
+            assertEquals(com.saathi.core.ScreenInterruption.Reason.PRIVATE,
+                com.saathi.core.ScreenInterruption.reason(privateForm))
+            assertTrue("Whole private form must stay minimized", privateForm.all { it.resourceId == null })
+            assertNull(com.saathi.core.ScreenInterruption.privateTarget(privateForm))
+            // The person uses Back themselves; never restore masked IDs to point into a private form.
             onView(withId(R.id.practice_back)).perform(click())
             assertEquals("water_biller", step("Pay my water bill").target?.description)
             onView(withId(R.id.water_biller)).perform(click())

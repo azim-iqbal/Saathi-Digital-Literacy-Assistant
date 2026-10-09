@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/evaluation/reliability_stress.py", line 71, in <module>
+    result=run();Path(args.output).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(dict(status=result['status'],recovery_requests=result['recovery_requests'])))
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/evaluation/reliability_stress.py", line 59, in run
+    assert result.get('status')=='ready',result
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'status': 'researched', 'request_id': 'research_one', 'evidence': [{'evidence_id': 'f2a8cc635b7b0b6db7153373', 'source_url': 'https://service.example.test/', 'source_title': 'Application requirements', 'source_type': 'official', 'authority_basis': 'synthetic operator review', 'retrieved_at_ms': 1791548099811, 'published_or_updated': None, 'jurisdiction': 'Region A', 'snippet': 'Read the public requirements.', 'content_hash': 'e532b97f89d0269c45caaf2684a7f531593bb461fa37330c6ff7923755c7f3fa', 'claim_type': 'requirements', 'confidence': 'retrieved_not_independently_verified', 'freshness': 'recent_fetch_date_unknown'}], 'limitations': ['bounded_reviewed_sources', 'content_is_untrusted', 'coverage_not_established']}

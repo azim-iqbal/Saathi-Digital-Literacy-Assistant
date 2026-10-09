@@ -1,0 +1,87 @@
+[
+  {
+    "file": "assistant-dark.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "assistant-light.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "assistant-paused.png",
+    "identical": false,
+    "difference_bounds": [
+      66,
+      0,
+      1214,
+      2378
+    ]
+  },
+  {
+    "file": "glass-clear-dialog.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "glass-disabled-dark.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "glass-home-opaque.png",
+    "identical": false,
+    "difference_bounds": [
+      66,
+      2514,
+      448,
+      2730
+    ]
+  },
+  {
+    "file": "glass-intake-dark.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "home-dark.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "home-hindi-200.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "home-light.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "language-dark.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "onboarding-dark-narrow.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "onboarding-dark.png",
+    "identical": true,
+    "difference_bounds": null
+  },
+  {
+    "file": "voice-settings.png",
+    "identical": false,
+    "difference_bounds": [
+      72,
+      1656,
+      1208,
+      1824
+    ]
+  }
+]

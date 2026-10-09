@@ -37,7 +37,7 @@ def load_local_env(path=None):
 
 
 def provider_order():
-    primary = os.environ.get("SAATHI_PRIMARY_PROVIDER", "gemini")
+    primary = os.environ.get("SAATHI_PRIMARY_PROVIDER", "groq")
     if primary not in ("gemini", "groq"):
         raise ValueError("SAATHI_PRIMARY_PROVIDER must be gemini or groq")
     return (primary, "groq" if primary == "gemini" else "gemini")

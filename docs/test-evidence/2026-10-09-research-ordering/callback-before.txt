@@ -1,0 +1,23 @@
+
+com.saathi.ui.GatewayTransportIntegrationTest:
+Error in callbackCannotAnnounceCompletionBeforeReleasingRequestCapacity(com.saathi.ui.GatewayTransportIntegrationTest):
+java.lang.AssertionError: Completion must not race the capacity release
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.saathi.ui.GatewayTransportIntegrationTest.callbackCannotAnnounceCompletionBeforeReleasingRequestCapacity(GatewayTransportIntegrationTest.kt:35)
+
+
+Time: 0.043
+There was 1 failure:
+1) callbackCannotAnnounceCompletionBeforeReleasingRequestCapacity(com.saathi.ui.GatewayTransportIntegrationTest)
+java.lang.AssertionError: Completion must not race the capacity release
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.saathi.ui.GatewayTransportIntegrationTest.callbackCannotAnnounceCompletionBeforeReleasingRequestCapacity(GatewayTransportIntegrationTest.kt:35)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+

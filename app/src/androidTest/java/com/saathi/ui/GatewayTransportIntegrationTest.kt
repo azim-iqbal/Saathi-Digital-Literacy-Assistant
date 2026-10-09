@@ -18,6 +18,31 @@ import java.util.concurrent.atomic.AtomicInteger
 /** Real Android HTTP against device-local synthetic servers. No provider calls or host secrets. */
 @RunWith(AndroidJUnit4::class)
 class GatewayTransportIntegrationTest {
+    @Test fun callbackCannotAnnounceCompletionBeforeReleasingRequestCapacity() {
+        Server().use { server ->
+            val cleaning = CountDownLatch(1)
+            val release = CountDownLatch(1)
+            val delivered = CountDownLatch(1)
+            try {
+                configure(server.origin)
+                com.saathi.accessibility.ObservationDiagnostics.gatewayCleanupObserver = {
+                    cleaning.countDown()
+                    release.await(4, TimeUnit.SECONDS)
+                }
+                main { PracticeGateway.connectionStatus { delivered.countDown() } }
+                assertTrue("Worker reached cleanup", cleaning.await(3, TimeUnit.SECONDS))
+                // Simulate the OS descheduling a finished worker before its finally block.
+                assertFalse("Completion must not race the capacity release", delivered.await(200, TimeUnit.MILLISECONDS))
+                release.countDown()
+                assertTrue("Result follows resource release", delivered.await(3, TimeUnit.SECONDS))
+                assertTrue(status() is GatewayResult.Connection)
+            } finally {
+                release.countDown()
+                com.saathi.accessibility.ObservationDiagnostics.gatewayCleanupObserver = null
+                main { PracticeGateway.disable() }
+            }
+        }
+    }
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
     private val token = "synthetic-connection-regression-token-0000"
     private fun main(block: () -> Unit) = instrumentation.runOnMainSync(block)
@@ -76,8 +101,12 @@ class GatewayTransportIntegrationTest {
             configure("http://127.0.0.1:$port")
             assertEquals("local_backend_unreachable", (status() as GatewayResult.Rejected).reason)
             Server(port).use { server ->
-                repeat(10) { assertTrue("Recovery request $it", status() is GatewayResult.Connection) }
-                assertEquals(10, server.statuses.get())
+                val rounds = InstrumentationRegistry.getArguments().getString("transport_rounds")?.toIntOrNull()?.coerceIn(1,1000) ?: 10
+                repeat(rounds) {
+                    val result = status()
+                    assertTrue("Recovery request $it: ${(result as? GatewayResult.Rejected)?.reason ?: result.javaClass.simpleName}", result is GatewayResult.Connection)
+                }
+                assertEquals(rounds, server.statuses.get())
             }
             assertEquals("local_backend_unreachable", (status() as GatewayResult.Rejected).reason)
         } finally { main { PracticeGateway.disable() } }

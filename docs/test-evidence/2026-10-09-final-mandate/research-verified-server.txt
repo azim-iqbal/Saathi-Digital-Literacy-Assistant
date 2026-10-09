@@ -1,0 +1,1 @@
+Synthetic AI protocol fixture at loopback:8767; no external calls

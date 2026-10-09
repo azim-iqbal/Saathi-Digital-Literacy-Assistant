@@ -1,0 +1,599 @@
+Working-tree inventory including preserved prior work. No commit or push.
+
+.dockerignore — Allowlisted container context excludes secrets and app artifacts.
+.github/workflows/capability-evaluation.yml — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+PRIVACY.md — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/androidTest/java/com/saathi/ui/ChromeGuidanceIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/ComplaintDraftUiTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/CrossAppGuidanceTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/ExternalSurfaceActivity.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/GatewayIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/GatewayTransportIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/LargeAccessibilitySurface.java — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/LiveAccessibilityIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/LiveAiIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/MixedLifecycleEnduranceTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/NodeMaskerPrivacyTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/ObservationFailureIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/PauseResumeIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/PausedRequestUiTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/PortalWorkflowIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/PracticeRecoveryTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/ResearchRecoveryUiTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/ReviewedSourceIntegrationTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/SaathiUiTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/androidTest/java/com/saathi/ui/TravelPrivacyUiTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/debug/java/com/saathi/accessibility/ObservationDiagnostics.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/AssistantActivity.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/CyberReportActivity.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/ResearchActivity.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/TermsActivity.kt — Correct outdated local-only/cloud-disabled disclosure.
+app/src/main/java/com/saathi/accessibility/CompleteTreeWalk.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/accessibility/NodeContentPolicy.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/accessibility/NodeMasker.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/accessibility/SaathiAccessibilityService.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/core/Models.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/core/NavigationHint.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/core/PrivateContextPolicy.kt — Narrative context enters the existing private handoff.
+app/src/main/java/com/saathi/core/ScreenInterruption.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/gateway/GatewaySetupActivity.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/gateway/PracticeGateway.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/orchestrator/FormGuide.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/orchestrator/SaathiSession.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/speech/VoiceConversationService.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/speech/VoicePrivacyGate.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/main/java/com/saathi/ui/Copy.kt — Correct capability disclosure in three languages; existing styles/layout untouched.
+app/src/release/java/com/saathi/accessibility/ObservationDiagnostics.kt — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+app/src/test/java/com/saathi/accessibility/CompleteTreeWalkTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/test/java/com/saathi/accessibility/NodeContentPolicyTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/test/java/com/saathi/accessibility/ObservationDiagnosticsTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/test/java/com/saathi/core/BrowserChromeInspectorTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/test/java/com/saathi/core/PrivateContextHandoverTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+app/src/test/java/com/saathi/speech/VoicePrivacyGateTest.kt — Regression/fault-injection coverage; includes preserved earlier tests.
+backend/.env.example — Preserved earlier implementation or privacy/CI changes; see prior reliability reports.
+backend/configuration.py — Groq-first default; explicit routing configuration retained.
+backend/evidence_constraints.py — Generic quoted source-order and negation safeguards across three languages.
+backend/gateway.py — Primary-attempt deadline and cancellation propagation; fallback retains the original freshness window.
+backend/incident.py — Conservative incident-signal prompt and explicit-denial validation.
+backend/planning.py — Explicit prerequisite direction in prompt and evidence-order validation.
+backend/provider_network.py — Verified TLS, pinned public DNS and fixed phase timing without content logging.
+backend/providers.py — Bounded HTTPS transport and private-safe operator diagnostics; legacy Android fields retained.
+backend/request_policy.py — Private narrative context rejected before live provider work.
+backend/tests/test_navigation_budget.py — Regression/fault-injection coverage; includes preserved earlier tests.
+backend/tests/test_primary_navigation.py — Regression/fault-injection coverage; includes preserved earlier tests.
+backend/tests/test_provider_https.py — Regression/fault-injection coverage; includes preserved earlier tests.
+backend/tests/test_provider_network.py — Regression/fault-injection coverage; includes preserved earlier tests.
+backend/tests/test_providers.py — Regression/fault-injection coverage; includes preserved earlier tests.
+backend/tests/test_reasoning_grounding.py — Regression/fault-injection coverage; includes preserved earlier tests.
+deploy/.env.example — Default navigation provider reflects measured latency; no keys included.
+deploy/Dockerfile — Non-root single-host pilot container template; not deployed or built here.
+docs/AI_ORCHESTRATION.md — Current/historical implementation, evidence and continuation documentation.
+docs/CURRENT_STATE_AUDIT.md — Current/historical implementation, evidence and continuation documentation.
+docs/CYBER_FRAUD_REPORTING.md — Current/historical implementation, evidence and continuation documentation.
+docs/EXECUTION_PLAN.md — Current/historical implementation, evidence and continuation documentation.
+docs/FINAL_RELIABILITY_REPORT.md — Current/historical implementation, evidence and continuation documentation.
+docs/LIVE_ASSISTANT.md — Current/historical implementation, evidence and continuation documentation.
+docs/NEXT_CONTINUATION.md — Current/historical implementation, evidence and continuation documentation.
+docs/PREDEPLOYMENT_VALIDATION.md — Current/historical implementation, evidence and continuation documentation.
+docs/PRIVATE_HANDOFF_DEVICE_CHECKLIST.md — Current/historical implementation, evidence and continuation documentation.
+docs/REMEDIATION_CAPABILITY_MATRIX.md — Current/historical implementation, evidence and continuation documentation.
+docs/TEST_RESULTS.md — Current/historical implementation, evidence and continuation documentation.
+docs/VOICE_CONVERSATION.md — Current/historical implementation, evidence and continuation documentation.
+docs/specs/FINAL_PREDEPLOYMENT_MANDATE.txt — Current/historical implementation, evidence and continuation documentation.
+docs/specs/FINAL_RELIABILITY_PRIVACY_HANDOFF_REQUEST.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-final-mandate/REPRODUCE.md — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/android-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/android-checks.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/backend-budget.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/backend-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/backend-full.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/backend-network.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/backend-stress.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/backend-verified.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/connection-verified-server.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/connection-verified.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/core-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/core.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/default-route-after.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/default-route-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/emulator-final-progress.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/emulator-start.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/emulator-suite-progress.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/endurance-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/endurance-progress.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/evaluation-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/evaluation-verified.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/evaluation.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/final-android-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/hosted-dependencies.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/hosted-smoke-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/hosted-smoke.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/https-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/isolated-emulator.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/lifecycle-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/live-eight/authorized-run.started — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/live-eight/results.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/live-run.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/narrative-backend-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/narrative-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/navigation-budget-after-initial.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/navigation-budget-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/network-after.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/network-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/offline-probes.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/offline-verified.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/paste-test-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-driver-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-driver.xml — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-final-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-progress.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-retest.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-setup-log.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-tests.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-traversal-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/portal-traversal.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/practice-final-server.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/practice-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/practice-verified-server.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/practice-verified.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/public-portal.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/reasoning-after.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/reasoning-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/remaining-progress.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/remaining-verified-progress.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/research-verified-server.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/research-verified.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/rotation-driver-build.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/rotation-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/run_emulator_groups.py — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/second-emulator.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/secret-scan.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/source-baseline.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/source-preservation.json — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/stress-final.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/stress.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/two-hour.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before-current.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before.txt — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/assistant-dark.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/assistant-light.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/assistant-paused.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/glass-clear-dialog.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/glass-disabled-dark.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/glass-home-opaque.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/glass-intake-dark.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/home-dark.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/home-hindi-200.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/home-light.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/language-dark.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/onboarding-dark-narrow.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/onboarding-dark.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-final-mandate/ui-before/voice-settings.png — Current validation evidence or reproducible fixture runner.
+docs/test-evidence/2026-10-09-observation-reliability/REPRODUCE.md — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/android-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/android-first.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/backend.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/diagnostic-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/diagnostic/failure-screen.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/diagnostic/failure-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/diagnostic/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/emulator-diagnostic.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/emulator-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/emulator-first.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/emulator-fixed.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/emulator-regressions.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/evaluation-tests.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/ai-fixture-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/ai-fixture-recovery.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/ai-fixture-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/ai-fixture-service-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-public-travel.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-readiness.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-readiness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-sensitive-node-ids.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/chrome-support.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/cloud-event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/gateway-reason-counts-cloud.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/handoff-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/lifecycle-resource-samples.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/live-service-detour.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/live-service-native.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/live-service-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/live-service-retarget.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/live-service-web.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/local-first-ai-enabled.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/observation-events.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/pause-resume-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/resume-captcha.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/resume-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/resume-restored.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/tap-geometry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/final-device/webview-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/first-runtime.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/fixture-crash.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/fixture-java-crash.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/lint-summary.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/offline.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/polling-test-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/secret-scan.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/test-build-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/tree-after.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/tree-before.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-observation-reliability/unit-summary.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/REPRODUCE.md — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/UI_COMPARISON.md — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/assistant-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/assistant-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/assistant-paused.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/glass-clear-dialog.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/glass-disabled-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/glass-home-opaque.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/glass-intake-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/home-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/home-hindi-200.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/home-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/language-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/onboarding-dark-narrow.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/onboarding-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/after/voice-settings.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/android-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/android-first.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/backend.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline-ui-retry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline-ui.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/assistant-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/assistant-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/assistant-paused.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/glass-clear-dialog.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/glass-disabled-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/glass-home-opaque.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/glass-intake-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/home-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/home-hindi-200.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/home-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/language-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/onboarding-dark-narrow.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/onboarding-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/baseline/voice-settings.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/browser-cloud-retest.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/changed-files.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-backend.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/ai-fixture-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/ai-fixture-recovery.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/ai-fixture-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/ai-fixture-service-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-public-travel.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-readiness.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-readiness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-sensitive-node-ids.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/chrome-support.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/cloud-event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/gateway-reason-counts-cloud.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/handoff-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/lifecycle-resource-samples.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/live-service-detour.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/live-service-native.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/live-service-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/live-service-retarget.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/live-service-web.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/local-first-ai-enabled.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/observation-events.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/pause-resume-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/resume-captcha.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/resume-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/resume-restored.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/tap-geometry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-device/voice-capability.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-emulator.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-evaluation.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-final-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-reporting.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-secret-scan.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/continuation-unit-summary.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/ai-fixture-service-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/chrome-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/chrome-readiness.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/chrome-readiness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/chrome-sensitive-node-ids.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/chrome-service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/handoff-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/lifecycle-resource-samples.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/live-service-detour.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/live-service-native.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/live-service-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/live-service-retarget.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/live-service-web.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/local-first-ai-enabled.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/observation-events.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/pause-resume-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/resume-captcha.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/resume-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/resume-restored.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/tap-geometry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/voice-capability.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/device/webview-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/emulator-core.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/emulator-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/emulator-retest-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/evaluation.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/offline.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/offline.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/pixel-comparison.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/privacy-before-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/privacy-before.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/reporting-device/cyber-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/reporting-device/cyber-floating-consent.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/reporting-device/cyber-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/reporting-device/draft-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/reporting-device/draft-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/reporting-device/incident-consent.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/secret-scan.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/ui-after.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-private-handoff/unit-summary.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/README.md — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/REPRODUCE.md — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/UI_COMPARISON.md — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/after-order.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/after.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/android-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/android.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/backend.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/before-order.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/before.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/browser-harness-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/callback-before-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/callback-before.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/ai-fixture-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/ai-fixture-recovery.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/ai-fixture-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/ai-fixture-service-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-public-travel.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-readiness.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-readiness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-sensitive-node-ids.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/chrome-support.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/cloud-event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/gateway-reason-counts-cloud.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/handoff-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/lifecycle-resource-samples.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/live-service-detour.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/live-service-native.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/live-service-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/live-service-retarget.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/live-service-web.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/local-first-ai-enabled.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/observation-events.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/pause-resume-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/research-lifecycle-order.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/resume-captcha.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/resume-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/resume-restored.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/tap-geometry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-device/voice-capability.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-final-complete.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/ai-fixture-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/ai-fixture-recovery.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/ai-fixture-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/ai-fixture-service-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-public-travel.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-readiness.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-readiness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-sensitive-node-ids.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/chrome-support.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/cloud-event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/gateway-reason-counts-cloud.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/handoff-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/incident-consent.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/lifecycle-resource-samples.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/live-service-detour.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/live-service-native.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/live-service-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/live-service-retarget.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/live-service-web.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/local-first-ai-enabled.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/observation-events.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/pause-resume-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/research-lifecycle-order.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/resume-captcha.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/resume-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/resume-restored.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/tap-geometry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-device/voice-capability.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/core-private-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/ai-fixture-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/ai-fixture-recovery.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/ai-fixture-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/ai-fixture-service-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-public-travel.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-readiness.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-readiness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-sensitive-node-ids.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/chrome-support.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/cloud-event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/gateway-reason-counts-cloud.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/handoff-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/lifecycle-resource-samples.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/live-service-detour.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/live-service-native.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/live-service-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/live-service-retarget.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/live-service-web.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/local-first-ai-enabled.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/observation-events.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/pause-resume-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/research-lifecycle-order.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/resume-captcha.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/resume-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/resume-restored.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/tap-geometry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/voice-capability.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-first/webview-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/ai-fixture-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/ai-fixture-recovery.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/ai-fixture-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/ai-fixture-service-state.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-help.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-public-travel.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-readiness.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-readiness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-sensitive-node-ids.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/chrome-support.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/cloud-event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/event-storm.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/gateway-reason-counts-cloud.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/handoff-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/lifecycle-resource-samples.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/live-service-detour.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/live-service-native.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/live-service-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/live-service-retarget.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/live-service-web.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/local-first-ai-enabled.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/observation-events.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/pause-resume-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/research-lifecycle-order.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/resume-captcha.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/resume-private.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/resume-restored.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/tap-geometry.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/voice-capability.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/device-retest/webview-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/diagnostic-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/emulator-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/emulator-retest.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/endurance-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/evaluation-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/evaluation.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/final-unit-summary.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/lifecycle-only.patch — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/lint-summary.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/live-four-call/authorized-run.started — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/live-four-call/results.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/live-summary.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-device/mixed-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-device/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-device/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-device/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-endurance.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-first/mixed-endurance.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-first/observation-failure-counts.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-first/permission-loss-result.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-first/service-state-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/mixed-retest.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/offline.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/pause-boundary-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-before.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-device/cyber-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-device/cyber-floating-consent.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-device/cyber-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-device/draft-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-device/draft-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-device/incident-consent.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-device/research-lifecycle-order.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-reporting-after.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-return-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/paused-return-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/practice-copy-retest.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/practice-copy-test-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/practice-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/practice-recovery-test-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/private-practice-after.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/private-practice-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/probe-harness-after.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/probe-harness.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-complete.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/connection-synthetic-evidence.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/cyber-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/cyber-floating-consent.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/cyber-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/draft-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/draft-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/launcher-icon.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/vector-mark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/voice-setup-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-device/voice-setup-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-private-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-private-retest.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/reporting-verified.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/secret-scan.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/transport-diagnostic-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/transport-diagnostic.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/transport-final-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/transport-final.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/travel-harness-build.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui-comparison-crops.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui-pixel-comparison.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui-regression.txt — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui-source-baseline.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui-source-comparison.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui-source-final.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/assistant-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/assistant-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/assistant-paused.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/glass-clear-dialog.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/glass-disabled-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/glass-home-opaque.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/glass-intake-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/home-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/home-hindi-200.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/home-light.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/language-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/onboarding-dark-narrow.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/onboarding-dark.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/ui/voice-settings.png — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/unit-summary.json — Current/historical implementation, evidence and continuation documentation.
+docs/test-evidence/2026-10-09-research-ordering/verification-summary.json — Current/historical implementation, evidence and continuation documentation.
+evaluation/continuation_probe.py — Bounded evaluation, independent scoring or deterministic stress tooling.
+evaluation/final_acceptance.py — Bounded evaluation, independent scoring or deterministic stress tooling.
+evaluation/reliability_stress.py — Bounded evaluation, independent scoring or deterministic stress tooling.
+evaluation/test_continuation_probe.py — Bounded evaluation, independent scoring or deterministic stress tooling.
+evaluation/test_final_acceptance.py — Bounded evaluation, independent scoring or deterministic stress tooling.

@@ -131,6 +131,7 @@ object SaathiSession {
     private var lastSpokenTargetId: String? = null
     private var active = false
     private var latestNodes: List<UiNode> = emptyList()
+    private var privateHandoffPending = false
     private var lastStep: GuideStep? = null
     private var pendingRunnable: Runnable? = null
     private var currentPackage: String? = null
@@ -200,6 +201,7 @@ object SaathiSession {
     fun stop() = clearSession(GuidanceSessionState.STOPPED)
 
     private fun clearSession(terminalState: GuidanceSessionState) {
+        privateHandoffPending = false
         pausedTask = null // Stop/error/process death never offers an automatic restart.
         sourcePlan?.invalidate(); sourcePlan = null
         val app = context
@@ -244,6 +246,7 @@ object SaathiSession {
 
     /** Called on the main thread at the event boundary, before copying a replacement tree. */
     fun invalidateScreen() {
+        if (active && privateHandoffPending) mutableStatus.value = GuidanceSessionState.OBSERVING
         sourcePlan?.invalidate()
         pendingGateway?.cancel(); pendingGateway = null
         observationGate.invalidate()
@@ -289,31 +292,45 @@ object SaathiSession {
             com.saathi.core.ScreenInterruption.reason(latestNodes) == null && !FormGuide.isRequest(goal))
     }
 
-    fun onScreenChanged(nodes: List<UiNode>, ticket: ObservationGate.Ticket, browserLocation: String? = null) {
-        val observedAtMs = System.currentTimeMillis()
+    fun onScreenChanged(nodes: List<UiNode>, ticket: ObservationGate.Ticket, browserLocation: String? = null,
+                        observedAtMs: Long = System.currentTimeMillis()) {
         // Accessibility copying runs off-thread. All session state and presentation stay on main.
         handler.post {
             if (!observationGate.accepts(ticket)) return@post
+            if (System.currentTimeMillis() - observedAtMs !in 0..15_000) { onScreenUnavailable(); return@post }
             latestNodes = nodes
             currentPackage = ticket.packageName
             pendingRunnable?.let(handler::removeCallbacks)
             pendingRunnable = Runnable {
                 pendingRunnable = null
                 if (!observationGate.accepts(ticket)) return@Runnable
+                if (System.currentTimeMillis() - observedAtMs !in 0..15_000) { onScreenUnavailable(); return@Runnable }
                 val app = context ?: return@Runnable
+                val practiceEligible = !live && PracticeSurfacePolicy.isEligible(ticket.packageName, app.packageName, nodes)
                 if (if (live) !LiveGuide.allowedPackage(ticket.packageName, app.packageName)
-                    else !PracticeSurfacePolicy.isEligible(ticket.packageName, app.packageName, nodes)) {
+                    else ticket.packageName != app.packageName) {
                     waitForPractice()
                     return@Runnable
                 }
                 val interruption = com.saathi.core.ScreenInterruption.reason(nodes)
                 if (interruption != null) {
+                    privateHandoffPending = true
                     present(GuideStep(com.saathi.core.ScreenInterruption.message(interruption, language.apiTag),
-                        language.apiTag, null, "Wait for a fresh screen after the user finishes privately.", false), true)
+                        language.apiTag, if (interruption == com.saathi.core.ScreenInterruption.Reason.PRIVATE && (live || practiceEligible))
+                            com.saathi.core.ScreenInterruption.privateTarget(nodes) else null,
+                        "Wait for a fresh screen after the user finishes privately.", false), true)
                     mutableStatus.value = if (interruption == com.saathi.core.ScreenInterruption.Reason.CAPTCHA)
                         GuidanceSessionState.WAITING_FOR_CAPTCHA else GuidanceSessionState.SENSITIVE_HANDOVER
                     return@Runnable
                 }
+                // Whole-private-context minimization deliberately removes practice IDs.
+                // Permit only the local no-target handoff above; ordinary practice guidance
+                // and all backend work still require a recognized synthetic screen.
+                if (!live && !practiceEligible) { waitForPractice(); return@Runnable }
+                // An empty/transitioning tree is not evidence that a private step ended.
+                // The observation ticket above revalidates session, window and revision.
+                if (nodes.isEmpty()) { onScreenUnavailable(); return@Runnable }
+                privateHandoffPending = false
                 sourcePlan?.let { binding ->
                     // Every interruption/error choice retains its existing local boundary.
                     // Even a matching source address never authorizes an application/payment target.

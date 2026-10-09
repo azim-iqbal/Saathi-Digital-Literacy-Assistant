@@ -135,7 +135,7 @@ class GatewayIntegrationTest {
                 onView(withId(R.id.water_biller)).perform(click())
                 waitFor("Private form hands over before any backend call") {
                     SaathiSession.status.value == GuidanceSessionState.SENSITIVE_HANDOVER &&
-                        SaathiSession.instruction.value.startsWith("This screen contains private fields")
+                        SaathiSession.instruction.value.contains("won't send it to AI or save it")
                 }
                 waitFor("Private form has no target marker") { !com.saathi.overlay.HighlightOverlayService.hasTarget() }
                 SystemClock.sleep(500)

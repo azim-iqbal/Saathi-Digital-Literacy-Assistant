@@ -29,6 +29,14 @@ import java.io.File
 
 @RunWith(AndroidJUnit4::class)
 class SaathiUiTest {
+    @Test fun preservedOnboardingScreenshots() {
+        launch(dark = true, welcome = true)
+        screenshot("onboarding-dark")
+        ui.onNodeWithText("हिन्दी").performScrollTo().assertHasClickAction()
+        screenshot("language-dark")
+        launch(dark = true, welcome = true, narrow = true)
+        screenshot("onboarding-dark-narrow")
+    }
     @Test fun speechSpeedPersistsWithoutStartingConversation() {
         launch()
         ui.onNodeWithTag("nav-settings").performClick()

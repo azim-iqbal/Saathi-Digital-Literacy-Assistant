@@ -21,7 +21,7 @@ data class NavigationHint(val kind: String, val label: String) {
             if (!node.isEnabled || node.isSensitive || node.isPassword) return@mapIndexedNotNull null
             val matches = if (kind=="FIELD_LABEL") {
                 // Values never supply a label. Filled fields are a manual handover.
-                node.isEditable && !node.hasValue && listOf(node.hint,node.description).any { it?.trim()==label }
+                node.isEditable && node.valueKnown && !node.hasValue && listOf(node.hint,node.description).any { it?.trim()==label }
             } else !node.isEditable && !node.className.orEmpty().contains("EditText") &&
                 (node.isClickable || node.clickableAncestorBounds!=null) && listOf(node.text,node.description).any { it?.trim()==label }
             index.takeIf { matches }

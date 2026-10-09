@@ -22,9 +22,24 @@ class InvalidRequest(ValueError):
 
 class RequestCancellation(threading.Event):
     """Cooperative stop signal with the shared monotonic decision deadline."""
-    def __init__(self, deadline):
+    def __init__(self, deadline, parent=None):
         super().__init__()
         self.deadline = deadline
+        self.parent = parent
+        self.overall_deadline = parent.overall_deadline if parent else deadline
+
+    def is_set(self):
+        return super().is_set() or (self.parent is not None and self.parent.is_set())
+
+    def wait(self, timeout=None):
+        if self.parent is None:
+            return super().wait(timeout)
+        until = None if timeout is None else time.monotonic() + timeout
+        while not self.is_set():
+            remaining = .01 if until is None else min(.01, until - time.monotonic())
+            if remaining <= 0: break
+            super().wait(remaining)
+        return self.is_set()
 
 
 @dataclass(frozen=True)
@@ -265,7 +280,7 @@ class Gateway:
             if event.wait(min(.01, max(0, event.deadline - time.monotonic()))):
                 return [], ["cancelled"]
             if time.monotonic() >= event.deadline:
-                if deadline_reason == "timeout":
+                if deadline_reason in ("timeout", "provider_timeout"):
                     with self.lock:
                         for p, f in zip(providers, futures):
                             if not f.done(): self._failed(p.id)
@@ -370,8 +385,22 @@ class Gateway:
                                "provider_rate_limited", "provider_unavailable", "provider_timeout", "invalid_response",
                                "malformed", "uncertain", "invalid_target"}
                 for index, provider in enumerate(self.providers):
-                    futures, error = self._launch((provider,), snapshot, event, deadline_reason)
-                    proposals, errors = ([], [error]) if error else self._collect((provider,), futures, snapshot, event, deadline_reason)
+                    # Navigation must retain time for a conditional fallback inside the
+                    # original decision/freshness window. Never extend the screen's life.
+                    now = time.monotonic()
+                    if event.is_set(): return self.rejected("cancelled")
+                    if now >= event.deadline: return self.rejected(deadline_reason)
+                    attempt = RequestCancellation(now + min(4.0, (event.deadline - now) * .6), event) if index == 0 else event
+                    attempt_reason = "provider_timeout" if index == 0 else deadline_reason
+                    try:
+                        futures, error = self._launch((provider,), snapshot, attempt, attempt_reason)
+                        proposals, errors = ([], [error]) if error else self._collect((provider,), futures, snapshot, attempt, attempt_reason)
+                    finally:
+                        if attempt is not event:
+                            attempt.set()
+                            with self.lock:
+                                for name, probe in list(self.circuit_probes.items()):
+                                    if probe is attempt: del self.circuit_probes[name]
                     if errors:
                         if index == 0 and errors[0] in recoverable: continue
                         return self.rejected(errors[0])

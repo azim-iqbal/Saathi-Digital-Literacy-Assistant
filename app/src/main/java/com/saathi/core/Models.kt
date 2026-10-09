@@ -16,7 +16,10 @@ data class UiNode(
     val hasValue: Boolean = !text.isNullOrBlank(),
     val clickableAncestorBounds: Rect? = null,
     val isEditable: Boolean = false,
-    val isFocused: Boolean = false
+    val isFocused: Boolean = false,
+    val valueKnown: Boolean = true,
+    val structuralPrivateField: Boolean = false,
+    val privateContext: Boolean = false
 ) {
     fun fingerprintPart() = listOf(resourceId, text, description, className, isEnabled, bounds.toShortString()).joinToString("|")
 }

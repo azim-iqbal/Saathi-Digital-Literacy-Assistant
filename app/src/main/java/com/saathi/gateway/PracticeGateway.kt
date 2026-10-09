@@ -121,6 +121,12 @@ object PracticeGateway {
         val ticket = generation.get()
         val origin = activeEndpoint ?: defaultEndpoint
         fun current() = !cancelled.get() && generation.get() == ticket
+        fun deliver(result: GatewayResult) {
+            if (!current()) return
+            com.saathi.accessibility.ObservationDiagnostics.gatewayResult(
+                (result as? GatewayResult.Rejected)?.reason ?: "accepted")
+            callback(result)
+        }
         val rejection = when {
             secret == null || origin == null -> "not_configured"
             encoded.toByteArray().size > 8192 -> "invalid_request"
@@ -129,7 +135,7 @@ object PracticeGateway {
         }
         if (rejection != null) {
             requestsRejectedLocally.incrementAndGet()
-            main.post { if (current()) callback(GatewayResult.Rejected(rejection)) }
+            main.post { deliver(GatewayResult.Rejected(rejection)) }
             return GatewayCancellation { cancelled.set(true) }
         }
         val credential = requireNotNull(secret)
@@ -160,7 +166,7 @@ object PracticeGateway {
         }
         pending[requestId] = cancellation
         io.execute {
-            try {
+            val result = try {
                 if (!current()) return@execute
                 requestsStarted.incrementAndGet()
                 val response = transport.post(
@@ -168,9 +174,8 @@ object PracticeGateway {
                     path, credential, encoded.toByteArray(Charsets.UTF_8), timeoutMs + 1000,
                     ::current, { activeConnection.set(it) }, { dispatchedOrigin.set(it) }
                 )
-                val result = if (response.status == 200) decode(response.body)
+                if (response.status == 200) decode(response.body)
                     else GatewayResult.Rejected(GatewayRecovery.httpStatus(response.status))
-                main.post { if (current()) callback(result) }
             } catch (error: Exception) {
                 val reason = when (error) {
                     is javax.net.ssl.SSLException -> "secure_connection_failed"
@@ -178,13 +183,19 @@ object PracticeGateway {
                     is java.io.IOException -> if (origin != null && GatewayEndpoint.isLocal(origin)) "local_backend_unreachable" else "connection_failed"
                     else -> "invalid_response"
                 }
-                main.post { if (current()) callback(GatewayResult.Rejected(reason)) }
+                GatewayResult.Rejected(reason)
             } finally {
-                activeConnection.set(null)
-                pending.remove(requestId, cancellation)
-                if (cancelled.get()) sendCancel()
-                slots.release()
+                try { com.saathi.accessibility.ObservationDiagnostics.gatewayBeforeCleanup() }
+                finally {
+                    activeConnection.set(null)
+                    pending.remove(requestId, cancellation)
+                    if (cancelled.get()) sendCancel()
+                    slots.release()
+                }
             }
+            // The callback may immediately start another request. Release capacity first,
+            // while still checking cancellation/generation again on the main thread.
+            main.post { deliver(result) }
         }
         // Cancel promptly on a separate bounded lane, even while the response read is blocked.
         // Server tombstones cover cancellation arriving before request admission. No automatic retry.

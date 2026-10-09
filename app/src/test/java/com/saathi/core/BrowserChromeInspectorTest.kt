@@ -46,4 +46,13 @@ class BrowserChromeInspectorTest {
         assertEquals("https://service.example/",BrowserChromeInspector.read(N(owner="com.brave.browser",children=listOf(b))))
         assertNull(BrowserChromeInspector.read(N(owner="com.brave.browser",children=listOf(bar()))))
     }
+    @Test fun customTabsAndIdnOrRedirectDestinationsNeverBorrowSourceAuthority() {
+        val custom=N(resourceId="com.android.chrome:id/url_bar_title", text="service.example")
+        assertNull(BrowserChromeInspector.read(N(children=listOf(custom)))); assertEquals(0,custom.reads)
+        for (url in listOf("http://service.example/", "https://servіce.example/", "https://xn--service-9jg.example/", "https://service.example@evil.example/", "https://service.example/../private"))
+            assertNull(BrowserChromeInspector.read(N(children=listOf(bar(url)))))
+        // A redirect can supply a different full origin but must not be reported as the original.
+        assertNotEquals("https://service.example/requirements", BrowserChromeInspector.read(N(children=listOf(bar("https://other.example/requirements")))))
+    }
+
 }

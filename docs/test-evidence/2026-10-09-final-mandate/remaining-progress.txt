@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/private/tmp/saathi-remaining-regressions.py", line 31, in <module>
+    group('practice',['GatewayIntegrationTest','PracticeRecoveryTest'],'backend.tests.mock_device_server',8766,'/tmp/saathi-release-test-token')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/saathi-remaining-regressions.py", line 21, in group
+    assert 'OK (' in result and 'FAILURES!!!' not in result,name+' failed: see saved evidence'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: practice-final failed: see saved evidence

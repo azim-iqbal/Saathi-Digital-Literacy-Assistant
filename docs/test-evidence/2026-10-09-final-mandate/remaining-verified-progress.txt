@@ -1,0 +1,12 @@
+practice-verified PASS
+research-verified PASS
+connection-verified PASS
+visual-verified PASS
+Traceback (most recent call last):
+  File "/private/tmp/saathi-remaining-regressions.py", line 40, in <module>
+    group('browser',['ChromeGuidanceIntegrationTest','PublicHttpsReadinessTest'],port=8766)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/saathi-remaining-regressions.py", line 22, in group
+    assert 'OK (' in result and 'FAILURES!!!' not in result,name+' failed: see saved evidence'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: browser-verified failed: see saved evidence

@@ -1,0 +1,50 @@
+
+com.saathi.ui.GatewayIntegrationTest:
+Error in realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(com.saathi.ui.GatewayIntegrationTest):
+java.lang.AssertionError: Backend home guidance; The local test server could not verify this step. No target is shown. Check the connection, or disable Local backend test and restart practice.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.GatewayIntegrationTest.waitFor(GatewayIntegrationTest.kt:44)
+	at com.saathi.ui.GatewayIntegrationTest.realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(GatewayIntegrationTest.kt:132)
+.
+Error in disableOrReconfigureSuppressesQueuedConnectionResults(com.saathi.ui.GatewayIntegrationTest):
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.saathi.ui.GatewayIntegrationTest.disableOrReconfigureSuppressesQueuedConnectionResults(GatewayIntegrationTest.kt:109)
+
+Error in realHttpRejectsWrongTokenAndCancelledCallbacks(com.saathi.ui.GatewayIntegrationTest):
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.saathi.ui.GatewayIntegrationTest.realHttpRejectsWrongTokenAndCancelledCallbacks(GatewayIntegrationTest.kt:79)
+
+com.saathi.ui.PracticeRecoveryTest:...
+
+Time: 39.703
+There were 3 failures:
+1) realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(com.saathi.ui.GatewayIntegrationTest)
+java.lang.AssertionError: Backend home guidance; The local test server could not verify this step. No target is shown. Check the connection, or disable Local backend test and restart practice.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.GatewayIntegrationTest.waitFor(GatewayIntegrationTest.kt:44)
+	at com.saathi.ui.GatewayIntegrationTest.realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(GatewayIntegrationTest.kt:132)
+2) disableOrReconfigureSuppressesQueuedConnectionResults(com.saathi.ui.GatewayIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.saathi.ui.GatewayIntegrationTest.disableOrReconfigureSuppressesQueuedConnectionResults(GatewayIntegrationTest.kt:109)
+3) realHttpRejectsWrongTokenAndCancelledCallbacks(com.saathi.ui.GatewayIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.saathi.ui.GatewayIntegrationTest.realHttpRejectsWrongTokenAndCancelledCallbacks(GatewayIntegrationTest.kt:79)
+
+FAILURES!!!
+Tests run: 7,  Failures: 3
+
+

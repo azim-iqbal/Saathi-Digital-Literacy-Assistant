@@ -1,0 +1,327 @@
+{
+  "status": "RUNNING",
+  "requested_rounds": 1,
+  "completed_rounds": 39,
+  "elapsed_ms": 3355806,
+  "samples": [
+    {
+      "round": 1,
+      "elapsed_ms": 66520,
+      "pss_kb": 112118,
+      "heap_used_bytes": 7207184,
+      "open_fds": 135,
+      "live_threads": 40
+    },
+    {
+      "round": 2,
+      "elapsed_ms": 129100,
+      "pss_kb": 112497,
+      "heap_used_bytes": 6682896,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 3,
+      "elapsed_ms": 190441,
+      "pss_kb": 113403,
+      "heap_used_bytes": 7207184,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 4,
+      "elapsed_ms": 251732,
+      "pss_kb": 113761,
+      "heap_used_bytes": 6895888,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 5,
+      "elapsed_ms": 313757,
+      "pss_kb": 112867,
+      "heap_used_bytes": 6158608,
+      "open_fds": 131,
+      "live_threads": 41
+    },
+    {
+      "round": 6,
+      "elapsed_ms": 373094,
+      "pss_kb": 113969,
+      "heap_used_bytes": 6863120,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 7,
+      "elapsed_ms": 434541,
+      "pss_kb": 114124,
+      "heap_used_bytes": 6781200,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 8,
+      "elapsed_ms": 493513,
+      "pss_kb": 114714,
+      "heap_used_bytes": 7371024,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 9,
+      "elapsed_ms": 553575,
+      "pss_kb": 114924,
+      "heap_used_bytes": 7043344,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 10,
+      "elapsed_ms": 615470,
+      "pss_kb": 114719,
+      "heap_used_bytes": 7174416,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 11,
+      "elapsed_ms": 679489,
+      "pss_kb": 114927,
+      "heap_used_bytes": 6846736,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 12,
+      "elapsed_ms": 743194,
+      "pss_kb": 114861,
+      "heap_used_bytes": 7092496,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 13,
+      "elapsed_ms": 823808,
+      "pss_kb": 115466,
+      "heap_used_bytes": 7207184,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 14,
+      "elapsed_ms": 889696,
+      "pss_kb": 115788,
+      "heap_used_bytes": 7403792,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 15,
+      "elapsed_ms": 951585,
+      "pss_kb": 115420,
+      "heap_used_bytes": 6945040,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 16,
+      "elapsed_ms": 1011519,
+      "pss_kb": 115580,
+      "heap_used_bytes": 6928656,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 17,
+      "elapsed_ms": 1072266,
+      "pss_kb": 115803,
+      "heap_used_bytes": 7043344,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 18,
+      "elapsed_ms": 1137475,
+      "pss_kb": 115867,
+      "heap_used_bytes": 6977808,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 19,
+      "elapsed_ms": 1222120,
+      "pss_kb": 116331,
+      "heap_used_bytes": 7452944,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 20,
+      "elapsed_ms": 1338141,
+      "pss_kb": 116538,
+      "heap_used_bytes": 7272720,
+      "open_fds": 136,
+      "live_threads": 40
+    },
+    {
+      "round": 21,
+      "elapsed_ms": 1570222,
+      "pss_kb": 115969,
+      "heap_used_bytes": 7059728,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 22,
+      "elapsed_ms": 1668950,
+      "pss_kb": 116521,
+      "heap_used_bytes": 7452944,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 23,
+      "elapsed_ms": 1768564,
+      "pss_kb": 116189,
+      "heap_used_bytes": 7026960,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 24,
+      "elapsed_ms": 1899223,
+      "pss_kb": 116905,
+      "heap_used_bytes": 7452944,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 25,
+      "elapsed_ms": 2008086,
+      "pss_kb": 116795,
+      "heap_used_bytes": 7616784,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 26,
+      "elapsed_ms": 2128519,
+      "pss_kb": 116299,
+      "heap_used_bytes": 7321872,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 27,
+      "elapsed_ms": 2246308,
+      "pss_kb": 116533,
+      "heap_used_bytes": 7108880,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 28,
+      "elapsed_ms": 2332041,
+      "pss_kb": 116992,
+      "heap_used_bytes": 7174416,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 29,
+      "elapsed_ms": 2412548,
+      "pss_kb": 116202,
+      "heap_used_bytes": 7174416,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 30,
+      "elapsed_ms": 2500359,
+      "pss_kb": 116362,
+      "heap_used_bytes": 7108880,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 31,
+      "elapsed_ms": 2563715,
+      "pss_kb": 116520,
+      "heap_used_bytes": 7174416,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 32,
+      "elapsed_ms": 2640096,
+      "pss_kb": 117002,
+      "heap_used_bytes": 7485712,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 33,
+      "elapsed_ms": 2751170,
+      "pss_kb": 116921,
+      "heap_used_bytes": 7665936,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 34,
+      "elapsed_ms": 2867913,
+      "pss_kb": 117192,
+      "heap_used_bytes": 7452944,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 35,
+      "elapsed_ms": 2974788,
+      "pss_kb": 116869,
+      "heap_used_bytes": 7534864,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 36,
+      "elapsed_ms": 3085701,
+      "pss_kb": 117335,
+      "heap_used_bytes": 7502096,
+      "open_fds": 135,
+      "live_threads": 41
+    },
+    {
+      "round": 37,
+      "elapsed_ms": 3183330,
+      "pss_kb": 116964,
+      "heap_used_bytes": 7190800,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 38,
+      "elapsed_ms": 3261174,
+      "pss_kb": 117226,
+      "heap_used_bytes": 7256336,
+      "open_fds": 136,
+      "live_threads": 41
+    },
+    {
+      "round": 39,
+      "elapsed_ms": 3355759,
+      "pss_kb": 117136,
+      "heap_used_bytes": 7272720,
+      "open_fds": 136,
+      "live_threads": 41
+    }
+  ],
+  "minimum_duration_ms": 7200000,
+  "phase": "incomplete_tree",
+  "broad": true,
+  "http_requests": 546,
+  "cancellations": 39,
+  "genuine_provider_calls": 0,
+  "scope": "Emulator service recreation, incomplete-tree recovery, loopback loss\/recovery and obsolete-response rejection; no actual speech or physical-device certification."
+}

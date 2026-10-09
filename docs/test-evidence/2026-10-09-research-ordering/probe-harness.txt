@@ -1,0 +1,21 @@
+.F
+======================================================================
+FAIL: test_navigation_only_stays_within_four_calls_and_exercises_two_locales (evaluation.test_continuation_probe.ContinuationProbeTests.test_navigation_only_stays_within_four_calls_and_exercises_two_locales)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/evaluation/test_continuation_probe.py", line 21, in test_navigation_only_stays_within_four_calls_and_exercises_two_locales
+    self.assertEqual([r['status'] for r in value['cases']],['PASS','PASS'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['FAIL', 'FAIL'] != ['PASS', 'PASS']
+
+First differing element 0:
+'FAIL'
+'PASS'
+
+- ['FAIL', 'FAIL']
++ ['PASS', 'PASS']
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.055s
+
+FAILED (failures=1)

@@ -1,3 +1,21 @@
+## 9 October 2026 — Final mandate continuation (verification in progress)
+
+Latest engineering/evidence report: [PREDEPLOYMENT_VALIDATION.md](PREDEPLOYMENT_VALIDATION.md). This section supersedes older counts and next-step lists below; historical records are retained.
+
+Implemented: bounded primary attempt/fallback within the original screen deadline; Groq-first navigation default (explicit config preserved); private-safe phased HTTPS diagnostics; narrative private handoff; explicit prerequisite/denial guards; accurate capability copy using unchanged styles; controlled portal/copy/paste/rotation/lock tests; allowlisted non-root pilot container template.
+
+Verified: 147 Android unit tests, 165 backend tests, 9 evaluation tests, 51/51 probes, 2,000 recovery plus 2,000 pre-cancelled synthetic requests, six local Gunicorn checks, zero lint errors/61 warnings, debug/test builds and release compilation. No configured-key matches in source/non-ignored files or decompressed APKs. Current emulator reruns and two-hour target must be read from `test-evidence/2026-10-09-final-mandate/`; do not call ongoing runs complete.
+
+New eight-call allowance EXHAUSTED: English/Hinglish paired navigation passed; Gemini planning/incident timed out waiting for headers, and Groq failed independent plan/signal expectations. Post-run reasoning guard/prompt changes are offline-tested only. No more live calls without new scoped authorization. Physical audio/OEM, legitimate protected portal, browser-dependent full HTTPS origin, historical post-tap causality and deployment acceptance remain unresolved; do not declare production readiness.
+
+> Final 9 October verification: 27 core/research/incident, 4 practice and 21 connection/reporting/recovery emulator tests pass after the latest production edits. Private practice handoff is local and precedes minimized-ID eligibility; no private values/IDs were restored. See NEXT_CONTINUATION.md and test-evidence/2026-10-09-research-ordering/README.md for earlier failures, final evidence and remaining gates. UI unchanged; no deployment.
+
+## 9 October — Pause-safe requests and new bounded provider evidence
+
+Research, API verification and incident assessment now cancel on **Pause**, before Android's delayed Stop callback; late responses cannot restore cancelled results/retry state. The gateway releases its request slot before notifying the UI, preventing callback/admission ordering races. No retries were added. Failing and passing emulator regressions: `test-evidence/2026-10-09-research-ordering/`.
+
+The newly authorized four-call evaluation is exhausted. Both providers accepted the expected English navigation target, with HTTP 200 and token metadata. Groq accepted the Hinglish target; Gemini timed out without an HTTP response, so the Hinglish pair failed. Corrected-prompt success in one Gemini case does not establish broad accuracy or reliable latency. This probe used fictional supplied controls, not real web research or incident facts. No raw model output, keys or private data is retained. Future live calls need a new allowance.
+
 ## 8 October — Optional source-cited navigation and live diagnostics
 
 Plan steps optionally carry `{kind: READ_OPTION|FIELD_LABEL, label}`. Exact cited quotation/instruction, safe label, paired agreement and Android contract checks are mandatory. This is only a local highlight hint; no action, completion, URL or private value is authorized. Browser address/step/expiry/context are rechecked on every observation, with explicit consent. Unknown/full-address-unavailable Chrome remains manual. Existing high-risk/secret/action guards remain enabled.

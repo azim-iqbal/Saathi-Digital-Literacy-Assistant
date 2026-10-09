@@ -1,0 +1,3 @@
+127.0.0.1 - - [09/Oct/2026 18:22:15] "GET /browser.html?fixture=cbdahja HTTP/1.1" 200 -
+127.0.0.1 - - [09/Oct/2026 18:22:16] code 404, message File not found
+127.0.0.1 - - [09/Oct/2026 18:22:16] "GET /favicon.ico HTTP/1.1" 404 -

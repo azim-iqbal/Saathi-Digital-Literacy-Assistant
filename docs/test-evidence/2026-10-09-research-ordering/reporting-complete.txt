@@ -1,0 +1,46 @@
+
+com.saathi.ui.ConnectionCheckTest:..
+com.saathi.ui.ConnectionScreenUiTest:.
+com.saathi.ui.GatewaySetupUiTest:.
+com.saathi.ui.PausedRequestUiTest:
+Error in incidentAssessmentCannotPublishAfterPause(com.saathi.ui.PausedRequestUiTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "STOPPED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at com.saathi.ui.PausedRequestUiTest.pauseThenReply(PausedRequestUiTest.kt:65)
+	at com.saathi.ui.PausedRequestUiTest.incidentAssessmentCannotPublishAfterPause(PausedRequestUiTest.kt:90)
+
+Error in connectionCheckCannotPublishAfterPause(com.saathi.ui.PausedRequestUiTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "STOPPED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at com.saathi.ui.PausedRequestUiTest.pauseThenReply(PausedRequestUiTest.kt:65)
+	at com.saathi.ui.PausedRequestUiTest.connectionCheckCannotPublishAfterPause(PausedRequestUiTest.kt:74)
+
+com.saathi.ui.CyberReportUiTest:....
+com.saathi.ui.ComplaintDraftUiTest:..
+com.saathi.ui.CyberLinkOverlayTest:..
+com.saathi.ui.PracticeRecoveryTest:...
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.VoiceSetupUiTest:.
+com.saathi.ui.LaunchUiTest:..
+
+Time: 207.989
+There were 2 failures:
+1) incidentAssessmentCannotPublishAfterPause(com.saathi.ui.PausedRequestUiTest)
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "STOPPED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at com.saathi.ui.PausedRequestUiTest.pauseThenReply(PausedRequestUiTest.kt:65)
+	at com.saathi.ui.PausedRequestUiTest.incidentAssessmentCannotPublishAfterPause(PausedRequestUiTest.kt:90)
+2) connectionCheckCannotPublishAfterPause(com.saathi.ui.PausedRequestUiTest)
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "STOPPED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at com.saathi.ui.PausedRequestUiTest.pauseThenReply(PausedRequestUiTest.kt:65)
+	at com.saathi.ui.PausedRequestUiTest.connectionCheckCannotPublishAfterPause(PausedRequestUiTest.kt:74)
+
+FAILURES!!!
+Tests run: 21,  Failures: 2
+
+

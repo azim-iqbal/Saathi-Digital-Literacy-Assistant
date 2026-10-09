@@ -1,0 +1,57 @@
+
+com.saathi.ui.ResearchRecoveryUiTest:
+Error in leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(com.saathi.ui.ResearchRecoveryUiTest):
+java.lang.AssertionError: Failed: assertDoesNotExist.
+Reason: Did not expect any node but found '1' node that satisfies: (Text + EditableText contains 'Nothing will retry automatically.' (ignoreCase: false) as substring)
+Node found:
+Node #77 at (l=132.0, t=2382.0, r=1148.0, b=4182.0)px
+Text = '[
+Synthetic requirements · Official
+https://fixture.example.test/
+Region: Region A
+Authority review record: Synthetic test review
+Retrieval does not independently verify truth or current applicability.
+Retrieved: Fri Oct 09 16:18:45 GMT+05:30 2026
+Publisher date: Unknown
+Original source excerpt (untrusted; original language):
+“Registration requires verification.”
+
+Search was bounded. Coverage, applicability and interpretation are not established. An empty result does not mean no requirements exist.
+
+The request could not finish. Check the connection or wait, then choose whether to request it again. Nothing will retry automatically. Read the available sources meanwhile.]'
+Actions = [SetTextSubstitution, ShowTextSubstitution, ClearTextSubstitution, GetTextLayoutResult]
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertDoesNotExist(SemanticsNodeInteraction.kt:100)
+	at com.saathi.ui.ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(ResearchRecoveryUiTest.kt:124)
+
+
+Time: 9.846
+There was 1 failure:
+1) leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(com.saathi.ui.ResearchRecoveryUiTest)
+java.lang.AssertionError: Failed: assertDoesNotExist.
+Reason: Did not expect any node but found '1' node that satisfies: (Text + EditableText contains 'Nothing will retry automatically.' (ignoreCase: false) as substring)
+Node found:
+Node #77 at (l=132.0, t=2382.0, r=1148.0, b=4182.0)px
+Text = '[
+Synthetic requirements · Official
+https://fixture.example.test/
+Region: Region A
+Authority review record: Synthetic test review
+Retrieval does not independently verify truth or current applicability.
+Retrieved: Fri Oct 09 16:18:45 GMT+05:30 2026
+Publisher date: Unknown
+Original source excerpt (untrusted; original language):
+“Registration requires verification.”
+
+Search was bounded. Coverage, applicability and interpretation are not established. An empty result does not mean no requirements exist.
+
+The request could not finish. Check the connection or wait, then choose whether to request it again. Nothing will retry automatically. Read the available sources meanwhile.]'
+Actions = [SetTextSubstitution, ShowTextSubstitution, ClearTextSubstitution, GetTextLayoutResult]
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertDoesNotExist(SemanticsNodeInteraction.kt:100)
+	at com.saathi.ui.ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry(ResearchRecoveryUiTest.kt:124)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+

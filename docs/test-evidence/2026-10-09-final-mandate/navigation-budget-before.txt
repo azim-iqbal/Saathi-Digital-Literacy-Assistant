@@ -1,0 +1,32 @@
+FFF
+======================================================================
+FAIL: test_both_slow_providers_remain_inside_shared_deadline (backend.tests.test_navigation_budget.NavigationBudgetTests.test_both_slow_providers_remain_inside_shared_deadline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_navigation_budget.py", line 65, in test_both_slow_providers_remain_inside_shared_deadline
+    self.assertEqual(sum(gateway.calls.values()),2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 2
+
+======================================================================
+FAIL: test_late_primary_cannot_replace_fallback_or_retain_a_circuit_probe (backend.tests.test_navigation_budget.NavigationBudgetTests.test_late_primary_cannot_replace_fallback_or_retain_a_circuit_probe)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_navigation_budget.py", line 48, in test_late_primary_cannot_replace_fallback_or_retain_a_circuit_probe
+    self.assertEqual(result.get('decision_policy'), 'fallback', result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'fallback' : {'status': 'rejected', 'reason': 'timeout', 'mode': 'dual_ai'}
+
+======================================================================
+FAIL: test_slow_primary_has_a_stage_deadline_and_fallback_uses_original_budget (backend.tests.test_navigation_budget.NavigationBudgetTests.test_slow_primary_has_a_stage_deadline_and_fallback_uses_original_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_navigation_budget.py", line 27, in test_slow_primary_has_a_stage_deadline_and_fallback_uses_original_budget
+    self.assertEqual(result.get('decision_policy'), 'fallback', result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'fallback' : {'status': 'rejected', 'reason': 'timeout', 'mode': 'dual_ai'}
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.661s
+
+FAILED (failures=3)

@@ -85,7 +85,11 @@ class CrossAppGuidanceTest {
                 }
                 waitUntil {
                     val r = automation.rootInActiveWindow ?: return@waitUntil false
-                    try { NodeMasker.flatten(r).any { it.className?.contains("EditText") == true } } finally { r.recycle() }
+                    try { NodeMasker.flatten(r).any { it.className?.contains("EditText") == true } }
+                    catch (error: IllegalStateException) {
+                        if (error.message != "Missing observation branch") throw error
+                        false // A transition is unavailable; the bounded wait still requires a complete tree.
+                    } finally { r.recycle() }
                 }
                 assertTrue(SaathiSession.isActive())
                 assertFalse(SaathiSession.hasSpokenGuidance())

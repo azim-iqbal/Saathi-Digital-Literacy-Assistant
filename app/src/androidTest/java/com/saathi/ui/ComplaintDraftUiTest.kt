@@ -45,6 +45,51 @@ class ComplaintDraftUiTest {
         ui.onNodeWithText("Copy incident description").performScrollTo().assertIsNotEnabled()
         ui.onNodeWithText("I checked this matches what happened").assertIsNotSelected()
     }
+    @Test fun consentedCopySurvivesManualPasteAndReturnWithoutAutoSubmission() {
+        fill()
+        ui.onNodeWithText("I checked this matches what happened").performScrollTo().performClick()
+        ui.onNodeWithText("Copy incident description").performScrollTo().performClick()
+        ui.onNodeWithText("Allow copy").performClick()
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        val automation = instrumentation.getUiAutomation(android.app.UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
+        val external = android.content.Intent().setComponent(android.content.ComponentName(instrumentation.context.packageName, ExternalSurfaceActivity::class.java.name))
+            .putExtra("paste_fixture", true).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        try {
+            ui.runOnUiThread { ui.activity.startActivity(external) }
+            val deadline = android.os.SystemClock.uptimeMillis() + 10000
+            var pasted = false
+            while (!pasted && android.os.SystemClock.uptimeMillis() < deadline) {
+                val root = automation.rootInActiveWindow
+                if (root != null) {
+                    val pending = java.util.ArrayDeque<android.view.accessibility.AccessibilityNodeInfo>()
+                    pending.add(root)
+                    try {
+                        while (pending.isNotEmpty()) {
+                            val node = pending.removeFirst()
+                            try {
+                                if (node.isEditable && node.packageName == instrumentation.context.packageName) {
+                                    assertTrue(node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_FOCUS))
+                                    // A synthetic USER paste in our fixture; no production auto-paste code.
+                                    assertTrue(node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_PASTE))
+                                    node.refresh()
+                                    assertEquals(ComplaintFacts(account=account).fields().first().text,node.text.toString())
+                                    pasted = true
+                                }
+                                for (index in 0 until node.childCount) node.getChild(index)?.let(pending::add)
+                            } finally { node.recycle() }
+                        }
+                    } finally { while(pending.isNotEmpty()) pending.removeFirst().recycle() }
+                }
+                if (!pasted) android.os.SystemClock.sleep(100)
+            }
+            assertTrue("Exact reviewed text pasted by synthetic user",pasted)
+        } finally {
+            instrumentation.targetContext.startActivity(android.content.Intent().setComponent(external.component).putExtra("close_fixture",true)
+                .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP))
+        }
+        ui.onNodeWithText("I checked this matches what happened").performScrollTo().assertIsSelected()
+        ui.runOnUiThread { ui.activity.getSystemService(ClipboardManager::class.java).clearPrimaryClip() }
+    }
     @Test fun privateWorksheetClearsOnRecreationAndFitsExistingThemes() {
         val preferences = Preferences(ui.activity); val old = preferences.theme
         try {

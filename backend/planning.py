@@ -29,7 +29,9 @@ only locates a public reading/navigation control; FIELD_LABEL only locates a bla
 non-private field. Never suggest private fields, approval, sending or submitting.
 Do not invent a label or destination, infer completion or generate clicks.
 Include prerequisites at any
-needed depth; order is not important, cycles are forbidden. Do not invent rules.
+needed depth. If the source says B follows A, B must depend_on A; if C follows B,
+C must depend_on B. Array order does not establish a dependency. Keep each selected
+option attached to the correct step. Cycles are forbidden. Do not invent rules.
 criteria is an array of 0..12 objects: id (c1..c12), evidence_id, quote (EXACT
 source excerpt describing one eligibility condition). Do not ask for private values.
 Include only supported requirements for the requested jurisdiction. Official/primary
@@ -178,6 +180,8 @@ def validate_plan(snapshot, proposal):
         active.remove(node); visited.add(node)
         return True
     if not all(visit(i) for i in ids): return 'dependency_cycle'
+    from backend.evidence_constraints import missing_explicit_order
+    if missing_explicit_order(proposal, snapshot.evidence): return 'evidence_missing'
     return None
 
 

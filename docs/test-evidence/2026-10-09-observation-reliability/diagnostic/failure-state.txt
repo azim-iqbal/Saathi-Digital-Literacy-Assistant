@@ -1,0 +1,1 @@
+Fresh complete tree resumes the original task; state=WAITING_FOR_PRACTICE; active=true; instruction=Open the app or browser you want help with. Saathi will check its visible controls.

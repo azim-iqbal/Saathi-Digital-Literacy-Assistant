@@ -31,7 +31,7 @@ enum class Copy(val en: String, val hi: String, val hinglish: String) {
     START_PRACTICE("Start guided practice", "मार्गदर्शन के साथ अभ्यास", "Guided practice shuru karein"),
     NO_GUIDE("Practise without highlights", "हाइलाइट के बिना अभ्यास", "Bina highlight practice karein"),
     SAFETY("Made-up details only. Never enter real passwords, PINs or account details.", "केवल काल्पनिक जानकारी डालें। असली पासवर्ड, PIN या खाता जानकारी न डालें।", "Sirf bani hui details. Asli passwords, PIN ya account details mat daaliye."),
-    LIMIT("Real apps are not supported in this build. Cloud AI and screen capture are off.", "इस संस्करण में असली ऐप का मार्गदर्शन नहीं है। क्लाउड AI और स्क्रीन कैप्चर बंद हैं।", "Is build mein real apps supported nahi hain. Cloud AI aur screen capture off hain."),
+    LIMIT("Practice is local. Live help needs a supported screen; AI needs your consent and a configured backend. Screen capture is off.", "अभ्यास स्थानीय है। लाइव मदद समर्थित स्क्रीन पर मिलती है; AI के लिए आपकी सहमति और बैकएंड चाहिए। स्क्रीन कैप्चर बंद है।", "Practice local hai. Live madad supported screen par milti hai; AI ke liye aapki sahmati aur backend chahiye. Screen capture band hai."),
     BACK("Back", "वापस", "Wapas"),
     YOUR_TASK("Your practice task", "आपका अभ्यास", "Aapki practice"),
     TASK_HINT("For example, practise my electricity bill", "जैसे, बिजली के बिल का अभ्यास", "Jaise, bijli ke bill ki practice"),

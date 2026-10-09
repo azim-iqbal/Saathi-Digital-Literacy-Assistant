@@ -1,0 +1,35 @@
+
+com.saathi.ui.ConnectionCheckTest:..
+com.saathi.ui.ConnectionScreenUiTest:.
+com.saathi.ui.GatewaySetupUiTest:.
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.CyberReportUiTest:....
+com.saathi.ui.ComplaintDraftUiTest:..
+com.saathi.ui.CyberLinkOverlayTest:..
+com.saathi.ui.PracticeRecoveryTest:.
+Error in wrongBillerGuidesBackThenToChosenBiller(com.saathi.ui.PracticeRecoveryTest):
+java.lang.AssertionError: expected:<practice_back> but was:<null>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.saathi.ui.PracticeRecoveryTest.wrongBillerGuidesBackThenToChosenBiller(PracticeRecoveryTest.kt:34)
+.
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.VoiceSetupUiTest:.
+com.saathi.ui.LaunchUiTest:..
+
+Time: 127.368
+There was 1 failure:
+1) wrongBillerGuidesBackThenToChosenBiller(com.saathi.ui.PracticeRecoveryTest)
+java.lang.AssertionError: expected:<practice_back> but was:<null>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:120)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.saathi.ui.PracticeRecoveryTest.wrongBillerGuidesBackThenToChosenBiller(PracticeRecoveryTest.kt:34)
+
+FAILURES!!!
+Tests run: 21,  Failures: 1
+
+

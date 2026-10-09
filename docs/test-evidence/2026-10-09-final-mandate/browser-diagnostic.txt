@@ -1,0 +1,9 @@
+
+com.saathi.ui.ChromeGuidanceIntegrationTest:.
+com.saathi.ui.PublicHttpsReadinessTest:.
+
+Time: 59.507
+
+OK (2 tests)
+
+

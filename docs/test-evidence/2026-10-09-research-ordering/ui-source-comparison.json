@@ -1,0 +1,7 @@
+{
+  "changed_files": [
+    "app/src/main/java/com/saathi/CyberReportActivity.kt",
+    "app/src/main/java/com/saathi/ResearchActivity.kt"
+  ],
+  "note": "Only lifecycle handlers changed in the three request Activities. Inspect saved diff; no Compose layout/resources/style modifications."
+}

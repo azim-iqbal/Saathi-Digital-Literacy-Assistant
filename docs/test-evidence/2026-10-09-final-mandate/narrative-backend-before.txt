@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_live_input_rejects_private_fields_unknown_data_and_actions (backend.tests.test_providers.ProviderTests.test_live_input_rejects_private_fields_unknown_data_and_actions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_providers.py", line 82, in test_live_input_rejects_private_fields_unknown_data_and_actions
+    with self.assertRaises(InvalidRequest):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: InvalidRequest not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

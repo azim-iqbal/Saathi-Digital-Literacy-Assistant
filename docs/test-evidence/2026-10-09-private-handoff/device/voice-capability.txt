@@ -1,0 +1,1 @@
+onDeviceRecognizerAvailable=true; SDK=37; no audio input/output quality tested

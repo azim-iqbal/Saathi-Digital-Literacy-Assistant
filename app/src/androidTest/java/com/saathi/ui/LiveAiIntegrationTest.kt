@@ -31,15 +31,28 @@ class LiveAiIntegrationTest {
         .bufferedReader().use { it.readText().trim() }
     private fun waitFor(description: String, condition: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + 12_000
-        while (!condition() && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100)
-        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", condition())
+        var ready = condition()
+        while (!ready && SystemClock.uptimeMillis() < deadline) {
+            SystemClock.sleep(100)
+            ready = condition()
+        }
+        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", ready)
     }
     private fun nodes() = automation.rootInActiveWindow?.let { root ->
-        try { NodeMasker.flatten(root) } finally { @Suppress("DEPRECATION") root.recycle() }
+        try { NodeMasker.flatten(root) } catch (error: IllegalStateException) {
+            // A transitioning tree is unavailable; the bounded poll still requires a complete result.
+            if (error.message != "Missing observation branch") throw error
+            emptyList()
+        } finally { @Suppress("DEPRECATION") root.recycle() }
     }.orEmpty()
     private fun tap(label: String) {
-        waitFor("Visible $label") { nodes().any { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) } }
-        val node = nodes().first { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+        var observed: com.saathi.core.UiNode? = null
+        waitFor("Visible $label") {
+            observed = nodes().firstOrNull { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+            observed != null
+        }
+        // Keep the complete snapshot that satisfied the wait; a second tree can be mid-transition.
+        val node = requireNotNull(observed)
         val bounds = if (node.isClickable) node.bounds else requireNotNull(node.clickableAncestorBounds)
         val down = SystemClock.uptimeMillis()
         for (action in listOf(MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP)) {
@@ -77,6 +90,11 @@ class LiveAiIntegrationTest {
             waitFor("Real Saathi accessibility service bound") {
                 shell("dumpsys accessibility").substringAfter("Bound services:").substringBefore("Enabled services:").contains("label=Saathi guidance")
             }
+            val reasonCounts = mutableMapOf<String,Int>()
+            main { com.saathi.accessibility.ObservationDiagnostics.gatewayObserver = { reason ->
+                reasonCounts[reason] = (reasonCounts[reason] ?: 0) + 1
+                File(output(), "gateway-reason-counts-${if (localFirst) "local" else "cloud"}.json").writeText(org.json.JSONObject(reasonCounts.toMap()).toString(2))
+            } }
             val token = if (localFirst) "a".repeat(43) else shell("cat /data/local/tmp/saathi-test-token")
             ActivityScenario.launch(MainActivity::class.java).use { scenario ->
                 val before = com.saathi.gateway.PracticeGateway.requestsStarted.get()
@@ -139,6 +157,7 @@ class LiveAiIntegrationTest {
                 File(output(), "ai-fixture-result.txt").writeText("PASS: actual Android HTTP/live-schema transport and real AccessibilityService; free-form goal; primary synthetic adapter selects Help, correct wrong path to Back, return, hand over; Stop clears. PROVIDERS ARE DETERMINISTIC TEST FAKES, NOT LIVE GEMINI/GROQ.\n")
             }
         } finally {
+            main { com.saathi.accessibility.ObservationDiagnostics.gatewayObserver = null }
             File(output(), "ai-fixture-service-state.txt").writeText(shell("dumpsys accessibility"))
             main { com.saathi.gateway.PracticeGateway.disable() }
             restore("enabled_accessibility_services", priorServices)

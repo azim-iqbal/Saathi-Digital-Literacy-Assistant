@@ -31,8 +31,12 @@ class PauseResumeIntegrationTest {
         .bufferedReader().use { it.readText().trim() }
     private fun waitFor(description: String, condition: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + 12_000
-        while (!condition() && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100)
-        if (!condition()) {
+        var ready = condition()
+        while (!ready && SystemClock.uptimeMillis() < deadline) {
+            SystemClock.sleep(100)
+            ready = condition()
+        }
+        if (!ready) {
             File(output(), "transition-failure.txt").writeText(description + "\n" + nodes().joinToString("\n") {
                 "class=${it.className} bounds=${it.bounds} clickable=${it.isClickable} parent=${it.clickableAncestorBounds}"
             })
@@ -41,14 +45,38 @@ class PauseResumeIntegrationTest {
             File(output(), "transition-logcat.txt").writeText(shell("logcat -d -t 500 -s InputDispatcher chromium ViewRootImpl"))
             screenshot("transition-failure")
         }
-        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", condition())
+        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", ready)
     }
     private fun nodes() = automation.rootInActiveWindow?.let { root ->
-        try { NodeMasker.flatten(root) } finally { @Suppress("DEPRECATION") root.recycle() }
+        try { NodeMasker.flatten(root) } catch (error: IllegalStateException) {
+            // A transitioning tree is unavailable; the bounded poll still requires a complete result.
+            if (error.message != "Missing observation branch") throw error
+            emptyList()
+        } finally { @Suppress("DEPRECATION") root.recycle() }
     }.orEmpty()
     private fun tap(label: String) {
-        waitFor("Visible $label") { nodes().any { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) } }
-        val node = nodes().first { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+        // Test driver only: the production snapshot intentionally removes all message-screen
+        // content. Locate this fixed fixture navigation button without reading the message.
+        if (label == "Return to choices" && nodes().any { it.privateContext }) {
+            val root = requireNotNull(automation.rootInActiveWindow)
+            val matches = root.findAccessibilityNodeInfosByText(label)
+            val bounds = android.graphics.Rect()
+            try { matches.single { it.isClickable }.getBoundsInScreen(bounds) }
+            finally { matches.forEach { it.recycle() }; root.recycle() }
+            val down = SystemClock.uptimeMillis()
+            for (action in listOf(MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP)) {
+                val event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), action, bounds.exactCenterX(), bounds.exactCenterY(), 0)
+                try { assertTrue(automation.injectInputEvent(event, true)) } finally { event.recycle() }
+            }
+            return
+        }
+        var observed: com.saathi.core.UiNode? = null
+        waitFor("Visible $label") {
+            observed = nodes().firstOrNull { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+            observed != null
+        }
+        // Keep the complete snapshot that satisfied the wait; a second tree can be mid-transition.
+        val node = requireNotNull(observed)
         val bounds = if (node.isClickable) node.bounds else requireNotNull(node.clickableAncestorBounds)
         File(output(), "tap-geometry.txt").appendText("$label: text=${node.bounds}; clickable=${node.isClickable}; tap=$bounds\n")
         val down = SystemClock.uptimeMillis()
@@ -90,7 +118,11 @@ class PauseResumeIntegrationTest {
                 fun guiding() = SaathiSession.instruction.value.startsWith("Find “Help”") && SaathiSession.presentationKey() != null
                 waitFor("Initial guidance") { guiding() }
                 val original = SaathiSession.sessionKey()
-                repeat(3) {
+                val rounds = InstrumentationRegistry.getArguments().getString("handoff_rounds")?.toIntOrNull()?.coerceIn(3,100) ?: 3
+                val started = SystemClock.uptimeMillis()
+                val requests = com.saathi.gateway.PracticeGateway.requestsStarted.get()
+                val measurements = org.json.JSONArray()
+                repeat(rounds) { round ->
                     for ((label, expected) in listOf("Private interruption" to com.saathi.core.GuidanceSessionState.SENSITIVE_HANDOVER,
                     "Message example" to com.saathi.core.GuidanceSessionState.SENSITIVE_HANDOVER,
                         "Human challenge" to com.saathi.core.GuidanceSessionState.WAITING_FOR_CAPTCHA)) {
@@ -107,7 +139,17 @@ class PauseResumeIntegrationTest {
                         assertEquals(original, SaathiSession.sessionKey())
                         assertNotEquals(old, SaathiSession.presentationKey())
                     }
+                    measurements.put(org.json.JSONObject().put("round", round + 1)
+                        .put("elapsed_ms", SystemClock.uptimeMillis() - started)
+                        .put("pss_kb", android.os.Debug.getPss())
+                        .put("heap_bytes", Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
+                        .put("thread_count", Thread.getAllStackTraces().size))
                 }
+                assertEquals("Private handoffs make no model requests", requests, com.saathi.gateway.PracticeGateway.requestsStarted.get())
+                File(output(), "handoff-endurance.json").writeText(org.json.JSONObject()
+                    .put("rounds", rounds).put("handoffs", rounds * 3).put("samples", measurements)
+                    .put("cloud_requests", com.saathi.gateway.PracticeGateway.requestsStarted.get() - requests)
+                    .put("scope", "Synthetic private/message/CAPTCHA round trips; no audio, account login or hours-long leak certification").toString(2))
                 val previousPresentation = SaathiSession.presentationKey()
                 main { SaathiSession.pause(); SaathiSession.pause() }
                 assertEquals(com.saathi.core.GuidanceSessionState.PAUSED, SaathiSession.status.value)

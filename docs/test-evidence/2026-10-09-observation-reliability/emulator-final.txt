@@ -1,0 +1,13 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.ChromeGuidanceIntegrationTest:.
+com.saathi.ui.LiveAiIntegrationTest:..
+
+Time: 314.636
+
+OK (7 tests)
+
+

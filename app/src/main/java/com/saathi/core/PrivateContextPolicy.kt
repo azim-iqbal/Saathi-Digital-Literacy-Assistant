@@ -4,9 +4,9 @@ package com.saathi.core
  * This is conservative minimization, not semantic proof that every other page is public.
  */
 object PrivateContextPolicy {
-    private val privateSurface = Regex("(?i)(?:^|[^a-z])(inbox|conversation|message[ _-]?(body|thread)|email[ _-]?(body|subject)|recipient|compose[ _-]?(mail|message)|personal[ _-]?(details|information)|account[ _-]?details|document[ _-]?(body|editor))(?:$|[^a-z])|निजी जानकारी|व्यक्तिगत जानकारी|संदेश का पाठ|ईमेल|niji jaankari|vyaktigat jaankari")
+    private val privateSurface = Regex("(?i)(?:^|[^a-z])(inbox|conversation|message[ _-]?(body|thread)|email[ _-]?(body|subject)|recipient|compose[ _-]?(mail|message)|personal[ _-]?(details|information)|account[ _-]?details|document[ _-]?(body|editor)|incident[ _-]?description|complaint[ _-]?(description|narrative)|report[ _-]?narrative)(?:$|[^a-z])|निजी जानकारी|व्यक्तिगत जानकारी|संदेश का पाठ|ईमेल|niji jaankari|vyaktigat jaankari|घटना का विवरण|शिकायत का विवरण|ghatna ka vivaran|shikayat ka vivaran")
     fun blocksCloud(nodes: List<UiNode>): Boolean = nodes.any { node ->
-        sequenceOf(node.resourceId, node.hint, node.description, node.text).filterNotNull().any {
+        node.privateContext || sequenceOf(node.resourceId, node.hint, node.description, node.text).filterNotNull().any {
             privateSurface.containsMatchIn(it.take(512))
         }
     }

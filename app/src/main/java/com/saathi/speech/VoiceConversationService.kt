@@ -25,7 +25,7 @@ enum class VoicePhase(val en: String, val hi: String, val hinglish: String) {
     STARTING("Preparing microphone", "माइक तैयार हो रहा है", "Mic taiyaar ho raha hai"),
     LISTENING("Listening · say help, repeat, pause or stop", "सुन रहे हैं · मदद, दोबारा, रोकें या रद्द बोलें", "Sun rahe hain · help, repeat, pause ya stop boliye"),
     PAUSED("Voice paused · resume in Saathi", "वॉइस रुकी है · साथी में फिर शुरू करें", "Voice paused · Saathi mein resume karein"),
-    PRIVATE("Microphone off · private form", "माइक बंद · निजी जानकारी का फॉर्म", "Mic off · private form"),
+    PRIVATE("Microphone off · enable hands-free replies to resume", "माइक बंद · फिर शुरू करने के लिए हैंड्स-फ़्री जवाब चालू करें", "Mic off · resume ke liye hands-free replies chalu karein"),
     NEEDS_LANGUAGE("Offline voice language unavailable · open voice setup", "ऑफलाइन वॉइस भाषा उपलब्ध नहीं · वॉइस सेटअप खोलें", "Offline voice language nahi hai · voice setup kholiye"),
     UNAVAILABLE("Voice unavailable · use visual guidance", "वॉइस उपलब्ध नहीं · स्क्रीन मार्गदर्शन देखें", "Voice unavailable · screen guidance dekhein");
     fun text(language: GuidanceLanguage) = when(language) {
@@ -39,6 +39,7 @@ enum class VoicePhase(val en: String, val hi: String, val hinglish: String) {
 class VoiceConversationService : Service() {
     private val handler = Handler(Looper.getMainLooper())
     private val turns = VoiceTurnGate()
+    private val privacy = VoicePrivacyGate()
     private var recognizer: SpeechRecognizer? = null
     private var tts: TtsManager? = null
     private var key: String? = null
@@ -89,6 +90,7 @@ class VoiceConversationService : Service() {
         key = requested
         language = GuidanceLanguage.fromStorage(intent.getStringExtra(LANGUAGE))
         manuallyPaused = false
+        privacy.activate()
         lastSpoken = null
         if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED || !supported(this)) {
             mutablePhase.value = VoicePhase.UNAVAILABLE
@@ -129,15 +131,17 @@ class VoiceConversationService : Service() {
     }
     private fun suspendForScreen() {
         prompt = null
+        privacy.invalidateScreen()
         cancelAudio()
-        if (!manuallyPaused) show(VoicePhase.WAITING)
+        if (!manuallyPaused) show(if (privacy.needsActivation()) VoicePhase.PRIVATE else VoicePhase.WAITING)
     }
     private fun update(next: String, microphoneAllowed: Boolean) {
         if (!valid()) { cancelAudio(); show(VoicePhase.UNAVAILABLE); return }
         prompt = next
+        privacy.observe(microphoneAllowed)
         if (manuallyPaused) return
         cancelAudio()
-        if (!microphoneAllowed) {
+        if (!privacy.canListen()) {
             if (next != lastSpoken) say(next, listenAfter = false) else show(VoicePhase.PRIVATE)
             return
         }
@@ -168,6 +172,7 @@ class VoiceConversationService : Service() {
 
     private fun listen() {
         cancelAudio()
+        if (!privacy.canListen()) { show(VoicePhase.PRIVATE); return }
         if (prompt == null || !acquireAudio()) return
         if (!supported(this)) { show(VoicePhase.UNAVAILABLE); return }
         val token = turns.begin()
@@ -178,7 +183,7 @@ class VoiceConversationService : Service() {
             val engine = SpeechRecognizer.createOnDeviceSpeechRecognizer(this)
             recognizer = engine
             engine.setRecognitionListener(object : RecognitionListener {
-                private fun current() = turns.accepts(token) && valid() && !manuallyPaused
+                private fun current() = turns.accepts(token) && valid() && !manuallyPaused && privacy.canListen()
                 override fun onReadyForSpeech(params: Bundle?) { if (current()) show(VoicePhase.LISTENING) }
                 override fun onResults(results: Bundle) {
                     if (!current()) return

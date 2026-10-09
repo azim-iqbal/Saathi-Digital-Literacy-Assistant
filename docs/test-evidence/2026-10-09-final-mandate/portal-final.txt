@@ -1,0 +1,9 @@
+
+com.saathi.ui.PortalWorkflowIntegrationTest:.
+com.saathi.ui.ComplaintDraftUiTest:...
+
+Time: 65.999
+
+OK (4 tests)
+
+

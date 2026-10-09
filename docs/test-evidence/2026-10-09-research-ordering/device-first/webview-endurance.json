@@ -1,0 +1,85 @@
+{
+  "cycles": 120,
+  "samples": [
+    {
+      "cycle": 1,
+      "elapsed_ms": 2599,
+      "pss_kb": 113477,
+      "heap_used_bytes": 7420720
+    },
+    {
+      "cycle": 11,
+      "elapsed_ms": 21208,
+      "pss_kb": 115381,
+      "heap_used_bytes": 7469872
+    },
+    {
+      "cycle": 21,
+      "elapsed_ms": 36538,
+      "pss_kb": 115605,
+      "heap_used_bytes": 7699248
+    },
+    {
+      "cycle": 31,
+      "elapsed_ms": 52279,
+      "pss_kb": 115189,
+      "heap_used_bytes": 7338800
+    },
+    {
+      "cycle": 41,
+      "elapsed_ms": 68494,
+      "pss_kb": 114948,
+      "heap_used_bytes": 7060272
+    },
+    {
+      "cycle": 51,
+      "elapsed_ms": 84507,
+      "pss_kb": 114980,
+      "heap_used_bytes": 6978352
+    },
+    {
+      "cycle": 61,
+      "elapsed_ms": 101046,
+      "pss_kb": 114404,
+      "heap_used_bytes": 6388528
+    },
+    {
+      "cycle": 71,
+      "elapsed_ms": 117691,
+      "pss_kb": 115364,
+      "heap_used_bytes": 7404336
+    },
+    {
+      "cycle": 81,
+      "elapsed_ms": 133426,
+      "pss_kb": 114916,
+      "heap_used_bytes": 6945584
+    },
+    {
+      "cycle": 91,
+      "elapsed_ms": 150844,
+      "pss_kb": 115672,
+      "heap_used_bytes": 7732016
+    },
+    {
+      "cycle": 101,
+      "elapsed_ms": 167508,
+      "pss_kb": 115448,
+      "heap_used_bytes": 7273264
+    },
+    {
+      "cycle": 111,
+      "elapsed_ms": 184009,
+      "pss_kb": 114680,
+      "heap_used_bytes": 6585136
+    },
+    {
+      "cycle": 120,
+      "elapsed_ms": 198406,
+      "pss_kb": 115720,
+      "heap_used_bytes": 7748400
+    }
+  ],
+  "same_guidance_session": true,
+  "scope": "synthetic WebView mutation\/detour\/return; not proof of historical failure cause or OEM endurance"
+}

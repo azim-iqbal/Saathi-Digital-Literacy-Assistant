@@ -1,0 +1,749 @@
+# SAATHI — Final Reliability, Privacy Handoff and Production Validation
+
+You already have the complete Saathi codebase, architecture, previous implementation history, evaluation suite, remediation documentation and Git history.
+
+Most of the previously requested system-design and real-world guidance work has already been implemented.
+
+**Do not rebuild Saathi, restart the project, redesign its interface, or repeat completed remediation work.**
+
+Your task is to address the remaining issues, implement seamless privacy-preserving user handoffs, verify actual behavior and preserve the existing product.
+
+## NON-NEGOTIABLE RULE: DO NOT CHANGE THE UI
+
+This is extremely important.
+
+The UI has changed unexpectedly during previous development.
+
+Before modifying anything:
+
+1. Inspect the current UI implementation and Git history.
+2. Identify the last approved UI design, if it can be established from repository evidence.
+3. Compare it with the current UI.
+4. Preserve or restore the approved design without affecting newly implemented functionality.
+5. If the approved design cannot be established confidently, do not guess or invent one. Preserve the current UI and report what needs confirmation.
+
+Do not change:
+
+- Logo or branding
+- Color palette
+- Typography
+- Backgrounds or gradients
+- Glassmorphism styling
+- Button shapes
+- Navigation structure
+- Screen layouts
+- Onboarding presentation
+- Language-selection design
+- Existing animations
+- Spacing or component proportions
+- Floating assistant controls
+- Overlay visual design
+
+The supplied screenshot shows a dark onboarding screen with the Saathi logo, a large introduction, numbered guidance instructions and language-selection cards.
+
+Do not treat this screenshot as authorization to redesign the application.
+
+Determine whether it represents the approved design or an unintended regression.
+
+If a UI change is absolutely necessary for a new functional control, reuse an existing component and style.
+
+No broad UI refactor is permitted.
+
+Take baseline screenshots before implementation and comparison screenshots afterward.
+
+Use screenshot/pixel comparisons where practical, accounting for legitimate dynamic content.
+
+**Functional changes must not become visual redesigns.**
+
+---
+
+# PHASE 1 — AUDIT EXISTING IMPLEMENTATION
+
+Read the relevant code before making changes.
+
+Start with the actual files implementing:
+
+- NodeMasker
+- Models
+- FormGuide
+- LiveGuide
+- SaathiSession
+- AssistantActivity
+- AccessibilityService
+- Overlay/highlighting
+- Speech recognition
+- TTS
+- Research/planning
+- Backend gateway
+- Provider adapters
+- Privacy enforcement
+
+Also inspect:
+
+- PRIVACY.md
+- LIVE_ASSISTANT.md
+- Existing evaluation results
+- Existing integration tests
+- IMPLEMENTATION_REMEDIATION_REQUEST.txt
+- Git history for UI changes
+
+Adapt filenames to the actual repository.
+
+Identify which remaining capabilities are already implemented and which genuinely need fixes.
+
+Do not overwrite working implementations.
+
+---
+
+# PHASE 2 — SEAMLESS SENSITIVE-FIELD HANDOFF
+
+## Problem
+
+Saathi currently pauses or enters a sensitive handover when encountering private fields.
+
+This is safe but may interrupt the user's experience unnecessarily.
+
+We want:
+
+**Continuous task guidance without continuous access to sensitive data.**
+
+The task remains active at the logical level, but sensitive observation and cloud processing remain suspended.
+
+Do not remove existing privacy protections.
+
+## 2.1 Introduce a user-controlled handoff state
+
+Implement or extend the existing interruption state machine.
+
+Conceptually support:
+
+GUIDING
+→ WAITING_FOR_PRIVATE_USER_ACTION
+→ VERIFYING_SAFE_CONTINUATION
+→ GUIDING
+
+Preserve existing CAPTCHA and manual Pause states.
+
+Do not collapse manual Pause, authentication handoff, CAPTCHA and payment uncertainty into one state.
+
+The handoff must preserve:
+
+- Original goal
+- Current task plan
+- Safe prerequisite state
+- Current non-sensitive step
+- Language
+- Speech preferences
+- Session identity
+- Relevant non-sensitive context
+
+Do not retain sensitive values.
+
+## 2.2 Sensitive-field instructions
+
+When Saathi detects a sensitive field, provide a short explanation in the user's selected language.
+
+English example:
+
+"This step needs private information. Enter it yourself. Saathi won't send it to AI or save it."
+
+Hindi and Hinglish must communicate the same meaning naturally.
+
+Avoid saying:
+
+"I cannot see your OTP."
+
+unless the implementation proves the value is never accessed by any Saathi component.
+
+Prefer guarantees about what Saathi does not transmit, retain or process.
+
+## 2.3 Safe field highlighting
+
+Where Android provides a safe, trustworthy accessibility target:
+
+- Highlight the sensitive field using structure-only metadata.
+- Do not read its value.
+- Do not include its contents in snapshots.
+- Do not send its value to the backend.
+- Do not send it to Gemini or Groq.
+- Do not log it.
+- Do not persist it.
+- Do not speak it.
+
+Do not use screenshots to bypass value masking.
+
+If highlighting would require capturing sensitive content, withhold the highlight and provide text-only guidance.
+
+If the accessibility target is ambiguous or unavailable, do not guess.
+
+## 2.4 Completion detection
+
+Use safe signals in priority order:
+
+1. Verified transition to a non-sensitive screen.
+2. Safe structural state change that indicates the sensitive step has ended.
+3. Explicit user confirmation through an existing-style control.
+
+A field becoming non-empty, losing focus, or the user tapping Next is not proof that authentication succeeded.
+
+If a non-empty boolean is available without reading the actual value, it may be used only as a local progress hint.
+
+Do not use it as an authentication-success predicate.
+
+Avoid reading `AccessibilityNodeInfo.text` for sensitive values merely to compute whether a field is non-empty.
+
+Use non-content structural indicators where available.
+
+Do not cache or transmit even a sensitive-field completion hint unnecessarily.
+
+## 2.5 Resume safely
+
+After the sensitive interaction:
+
+- Obtain a fresh screen observation.
+- Verify the sensitive state has ended.
+- Revalidate session identity.
+- Revalidate task context.
+- Reject stale AI responses.
+- Remove outdated overlays.
+- Continue with the next safe step.
+
+If the screen remains private or protected, keep waiting.
+
+If authentication failed, explain the visible failure safely without extracting credentials.
+
+If the user cancels, preserve appropriate manual control.
+
+If permissions are revoked or the screen locks, retain existing safety-stop behavior.
+
+## 2.6 Voice privacy
+
+Do not silently restart the microphone.
+
+Prevent speech recognition from capturing spoken passwords, OTPs, PINs or other authentication secrets during handoff.
+
+TTS may announce the safe handoff instruction if appropriate, but listening must remain disabled during sensitive entry.
+
+Resume voice only according to the existing explicit consent and activation rules.
+
+## 2.7 CAPTCHA
+
+Preserve the existing CAPTCHA interruption mechanism.
+
+Never solve, bypass or automate CAPTCHA.
+
+Explain that the user must complete it.
+
+Resume only after a fresh safe observation.
+
+---
+
+# PHASE 3 — CHROME HTTPS DESTINATION VERIFICATION
+
+The evaluation identifies incomplete full-address verification before highlighting researched browser steps.
+
+Fix this as a priority.
+
+## Requirements
+
+Implement a trustworthy destination-verification mechanism.
+
+Do not rely solely on:
+
+- Visible page titles
+- Favicon
+- Website branding
+- A substring in the address
+- An LLM's claim about the URL
+- A search-result title
+
+For sensitive workflows, verify the full effective HTTPS destination, including the host and relevant path when necessary.
+
+Use trusted browser/navigation information where actually available.
+
+Recognize that Android accessibility does not always expose a trustworthy complete browser URL.
+
+If the full destination cannot be verified:
+
+- Do not invent it.
+- Do not claim it is verified.
+- Do not highlight sensitive submission controls based on unverified research.
+- Offer a safe alternative, such as opening a validated official URL or requesting user verification.
+
+Handle:
+
+- Redirects
+- Lookalike domains
+- Internationalized domains
+- Subdomains
+- HTTP-to-HTTPS transitions
+- Unexpected origins
+- Browser address-bar changes
+- Chrome custom tabs
+- Browser-specific accessibility limitations
+
+Do not assume HTTPS alone means the website is legitimate.
+
+Add adversarial tests.
+
+---
+
+# PHASE 4 — AI PROVIDER RELIABILITY AND ACCURACY
+
+Retest the corrected Gemini prompt and existing provider adapters.
+
+Do not assume that a schema-valid response is factually correct.
+
+Evaluate:
+
+- Gemini response compatibility
+- Groq response compatibility
+- Structured output validity
+- Target grounding
+- Task planning
+- Prerequisite reasoning
+- Eligibility reasoning
+- Current-source attribution
+- Incident explanation
+- Hindi and Hinglish accuracy
+- Safe uncertainty handling
+
+Use deterministic fixtures first.
+
+Record privacy-safe validation reason codes.
+
+Do not log raw private prompts, credentials or sensitive screen data.
+
+## Provider acceptance scenarios
+
+Test at least:
+
+1. Simple navigation
+2. Multi-step government workflow
+3. Missing prerequisite
+4. Uncertain eligibility
+5. Conflicting official sources
+6. Outdated community information
+7. Subscription error
+8. Provider outage
+9. Malicious webpage instruction
+10. Low-confidence target
+11. English/Hindi/Hinglish equivalents
+12. Unsupported task
+13. Unverified completion
+14. Changed screen during response
+15. Sensitive-field interruption
+
+Do not weaken safety validation to improve acceptance rates.
+
+Do not spend additional paid provider calls without an explicitly authorized bounded budget.
+
+Prepare the real-provider tests and report the exact required authorization if needed.
+
+---
+
+# PHASE 5 — WEBVIEW RELIABILITY
+
+The earlier evaluation recorded 40 successful cycles without establishing the cause of an older intermittent failure.
+
+Do not declare it fixed solely because it has not reappeared.
+
+Investigate:
+
+- Accessibility event ordering
+- WebView rendering timing
+- Delayed tree updates
+- Stale node references
+- Overlay lifecycle
+- Activity transitions
+- Navigation redirects
+- Session cancellation
+- Coroutine races
+- UI-thread blocking
+- WebView process recreation
+
+Add safe diagnostic instrumentation.
+
+Reproduce the original failure if possible.
+
+When a concrete root cause is identified:
+
+1. Write a failing regression test.
+2. Implement the smallest general fix.
+3. Rerun repeated cycles.
+4. Verify no regressions.
+
+If it cannot be reproduced, report it as unresolved with the exact tests performed.
+
+Do not invent a root cause.
+
+---
+
+# PHASE 6 — LONG-SESSION RELIABILITY
+
+Create controlled endurance tests.
+
+Include:
+
+- Extended guidance sessions
+- Repeated pause/resume
+- Sensitive handoffs
+- CAPTCHA handoffs
+- Network loss
+- Network recovery
+- App backgrounding
+- Foreground restoration
+- Screen lock
+- Permission revocation
+- Rapid task switching
+- Accessibility-service recreation
+- Backend timeout
+- Provider timeout
+- Overlay cleanup
+
+Measure:
+
+- Memory
+- Retained objects
+- Active coroutines
+- Pending requests
+- Overlay instances
+- Event-processing latency
+- Request duplication
+- AI call count
+- Session-state consistency
+
+Do not infer absence of memory leaks from one short run.
+
+Use reproducible measurements.
+
+---
+
+# PHASE 7 — PHYSICAL-DEVICE VALIDATION
+
+Create and run all tests supported by the available hardware.
+
+Prioritize:
+
+- Actual microphone recognition
+- TTS output quality
+- Continuous voice interaction
+- Voice interruption
+- Microphone privacy handoff
+- OEM background restrictions
+- Accessibility connection stability
+- Overlay permission behavior
+- Screen rotation
+- Battery optimization behavior
+- Long-session performance
+
+Do not claim physical-device PASS from emulator-only evidence.
+
+If no physical device is connected, prepare a repeatable test procedure and mark those tests BLOCKED.
+
+Do not fabricate device results.
+
+---
+
+# PHASE 8 — CYBERCRIME REPORTING
+
+Verify the existing cybercrime reporting guidance.
+
+The previous evaluation only established the public entry path.
+
+Test the authenticated workflow safely.
+
+Saathi should:
+
+- Identify the appropriate authoritative reporting portal.
+- Explain available reporting categories.
+- Explain required information using official guidance.
+- Guide the user through accessible steps.
+- Preserve privacy.
+- Recognize authentication and OTP boundaries.
+- Explain what evidence may be needed.
+- Avoid fabricating complaint details.
+- Avoid making unsupported claims about complaint status.
+- Stop before final legal declaration or complaint submission during testing.
+
+Use controlled fixtures and public information.
+
+Do not create a real complaint merely to test the app.
+
+Authenticated steps requiring real credentials must remain manually unverified until legitimately tested.
+
+---
+
+# PHASE 9 — VERIFY REAL-WORLD TASK CONTINUITY
+
+The key product requirement is:
+
+**A private step must not destroy the original task.**
+
+Test the following sequence:
+
+User:
+"Help me apply for a service."
+
+Saathi:
+Understands the goal and begins guidance.
+
+User:
+Reaches login.
+
+Saathi:
+Explains the private step without accessing credentials.
+
+User:
+Completes login.
+
+Saathi:
+Re-observes the screen and continues the original task.
+
+User:
+Encounters OTP.
+
+Saathi:
+Enters safe user-turn handoff.
+
+User:
+Completes OTP.
+
+Saathi:
+Resumes from the next safe step.
+
+User:
+Encounters CAPTCHA.
+
+Saathi:
+Waits for user completion.
+
+User:
+Completes CAPTCHA.
+
+Saathi:
+Continues.
+
+User:
+Reaches final submission.
+
+Saathi:
+Explains consequences and highlights only when safe.
+
+User:
+Performs final action.
+
+Saathi:
+Verifies completion using actual evidence.
+
+No fabricated completion.
+
+No autonomous sensitive actions.
+
+No lost original goal.
+
+No stale highlights.
+
+No leaked secrets.
+
+---
+
+# PHASE 10 — PRIVACY AND SECURITY REGRESSION
+
+Create tests with synthetic:
+
+- OTP
+- Password
+- PIN
+- CVV
+- Card number
+- Banking credentials
+- Private messages
+- Sensitive identity information
+
+Test whether any value appears in:
+
+- AI payloads
+- Research queries
+- Logs
+- Crash reports
+- Telemetry
+- Caches
+- Saved preferences
+- Temporary files
+- Screenshots
+- Debug traces
+- TTS output
+
+Use synthetic values only.
+
+Test both obvious and obfuscated formats.
+
+Never disable masking to improve guidance.
+
+Do not alter NodeMasker unless a verified defect requires a narrowly scoped change.
+
+If NodeMasker changes, include dedicated before/after privacy tests.
+
+---
+
+# PHASE 11 — DIFFERENTIATION FROM GEMINI LIVE
+
+Do not imitate Gemini Live's interface.
+
+Do not introduce a generic full-screen video-sharing experience merely for competitive parity.
+
+Preserve Saathi's product philosophy:
+
+**Understand → Research → Explain → Highlight → User Acts → Verify.**
+
+The intended differentiators are:
+
+1. Structured goal-oriented guidance.
+2. Evidence-backed prerequisites and eligibility.
+3. Precise grounded UI highlighting.
+4. User-controlled completion.
+5. Sensitive-field handoffs without credential transmission.
+6. Hindi/Hinglish-first digital-literacy assistance.
+7. Explicit progress and completion verification.
+
+Do not make unsupported claims about Gemini's privacy practices.
+
+Saathi's own privacy guarantees must be testable.
+
+Do not add competitor comparisons to the production UI.
+
+---
+
+# PHASE 12 — STRICT UI REGRESSION TESTING
+
+Before finishing, verify that the visual appearance remains unchanged from the approved baseline.
+
+Check:
+
+- Onboarding
+- Home screen
+- Task selection
+- Language selection
+- Assistant screen
+- Floating assistant
+- Overlays
+- Voice controls
+- Pause/resume controls
+- Error screens
+- Permission screens
+
+Run screenshot comparisons at representative device sizes.
+
+Do not change UI dependencies, themes or component structure unnecessarily.
+
+If any UI change occurs, explain exactly why.
+
+Prefer zero visual changes.
+
+If the approved UI needs restoration, perform it separately from functional remediation and verify that the restored UI still supports every current feature.
+
+---
+
+# PHASE 13 — TEST AND VERIFY
+
+Run all relevant existing suites:
+
+- Backend tests
+- Android unit tests
+- Integration tests
+- Emulator tests
+- Browser tests
+- WebView tests
+- Privacy tests
+- Provider-contract tests
+- Pause/resume regression tests
+- CAPTCHA tests
+- Event-storm tests
+- Long-session tests
+- Android lint
+- Release compilation
+- Secret scanning
+
+Do not remove failing tests to make the suite green.
+
+Do not silently skip tests.
+
+Classify results accurately:
+
+PASS
+FAIL
+PARTIAL
+BLOCKED
+NOT RUN
+
+For every failure:
+
+Find root cause → Fix → Rerun → Run regressions.
+
+---
+
+# DEFINITION OF DONE
+
+This phase is complete only when:
+
+- Sensitive-field guidance continues without transmitting secrets.
+- Existing masking remains enforced.
+- The original task survives safe handoffs.
+- User-controlled resume works.
+- CAPTCHA remains user-controlled.
+- Cloud processing is blocked during sensitive states.
+- Chrome destination verification is implemented and tested within platform limitations.
+- Corrected provider contracts pass deterministic tests.
+- Authorized real-provider tests have truthful results.
+- WebView reliability is investigated with evidence.
+- Long-session tests run and confirmed defects are fixed.
+- Physical-device tests are run where hardware is available.
+- Cybercrime workflow guidance is tested to the legitimate safe boundary.
+- Existing regression tests continue passing.
+- No autonomous payment, authentication or legal submission is introduced.
+- No provider secrets are exposed.
+- The approved UI remains visually unchanged or is restored from a verified baseline.
+- Documentation matches the actual implementation.
+
+Do not claim that all Android apps, websites, banks or government portals are universally supported.
+
+Do not claim that a test passed when it was blocked.
+
+---
+
+# FINAL REPORT
+
+Produce a concise engineering report containing:
+
+1. Existing implementation audited
+2. Remaining defects found
+3. Sensitive-field handoff changes
+4. Privacy guarantees verified
+5. Chrome HTTPS verification
+6. Gemini/Groq validation
+7. WebView investigation
+8. Long-session results
+9. Physical-device results
+10. Cybercrime reporting validation
+11. UI baseline and visual regression results
+12. Files changed
+13. Tests passed/failed/blocked
+14. Remaining external dependencies
+15. Exact production-readiness verdict
+
+Include evidence paths and commands needed to reproduce results.
+
+Do not make a Git commit.
+
+Do not change the app's UI design.
+
+Do not stop after producing a plan.
+
+Implement all repository-level fixes that can be completed safely, run the tests, fix regressions, and clearly identify anything requiring hardware, external credentials or separately authorized paid API calls.
+
+**Final priority order: Privacy → Correctness → Task continuity → Reliability → Performance → UI preservation.**
+
+UI preservation is also a mandatory constraint throughout implementation, not an optional final check.
+
+Start by auditing the existing implementation and identifying the approved UI baseline, then proceed with the smallest necessary changes.

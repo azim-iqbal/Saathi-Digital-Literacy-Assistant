@@ -1,0 +1,25 @@
+..F......
+======================================================================
+FAIL: test_cap_replay_scorer_and_no_body_retention (test_final_acceptance.FinalAcceptanceTests.test_cap_replay_scorer_and_no_body_retention)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/evaluation/test_final_acceptance.py", line 28, in test_cap_replay_scorer_and_no_body_retention
+    self.assertEqual([r['status'] for r in value['cases']],['PASS']*4)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['PASS', 'PASS', 'FAIL', 'PASS'] != ['PASS', 'PASS', 'PASS', 'PASS']
+
+First differing element 2:
+'FAIL'
+'PASS'
+
+- ['PASS', 'PASS', 'FAIL', 'PASS']
+?                   ^ ^^
+
++ ['PASS', 'PASS', 'PASS', 'PASS']
+?                   ^ ^^
+
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.136s
+
+FAILED (failures=1)

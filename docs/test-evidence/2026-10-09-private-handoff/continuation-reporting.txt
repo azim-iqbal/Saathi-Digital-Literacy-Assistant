@@ -1,0 +1,11 @@
+
+com.saathi.ui.CyberReportUiTest:....
+com.saathi.ui.ComplaintDraftUiTest:..
+com.saathi.ui.CyberLinkOverlayTest:..
+com.saathi.ui.IncidentAssessmentUiTest:..
+
+Time: 83.946
+
+OK (10 tests)
+
+

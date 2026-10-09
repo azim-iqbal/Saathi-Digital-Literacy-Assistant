@@ -1,0 +1,12 @@
+{
+  "files_checked": 58,
+  "changed": [
+    "app/src/main/java/com/saathi/ui/Copy.kt",
+    "app/src/main/java/com/saathi/TermsActivity.kt"
+  ],
+  "expected_copy_only": [
+    "app/src/main/java/com/saathi/ui/Copy.kt",
+    "app/src/main/java/com/saathi/TermsActivity.kt"
+  ],
+  "styles_logo_layouts_changed": false
+}

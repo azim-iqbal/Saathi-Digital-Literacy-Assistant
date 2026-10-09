@@ -1,0 +1,835 @@
+# SAATHI — FINAL PRE-DEPLOYMENT COMPLETION MANDATE
+
+## Mission
+
+You are working on Saathi, an Android-first, privacy-preserving AI digital guidance application.
+
+You already have access to the entire repository, Git history, architecture, evaluation suite, existing documentation, previous remediation work, and implementation evidence.
+
+**Your task is to finish the application completely to the greatest extent technically possible, excluding only actual deployment, hosting activation, production credentials, store publishing, and release distribution.**
+
+This is the final pre-deployment engineering pass.
+
+Do not stop after another audit, implementation plan, checklist, or partial improvement.
+
+**AUDIT → REPRODUCE → FIX → TEST → VERIFY → CONTINUE.**
+
+Continue through all remaining workstreams until every repository-solvable issue has been resolved and every available acceptance test has been executed.
+
+Do not claim completion merely because existing tests pass.
+
+Do not invent evidence for unavailable hardware, real authentication, external services, or live-model evaluations.
+
+---
+
+# 1. START FROM THE LATEST VERIFIED STATE
+
+Read the newest entries first in:
+
+- FINAL_RELIABILITY_REPORT.md
+- REMEDIATION_CAPABILITY_MATRIX.md
+- TEST_RESULTS.md
+- EXECUTION_PLAN.md
+- PRIVACY.md
+- RESEARCH_AND_PLANNING.md
+- PRIVATE_HANDOFF_DEVICE_CHECKLIST.md
+- The latest `docs/test-evidence/2026-10-09-research-ordering/` evidence
+- Relevant implementation specifications and regression logs
+
+Discover the actual locations if filenames differ.
+
+Preserve all existing uncommitted work.
+
+The latest reported verification baseline includes:
+
+- 147 Android unit tests passing
+- 152 offline backend tests passing
+- 7 evaluation tests passing
+- 51/51 offline capability probes passing
+- 52 passing emulator tests across the latest reported groups
+- 8 UI checks passing
+- Debug/test builds passing
+- Release Kotlin compilation passing
+- Android lint with zero errors and 61 warnings
+
+These are historical results, not automatic proof that the current working tree still passes.
+
+Rerun relevant checks against the current code.
+
+Do not rebuild completed research, prerequisite, eligibility, pause/resume, privacy, source review, incident assessment, or task-planning architecture unless a real defect is identified.
+
+---
+
+# 2. ABSOLUTE UI PRESERVATION
+
+**DO NOT REDESIGN SAATHI.**
+
+The existing approved UI must remain intact.
+
+Preserve:
+
+- Saathi branding and logo
+- Existing green/dark visual identity
+- Glassmorphism
+- Typography
+- Onboarding
+- Home screen
+- Assistant interface
+- Floating assistant controls
+- Language selection
+- Navigation
+- Overlays
+- Animations
+- Existing control shapes and spacing
+
+Use the saved UI screenshots and established baseline.
+
+Capture screenshots before and after modifications.
+
+Run existing UI regression tests and compare screenshots.
+
+Any necessary functional copy change must use existing components and styles.
+
+Do not introduce a new design system.
+
+Do not change the UI merely because a different layout seems more modern.
+
+**The finished app must look like the approved Saathi design.**
+
+---
+
+# 3. FINISH AI ACCURACY AND LATENCY
+
+This is a major remaining gate.
+
+## 3.1 Audit actual provider behavior
+
+Inspect the current Gemini and Groq integrations.
+
+Investigate:
+
+- Prompt construction
+- Model compatibility
+- Structured-output parsing
+- Response validation
+- Provider-specific formatting
+- Network latency
+- Connection establishment
+- Request deadlines
+- Timeout classification
+- Cancellation
+- Primary/fallback routing
+- Quota protection
+- Response freshness
+- Uncertain-output handling
+
+The previous genuine evaluation found:
+
+- English paired navigation passed.
+- Hinglish Groq response was accepted.
+- Hinglish Gemini timed out at approximately eight seconds.
+- Broader planning and incident accuracy remains unverified.
+
+Do not assume that increasing timeouts fixes the problem.
+
+Preserve screen-freshness constraints.
+
+## 3.2 Implement meaningful diagnostics
+
+Use privacy-safe diagnostics to distinguish:
+
+- DNS failure
+- Connection failure
+- TLS failure
+- Request write failure
+- Provider processing delay
+- Response read timeout
+- Invalid JSON
+- Schema mismatch
+- Unsupported target
+- Contradictory evidence
+- Insufficient confidence
+- Stale response
+- Cancellation
+- Quota exhaustion
+
+Do not record private prompts, screenshots, secrets, response bodies containing user data, or credentials.
+
+## 3.3 Improve response correctness
+
+Evaluate general capabilities, not memorized scenarios.
+
+Include:
+
+- Navigation target accuracy
+- Multi-step planning
+- Prerequisite extraction
+- Eligibility reasoning
+- Source citation correctness
+- Source freshness
+- Official versus community evidence
+- Incident diagnosis
+- Contradictory information
+- Uncertainty calibration
+- Unsupported completion claims
+- English/Hindi/Hinglish equivalence
+- Prompt-injection resistance
+
+Create deterministic and adversarial evaluation datasets.
+
+Use independent expected outcomes.
+
+Do not tune acceptance tests merely to accept existing model outputs.
+
+## 3.4 Measure latency
+
+Measure:
+
+- Local guidance response time
+- Research retrieval latency
+- Planning latency
+- Incident analysis latency
+- Primary-provider timeout behavior
+- Conditional fallback latency
+- Cancellation latency
+- End-to-end observation-to-guidance latency
+
+Report p50, p95, maximum and sample counts where meaningful.
+
+Preserve bounded resource usage.
+
+Do not weaken safety or freshness limits for better benchmark numbers.
+
+## 3.5 Genuine-provider acceptance
+
+The previous four-call authorization is exhausted.
+
+Do not silently reuse it.
+
+Complete deterministic preparation first.
+
+If an explicitly authorized fresh live-call budget is available, execute a small, predeclared evaluation and report every result.
+
+Otherwise prepare a reproducible live evaluation command and mark genuine-provider acceptance BLOCKED pending authorization.
+
+Do not label fixtures as genuine AI.
+
+---
+
+# 4. RESOLVE WEBVIEW INTERMITTENCE
+
+The historical WebView failure remains unexplained despite repeated passing cycles.
+
+Investigate it thoroughly.
+
+Inspect existing saved evidence and logs before adding tests.
+
+Analyze:
+
+- Touch event timing
+- Window changes
+- Accessibility event ordering
+- WebView tree mutation
+- Incomplete node traversal
+- Node invalidation
+- Overlay positioning
+- Old-window callbacks
+- Session identity
+- Navigation detours
+- Renderer recreation
+- Activity lifecycle
+- Coroutine scheduling
+- Main-thread delays
+- Stale UI snapshots
+
+Create a reproducible stress harness with deterministic fault injection.
+
+Capture sanitized reason codes and timing information.
+
+If the failure reproduces:
+
+1. Preserve failing evidence.
+2. Identify the actual cause.
+3. Add a regression test.
+4. Fix the underlying defect.
+5. Run the regression repeatedly.
+6. Run the broader WebView and accessibility suite.
+
+If it cannot be reproduced, do not invent an explanation.
+
+Document the exact attempted reproductions and remaining uncertainty.
+
+A historical issue is not automatically fixed because 40 or 120 cycles pass.
+
+---
+
+# 5. RESOLVE HISTORICAL CLOUD/RECOVERY INTERMITTENCE
+
+Investigate the previous synthetic-cloud and mixed-fault recovery failures separately from WebView.
+
+Review:
+
+- Capacity accounting
+- Cleanup-before-callback ordering
+- Request cancellation
+- Worker scheduling
+- Session generation
+- Backend connection replacement
+- Deadline handling
+- Pending request cleanup
+- Network failure recovery
+- Callback ordering
+- Retry suppression
+- Circuit breaker recovery
+- Duplicate requests
+
+Retain the already-fixed request-capacity and cancellation behavior.
+
+Use controlled fault injection and reproducible seeds.
+
+Test:
+
+- Repeated cancellation
+- Rapid session replacement
+- Request bursts
+- Delayed callbacks
+- Backend restart
+- Network disconnection
+- Network restoration
+- Timeout races
+- Concurrent provider failures
+- Capacity exhaustion
+- Thousands of sequential recovery requests
+
+Do not add automatic retries that create duplicate AI calls or unexpected costs.
+
+For any reproduced failure, add a failing regression before fixing it.
+
+---
+
+# 6. HOURS-LONG ENDURANCE AND RESOURCE ACCEPTANCE
+
+The previous mixed-fault run lasted approximately 140 seconds.
+
+That is not sufficient for hours-long acceptance.
+
+Create and execute a genuine extended-duration test wherever the available environment supports it.
+
+Target:
+
+- At least 2 hours of continuous mixed lifecycle and resource testing.
+- Additional accelerated deterministic stress testing for high-frequency events.
+- Repeated app background/foreground transitions.
+- Repeated pause/resume.
+- Private-field handoffs.
+- CAPTCHA handoffs.
+- Research cancellation.
+- Task replacement.
+- Network failures.
+- Service recreation.
+- Screen locking where controllable.
+- Long-running TTS/voice fixtures.
+- WebView transitions.
+- Backend recovery.
+
+Measure:
+
+- Android PSS and heap
+- Retained references
+- Resource handles
+- Thread counts
+- Active coroutine/job counts
+- Accessibility node ownership
+- Overlay instances
+- Pending callbacks
+- Foreground service state
+- Network request counts
+- AI call counts
+- Cancellation success
+- Response latency drift
+- Crashes and ANRs
+
+Use time-series measurements rather than a single before/after sample.
+
+Detect meaningful upward resource trends.
+
+Investigate suspected leaks with heap or allocation evidence.
+
+Do not claim zero leaks merely because the app survived.
+
+If the environment cannot run the full duration, run the longest feasible test, preserve the evidence and report the incomplete duration honestly.
+
+---
+
+# 7. PHYSICAL AND EMULATED DEVICE VALIDATION
+
+First determine which Android devices and emulators are actually connected and usable.
+
+Do not assume no hardware is available without checking.
+
+## Validate wherever possible
+
+- Real microphone capture
+- Speech recognition
+- TTS output
+- Voice interruption
+- Continuous conversation
+- Microphone shutdown during private handoff
+- Explicit microphone restart
+- Android accessibility stability
+- TalkBack interaction
+- Overlay visibility
+- Screen rotation
+- Background/foreground behavior
+- Foreground-service lifecycle
+- Battery optimization restrictions
+- Memory/performance
+- Permission revocation
+- Recovery after process recreation
+
+Run physical-device tests on connected hardware.
+
+Run emulator tests for the rest.
+
+Do not substitute emulator results for actual microphone, OEM, or physical-device acceptance.
+
+If physical hardware is unavailable:
+
+- Prepare executable device tests where possible.
+- Produce an exact manual acceptance checklist.
+- Include expected results and failure-reporting instructions.
+- Mark physical-device acceptance BLOCKED.
+
+Do not invent device results.
+
+---
+
+# 8. FINISH PROTECTED PORTAL GUIDANCE
+
+The existing cybercrime reporting evaluation only verifies the public entry path.
+
+Finish everything that can be safely tested without real credentials or legal submission.
+
+Test:
+
+- Public portal navigation
+- Official domain verification
+- Login transition
+- Private authentication handoff
+- OTP handoff
+- CAPTCHA handoff
+- Safe continuation after authentication
+- Authenticated form structure using controlled fixtures
+- Complaint-category guidance
+- Evidence requirements
+- Local complaint worksheet
+- Field-level copy consent
+- Manual paste/return behavior
+- Error recovery
+- Final review
+- Explicit user-controlled submission boundary
+
+Use official public documentation and controlled authenticated-form fixtures.
+
+Do not submit real complaints.
+
+Do not create fake identities or misuse public reporting systems.
+
+Do not accept declarations or legal attestations automatically.
+
+Where real protected steps cannot be accessed legitimately, preserve a manual acceptance gate.
+
+Do not claim fixture forms prove compatibility with the actual protected portal.
+
+---
+
+# 9. FINISH BROWSER HTTPS VERIFICATION
+
+The current browser verification correctly fails closed when a trustworthy complete HTTPS destination cannot be established.
+
+Do not weaken this protection.
+
+Investigate whether supported Android browsers expose enough trusted metadata for positive destination binding.
+
+Test:
+
+- Chrome
+- Brave, if supported
+- Standard browser navigation
+- Custom tabs
+- Redirects
+- Scheme-less address displays
+- Focused/editable address bars
+- Full HTTPS URLs
+- Lookalike domains
+- IDN/punycode domains
+- Spoofed WebView address bars
+- Security warning screens
+- Truncated accessibility trees
+
+Use actual browser observations where possible.
+
+Do not infer HTTPS merely from a domain-looking string.
+
+Do not claim browser origin verification from page content.
+
+If Android does not expose trustworthy information, preserve the safe fallback.
+
+Consider whether a user-consented, independently validated navigation path can provide sufficient provenance without broadening privileges or bypassing browser protections.
+
+Do not implement insecure heuristics to make positive tests pass.
+
+---
+
+# 10. FULL END-TO-END SAATHI ACCEPTANCE
+
+Test complete representative workflows.
+
+At minimum include:
+
+1. Basic Android settings navigation.
+2. Public government service research.
+3. Multi-step prerequisite discovery.
+4. Eligibility explanation with unknown facts.
+5. Source-backed research and review.
+6. Source-to-browser guidance.
+7. Login handoff.
+8. OTP handoff.
+9. CAPTCHA handoff.
+10. Network loss and recovery.
+11. Subscription error diagnosis.
+12. Official outage versus community reports.
+13. Cybercrime complaint preparation.
+14. Task pause and resume.
+15. Task replacement.
+16. English guidance.
+17. Hindi guidance.
+18. Hinglish guidance.
+19. Screen changes while AI is processing.
+20. Safe completion verification.
+
+For each scenario verify:
+
+- Original goal preservation
+- Correct evidence and provenance
+- Correct next step
+- Fresh screen grounding
+- Accurate target selection
+- User-controlled interaction
+- Sensitive-data protection
+- Appropriate uncertainty
+- Correct cancellation
+- Safe error recovery
+- No fabricated completion
+
+Separate deterministic fixture acceptance from genuine website/provider acceptance.
+
+---
+
+# 11. SECURITY AND PRIVACY FINAL AUDIT
+
+Preserve the existing privacy-first architecture.
+
+Never send:
+
+- OTPs
+- Passwords
+- PINs
+- CVVs
+- Banking secrets
+- Sensitive private messages
+- Raw private field values
+
+to Gemini, Groq, research providers, logs or telemetry.
+
+Check:
+
+- Android client
+- Accessibility snapshots
+- Backend requests
+- Provider payloads
+- Research queries
+- Logs
+- Diagnostics
+- Caches
+- Crash reporting
+- Clipboard
+- Speech lifecycle
+- Persisted configuration
+
+Use synthetic secret canaries and regression tests.
+
+Do not disable masking.
+
+Do not introduce automatic form submission, payment, CAPTCHA solving or authentication.
+
+Preserve explicit user consent.
+
+Preserve stale-result rejection.
+
+Preserve safe session termination.
+
+Preserve memory-only paused-task behavior.
+
+---
+
+# 12. PERFORMANCE AND CODE QUALITY
+
+After correctness and privacy are established, improve demonstrated performance bottlenecks.
+
+Inspect:
+
+- Main-thread work
+- Accessibility traversal costs
+- Event coalescing
+- Redundant observations
+- Backend connection pooling
+- Provider request overhead
+- Serialization
+- Memory allocations
+- Overlay updates
+- Speech lifecycle overhead
+
+Optimize only where measurement justifies it.
+
+Do not perform unnecessary architectural rewrites.
+
+Resolve meaningful lint warnings where safe, but do not destabilize the app merely to eliminate every cosmetic warning.
+
+Do not add unnecessary dependencies.
+
+Keep the code maintainable and testable.
+
+---
+
+# 13. PRE-DEPLOYMENT CONFIGURATION
+
+Actual deployment is explicitly excluded.
+
+However, finish the code and configuration needed for later deployment.
+
+Verify:
+
+- Release build configuration
+- Production backend endpoint configuration
+- HTTPS-only release transport
+- No embedded provider keys
+- No debug-only credentials in release
+- Per-user authentication support
+- Rate limiting
+- Quota enforcement
+- Provider fallback
+- Request cancellation
+- Backend health/status
+- Logging redaction
+- Production container configuration
+- Environment-variable validation
+- Secret configuration templates
+- Database migration readiness, if applicable
+- Deployment documentation
+- Release build reproducibility
+
+Create safe templates where required.
+
+Do not create real cloud resources.
+
+Do not deploy to Google Cloud Run.
+
+Do not enable paid services.
+
+Do not upload credentials.
+
+Do not publish an APK.
+
+Do not sign a distributable production release using real signing credentials.
+
+Compilation of release code is permitted.
+
+---
+
+# 14. COMPLETE REGRESSION PASS
+
+Run the complete available automated suite.
+
+Include:
+
+- Android unit tests
+- Backend tests
+- Evaluation tests
+- Offline capability probes
+- Emulator integration
+- Accessibility-service integration
+- WebView
+- Browser
+- Research/planning
+- Eligibility
+- Incident assessment
+- Privacy
+- CAPTCHA
+- Authentication handoff
+- Pause/resume
+- Voice lifecycle
+- Network recovery
+- Request cancellation
+- Event storms
+- Endurance
+- UI regression
+- Lint
+- Debug/test builds
+- Release compilation
+- Secret scanning
+
+For every failing test:
+
+1. Determine whether the failure is in production code, fixture code or the environment.
+2. Preserve evidence.
+3. Fix the actual issue.
+4. Rerun the failed test.
+5. Run affected regressions.
+
+Never delete a valid failing assertion to obtain a green result.
+
+Never classify skipped tests as passing.
+
+---
+
+# 15. NO PREMATURE STOPPING
+
+Do not stop after the first successful test suite.
+
+Do not stop after fixing one issue.
+
+Do not stop merely because the original historical failure does not reproduce.
+
+Continue to the next unresolved workstream.
+
+Do not repeatedly rerun unchanged tests without a useful reason.
+
+Prioritize work that materially improves correctness and real-world reliability.
+
+If execution limits or context limits interrupt work, preserve an exact continuation state:
+
+- Completed work
+- Current branch/working tree
+- Tests already run
+- Active failure
+- Next command
+- Remaining gates
+- Any required user authorization
+
+Do not discard unfinished changes.
+
+Do not silently exceed tool or usage limits.
+
+---
+
+# 16. STRICT COMPLETION CLASSIFICATION
+
+At the end, classify each area as:
+
+**PASS** — Implemented and verified against the stated acceptance criteria.
+
+**PARTIAL** — Some requirements verified; others remain.
+
+**BLOCKED** — Requires unavailable hardware, legitimate protected access, external credentials, authorization or deployment.
+
+**FAIL** — Reproducible defect remains.
+
+**NOT RUN** — Test was not executed.
+
+A passing unit test does not automatically mean real-world acceptance.
+
+A passing emulator test does not mean physical-device acceptance.
+
+A controlled fixture does not prove a live website works.
+
+A successful model response does not prove broad semantic accuracy.
+
+A safe browser fallback does not mean complete browser verification.
+
+Do not mark an issue PASS without evidence.
+
+---
+
+# 17. FINAL DELIVERABLE
+
+When all feasible implementation and verification work is finished, produce:
+
+## A. Final engineering summary
+
+Explain what was fixed and why.
+
+## B. Complete test report
+
+Include actual commands, test counts, failures, durations and evidence paths.
+
+## C. Remaining blocker report
+
+Only genuine unresolved issues should remain.
+
+Distinguish:
+
+- Reproducible software defects
+- Unreproduced historical incidents
+- Hardware-only validation
+- Protected-site access
+- Live-model authorization
+- Deployment-specific validation
+
+## D. UI preservation report
+
+Confirm whether the approved design was preserved using actual screenshot evidence.
+
+## E. Pre-deployment readiness verdict
+
+Use one of:
+
+- READY FOR DEPLOYMENT VALIDATION
+- CONDITIONALLY READY — EXTERNAL ACCEPTANCE REQUIRED
+- NOT READY — SOFTWARE DEFECTS REMAIN
+
+Do not use READY if significant repository-solvable defects remain.
+
+## F. Deployment handoff
+
+Provide the exact remaining deployment steps for the future Google Cloud Run and Android release phase.
+
+Do not execute them.
+
+## G. Changed files
+
+List every modified file and explain its purpose.
+
+Do not commit, push, deploy, publish or distribute anything.
+
+---
+
+# FINAL INSTRUCTION
+
+I want Saathi completed as an application, not another collection of unfinished implementation reports.
+
+You have already completed most of the architecture.
+
+Now focus exclusively on closing the remaining reliability, accuracy, latency, browser, WebView, endurance, voice, privacy and workflow-verification gaps.
+
+**Finish every issue that can actually be fixed in this repository.**
+
+**Execute every acceptance test supported by the available environment.**
+
+**Preserve the approved UI completely.**
+
+**Keep all sensitive actions user-controlled.**
+
+**Do not fabricate evidence or weaken safety restrictions.**
+
+**Do not perform deployment.**
+
+Work through the remaining tasks continuously and systematically.
+
+The goal is to reach:
+
+**SAATHI — READY FOR DEPLOYMENT VALIDATION**
+
+If an external/manual blocker prevents that verdict, state the blocker precisely and leave the repository in the best fully tested, deployment-prepared condition possible.
+
+Begin implementation now.

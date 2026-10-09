@@ -1,0 +1,23 @@
+
+com.saathi.ui.GatewayIntegrationTest:
+Error in realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(com.saathi.ui.GatewayIntegrationTest):
+java.lang.AssertionError: Private form hands over before any backend call; Open the practice screen to continue.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.GatewayIntegrationTest.waitFor(GatewayIntegrationTest.kt:44)
+	at com.saathi.ui.GatewayIntegrationTest.realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(GatewayIntegrationTest.kt:136)
+...
+
+Time: 21.265
+There was 1 failure:
+1) realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(com.saathi.ui.GatewayIntegrationTest)
+java.lang.AssertionError: Private form hands over before any backend call; Open the practice screen to continue.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.GatewayIntegrationTest.waitFor(GatewayIntegrationTest.kt:44)
+	at com.saathi.ui.GatewayIntegrationTest.realServiceUsesBackendAcrossPracticeStepsAndKeepsPrivateFormLocal(GatewayIntegrationTest.kt:136)
+
+FAILURES!!!
+Tests run: 4,  Failures: 1
+
+

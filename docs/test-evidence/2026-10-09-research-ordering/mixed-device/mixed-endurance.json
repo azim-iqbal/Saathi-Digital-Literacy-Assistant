@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "requested_rounds": 8,
+  "completed_rounds": 8,
+  "elapsed_ms": 140012,
+  "samples": [
+    {
+      "round": 1,
+      "elapsed_ms": 18807,
+      "pss_kb": 111182,
+      "heap_used_bytes": 10107696,
+      "live_threads": 33
+    },
+    {
+      "round": 2,
+      "elapsed_ms": 35752,
+      "pss_kb": 111659,
+      "heap_used_bytes": 10500912,
+      "live_threads": 38
+    },
+    {
+      "round": 3,
+      "elapsed_ms": 53192,
+      "pss_kb": 108821,
+      "heap_used_bytes": 6224688,
+      "live_threads": 40
+    },
+    {
+      "round": 4,
+      "elapsed_ms": 72193,
+      "pss_kb": 112796,
+      "heap_used_bytes": 10812208,
+      "live_threads": 40
+    },
+    {
+      "round": 5,
+      "elapsed_ms": 89356,
+      "pss_kb": 113340,
+      "heap_used_bytes": 10877744,
+      "live_threads": 40
+    },
+    {
+      "round": 6,
+      "elapsed_ms": 106793,
+      "pss_kb": 109356,
+      "heap_used_bytes": 6159152,
+      "live_threads": 40
+    },
+    {
+      "round": 7,
+      "elapsed_ms": 123384,
+      "pss_kb": 110713,
+      "heap_used_bytes": 6929200,
+      "live_threads": 40
+    },
+    {
+      "round": 8,
+      "elapsed_ms": 140008,
+      "pss_kb": 109817,
+      "heap_used_bytes": 6060848,
+      "live_threads": 40
+    }
+  ],
+  "http_requests": 112,
+  "cancellations": 8,
+  "genuine_provider_calls": 0,
+  "scope": "Emulator service recreation, incomplete-tree recovery, loopback loss\/recovery and obsolete-response rejection; no actual speech or physical-device certification."
+}

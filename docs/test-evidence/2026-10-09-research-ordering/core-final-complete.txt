@@ -1,0 +1,21 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.ChromeGuidanceIntegrationTest:.
+com.saathi.ui.LiveAiIntegrationTest:..
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.ResearchRecoveryUiTest:..
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.GatewayTransportIntegrationTest:....
+com.saathi.ui.LiveGatewayCodecTest:..
+com.saathi.ui.ResearchUiTest:...
+
+Time: 156.112
+
+OK (25 tests)
+
+

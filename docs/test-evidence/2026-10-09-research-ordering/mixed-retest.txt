@@ -1,0 +1,8 @@
+
+com.saathi.ui.MixedLifecycleEnduranceTest:.
+
+Time: 140.021
+
+OK (1 test)
+
+

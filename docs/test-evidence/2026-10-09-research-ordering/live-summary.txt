@@ -1,0 +1,1 @@
+{"provider_reservations": 4, "cases": [{"case": "navigation", "status": "PASS", "reason": null}, {"case": "navigation-hinglish", "status": "FAIL", "reason": "provider_timeout"}], "blocker": null}

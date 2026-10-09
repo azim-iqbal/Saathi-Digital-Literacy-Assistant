@@ -37,7 +37,7 @@ internal object FormGuide {
         fun noTarget(message: String) = GuideStep(message, language, null, "Wait for a safe visible form field.", false)
 
         if (nodes.any { it.isSensitive || it.isPassword }) return noTarget(copy(
-            "This screen includes a private field. Fill it yourself; Saathi will not inspect or mark private fields.",
+            "This screen includes a private field. Fill it yourself; Saathi will not send the value to AI or save it.",
             "Is screen par niji field hai. Ise khud bharein; Saathi ise nahi padhega ya mark karega.",
             "Is screen par private field hai. Ise khud bharein; Saathi private fields ko nahi padhega ya mark karega."
         ))
@@ -54,7 +54,7 @@ internal object FormGuide {
             "Ek se zyada form fields focused hain, isliye main guess nahi karunga. Jis field ko bharna hai, use tap karein."
         ))
 
-        val next = focused.singleOrNull() ?: fields.filterNot { it.value.hasValue }
+        val next = focused.singleOrNull() ?: fields.filter { !it.value.valueKnown || !it.value.hasValue }
             .minWithOrNull(compareBy<IndexedValue<UiNode>> { it.value.bounds.top }.thenBy { it.value.bounds.left })
         if (next == null) return noTarget(if (fields.isEmpty()) copy(
             "I cannot identify a safe text field here. Scroll until a form field is visible, then I will check again.",

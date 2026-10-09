@@ -1,0 +1,103 @@
+{
+  "provenance": "Genuine adapters with fictional public cases; not Android E2E or real policy research",
+  "maximum_provider_calls": 4,
+  "provider_reservations": 4,
+  "cases": [
+    {
+      "case": "navigation",
+      "status": "PASS",
+      "accepted": true,
+      "reason": null,
+      "expected": "Help (n2)",
+      "request_id": "continuation-navigation",
+      "providers": [
+        {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "diagnostics": {
+            "request_id": "continuation-navigation",
+            "session_id": "continuation-navigation",
+            "validation_reason": "ACCEPTED",
+            "response_category": "HIGHLIGHT",
+            "outcome": "succeeded",
+            "real_api": true,
+            "http_received": true,
+            "http_status": 200,
+            "checked_at_ms": 1791543890553,
+            "elapsed_ms": 2642,
+            "input_tokens": 347,
+            "output_tokens": 83,
+            "total_tokens": 430
+          }
+        },
+        {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "diagnostics": {
+            "request_id": "continuation-navigation",
+            "session_id": "continuation-navigation",
+            "validation_reason": "ACCEPTED",
+            "response_category": "HIGHLIGHT",
+            "outcome": "succeeded",
+            "real_api": true,
+            "http_received": true,
+            "http_status": 200,
+            "checked_at_ms": 1791543890553,
+            "elapsed_ms": 1878,
+            "input_tokens": 434,
+            "output_tokens": 167,
+            "total_tokens": 601
+          }
+        }
+      ]
+    },
+    {
+      "case": "navigation-hinglish",
+      "status": "FAIL",
+      "accepted": false,
+      "reason": "provider_timeout",
+      "expected": "Help (n2)",
+      "request_id": "continuation-navigation-hinglish",
+      "providers": [
+        {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "diagnostics": {
+            "request_id": "continuation-navigation-hinglish",
+            "session_id": "continuation-navigation-hinglish",
+            "validation_reason": "PROVIDER_TIMEOUT",
+            "response_category": "NONE",
+            "outcome": "provider_timeout",
+            "real_api": true,
+            "http_received": false,
+            "http_status": null,
+            "checked_at_ms": 1791543893201,
+            "elapsed_ms": 8076,
+            "input_tokens": null,
+            "output_tokens": null,
+            "total_tokens": null
+          }
+        },
+        {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "diagnostics": {
+            "request_id": "continuation-navigation-hinglish",
+            "session_id": "continuation-navigation-hinglish",
+            "validation_reason": "ACCEPTED",
+            "response_category": "HIGHLIGHT",
+            "outcome": "succeeded",
+            "real_api": true,
+            "http_received": true,
+            "http_status": 200,
+            "checked_at_ms": 1791543893202,
+            "elapsed_ms": 1017,
+            "input_tokens": 444,
+            "output_tokens": 182,
+            "total_tokens": 626
+          }
+        }
+      ]
+    }
+  ]
+}

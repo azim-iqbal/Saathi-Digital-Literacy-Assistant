@@ -1,0 +1,32 @@
+
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.ReviewedSourceIntegrationTest:
+Error in sourceCompanionRetainsTaskAcrossPrivatePauseReturnAndReplacement(com.saathi.ui.ReviewedSourceIntegrationTest):
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at com.saathi.ui.ReviewedSourceIntegrationTest.sourceCompanionRetainsTaskAcrossPrivatePauseReturnAndReplacement(ReviewedSourceIntegrationTest.kt:111)
+
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.GatewayTransportIntegrationTest:...
+com.saathi.ui.LiveGatewayCodecTest:..
+
+Time: 50.696
+There was 1 failure:
+1) sourceCompanionRetainsTaskAcrossPrivatePauseReturnAndReplacement(com.saathi.ui.ReviewedSourceIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at com.saathi.ui.ReviewedSourceIntegrationTest.sourceCompanionRetainsTaskAcrossPrivatePauseReturnAndReplacement(ReviewedSourceIntegrationTest.kt:111)
+
+FAILURES!!!
+Tests run: 13,  Failures: 1
+
+

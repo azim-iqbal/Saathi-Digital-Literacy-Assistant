@@ -1,0 +1,23 @@
+
+com.saathi.ui.NodeMaskerPrivacyTest:
+Error in privateOccupancyMustNotBeDerivedFromValue(com.saathi.ui.NodeMaskerPrivacyTest):
+java.lang.AssertionError: Private occupancy must not survive masking
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.saathi.ui.NodeMaskerPrivacyTest.privateOccupancyMustNotBeDerivedFromValue(NodeMaskerPrivacyTest.kt:23)
+
+
+Time: 0.018
+There was 1 failure:
+1) privateOccupancyMustNotBeDerivedFromValue(com.saathi.ui.NodeMaskerPrivacyTest)
+java.lang.AssertionError: Private occupancy must not survive masking
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.saathi.ui.NodeMaskerPrivacyTest.privateOccupancyMustNotBeDerivedFromValue(NodeMaskerPrivacyTest.kt:23)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+

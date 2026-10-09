@@ -15,6 +15,7 @@ class SaathiAccessibilityService : AccessibilityService() {
     private var pending = false
     private var copying = false
     private var dirty = false
+    @Volatile private var destroyed = false
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -68,12 +69,12 @@ class SaathiAccessibilityService : AccessibilityService() {
     }
 
     private fun scheduleCopy() {
-        if (pending || copying || !SaathiSession.isActive()) return
+        if (destroyed || pending || copying || !SaathiSession.isActive()) return
         pending = true
         // Fixed delay from the first event: continuous events cannot starve snapshots.
         handler.postDelayed({
             pending = false
-            if (!SaathiSession.isActive()) return@postDelayed
+            if (destroyed || !SaathiSession.isActive()) return@postDelayed
             if (getSystemService(KeyguardManager::class.java).isKeyguardLocked) { SaathiSession.stop(); return@postDelayed }
             dirty = false
             val root = runCatching { rootInActiveWindow }.getOrNull() ?: run {
@@ -86,33 +87,38 @@ class SaathiAccessibilityService : AccessibilityService() {
                 return@postDelayed
             }
             val ticket = SaathiSession.beginObservation(root.packageName?.toString().orEmpty(), root.windowId)
+            val observedAtMs = System.currentTimeMillis()
+            val started = android.os.SystemClock.elapsedRealtime()
             val snapshot = AccessibilityNodeInfo.obtain(root)
             @Suppress("DEPRECATION") root.recycle()
             if (ticket == null) { @Suppress("DEPRECATION") snapshot.recycle(); return@postDelayed }
             copying = true
             nodeExecutor.execute {
                 try {
-                    val started = android.os.SystemClock.elapsedRealtime()
-                    val nodes = NodeMasker.flatten(snapshot)
+                    val nodes = NodeMasker.flatten(snapshot) {
+                        !destroyed && android.os.SystemClock.elapsedRealtime() - started in 0..2_000
+                    }
                     ObservationDiagnostics.snapshot(android.os.SystemClock.elapsedRealtime() - started)
                     val browserLocation = if (SaathiSession.wantsBrowserLocation() &&
                         com.saathi.core.ScreenInterruption.reason(nodes) == null) BrowserLocationReader.read(snapshot) else null
-                    SaathiSession.onScreenChanged(nodes, ticket, browserLocation)
+                    if (!destroyed) SaathiSession.onScreenChanged(nodes, ticket, browserLocation, observedAtMs)
                 }
-                catch (_: RuntimeException) { SaathiSession.onObservationFailed(ticket) }
+                catch (error: RuntimeException) { ObservationDiagnostics.observationFailure(error.message.orEmpty()); SaathiSession.onObservationFailed(ticket) }
                 finally {
                     @Suppress("DEPRECATION") snapshot.recycle()
-                    handler.post { copying = false; if (dirty) scheduleCopy() }
+                    if (!destroyed) handler.post { copying = false; if (dirty) scheduleCopy() }
                 }
             }
         }, 150)
     }
 
     override fun onDestroy() {
-        if (instance === this) instance = null
+        destroyed = true
+        if (instance === this) { instance = null; SaathiSession.stop() }
         handler.removeCallbacksAndMessages(null)
-        SaathiSession.stop()
-        nodeExecutor.shutdownNow()
+        // Let an already accepted worker run its finally/recycle even if it was queued.
+        // The destroyed predicate aborts traversal before reading further node contents.
+        nodeExecutor.shutdown()
         super.onDestroy()
     }
     override fun onInterrupt() { SaathiSession.stop() }

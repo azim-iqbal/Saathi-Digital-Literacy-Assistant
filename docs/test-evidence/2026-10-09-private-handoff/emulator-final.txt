@@ -1,0 +1,48 @@
+
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.GatewayTransportIntegrationTest:...
+com.saathi.ui.LiveGatewayCodecTest:..
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.ChromeGuidanceIntegrationTest:
+Error in realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest):
+java.lang.AssertionError: Password page suspends guidance; state=SENSITIVE_HANDOVER; instruction=This step needs private information. Enter it yourself. Saathi won't send it to AI or save it. Guidance resumes on a safe screen. Turn the microphone back on yourself.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.waitFor(ChromeGuidanceIntegrationTest.kt:35)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:116)
+
+com.saathi.ui.LiveAiIntegrationTest:
+Error in primaryProtocolGuidesAnExternalDetourAndReturn(com.saathi.ui.LiveAiIntegrationTest):
+java.lang.AssertionError: Primary backend proposes Help for a free-form goal; state=GUIDING; instruction=I could not verify a clear next step. No marker is shown. Describe a more specific task or use visible-option help.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.LiveAiIntegrationTest.waitFor(LiveAiIntegrationTest.kt:35)
+	at com.saathi.ui.LiveAiIntegrationTest.runProtocol(LiveAiIntegrationTest.kt:97)
+	at com.saathi.ui.LiveAiIntegrationTest.primaryProtocolGuidesAnExternalDetourAndReturn(LiveAiIntegrationTest.kt:55)
+.
+
+Time: 374.399
+There were 2 failures:
+1) realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest)
+java.lang.AssertionError: Password page suspends guidance; state=SENSITIVE_HANDOVER; instruction=This step needs private information. Enter it yourself. Saathi won't send it to AI or save it. Guidance resumes on a safe screen. Turn the microphone back on yourself.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.waitFor(ChromeGuidanceIntegrationTest.kt:35)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:116)
+2) primaryProtocolGuidesAnExternalDetourAndReturn(com.saathi.ui.LiveAiIntegrationTest)
+java.lang.AssertionError: Primary backend proposes Help for a free-form goal; state=GUIDING; instruction=I could not verify a clear next step. No marker is shown. Describe a more specific task or use visible-option help.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.LiveAiIntegrationTest.waitFor(LiveAiIntegrationTest.kt:35)
+	at com.saathi.ui.LiveAiIntegrationTest.runProtocol(LiveAiIntegrationTest.kt:97)
+	at com.saathi.ui.LiveAiIntegrationTest.primaryProtocolGuidesAnExternalDetourAndReturn(LiveAiIntegrationTest.kt:55)
+
+FAILURES!!!
+Tests run: 17,  Failures: 2
+
+

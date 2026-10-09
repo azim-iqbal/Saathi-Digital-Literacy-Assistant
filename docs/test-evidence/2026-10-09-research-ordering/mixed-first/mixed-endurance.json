@@ -1,0 +1,54 @@
+{
+  "status": "FAIL",
+  "requested_rounds": 8,
+  "completed_rounds": 6,
+  "elapsed_ms": 113534,
+  "samples": [
+    {
+      "round": 1,
+      "elapsed_ms": 18550,
+      "pss_kb": 110718,
+      "heap_used_bytes": 10730288,
+      "live_threads": 33
+    },
+    {
+      "round": 2,
+      "elapsed_ms": 35065,
+      "pss_kb": 110947,
+      "heap_used_bytes": 10124080,
+      "live_threads": 37
+    },
+    {
+      "round": 3,
+      "elapsed_ms": 53036,
+      "pss_kb": 108014,
+      "heap_used_bytes": 6454064,
+      "live_threads": 40
+    },
+    {
+      "round": 4,
+      "elapsed_ms": 68593,
+      "pss_kb": 112190,
+      "heap_used_bytes": 10500912,
+      "live_threads": 40
+    },
+    {
+      "round": 5,
+      "elapsed_ms": 84460,
+      "pss_kb": 108867,
+      "heap_used_bytes": 6961968,
+      "live_threads": 40
+    },
+    {
+      "round": 6,
+      "elapsed_ms": 99234,
+      "pss_kb": 112771,
+      "heap_used_bytes": 10189616,
+      "live_threads": 40
+    }
+  ],
+  "http_requests": 94,
+  "cancellations": 9,
+  "genuine_provider_calls": 0,
+  "scope": "Emulator service recreation, incomplete-tree recovery, loopback loss\/recovery and obsolete-response rejection; no actual speech or physical-device certification."
+}

@@ -4,51 +4,52 @@ import android.graphics.Rect
 import android.view.accessibility.AccessibilityNodeInfo
 import com.saathi.core.UiNode
 
-/** Best-effort local masking; editable values are discarded and cloud filtering is not exhaustive. */
+/** Editable value getters are not accessed. Static-content filtering remains best effort. */
 object NodeMasker {
-    private const val MAX_NODES = 600
 
-    fun flatten(root: AccessibilityNodeInfo): List<UiNode> {
+    fun flatten(root: AccessibilityNodeInfo, isCurrent: () -> Boolean = { true }): List<UiNode> {
         val nodes = mutableListOf<UiNode>()
-        visit(root, nodes, 0, intArrayOf(0))
-        return nodes
+        CompleteTreeWalk.visit(root, null as Rect?, { it.childCount }, { node, index -> node.getChild(index) },
+            { node -> runCatching { node.recycle() }; Unit }, { node, ancestor -> read(node, nodes, ancestor) },
+            isCurrent = isCurrent)
+        // A private message/document need not contain digits. Discard the local copied content
+        // as soon as the screen context is classified; keep only a non-content handoff flag.
+        return if (com.saathi.core.PrivateContextPolicy.blocksCloud(nodes)) nodes.map {
+            it.copy(text = null, description = null, hint = null, resourceId = null,
+                hasValue = false, valueKnown = false, privateContext = true)
+        } else nodes
     }
 
-    private fun visit(node: AccessibilityNodeInfo, into: MutableList<UiNode>, depth: Int, visited: IntArray, clickableAncestor: Rect? = null) {
-        if (visited[0]++ >= MAX_NODES || depth > 50) return
+    private fun read(node: AccessibilityNodeInfo, into: MutableList<UiNode>, clickableAncestor: Rect?): Rect? {
         val bounds = Rect().also(node::getBoundsInScreen)
         if (node.isVisibleToUser && !bounds.isEmpty) {
-            val rawText = node.text?.toString()?.take(300)
-            val rawDescription = node.contentDescription?.toString()?.take(300)
             val hint = if (android.os.Build.VERSION.SDK_INT >= 26) node.hintText?.toString()?.take(300) else null
             val id = node.viewIdResourceName
-            val sensitive = isSensitive(node.isPassword, hint, id, rawDescription, rawText)
+            val className = node.className?.toString()
+            val editable = node.isEditable || className.orEmpty().contains("EditText")
+            val content = NodeContentPolicy.read(node.isPassword, editable, hint, id, node.inputType,
+                node.isShowingHintText, { node.text?.toString() }, { node.contentDescription?.toString() })
+            val sensitive = content.sensitive
             into += UiNode(
                 bounds = bounds,
-                // Editable contents can be personal even when heuristics do not recognize them.
-                // Keep only the occupied bit needed for local form progression.
-                text = if (sensitive || node.isEditable) null else rawText,
-                description = if (sensitive || node.isEditable) null else rawDescription,
+                text = content.text,
+                description = content.description,
                 hint = if (sensitive) null else hint,
-                resourceId = id,
-                className = node.className?.toString(),
+                resourceId = if (sensitive) null else id,
+                className = className,
                 isPassword = node.isPassword,
                 isEnabled = node.isEnabled,
                 isClickable = node.isClickable,
                 isSensitive = sensitive,
-                hasValue = !rawText.isNullOrBlank(),
+                hasValue = content.hasValue,
+                valueKnown = content.valueKnown,
+                structuralPrivateField = content.structuralPrivateField,
                 clickableAncestorBounds = clickableAncestor?.let(::Rect),
-                isEditable = node.isEditable,
+                isEditable = editable,
                 isFocused = node.isFocused
             )
         }
-        for (index in 0 until node.childCount) {
-            if (visited[0] >= MAX_NODES) return
-            node.getChild(index)?.let { child ->
-                val ancestor = if (node.isClickable && node.isEnabled && node.isVisibleToUser && !bounds.isEmpty) bounds else clickableAncestor
-                try { visit(child, into, depth + 1, visited, ancestor) } finally { runCatching { child.recycle() } }
-            }
-        }
+        return if (node.isClickable && node.isEnabled && node.isVisibleToUser && !bounds.isEmpty) bounds else clickableAncestor
     }
 
     fun isSensitive(isPassword: Boolean, vararg values: String?): Boolean =

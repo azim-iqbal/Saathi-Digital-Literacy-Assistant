@@ -1,0 +1,9 @@
+
+com.saathi.ui.SaathiUiTest:.....
+com.saathi.ui.AssistantUiTest:...
+
+Time: 52.803
+
+OK (8 tests)
+
+

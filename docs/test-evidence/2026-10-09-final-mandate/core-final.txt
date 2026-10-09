@@ -1,0 +1,69 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.GatewayTransportIntegrationTest:....
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.LiveGatewayCodecTest:..
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.CrossAppGuidanceTest:..
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.ResearchRecoveryUiTest:..
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.SpeechEngineSmokeTest:.
+com.saathi.ui.PortalWorkflowIntegrationTest:
+Error in reportingWebFormPreservesGoalAndPrivateUserBoundaries(com.saathi.ui.PortalWorkflowIntegrationTest):
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.reportingWebFormPreservesGoalAndPrivateUserBoundaries$lambda$21$lambda$19(PortalWorkflowIntegrationTest.kt:128)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.$r8$lambda$BqS8t04Zz-oT6kZkNLLhJu7klso(PortalWorkflowIntegrationTest.kt:0)
+	at com.saathi.ui.PortalWorkflowIntegrationTest$$ExternalSyntheticLambda1.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2721)
+	at android.os.Handler.handleCallback(Handler.java:1080)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:135)
+	at android.os.Handler.dispatchMessage(Handler.java:126)
+	at android.os.Looper.loopOnce(Looper.java:285)
+	at android.os.Looper.loop(Looper.java:390)
+	at android.app.ActivityThread.main(ActivityThread.java:9884)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+
+com.saathi.ui.ComplaintDraftUiTest:...
+
+Time: 288.407
+There was 1 failure:
+1) reportingWebFormPreservesGoalAndPrivateUserBoundaries(com.saathi.ui.PortalWorkflowIntegrationTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at org.junit.Assert.assertFalse(Assert.java:75)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.reportingWebFormPreservesGoalAndPrivateUserBoundaries$lambda$21$lambda$19(PortalWorkflowIntegrationTest.kt:128)
+	at com.saathi.ui.PortalWorkflowIntegrationTest.$r8$lambda$BqS8t04Zz-oT6kZkNLLhJu7klso(PortalWorkflowIntegrationTest.kt:0)
+	at com.saathi.ui.PortalWorkflowIntegrationTest$$ExternalSyntheticLambda1.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:520)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2721)
+	at android.os.Handler.handleCallback(Handler.java:1080)
+	at android.os.Handler.dispatchMessageImpl(Handler.java:135)
+	at android.os.Handler.dispatchMessage(Handler.java:126)
+	at android.os.Looper.loopOnce(Looper.java:285)
+	at android.os.Looper.loop(Looper.java:390)
+	at android.app.ActivityThread.main(ActivityThread.java:9884)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+
+FAILURES!!!
+Tests run: 29,  Failures: 1
+
+

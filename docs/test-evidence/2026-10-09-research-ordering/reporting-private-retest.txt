@@ -1,0 +1,51 @@
+
+com.saathi.ui.ConnectionCheckTest:..
+com.saathi.ui.ConnectionScreenUiTest:.
+com.saathi.ui.GatewaySetupUiTest:.
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.CyberReportUiTest:....
+com.saathi.ui.ComplaintDraftUiTest:..
+com.saathi.ui.CyberLinkOverlayTest:..
+com.saathi.ui.PracticeRecoveryTest:...
+com.saathi.ui.TravelPrivacyUiTest:
+Error in realTreeAllowsTravelDisplaysButWithholdsOtp(com.saathi.ui.TravelPrivacyUiTest):
+java.lang.IllegalStateException: Missing observation branch
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:15)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit(CompleteTreeWalk.kt:19)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$default(CompleteTreeWalk.kt:5)
+	at com.saathi.accessibility.NodeMasker.flatten(NodeMasker.kt:12)
+	at com.saathi.accessibility.NodeMasker.flatten$default(NodeMasker.kt:10)
+	at com.saathi.ui.TravelPrivacyUiTest.realTreeAllowsTravelDisplaysButWithholdsOtp(TravelPrivacyUiTest.kt:30)
+
+com.saathi.ui.VoiceSetupUiTest:.
+com.saathi.ui.LaunchUiTest:..
+
+Time: 122.316
+There was 1 failure:
+1) realTreeAllowsTravelDisplaysButWithholdsOtp(com.saathi.ui.TravelPrivacyUiTest)
+java.lang.IllegalStateException: Missing observation branch
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:15)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit(CompleteTreeWalk.kt:19)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$default(CompleteTreeWalk.kt:5)
+	at com.saathi.accessibility.NodeMasker.flatten(NodeMasker.kt:12)
+	at com.saathi.accessibility.NodeMasker.flatten$default(NodeMasker.kt:10)
+	at com.saathi.ui.TravelPrivacyUiTest.realTreeAllowsTravelDisplaysButWithholdsOtp(TravelPrivacyUiTest.kt:30)
+
+FAILURES!!!
+Tests run: 21,  Failures: 1
+
+

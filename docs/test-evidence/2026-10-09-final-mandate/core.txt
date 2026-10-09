@@ -1,0 +1,71 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.GatewayTransportIntegrationTest:....
+com.saathi.ui.LiveAccessibilityIntegrationTest:.
+com.saathi.ui.VoiceLifecycleTest:.
+com.saathi.ui.LiveGatewayCodecTest:..
+com.saathi.ui.ResearchProtocolTest:..
+com.saathi.ui.CrossAppGuidanceTest:
+Error in settingsTargetRemainsAvailableWhenSystemHidesOverlay(com.saathi.ui.CrossAppGuidanceTest):
+java.lang.IllegalStateException: Missing observation branch
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:15)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit(CompleteTreeWalk.kt:19)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$default(CompleteTreeWalk.kt:5)
+	at com.saathi.accessibility.NodeMasker.flatten(NodeMasker.kt:12)
+	at com.saathi.accessibility.NodeMasker.flatten$default(NodeMasker.kt:10)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay$lambda$23$lambda$22(CrossAppGuidanceTest.kt:88)
+	at com.saathi.ui.CrossAppGuidanceTest.$r8$lambda$TJf88Igv-m3ASFH5dS1bLVsVjOQ(CrossAppGuidanceTest.kt:0)
+	at com.saathi.ui.CrossAppGuidanceTest$$ExternalSyntheticLambda24.invoke(D8$$SyntheticClass:0)
+	at com.saathi.ui.CrossAppGuidanceTest.waitUntil(CrossAppGuidanceTest.kt:31)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay(CrossAppGuidanceTest.kt:86)
+.
+com.saathi.ui.ReviewedSourceIntegrationTest:.
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.ResearchRecoveryUiTest:..
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.SpeechEngineSmokeTest:.
+
+Time: 262.949
+There was 1 failure:
+1) settingsTargetRemainsAvailableWhenSystemHidesOverlay(com.saathi.ui.CrossAppGuidanceTest)
+java.lang.IllegalStateException: Missing observation branch
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:15)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$walk(CompleteTreeWalk.kt:16)
+	at com.saathi.accessibility.CompleteTreeWalk.visit(CompleteTreeWalk.kt:19)
+	at com.saathi.accessibility.CompleteTreeWalk.visit$default(CompleteTreeWalk.kt:5)
+	at com.saathi.accessibility.NodeMasker.flatten(NodeMasker.kt:12)
+	at com.saathi.accessibility.NodeMasker.flatten$default(NodeMasker.kt:10)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay$lambda$23$lambda$22(CrossAppGuidanceTest.kt:88)
+	at com.saathi.ui.CrossAppGuidanceTest.$r8$lambda$TJf88Igv-m3ASFH5dS1bLVsVjOQ(CrossAppGuidanceTest.kt:0)
+	at com.saathi.ui.CrossAppGuidanceTest$$ExternalSyntheticLambda24.invoke(D8$$SyntheticClass:0)
+	at com.saathi.ui.CrossAppGuidanceTest.waitUntil(CrossAppGuidanceTest.kt:31)
+	at com.saathi.ui.CrossAppGuidanceTest.settingsTargetRemainsAvailableWhenSystemHidesOverlay(CrossAppGuidanceTest.kt:86)
+
+FAILURES!!!
+Tests run: 25,  Failures: 1
+
+

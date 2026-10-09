@@ -12,7 +12,7 @@ _PATTERNS = [(kind, re.compile(pattern, re.I)) for kind, pattern in (
 def research_claim(goal):
     return next((kind for kind, pattern in _PATTERNS if pattern.search(goal[:160])), None)
 
-_PRIVATE_LABEL = re.compile(r'(?i)\b(inbox|conversation|recipient|message[ _-]?(body|thread)|email[ _-]?(body|subject)|compose[ _-]?(mail|message)|personal[ _-]?(details|information)|account[ _-]?details|document[ _-]?(body|editor))\b|निजी जानकारी|व्यक्तिगत जानकारी|संदेश का पाठ|ईमेल|niji jaankari|vyaktigat jaankari')
+_PRIVATE_LABEL = re.compile(r'(?i)\b(inbox|conversation|recipient|message[ _-]?(body|thread)|email[ _-]?(body|subject)|compose[ _-]?(mail|message)|personal[ _-]?(details|information)|account[ _-]?details|document[ _-]?(body|editor)|incident[ _-]?description|complaint[ _-]?(description|narrative)|report[ _-]?narrative)\b|निजी जानकारी|व्यक्तिगत जानकारी|संदेश का पाठ|ईमेल|niji jaankari|vyaktigat jaankari|घटना का विवरण|शिकायत का विवरण|ghatna ka vivaran|shikayat ka vivaran')
 def private_context(value):
     return bool(_PRIVATE_LABEL.search(value))
 

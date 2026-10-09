@@ -1,0 +1,36 @@
+
+com.saathi.ui.ObservationFailureIntegrationTest:
+Error in oversizedTreeCannotHidePrivateFieldAndFreshCompleteTreeRecoversOriginalTask(com.saathi.ui.ObservationFailureIntegrationTest):
+java.lang.AssertionError: Fresh complete tree resumes the original task; state=WAITING_FOR_PRACTICE
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ObservationFailureIntegrationTest.waitFor(ObservationFailureIntegrationTest.kt:36)
+	at com.saathi.ui.ObservationFailureIntegrationTest.oversizedTreeCannotHidePrivateFieldAndFreshCompleteTreeRecoversOriginalTask(ObservationFailureIntegrationTest.kt:69)
+	Suppressed: java.lang.NullPointerException: Current state was null unexpectedly. Last stage = STARTED
+		at androidx.test.internal.util.Checks.checkNotNull(Checks.java:50)
+		at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:657)
+		at androidx.test.core.app.ActivityScenario.close(ActivityScenario.java:421)
+		at kotlin.io.CloseableKt.closeFinally(Closeable.kt:59)
+		at com.saathi.ui.ObservationFailureIntegrationTest.oversizedTreeCannotHidePrivateFieldAndFreshCompleteTreeRecoversOriginalTask(ObservationFailureIntegrationTest.kt:55)
+
+
+Time: 28.809
+There was 1 failure:
+1) oversizedTreeCannotHidePrivateFieldAndFreshCompleteTreeRecoversOriginalTask(com.saathi.ui.ObservationFailureIntegrationTest)
+java.lang.AssertionError: Fresh complete tree resumes the original task; state=WAITING_FOR_PRACTICE
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ObservationFailureIntegrationTest.waitFor(ObservationFailureIntegrationTest.kt:36)
+	at com.saathi.ui.ObservationFailureIntegrationTest.oversizedTreeCannotHidePrivateFieldAndFreshCompleteTreeRecoversOriginalTask(ObservationFailureIntegrationTest.kt:69)
+	Suppressed: java.lang.NullPointerException: Current state was null unexpectedly. Last stage = STARTED
+		at androidx.test.internal.util.Checks.checkNotNull(Checks.java:50)
+		at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:657)
+		at androidx.test.core.app.ActivityScenario.close(ActivityScenario.java:421)
+		at kotlin.io.CloseableKt.closeFinally(Closeable.kt:59)
+		at com.saathi.ui.ObservationFailureIntegrationTest.oversizedTreeCannotHidePrivateFieldAndFreshCompleteTreeRecoversOriginalTask(ObservationFailureIntegrationTest.kt:55)
+		... 33 more
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+

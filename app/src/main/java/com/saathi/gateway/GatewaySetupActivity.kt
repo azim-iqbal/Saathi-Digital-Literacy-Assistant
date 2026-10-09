@@ -33,9 +33,10 @@ class GatewaySetupActivity : ComponentActivity() {
         }
         check = if (providers) PracticeGateway.checkProviders(true, callback) else PracticeGateway.connectionStatus(callback)
     }
-    override fun onStop() {
+    override fun onPause() {
+        // Suppress results as soon as the visible request screen loses foreground control.
         if (checking) report = "Check cancelled when you left. Refresh server status on return; calls already sent may still count."
-        cancelCheck(); super.onStop()
+        cancelCheck(); super.onPause()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

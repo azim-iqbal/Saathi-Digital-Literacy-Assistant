@@ -1,0 +1,3 @@
+PASS: real Chrome package with localhost synthetic page; actual AccessibilityService; Help, detour/return, password-form suspension, Support retarget, changed label, overlay visibility/touch-through and Stop. No real account, transaction, audio or AI.
+    versionName=154.0.8037.126
+    versionName=149.0.7827.5

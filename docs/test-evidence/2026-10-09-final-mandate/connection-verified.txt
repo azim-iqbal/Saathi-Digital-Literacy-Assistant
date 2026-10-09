@@ -1,0 +1,9 @@
+
+com.saathi.ui.ConnectionCheckTest:..
+com.saathi.ui.ConnectionScreenUiTest:.
+
+Time: 13.268
+
+OK (3 tests)
+
+

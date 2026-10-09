@@ -1,0 +1,1 @@
+PASS: real enabled service; native/WebView events; stable idle presentation; in-session request change without a screen event; old presentation/session rejection; detour/return; changed label; own-app clearing; explicit Stop. Request handoff exercised directly; no real speech recognition/audio or model.

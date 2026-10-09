@@ -220,6 +220,12 @@ class ResearchActivity : ComponentActivity() {
         super.onDestroy()
     }
     private fun cancelRequest() { pending?.cancel(); pending = null; busy = false; researchId = null }
+    override fun onPause() {
+        // onStop can be delayed by the next window's transition. A response arriving
+        // after the user leaves must not restore retry/plan state during that gap.
+        cancelRequest()
+        super.onPause()
+    }
     override fun onStart() {
         super.onStart()
         // Returning from a browser requires review again. No screen observation confirms a step.

@@ -1,0 +1,1 @@
+PASS: actual Android HTTP/live-schema transport and real AccessibilityService; free-form goal; primary synthetic adapter selects Help, correct wrong path to Back, return, hand over; Stop clears. PROVIDERS ARE DETERMINISTIC TEST FAKES, NOT LIVE GEMINI/GROQ.

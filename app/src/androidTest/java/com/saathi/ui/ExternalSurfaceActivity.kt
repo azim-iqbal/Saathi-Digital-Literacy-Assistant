@@ -11,7 +11,10 @@ import android.widget.TextView
 class ExternalSurfaceActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent.getBooleanExtra("portal_fixture", false)) { showPortal(); return }
+        if (intent.getBooleanExtra("paste_fixture", false)) { showPaste(); return }
         if (intent.getBooleanExtra("close_fixture", false)) { finish(); return }
+        if (intent.getBooleanExtra("oversized_fixture", false)) { showOversizedTree(); return }
         if (intent.getBooleanExtra("resume_fixture", false)) { showResumeChoices(); return }
         if (intent.getBooleanExtra("travel_fixture", false)) {
             val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 100, 32, 32) }
@@ -107,9 +110,45 @@ class ExternalSurfaceActivity : Activity() {
         layout.addView(Button(this).apply { text = "Return to choices"; isAllCaps = false; setOnClickListener { showResumeChoices() } })
         setContentView(layout)
     }
+    private fun showPaste() {
+        val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32,100,32,32) }
+        layout.addView(android.widget.EditText(this).apply { hint = "Incident description"; id = 0x1020011 })
+        setContentView(layout)
+    }
+    private fun showPortal() {
+        setContentView(WebView(this).apply {
+            settings.javaScriptEnabled = true
+            loadDataWithBaseURL("https://portal.fixture.test/", """
+                <html><meta name='viewport' content='width=device-width, initial-scale=1'>
+                <style>body{padding:24px}button{font-size:22px;padding:16px;margin:12px}input,textarea{font-size:20px}</style>
+                <body><h1>Controlled reporting fixture</h1><main id='page'></main>
+                <script>
+                const pages = [
+                  '<button>Help</button><p>Public reporting information</p>',
+                  '<label>Password<input type="password" value="fictional-secret-canary"></label>',
+                  '<label>OTP<input type="password" inputmode="numeric" value="582139"></label>',
+                  '<p>CAPTCHA: Verify you are human</p>',
+                  '<button>Help</button><p>Category and evidence requirements</p>',
+                  '<label>Incident description<textarea>Fictional private narrative canary</textarea></label>',
+                  '<p>Service temporarily unavailable. Please try again later.</p>',
+                  '<button>Help</button><p>Review your report privately.</p><label><input type="checkbox">Legal declaration</label><button disabled>Submit complaint</button>'
+                ];
+                let page=0;
+                function render(){document.getElementById('page').innerHTML=pages[page]+(page<7?'<button onclick="page++;render()">Fixture next</button>':'');}
+                render();
+                </script></body></html>
+            """.trimIndent(), "text/html", "UTF-8", null)
+        })
+    }
+
+    private fun showOversizedTree() {
+        setContentView(LargeAccessibilitySurface(this))
+    }
+
     override fun onNewIntent(intent: android.content.Intent?) {
         super.onNewIntent(intent)
         if (intent?.getBooleanExtra("close_fixture", false) == true) finish()
+        else if (intent?.getBooleanExtra("oversized_fixture", false) == true) showOversizedTree()
         else if (intent?.getBooleanExtra("resume_fixture", false) == true) showResumeChoices()
     }
 }

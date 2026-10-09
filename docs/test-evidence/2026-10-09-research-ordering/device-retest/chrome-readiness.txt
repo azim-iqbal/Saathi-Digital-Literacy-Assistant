@@ -1,0 +1,48 @@
+debug_app=com.android.chrome
+flags=chrome --disable-fre --no-first-run --no-default-browser-check
+null / null / false
+null / null / false
+null / null / false
+null / com.android.chrome:id/action_bar_root / false
+null / android:id/content / false
+null / com.android.chrome:id/edge_to_edge_base_layout / false
+null / null / false
+null / com.android.chrome:id/coordinator / false
+null / com.android.chrome:id/compositor_view_holder / false
+null / null / false
+null / null / false
+null / null / false
+ / null / false
+Saathi browser test / null / false
+Synthetic local page. No account or payment. / null / false
+ / content / false
+Help / null / true
+Explore / null / true
+null / null / true
+Support / null / false
+Private example / null / true
+Travel options / null / true
+Human challenge / null / true
+Cookie choices / null / true
+null / com.android.chrome:id/control_container / false
+null / com.android.chrome:id/toolbar_container / false
+null / com.android.chrome:id/toolbar / false
+null / com.android.chrome:id/home_button / true
+null / com.android.chrome:id/location_bar / false
+null / com.android.chrome:id/location_bar_status / true
+null / com.android.chrome:id/location_bar_status_icon_view / false
+null / com.android.chrome:id/location_bar_status_icon / false
+null / com.android.chrome:id/focus_thief / false
+null / com.android.chrome:id/url_bar / true
+null / com.android.chrome:id/toolbar_buttons / false
+null / com.android.chrome:id/optional_toolbar_button_container / false
+null / com.android.chrome:id/optional_toolbar_button / true
+null / com.android.chrome:id/tab_switcher_button / true
+null / com.android.chrome:id/menu_button_wrapper / false
+null / com.android.chrome:id/menu_button / true
+null / com.android.chrome:id/toolbar_hairline / false
+null / com.android.chrome:id/toolbar_progress_bar_container / false
+null / com.android.chrome:id/bottom_container / false
+null / com.android.chrome:id/snackbar / true
+Chrome is loading flags from a command-line file. Stability and security may be affected. / com.android.chrome:id/snackbar_message / false
+null / com.android.chrome:id/edge_to_edge_bottom_chin / false

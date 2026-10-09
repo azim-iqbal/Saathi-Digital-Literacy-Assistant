@@ -1,0 +1,76 @@
+android.widget.FrameLayout | click=false parent=false | null | null
+android.widget.LinearLayout | click=false parent=false | null | null
+android.widget.FrameLayout | click=false parent=false | null | null
+android.widget.ScrollView | click=false parent=false | null | null
+android.widget.LinearLayout | click=false parent=false | null | null
+android.widget.LinearLayout | click=false parent=false | null | null
+androidx.cardview.widget.CardView | click=false parent=false | null | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Search Settings | null
+android.widget.ScrollView | click=false parent=false | null | null
+android.widget.LinearLayout | click=false parent=false | null | null
+android.widget.FrameLayout | click=false parent=false | null | null
+android.widget.LinearLayout | click=false parent=false | null | null
+android.widget.FrameLayout | click=false parent=false | null | null
+androidx.recyclerview.widget.RecyclerView | click=false parent=false | null | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Google | null
+android.widget.TextView | click=false parent=true | Services & preferences | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Network & internet | null
+android.widget.TextView | click=false parent=true | Mobile, Wi‑Fi, hotspot | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Connected devices | null
+android.widget.TextView | click=false parent=true | Bluetooth, pairing | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Apps | null
+android.widget.TextView | click=false parent=true | Assistant, recent apps, default apps | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Notifications | null
+android.widget.TextView | click=false parent=true | Notification history, conversations | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Sound & vibration | null
+android.widget.TextView | click=false parent=true | Volume and haptics | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Modes | null
+android.widget.TextView | click=false parent=true | Do Not Disturb, Bedtime, Transit | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Display & touch | null
+android.widget.TextView | click=false parent=true | Dark theme, font size, touch | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Wallpaper & style | null
+android.widget.TextView | click=false parent=true | Colors, themed icons, app grid | null
+android.widget.LinearLayout | click=true parent=false | null | null
+android.widget.LinearLayout | click=false parent=true | null | null
+android.widget.ImageView | click=false parent=true | null | null
+android.widget.RelativeLayout | click=false parent=true | null | null
+android.widget.TextView | click=false parent=true | Storage | null
+android.widget.TextView | click=false parent=true | 40% used - 4.82 GB free | null

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/private/tmp/saathi-final-regressions.py", line 30, in <module>
+    group('core', ['ObservationFailureIntegrationTest','NodeMaskerPrivacyTest','PauseResumeIntegrationTest','PermissionLossIntegrationTest','GatewayTransportIntegrationTest','LiveAccessibilityIntegrationTest','VoiceLifecycleTest','LiveGatewayCodecTest','ResearchProtocolTest','CrossAppGuidanceTest','ReviewedSourceIntegrationTest','PausedRequestUiTest','ResearchRecoveryUiTest','TravelPrivacyUiTest','SpeechEngineSmokeTest'])
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/saathi-final-regressions.py", line 20, in group
+    assert 'OK (' in result and 'FAILURES!!!' not in result,name+' failed: see saved evidence'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: core failed: see saved evidence

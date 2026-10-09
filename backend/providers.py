@@ -3,6 +3,7 @@ import json
 import re
 import time
 import threading
+import copy
 from collections import OrderedDict
 import urllib.request
 import urllib.error
@@ -101,17 +102,25 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         raise InvalidRequest("Provider redirect refused")
 
 
-def post_json(url, headers, data, timeout=8, observer=None):
+def post_json(url, headers, data, timeout=8, observer=None, trace=None, cancelled=None):
+    from backend.provider_network import NetworkTrace, ObservedHTTPSHandler
+    trace = trace or NetworkTrace()
     deadline = time.monotonic() + timeout
     request = urllib.request.Request(url, data=json.dumps(data).encode(), headers={"Content-Type": "application/json", "User-Agent": "Saathi-Gateway/0.1", **headers})
     # Ignore environment proxy overrides; only fixed HTTPS provider endpoints are permitted.
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect(),
+                                        ObservedHTTPSHandler(deadline, trace, cancelled))
     with opener.open(request, timeout=timeout) as response:
         if observer is not None: observer(response.status)
         raw = bytearray()
         while True:
+            if cancelled is not None and cancelled.is_set(): raise InterruptedError()
             if time.monotonic() >= deadline:
                 raise TimeoutError("Provider deadline")
+            # urllib's response socket may already be detached from its connection.
+            # Reset it before each read so a late header cannot start a fresh full timeout.
+            response_socket = getattr(getattr(getattr(response, 'fp', None), 'raw', None), '_sock', None)
+            if response_socket is not None: response_socket.settimeout(max(.001, deadline-time.monotonic()))
             chunk = response.read1(min(4096, 65_537 - len(raw)))
             if time.monotonic() >= deadline:
                 raise TimeoutError("Provider deadline")
@@ -120,9 +129,11 @@ def post_json(url, headers, data, timeout=8, observer=None):
             raw.extend(chunk)
             if len(raw) > 65_536:
                 raise InvalidRequest("Provider response too large")
+        trace.enter('json')
         result = strict_json(raw.decode("utf-8"))
         if time.monotonic() >= deadline:
             raise TimeoutError("Provider deadline")
+        trace.enter('complete')
         return result
 
 
@@ -137,10 +148,10 @@ class RestProvider:
         self.id, self.model, self._key, self._transport = provider_id, model, key, transport
         self._records, self._record_lock, self._local = OrderedDict(), threading.Lock(), threading.local()
 
-    def diagnostics(self, request_id=None):
+    def diagnostics(self, request_id=None, include_network=False):
         with self._record_lock:
             record = self._records.get(request_id) if request_id else next(reversed(self._records.values()), None)
-            return dict(record) if record else None
+            return copy.deepcopy({k: v for k, v in record.items() if include_network or k != "network"}) if record else None
 
     def record_validation(self, snapshot, proposal, reason):
         from backend.validation_diagnostics import validation_code
@@ -166,6 +177,9 @@ class RestProvider:
             self._local.record[name] = value if type(value) is int and 0 <= value <= 2**31 - 1 else None
 
     def propose(self, snapshot, cancelled):
+        from backend.provider_network import NetworkTrace
+        trace = NetworkTrace()
+        self._local.trace = trace
         started = time.monotonic()
         record = dict(request_id=snapshot.request_id, session_id=snapshot.session_id, validation_reason="NOT_VALIDATED", response_category="NONE", outcome="in_progress", real_api=self._transport is post_json,
                       http_received=False, http_status=None, checked_at_ms=int(time.time()*1000), elapsed_ms=0,
@@ -179,6 +193,7 @@ class RestProvider:
             record["outcome"] = "succeeded"
             return proposal
         except urllib.error.HTTPError as error:
+            trace.fail(error)
             code = error.code
             error.close()
             record["http_received"] = True
@@ -187,34 +202,41 @@ class RestProvider:
             reason = "provider_auth" if code in (401, 403) else "provider_rate_limited" if code == 429 else "provider_model" if code == 404 else "provider_request" if code == 400 else "provider_unavailable"
             record["outcome"] = reason
             raise ProviderFailure(reason) from None
-        except TimeoutError:
+        except TimeoutError as error:
+            trace.fail(error)
             record["outcome"] = "provider_timeout"
             record["validation_reason"] = "PROVIDER_TIMEOUT"
             raise ProviderFailure("provider_timeout") from None
         except urllib.error.URLError as error:
+            trace.fail(error)
             reason = "provider_timeout" if isinstance(error.reason, TimeoutError) else "provider_unavailable"
             record["outcome"] = reason
             record["validation_reason"] = "PROVIDER_TIMEOUT" if reason == "provider_timeout" else "PROVIDER_UNAVAILABLE"
             raise ProviderFailure(reason) from None
-        except InterruptedError:
+        except InterruptedError as error:
+            trace.fail(error)
             record["outcome"] = "cancelled"
             raise
         except InvalidRequest as error:
+            trace.fail(error)
             from backend.validation_diagnostics import schema_code
             record["validation_reason"] = schema_code(error)
             record["outcome"] = "invalid_response"
             raise
-        except Exception:
+        except Exception as error:
+            trace.fail(error)
             record["outcome"] = "provider_unavailable"
             record["validation_reason"] = "PROVIDER_UNAVAILABLE"
             raise ProviderFailure("provider_unavailable") from None
         finally:
             record["elapsed_ms"] = int((time.monotonic() - started)*1000)
+            record["network"] = trace.snapshot()
             with self._record_lock:
                 self._records[snapshot.request_id] = dict(record)
                 self._records.move_to_end(snapshot.request_id)
                 while len(self._records) > 64: self._records.popitem(last=False)
             del self._local.record
+            del self._local.trace
 
     def _request(self, url, headers, payload, cancelled):
         if cancelled.is_set():
@@ -224,7 +246,8 @@ class RestProvider:
         timeout = deadline - now
         if timeout <= 0:
             raise TimeoutError("Decision expired before transport")
-        result = self._transport(url, headers, payload, timeout, observer=self._received) if self._transport is post_json else self._transport(url, headers, payload, timeout)
+        result = self._transport(url, headers, payload, timeout, observer=self._received,
+                                 trace=self._local.trace, cancelled=cancelled) if self._transport is post_json else self._transport(url, headers, payload, timeout)
         # Preserve usage evidence even when a late reply cannot become guidance.
         self._usage(result)
         if cancelled.is_set():

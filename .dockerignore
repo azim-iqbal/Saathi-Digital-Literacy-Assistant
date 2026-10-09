@@ -1,0 +1,8 @@
+# Allowlisted source only; never send local credentials, databases or Android artifacts.
+**
+!backend/
+!backend/*.py
+!deploy/
+!deploy/requirements.txt
+!deploy/gunicorn.conf.py
+!deploy/Dockerfile

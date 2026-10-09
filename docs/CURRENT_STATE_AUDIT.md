@@ -1,3 +1,47 @@
+## 9 October 2026 — Final mandate continuation (verification in progress)
+
+Latest engineering/evidence report: [PREDEPLOYMENT_VALIDATION.md](PREDEPLOYMENT_VALIDATION.md). This section supersedes older counts and next-step lists below; historical records are retained.
+
+Implemented: bounded primary attempt/fallback within the original screen deadline; Groq-first navigation default (explicit config preserved); private-safe phased HTTPS diagnostics; narrative private handoff; explicit prerequisite/denial guards; accurate capability copy using unchanged styles; controlled portal/copy/paste/rotation/lock tests; allowlisted non-root pilot container template.
+
+Verified: 147 Android unit tests, 165 backend tests, 9 evaluation tests, 51/51 probes, 2,000 recovery plus 2,000 pre-cancelled synthetic requests, six local Gunicorn checks, zero lint errors/61 warnings, debug/test builds and release compilation. No configured-key matches in source/non-ignored files or decompressed APKs. Current emulator reruns and two-hour target must be read from `test-evidence/2026-10-09-final-mandate/`; do not call ongoing runs complete.
+
+New eight-call allowance EXHAUSTED: English/Hinglish paired navigation passed; Gemini planning/incident timed out waiting for headers, and Groq failed independent plan/signal expectations. Post-run reasoning guard/prompt changes are offline-tested only. No more live calls without new scoped authorization. Physical audio/OEM, legitimate protected portal, browser-dependent full HTTPS origin, historical post-tap causality and deployment acceptance remain unresolved; do not declare production readiness.
+
+## Final verification addendum — 9 October 2026
+
+UI preserved; deployment/release not executed. This addendum supersedes earlier test counts in this file. The latest production fix makes the local private/CAPTCHA handoff precede practice-ID eligibility, while retaining the package boundary, no-target behavior for minimized screens and no private backend calls. Request cancellation at Pause and gateway cleanup-before-callback remain verified.
+
+Final application checks: **147 Android unit tests, 152 offline backend tests, 7 evaluation tests and 51/51 offline probes pass.** Emulator groups after the last production edit: **27 core/research/incident, 4 practice transport/handoff, and 21 connection/reporting/recovery/startup tests pass (52 total across these groups).** The last combined 21-test run passes after correcting obsolete private-form expectations and bounded transition/task-return test helpers; all earlier failures are retained. Eight UI checks passed, with the source and screenshot comparison described in the evidence index. Debug/test builds, release Kotlin compilation and lint pass; lint retains 61 warnings and zero errors.
+
+Evidence: [current index](test-evidence/2026-10-09-research-ordering/README.md), [reproduction](test-evidence/2026-10-09-research-ordering/REPRODUCE.md), [UI comparison](test-evidence/2026-10-09-research-ordering/UI_COMPARISON.md). The four authorized genuine calls are consumed: English paired PASS; Hinglish Groq accepted and Gemini timed out. Genuine semantic accuracy/latency remains PARTIAL. No further live calls were made. Local fixture servers, reverse mappings and temporary fixture credentials were removed; ignored provider configuration was left untouched.
+
+**Open gates, not claimed complete:** historical WebView/cloud failure attribution; broader semantic privacy and hours-long resource acceptance; trustworthy full browser metadata when the browser does not expose it; broader genuine-provider accuracy/latency; physical-device voice/OEM/TalkBack/performance; legitimate protected portal steps. Some need new evidence/reproduction, others require unavailable hardware/access or a new scoped model-call allowance. The eight-round mixed-fault run is 140 seconds, not hours-long certification. The first mixed failure remains unproven despite separately fixing a demonstrated capacity-ordering race. Hosting, release connectivity and production operational validation stay deferred by the user. Do not describe Saathi as bug-free or fully production-ready.
+
+## 9 October 2026 — Current verification
+
+Research, incident assessment and API checks cancel on Pause; the gateway releases request capacity before callbacks. Both defects have failing-before/passing-after evidence. The current UI is preserved. Four newly authorized genuine calls are exhausted: English paired navigation PASS, Hinglish pair FAIL due to Gemini timeout; no broad accuracy claim.
+
+147 Android unit / 152 backend / 7 evaluation tests and 51 offline probes pass. Final core suite 25/25; transport/cancellation 8/8 with 1000 requests; reporting 14/14; mixed retest eight rounds in 140 seconds; UI 8/8 with 12/14 identical PNGs (two pressed-state shading differences). See [current handoff](NEXT_CONTINUATION.md), [evidence and retained failures](test-evidence/2026-10-09-research-ordering/README.md) and [UI comparison](test-evidence/2026-10-09-research-ordering/UI_COMPARISON.md).
+
+Deployment/release remain deferred. Physical-device/protected-portal acceptance, broader model quality/latency, browser full-address limitations and historical/intermittent failure attribution remain open. Older entries below are historical, not current blockers already resolved above.
+
+## 9 October 2026 — Complete-tree privacy and resource cleanup
+
+Implemented fail-closed complete accessibility traversal: node/depth limits, missing children and cancelled/expired copies cannot produce a partial safe screen. Child references are released on every unwind; accepted service work runs cleanup after destruction. Capture timestamps precede copying and stale delivery is rejected. No UI layout/theme changes, live provider calls, commits or deployment.
+
+Verified so far: 147 Android unit tests, 152 backend tests, six evaluation tests and 51/51 offline probes pass. Debug/test builds, release Kotlin and lint pass (0 errors/61 warnings). Pattern scan found no matching secrets in tracked/nonignored text. New real-service oversized-tree regression passes with actual rejection evidence and original-task recovery. Ten thousand mixed traversal tests balance child ownership; this is not proof of Android heap leak freedom.
+
+The first combined emulator run was 16 tests / 2 failures. One was a polling helper treating an incomplete transitional WebView tree as an exception; helpers now retry only missing-branch observations under the existing timeout. The other is OPEN: ResearchRecoveryUiTest.leavingDuringPlanRequestDiscardsLateFailureAndDoesNotRestoreRetry showed late error copy after returning. Inspect whether the fixture's five-second release/Compose idle waiting completes before Home/onStop; do not assume that hypothesis is the cause or weaken cancellation assertions. Production ResearchActivity was not changed.
+
+Final affected browser/service rerun is in test-evidence/2026-10-09-observation-reliability/emulator-final.txt. See that directory's REPRODUCE.md for baseline failures, fixture-runtime diagnosis and commands. Initial separate test-APK crash was missing Kotlin Intrinsics in a new provider; Java fixture fixed it. This is unrelated to the historical WebView failure.
+
+NEXT FIRST: collect final rerun if still running, then diagnose the research cancellation regression with request-release and activity-stop ordering. Keep accepted pause/resume/privacy tests. Historical WebView/cloud intermittence, broader hours-long/resource checks, genuine provider prompt retest, browser full-HTTPS metadata limitations, physical voice/OEM and authenticated portal steps remain open. No claim of production readiness or zero bugs. Stop above the user's 8% five-hour floor; deployment/release remain deferred.
+
+## 9 October privacy verification
+
+See FINAL_RELIABILITY_REPORT.md for the current passing evidence and remaining blockers. Editable/private value getters are skipped; private context content is discarded before session storage. A private/challenge handoff requires explicit microphone reactivation. Original task continuity and structure-only private markers have emulator evidence; actual speech and OEM behaviour remain unverified.
+
 ## 8 October 2026 — Source-cited control guidance and bounded live evaluation
 
 The user asked to finish remaining pre-deployment work; **deployment/release remain deferred and overall remediation remains open**. Preserve this run and the earlier uncommitted recovery/expiry changes. The 8% short-window stop floor still applies. No reset credits, publishing, commits or pushes were used.

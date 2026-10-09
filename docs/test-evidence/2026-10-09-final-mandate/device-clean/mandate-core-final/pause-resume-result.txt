@@ -1,0 +1,1 @@
+PASS: three private/CAPTCHA round trips each; manual pause retains only task settings; no auto-resume; denied overlay blocks resume without losing task; fresh identity/tree on resume; old notification/presentation rejected; Stop discards paused task. No real speech, authentication, model or CAPTCHA solver.

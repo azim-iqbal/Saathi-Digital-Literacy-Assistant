@@ -224,9 +224,10 @@ class CyberReportActivity : ComponentActivity() {
         // available when the user returns to their browser.
         if (SaathiSession.isActive()) SaathiSession.onScreenUnavailable()
     }
-    override fun onStop() {
+    override fun onPause() {
+        // Stop can follow Pause much later during a window transition.
         if (assessing) message = "AI assessment cancelled when you left. You can request it again after reviewing the summary."
-        cancelAssessment(); tts?.stop(); super.onStop()
+        cancelAssessment(); tts?.stop(); super.onPause()
     }
     override fun onDestroy() { tts?.stop(); tts?.shutdown(); tts = null; super.onDestroy() }
 }

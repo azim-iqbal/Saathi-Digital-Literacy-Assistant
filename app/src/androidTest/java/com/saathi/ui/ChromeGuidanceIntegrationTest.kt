@@ -31,15 +31,33 @@ class ChromeGuidanceIntegrationTest {
         .bufferedReader().use { it.readText().trim() }
     private fun waitFor(description: String, condition: () -> Boolean) {
         val deadline = SystemClock.uptimeMillis() + 12_000
-        while (!condition() && SystemClock.uptimeMillis() < deadline) SystemClock.sleep(100)
-        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", condition())
+        var ready = condition()
+        while (!ready && SystemClock.uptimeMillis() < deadline) {
+            SystemClock.sleep(100)
+            ready = condition()
+        }
+        if (!ready) {
+            File(output(), "chrome-failure.txt").writeText(description + "\n" + nodes().joinToString("\n") { "${it.text} / ${it.resourceId} / ${it.className} / ${it.isClickable}" })
+            File(output(), "chrome-failure-windows.txt").writeText(shell("dumpsys window windows"))
+            screenshot("chrome-failure")
+        }
+        assertTrue("$description; state=${SaathiSession.status.value}; instruction=${SaathiSession.instruction.value}", ready)
     }
     private fun nodes() = automation.rootInActiveWindow?.let { root ->
-        try { NodeMasker.flatten(root) } finally { @Suppress("DEPRECATION") root.recycle() }
+        try { NodeMasker.flatten(root) } catch (error: IllegalStateException) {
+            // A transitioning tree is unavailable; the bounded poll still requires a complete result.
+            if (error.message != "Missing observation branch") throw error
+            emptyList()
+        } finally { @Suppress("DEPRECATION") root.recycle() }
     }.orEmpty()
     private fun tap(label: String) {
-        waitFor("Visible $label") { nodes().any { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) } }
-        val node = nodes().first { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+        var observed: com.saathi.core.UiNode? = null
+        waitFor("Visible $label") {
+            observed = nodes().firstOrNull { it.text == label && (it.isClickable || it.clickableAncestorBounds != null) }
+            observed != null
+        }
+        // Keep the complete snapshot that satisfied the wait; a second tree can be mid-transition.
+        val node = requireNotNull(observed)
         val bounds = if (node.isClickable) node.bounds else requireNotNull(node.clickableAncestorBounds)
         val down = SystemClock.uptimeMillis()
         for (action in listOf(MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP)) {
@@ -113,7 +131,7 @@ class ChromeGuidanceIntegrationTest {
                 tap("Back to choices")
                 waitFor("Chrome return") { SaathiSession.instruction.value.startsWith("Find “Help”") }
                 tap("Private example")
-                waitFor("Password page suspends guidance") { SaathiSession.instruction.value.startsWith("This screen contains private fields") }
+                waitFor("Password page suspends guidance") { SaathiSession.status.value == com.saathi.core.GuidanceSessionState.SENSITIVE_HANDOVER && SaathiSession.instruction.value.contains("won't send it to AI or save it") }
                 screenshot("chrome-private")
                 tap("Back to choices")
                 waitFor("Chrome return from private screen") { SaathiSession.instruction.value.startsWith("Find “Help”") }

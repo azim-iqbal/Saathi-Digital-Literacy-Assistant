@@ -1,0 +1,1107 @@
+--------- beginning of main
+10-09 17:49:45.420   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.494   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.497  2146  2467 I EmojiSuperpacksManager: EmojiSuperpacksManager.processPackSet():566 processPackSet() : isBundled = true
+10-09 17:49:45.498  2146  2675 I EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():386 triggerSync(3) : isBundled=false, isUserInitiated=false
+10-09 17:49:45.498  2146  2675 I EmojiSuperpacksManager: EmojiSuperpacksManager.sync():468 Reregister manifest for emoji
+10-09 17:49:45.498  2146  2675 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():135 Reading en_US emoji shortcuts
+10-09 17:49:45.563  2146  2555 I SP      : Scheduling job with delay of 0s for {m:b:u:l, bg}, 2 candidates
+10-09 17:49:45.568  6065  6065 I DialerInternalSemanticEventLogger: com.android.dialer.cui.impl.InternalSemanticEventLogger.handleEvent$<anonymous>:140 CUI event: APP_ON_CREATE; uniqueCallId: null
+10-09 17:49:45.570  1898  4245 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/proxy-apps-corpus.xml: [<1: 0, <2: 0, <4: 1, <8: 2, <16: 0, <32: 2, <64: 3, <128: 0, <256: 2, <512: 1, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:45.571  2146  2555 I SP      : Scheduling: download registered, 0 started, 0 paused, 2 scheduled, 2 pending: next-word-predictor:tflite-nwp-9343e8ce723e0b22aa8e2733a7d475be * {m:b:u:l, bg}, emoji:2b8bc459159046c494d928dec1c678ff * {m:b:u:l, bg}
+10-09 17:49:45.572  2146  2555 I SP      : Registering emoji.2025011518, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20250115185814/superpacks_manifest.zip, constraints: m:*:*:*, flags: *, requested: 2025011518, current: 2025011518
+10-09 17:49:45.572  2146  2555 I SuperpacksManagerImpl: SuperpacksManagerImpl$3$1.onSuccess():552 emoji.registerManifest() succeeded
+10-09 17:49:45.572  2146  2555 I EmojiSlicingStrategy: EmojiSlicingStrategy.matchEnabledLocalesWithPackLocales():129 matchEnabledLocalesWithPackLocales() : User enabled 1 locales; returning 1 slices
+10-09 17:49:45.572  2146  2555 I SP      : Syncing emoji (2025011518) with slices: [{2b8bc459159046c494d928dec1c678ff, m:*:*:*}], metadata: false
+--------- beginning of system
+10-09 17:49:45.581   662   843 D ActivityManager: freezing 5450 com.google.android.healthconnect.controller
+10-09 17:49:45.581   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.593   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+10-09 17:49:45.594   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+10-09 17:49:45.595   662  1169 D InetDiagMessage: Destroyed live tcp sockets for uids={10218} in 2ms
+10-09 17:49:45.631   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.634  1898  5915 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/com.google.android.gms.update.storage.xml: [<1: 0, <2: 0, <4: 1, <8: 2, <16: 1, <32: 0, <64: 0, <128: 0, <256: 0, <512: 1, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:45.635   318  5902 I keystore2: system/security/keystore2/watchdog/src/lib.rs:371 - Watchdog thread idle -> terminating. Have a great day.
+10-09 17:49:45.642  2838  3079 I dmoo    : The GellerConfig is not present, returning null.
+10-09 17:49:45.642  2838  3079 I dmoo    : (REDACTED) The GellerConfig is not present, defaulting isUploadEnabled for corpus %s to true.
+10-09 17:49:45.646   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.698   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.727  2838  3079 I dmkg    : (REDACTED) The syncToken for corpus %s is %s and the syncRequestReason is %s
+10-09 17:49:45.766   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.769  1898  5917 I MagicTether: [LaunchUtils] No accounts found for enabling Instant Wifi. [CONTEXT service_id=276 ]
+10-09 17:49:45.789  1898  5917 I Google Maps Android API: Validating conditions for requesting maps_core feature. [CONTEXT service_id=71 ]
+10-09 17:49:45.789  1898  5917 W Google Maps Android API: maps_core feature is module is not recognized; Google Play Services may need to be  updated. Requesting a module install will fail. [CONTEXT service_id=71 ]
+10-09 17:49:45.811  1295  1295 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-09 17:49:45.817   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.821   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:45.821   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:45.822  1454  1454 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-09 17:49:45.822  1454  1454 D CarrierSvcBindHelper: No carrier app for: 0
+10-09 17:49:45.822  1298  4886 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:45.822  1298  4886 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:45.825   662   845 I RoleService: Granting default roles...
+10-09 17:49:45.832  6065  6141 I DialerGmsFlagCommitter: com.android.dialer.phenotype.GmsFlagCommitter.commit:52 flags committing
+10-09 17:49:45.840   662  2771 W ApplicationInfo: Large ApplicationInfo parcel: size=20060 package=com.google.android.googlequicksearchbox sharedLibs=3 resDirs=2 overlayPaths=2
+10-09 17:49:45.849   662  2689 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:45.851  1898  5915 I SystemUpdate: [UUC,UucEnabler] Disabled UucNotificationReceiverService proxy service
+10-09 17:49:45.859   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:45.861  1898  5708 I GCM-GMS : Got GMS direct boot token.
+10-09 17:49:45.866  1454  1562 V MessagingReadRestrictionAllowlistMonitor: onBroadcastReceived: No AppOp changes for package: com.google.android.gms
+10-09 17:49:45.867  2146  2555 I SP      : Scheduling job with delay of 0s for {m:b:u:l, bg}, 2 candidates
+10-09 17:49:45.868  6077  6092 I RegisteredComponentCache: generateComponentsList: New Components => 
+10-09 17:49:45.868  6077  6092 I RegisteredComponentCache: ComponentInfo: ResolveInfo{c3c8ad2 com.google.android.tag/com.android.apps.tag.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+10-09 17:49:45.868  6077  6092 I RegisteredComponentCache: generateComponentsList: Removed Components => 
+10-09 17:49:45.868  6077  6092 I RegisteredComponentCache: ComponentInfo: ResolveInfo{6fc7421 com.google.android.tag/com.android.apps.tag.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+10-09 17:49:45.915  1454  1787 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+10-09 17:49:45.915  1454  1787 V ImsResolver: searchForImsServices: package=com.google.android.gms, users=[UserHandle{0}]
+10-09 17:49:45.919  1454  1787 V ImsResolver: searchForImsServices: package=com.google.android.gms, users=[UserHandle{0}]
+10-09 17:49:45.958  2146  2675 I EmojiShortcutsLoader: EmojiShortcutsLoader.getEmojiShortcuts():156 Read en_US emoji shortcuts successfully.
+10-09 17:49:45.975   662  2774 W PackageInfo: Large parcel: size=70828 pkg=com.google.android.gms uid=10205 perm=18128(95) reqPerm=20184(386) attr=27616(332) prevAllowSquashing=false
+10-09 17:49:45.986   662  2134 W libbinder.ServiceManagerCppClient: Waited one second for android.hardware.uwb.IUwb/default (is service started? Number of threads started in the threadpool: 32. Are binder threads started and available?)
+10-09 17:49:45.989  1898  1910 I gvuy    : (REDACTED) Shared storage file not found for %s
+10-09 17:49:45.989  1898  1910 I gvuy    : (REDACTED) Unable to retrieve flag snapshot for %s, using defaults.
+10-09 17:49:45.992  1898  1898 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.chimera.container.moduleinstall.ModuleInstallService.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsApiService }
+10-09 17:49:45.992  1898  1898 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.chimera.container.moduleinstall.ModuleInstallService.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsApiService }
+10-09 17:49:46.010   293  6156 W libc    : Unable to set property "ctl.interface_start" to "aidl/android.hardware.uwb.IUwb/default": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-09 17:49:46.014   662   843 D ActivityManager: freezing 5480 com.google.android.ondevicepersonalization.services
+10-09 17:49:46.014   662   843 D ActivityManager: freezing 3676 com.android.vending:instant_app_installer
+10-09 17:49:46.035   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.035  2146  2675 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():71 1 emoji shortcut maps loaded.
+10-09 17:49:46.042  1898  5688 I RecoverableKeyStoreGms: [EnrollmentManager] Successfully downloaded certificates. [CONTEXT service_id=172 ]
+10-09 17:49:46.085   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.retaildemo
+10-09 17:49:46.085   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION, user: 0
+10-09 17:49:46.085  2146  2675 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():82 Finished loading emoji shortcuts
+10-09 17:49:46.092   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:46.092   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:46.093  1898  5917 I MdiSyncModule: initializing module...
+10-09 17:49:46.094   662  1423 I Role    : com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mFlags='0', mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMetaData=[], mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0} Requirement{mFeatureFlag=null, mMinTargetSdkVersion=1}
+10-09 17:49:46.094   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING, user: 0
+10-09 17:49:46.094   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:46.094   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:46.094   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.apps.work.clouddpc
+10-09 17:49:46.142   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.147  1898  6128 I AutofillGeller: (REDACTED) Log numberOfSyncPages. corpora=%s
+10-09 17:49:46.168  1898  6134 I AutofillGeller: (REDACTED) Geller sync completed. corpora=%s, status=%s, endToEndLatencyMillis=%d, syncRequestReason=%s
+10-09 17:49:46.184   662   843 D ActivityManager: freezing 5493 com.google.android.projection.gearhead:car
+10-09 17:49:46.185   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.189  1454  1679 D SatelliteController: packageStateChanged: package:com.google.android.gms defaultSmsPackageName: com.google.android.apps.messaging satelliteGatewayServicePackageName: 
+10-09 17:49:46.189  1454  1679 I SatelliteAppTracker: onPackageModified : com.google.android.gms
+10-09 17:49:46.191   662  2774 W PackageInfo: Large parcel: size=159784 pkg=com.google.android.gms uid=10205 serv=155332(427) prevAllowSquashing=false
+10-09 17:49:46.194   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+10-09 17:49:46.196   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.203  1454  1679 D SatelliteAppTracker: packageName: com.google.android.gms, value: com.google.android.gms
+10-09 17:49:46.211   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+10-09 17:49:46.211   662  1169 D InetDiagMessage: Destroyed live tcp sockets for uids={10212} in 18ms
+10-09 17:49:46.237  1898  6024 I SystemUpdate: [Execution,InstallationEventIntentOperation] Handling event of type 2.
+10-09 17:49:46.240   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.244  2146  2555 I SP      : Scheduling: download registered, 0 started, 0 paused, 2 scheduled, 2 pending: next-word-predictor:tflite-nwp-9343e8ce723e0b22aa8e2733a7d475be * {m:b:u:l, bg}, emoji:2b8bc459159046c494d928dec1c678ff * {m:b:u:l, bg}
+10-09 17:49:46.245  2146  2555 I SP      : GC for 'emoji' (10) with ttl of 0 ms took 1 ms (0/1/0)
+10-09 17:49:46.245  2146  2555 I AbstractSyncResultCallback: AbstractSyncResultCallback.onFailure():38 onFailure(): emoji.sync cancelled; expected if new request supersedes pending one.
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():428 triggerSync(1) : canceled
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: java.util.concurrent.CancellationException: Task was cancelled.
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at wwo.i(PG:31)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at www.r(PG:24)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at wwo.get(PG:1)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at a.w(PG:2)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at wht.br(PG:10)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at wyp.run(PG:23)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at java.lang.Thread.run(Thread.java:1571)
+10-09 17:49:46.259  2146  2696 W EmojiSuperpacksManager: 	at ncl.run(PG:8)
+10-09 17:49:46.261  3584  4334 I AiAiEcho: AppIndexer Package:[com.google.android.gms] UserProfile:[0] Enabled:[true].
+10-09 17:49:46.261  3584  4334 I AiAiEcho: AppFetcherImplV2 updateApps package:[com.google.android.gms], userId:[0], reason:[package is updated.].
+10-09 17:49:46.301   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.322  6077  6077 E libnfc_nci: Timeout waiting for NFC AIDL service (future).
+10-09 17:49:46.322  6077  6077 I libnfc_nci: NfcAdaptation::InitializeHalDeviceContext: Failed to retrieve the NFC AIDL!
+10-09 17:49:46.322  6077  6077 E libnfc_nci: Exit current process to recover.
+10-09 17:49:46.323  1454  1794 D SatelliteAccessController: Current default SMS app:ComponentInfo{com.google.android.apps.messaging/com.google.android.apps.messaging.shared.receiver.SmsDeliverReceiver}
+10-09 17:49:46.323  1454  1794 D SatelliteController: getSelectedSatelliteSubId: subId=-1
+10-09 17:49:46.323  1454  1794 D SatelliteController: getConfigForSubId: subId= -1, config= PersistableBundle[{satellite_esos_supported_bool=false, satellite_connection_hysteresis_sec_int=180, satellite_supported_disaster_plmn_string_array=[], regional_satellite_earfcn_bundle=PersistableBundle[{}], satellite_entitlement_supported_bool=false, satellite_supported_emergency_plmn_string_array=[], satellite_configs_per_plmn_bundle=PersistableBundle[{}], satellite_sos_max_datagram_size_bytes_int=255, satellite_supported_msg_apps_string_array=[com.google.android.apps.messaging], satellite_connected_notification_throttle_millis_int=604800000, override_satellite_as_unconstrained_bool=false, satellite_display_name_string=, satellite_roaming_p2p_sms_inactivity_timeout_sec_int=180, satellite_roaming_turn_off_session_for_emergency_call_bool=true, emergency_messaging_supported_bool=false, carrier_roaming_satellite_emergency_messaging_provider_per_country_bundle=PersistableBundle[{}], satellite_data_support_mode_int=0, carrier_roaming_ntn_connect_type_int=0, satellite_attach_supported_bool=false, carrier_roaming_satellite_emergency_messaging_redirection_destination_string=, satellite_nidd_apn_name_string=, carrier_supported_satellite_services_per_provider_bundle=PersistableBundle[{}], satellite_roaming_esos_inactivity_timeout_sec_int=300, carrier_supported_satellite_notification_hysteresis_sec_int=180, carrier_config_applied_bool=false, carrier_roaming_ntn_emergency_call_to_satellite_handover_type_int=2, carrier_roaming_satellite_default_services_int_array=[3, 6], imsserviceentitlement.entitlement_server_url_string=, emergency_call_to_satellite_t911_handover_timeout_millis_int=30000, satellite_roaming_p2p_sms_supported_bool=false, carrier_config_version_string=, satellite_roaming_screen_off_inactivity_timeout_sec_int=30}]
+10-09 17:49:46.323  1454  1794 D SatelliteAccessController: supportedMsgApps:com.google.android.apps.messaging
+10-09 17:49:46.324  1898  6024 I SystemUpdate: [Execution,InstallationIntentOperation] Received intent: Intent { act=com.google.android.gms.update.INSTALL_UPDATE cat=[targeted_intent_op_prefix:.update.execution.InstallationIntentOperation] xflg=0x4 cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }.
+10-09 17:49:46.409   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.424   662   690 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:46.425   662   690 I AppBindingService: [Supervision app] feature disabled
+10-09 17:49:46.426   662   690 I AppBindingService: [Supervision app] feature disabled
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:46.427   662   866 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-09 17:49:46.430  1898  5917 I MdiSyncModule: module initialization completed
+10-09 17:49:46.440   662  2685 W PackageInfo: Large parcel: size=17220 pkg=com.google.android.gms uid=10205 prov=12768(47) prevAllowSquashing=false
+10-09 17:49:46.444   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:46.444   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:46.458   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+10-09 17:49:46.458   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+10-09 17:49:46.458   662  1169 D InetDiagMessage: Destroyed live tcp sockets for uids={10148} in 1ms
+10-09 17:49:46.466  1898  4553 I PeopleGalProvider: Gal directories started.
+10-09 17:49:46.466  1898  4553 I PeopleGalProvider: Method 1 completed.
+10-09 17:49:46.466  1898  4553 I PeopleGalProvider: Method 1 finished successfully.
+10-09 17:49:46.476   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:46.476   662   662 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+10-09 17:49:46.476   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:46.476   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:46.476   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:46.476   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:46.476   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:46.476   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:46.476   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:46.476   662   662 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-09 17:49:46.476   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:46.476   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:46.477   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:46.486  4045  4045 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+10-09 17:49:46.486  4045  4045 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+10-09 17:49:46.492   662  1155 W InputChannel-JNI: Channel already disposed.
+10-09 17:49:46.506   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.506   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.506   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.506   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.506   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.508  1632  6102 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/METRICS_LOGGER_PREFERENCE_FILE.xml: [<1: 0, <2: 0, <4: 0, <8: 0, <16: 0, <32: 0, <64: 0, <128: 0, <256: 0, <512: 1, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:46.586   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.590   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.590   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.590   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.590   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.590   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.593  4045  4111 I com.saathi: Background young concurrent mark compact GC freed 3075KB AllocSpace bytes, 0(0B) LOS objects, 32% free, 6745KB/10045KB, paused 322us,21.845ms total 105.189ms
+10-09 17:49:46.593   662  1833 I ActivityManager: Process com.google.android.nfc (pid 6077) has died: pers PER 
+10-09 17:49:46.594   662  1833 W ActivityManager: Re-adding persistent process ProcessRecord{a85abe3 6077:com.google.android.nfc/1027}
+10-09 17:49:46.595   662  1833 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@8fd19dce does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+10-09 17:49:46.623   662   693 I libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1027/pid_6077
+10-09 17:49:46.624   448   448 I Zygote  : Process 6077 exited cleanly (0)
+10-09 17:49:46.624   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.627   448   448 D Zygote  : Forked child process 6164
+10-09 17:49:46.630  6164  6164 I libprocessgroup: Created cgroup /sys/fs/cgroup/system/uid_1027/pid_6164
+10-09 17:49:46.642  4045  4045 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@aa7da1e
+10-09 17:49:46.652  4045  4655 D WindowOnBackDispatcher: setOnBackInvokedCallbackInfo: android.view.ViewRootImpl$$ExternalSyntheticLambda16@aa7da1e
+10-09 17:49:46.663   662   692 W ActivityManager: Slow operation: 68ms so far, now at startProcess: returned from zygote!
+10-09 17:49:46.663   662   692 W ActivityManager: Slow operation: 68ms so far, now at startProcess: done updating battery stats
+10-09 17:49:46.663   662   692 W ActivityManager: Slow operation: 68ms so far, now at startProcess: building log message
+10-09 17:49:46.663   662   692 I ActivityManager: Start proc 6164:com.google.android.nfc/1027 for restart com.google.android.nfc
+10-09 17:49:46.663   662   692 W ActivityManager: Slow operation: 68ms so far, now at startProcess: starting to update pids map
+10-09 17:49:46.664   662   692 W ActivityManager: Slow operation: 69ms so far, now at startProcess: done updating pids map
+10-09 17:49:46.669   662  2690 D WindowManager: setClientSurface Surface(name=VRI-com.saathi/com.saathi.ComplaintDraftActivity#185)/@0xc68156c for d7cd6d1 com.saathi/com.saathi.ComplaintDraftActivity
+10-09 17:49:46.669  1632  4314 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+10-09 17:49:46.670  1632  4314 I DynamiteModule: Considering local module com.google.android.gms.providerinstaller.dynamite:1 and remote module com.google.android.gms.providerinstaller.dynamite:0
+10-09 17:49:46.670  1632  4314 I DynamiteModule: Selected local version of com.google.android.gms.providerinstaller.dynamite
+10-09 17:49:46.674   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.674   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.674   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.674   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.674   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.675   662  1423 W SignedPackage: Cannot get ApplicationInfo for package: com.google.android.devicelockcontroller
+10-09 17:49:46.679  6164  6164 I Zygote  : Process 6164 created for com.google.android.nfc
+10-09 17:49:46.701   662  1242 W ActivityManager: Skipping manifest association check for null package. SourceUid: 10205, SourcePkg: null, TargetUid: 10205, TargetPkg: com.google.android.gms
+10-09 17:49:46.701   662  2540 D CoreBackPreview: Window{d7cd6d1 u0 com.saathi/com.saathi.ComplaintDraftActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c603735, mPriority=0, mIsAnimationCallback=false, mOverrideBehavior=0}
+10-09 17:49:46.701  4045  4045 I Surface : Creating surface for consumer unnamed-4045-4 with slotExpansion=1 for 64 slots
+10-09 17:49:46.703  1632  4314 I TrafficStats: tagSocketFd(-1, 1031, -1) failed with errno-9
+10-09 17:49:46.703  4045  4045 I Surface : Creating surface for consumer VRI[ComplaintDraftActivity]#4(BLAST Consumer)4 with slotExpansion=1 for 64 slots
+10-09 17:49:46.707   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.707   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.707   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.707   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.708   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.709  1632  6102 I MagicTether: [LaunchUtils] No accounts found for enabling Instant Wifi. [CONTEXT service_id=276 ]
+10-09 17:49:46.709  1632  6102 I TetheringManager: registerTetheringEventCallback:com.google.android.gms
+10-09 17:49:46.747  1898  6025 I LSRModuleInit: (REDACTED) Attempting to change container components state to enabled: %s
+10-09 17:49:46.759  6065  6065 I DialerShortcutsJobScheduler: com.android.dialer.shortcuts.ShortcutsJobScheduler.schedule:55 schedule
+10-09 17:49:46.773  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.774   662  1155 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.775  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.775   662  1155 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.775  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.775   662  1155 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.777   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.777   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.777   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.777   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.777   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.780  3217  4643 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+10-09 17:49:46.780  3217  4643 W libc    : Access denied finding property "service.adb.tls.port"
+10-09 17:49:46.781  6164  6164 I gle.android.nfc: Using generational CollectorTypeCMC GC.
+10-09 17:49:46.782   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:46.783   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+10-09 17:49:46.783   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+10-09 17:49:46.783   662  1169 D InetDiagMessage: Destroyed live tcp sockets for uids={1027} in 0ms
+10-09 17:49:46.788  6065  6167 I DialerShortcutsJobScheduler: com.android.dialer.shortcuts.ShortcutsJobScheduler.scheduleJobInternal:82 job already scheduled.
+10-09 17:49:46.789  6164  6164 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+10-09 17:49:46.791  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.791  6065  6152 I DialerLoggingTelephonyCache: com.google.android.callingshared.logging.telephony.LoggingTelephonyCache.setUpNetworkMemoize:122 getNetworkOperatorName
+10-09 17:49:46.791   662  1155 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.793   662   824 W JobServiceContext: Sending onNetworkChanged for a job that isn't started. JobStatus{1a86803 androidx.work.systemjobscheduler:u0a152/25 #TikTokWorker#com.android.dialer.voicemail.service.impl.VvmTaskWorker#@androidx.work.systemjobscheduler@com.google.android.dialer/androidx.work.impl.background.systemjob.SystemJobService u=0 s=10152 TIME=-4s478ms:none NET READY}
+10-09 17:49:46.793  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.793   662  2540 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.793  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.794   662  1833 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.794  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.794   662  1833 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.798  1632  1920 I RegisterSyncOperation: (REDACTED) Register sync called by %s, syncing since something changed
+10-09 17:49:46.799  1632  1920 I HeterodyneSyncer: (REDACTED) Removed %d invalid users
+10-09 17:49:46.799  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.800   662  1833 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.801  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.802   662  2161 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.802  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.802   662  2161 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.803  6065  6152 I DialerLoggingTelephonyCache: com.google.android.callingshared.logging.telephony.LoggingTelephonyCache.setUpNetworkMemoize:131 getNetworkCountryIso
+10-09 17:49:46.803  6065  6152 I DialerLoggingTelephonyCache: com.google.android.callingshared.logging.telephony.LoggingTelephonyCache.setUpNetworkMemoize:140 getNetworkOperator
+10-09 17:49:46.809  6065  6179 E ActivityThread: Failed to find provider info for androidx.car.app.connection
+10-09 17:49:46.809  6065  6065 I DialerMainActivityStartupMonitor: com.android.dialer.startup.mainactivitystartup.MainActivityStartupMonitor.onApplicationCreated$<anonymous>:32 mainActivityCreated: false
+10-09 17:49:46.809  6065  6065 I DialerInternalSemanticEventLogger: com.android.dialer.cui.impl.InternalSemanticEventLogger.handleEvent$<anonymous>:140 CUI event: APP_ON_CREATE_RUNNABLE_COMPLETED_BEFORE_MAIN_ACTIVITY_CREATED; uniqueCallId: null
+10-09 17:49:46.812  6065  6065 I DialerDefaultProcessValidator: com.google.apps.tiktok.contrib.work.impl.DefaultProcessValidator.validateAsynchronouslyAndMaybeCrash:68 Validating WorkManager process
+10-09 17:49:46.819  6164  6164 D CompatChangeReporter: Compat change id reported: 333566037; UID 1027; state: ENABLED
+10-09 17:49:46.820  6065  6152 W MendelPackageState: Shared storage file not found for com.google.android.callingshared.directboot#com.google.android.dialer
+10-09 17:49:46.825  6065  6065 D WM-PackageManagerHelper: Skipping component enablement for androidx.work.impl.background.systemjob.SystemJobService
+10-09 17:49:46.825  6065  6065 D WM-Schedulers: Created SystemJobScheduler and enabled SystemJobService
+10-09 17:49:46.829   662  1169 D TcpMetricsLogger: connect: uid=10205 netId=101 dst=[127.0.0.1]:7810 latencyMs=0 err=111
+10-09 17:49:46.830  1898  6024 I SystemUpdate: [Execution,ExecutionManager] Start action execution: pending
+10-09 17:49:46.831  1898  6025 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:46.831   662  1155 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:46.834  3217  4643 W libbinder.Binder: Binder transaction to com.google.android.gms.droidguard.internal.IDroidGuardHandle, function: UNKNOWN_FUNCTION_NAME, code: 5, took 1160ms. Data bytes: 332 Reply bytes: 16 Flags: 18
+10-09 17:49:46.834  6065  6183 I DialerDefaultProcessValidator: com.google.apps.tiktok.contrib.work.impl.DefaultProcessValidator.validateInternal:99 Processes: NONE, true, com.google.android.dialer, com.google.android.dialer
+10-09 17:49:46.834  6065  6183 D WM-ForceStopRunnable: The default process name was not specified.
+10-09 17:49:46.836  6164  6164 D nativeloader: Configuring clns-shared-9 for other apk /apex/com.android.nfcservices/priv-app/NfcNciApexGoogle@CP41.260828.004.A7/NfcNciApexGoogle.apk. target_sdk_version=37, uses_libraries=, library_path=/apex/com.android.nfcservices/priv-app/NfcNciApexGoogle@CP41.260828.004.A7/lib/arm64:/system/lib64:/system_ext/lib64, permitted_path=/data:/mnt/expand:/data/user_de/0/com.google.android.nfc:/apex/com.android.nfcservices/priv-app/NfcNciApexGoogle@CP41.260828.004.A7:/system/lib64:/system_ext/lib64
+10-09 17:49:46.837  6065  6183 D WM-ForceStopRunnable: Performing cleanup operations.
+10-09 17:49:46.838  6164  6164 D nativeloader: InitApexLibraries:
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_adservices: libhpke_jni.so:libtflite_support_classifiers_native.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_appsearch: libappsearchservice.so:libicing_anywhere.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_art: libartservice.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_bt: libbluetooth_jni.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_conscrypt: libjavacrypto.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_extservices: libtflite_support_classifiers_native.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_mediaprovider: libpdfclient.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_nfcservices: libnfc_nci_jni.so:libnfc_rust_jni.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_npumanager: libnpumanager_service_jni.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_ondevicepersonalization: libfcp_cpp_dep_jni.so:libfcp_hpke_jni.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_os_statsd: libstats_jni.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_profiling: libanomaly_detector_service_jni.so
+10-09 17:49:46.838  6164  6164 D nativeloader:   com_android_tethering: libandroid_net_connectivity_com_android_net_module_util_jni.so:libandroid_net_connectivity_com_android_net_module_util_jni_CommonConnectivityJni.so:libcrypto_httpengine.so:libframework-connectivity-jni.so:libframework-connectivity-tiramisu-jni.so:libhttpengine.so:libservice-connectivity.so:libservice
+10-09 17:49:46.841  6065  6065 W CarApp.Conn: Null response from content provider when checking connection to the car, treating as disconnected
+10-09 17:49:46.841  6065  6065 D WM-SystemJobService: onStartJob for WorkGenerationalId(workSpecId=0cb8bf0d-bc76-4afe-abf6-bb4ff4bf1605, generation=0)
+10-09 17:49:46.842  1898  5682 I Checkin : [CheckinOperation] Starting Checkin: Default Task Reason : 1 Force : false UserId : 0 Start time : 189722
+10-09 17:49:46.844  6164  6164 D ActivityThread: Set OS env TMPDIR to /data/user_de/0/com.google.android.nfc/cache
+10-09 17:49:46.846  6164  6164 V GraphicsEnvironment: Currently set values for:
+10-09 17:49:46.846  6164  6164 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+10-09 17:49:46.846  6164  6164 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+10-09 17:49:46.846  6164  6164 V GraphicsEnvironment: com.google.android.nfc is not listed in per-application setting
+10-09 17:49:46.846  6164  6164 V GraphicsEnvironment: No special selections for ANGLE, returning default driver choice
+10-09 17:49:46.846  6164  6164 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+10-09 17:49:46.847  6164  6164 D CompatChangeReporter: Compat change id reported: 407952621; UID 1027; state: ENABLED
+10-09 17:49:46.847  6164  6164 D CompatChangeReporter: Compat change id reported: 419020719; UID 1027; state: ENABLED
+10-09 17:49:46.866   662  2161 W ApplicationInfo: Large ApplicationInfo parcel: size=20060 package=com.google.android.googlequicksearchbox sharedLibs=3 resDirs=2 overlayPaths=2
+10-09 17:49:46.867   662   845 I RoleService: Granting default roles...
+10-09 17:49:46.869   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.retaildemo
+10-09 17:49:46.870   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION, user: 0
+10-09 17:49:46.871   662  1423 I Role    : com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mFlags='0', mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMetaData=[], mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0} Requirement{mFeatureFlag=null, mMinTargetSdkVersion=1}
+10-09 17:49:46.871   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING, user: 0
+10-09 17:49:46.884   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.apps.work.clouddpc
+10-09 17:49:46.891  1295  1295 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-09 17:49:46.891   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:46.891   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:46.893   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:46.893   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:46.894   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:46.894   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:46.896  1632  1664 I .gms.persistent: Waiting for a blocking GC ProfileSaver
+10-09 17:49:46.925   662  1423 W SignedPackage: Cannot get ApplicationInfo for package: com.google.android.devicelockcontroller
+10-09 17:49:46.941  1632  6102 W MagicTether: [HostEnablementUtils] Invalid account list. [CONTEXT service_id=276 ]
+10-09 17:49:46.987  1898  5688 I RecoverableKeyStoreGms: [RecoverableKeyStoreGmsInitOperation] Vault handle was updated recently
+10-09 17:49:46.988   662  2134 W libbinder.ServiceManagerCppClient: Waited one second for android.hardware.uwb.IUwb/default (is service started? Number of threads started in the threadpool: 32. Are binder threads started and available?)
+10-09 17:49:46.989  1454  1454 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-09 17:49:46.990  1454  1454 D CarrierSvcBindHelper: No carrier app for: 0
+10-09 17:49:47.009   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.009   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.009   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.009   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.009   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.011   293  6185 W libc    : Unable to set property "ctl.interface_start" to "aidl/android.hardware.uwb.IUwb/default": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-09 17:49:47.038  1898  6025 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:47.039   662  2161 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:47.067  1898  6025 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:47.067   662  2161 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:47.069  1898  6025 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:47.069   662  1242 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:47.071  1898  6025 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:47.071   662  1242 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:47.085  1898  6025 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:47.085   662  1242 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:47.088  1898  6025 I MlBenchmarkInstaller: (REDACTED) Intent: %s
+10-09 17:49:47.088  1898  6025 I MlBenchmarkInstaller: (REDACTED) onInitRuntimeState(), intent action=%s
+10-09 17:49:47.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.128  1454  1787 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+10-09 17:49:47.128  1454  1787 V ImsResolver: searchForImsServices: package=com.google.android.gms, users=[UserHandle{0}]
+10-09 17:49:47.128  1454  1787 V ImsResolver: searchForImsServices: package=com.google.android.gms, users=[UserHandle{0}]
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:47.131   662   866 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-09 17:49:47.133   662   662 W Looper  : Slow dispatch took 267ms main app=system_server main=true group=FOREGROUND h=android.app.ActivityThread$H c=com.android.server.modes.ContextualModeManagerService$1$$ExternalSyntheticLambda0@e197f7f m=0
+10-09 17:49:47.133   662   662 W Looper  : Slow delivery took 250ms main app=system_server main=true group=FOREGROUND h=android.app.ActivityThread$H c=android.app.LoadedApk$ReceiverDispatcher$Args$$ExternalSyntheticLambda0@ee2b4c m=0
+10-09 17:49:47.160  1298  1407 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:47.350  1898  3158 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/gms_icing_mdd_shared_filesautofill.xml: [<1: 0, <2: 0, <4: 0, <8: 0, <16: 1, <32: 0, <64: 0, <128: 0, <256: 0, <512: 2, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:47.363  6065  6152 I DialerLoggingTelephonyCache: com.google.android.callingshared.logging.telephony.LoggingTelephonyCache.setUpNetworkMemoize:176 getSimCarrierIdName
+10-09 17:49:47.363  6065  6165 I DialerLoggingTelephonyCache: com.google.android.callingshared.logging.telephony.LoggingTelephonyCache.setUpNetworkMemoize:186 getSimCountryIso
+10-09 17:49:47.394  6065  6152 I DialerAndroidAutoStatusLookupImpl: com.android.dialer.androidautostatuslookup.impl.AndroidAutoStatusLookupImpl.isAndroidAutoConnected:97 Android Auto connected in 0 mode [CONTEXT ratelimit_period="1 MINUTES" ]
+10-09 17:49:47.394  6065  6152 I DialerInternalSemanticEventLogger: com.android.dialer.cui.impl.InternalSemanticEventLogger.processPotentialCancelEvent:226 Cancelled logging CUI AppStartToMainActivity to GIL due to cancelEvent
+10-09 17:49:47.395  6065  6165 I DialerAndroidAutoStatusLookupImpl: com.android.dialer.androidautostatuslookup.impl.AndroidAutoStatusLookupImpl.isAndroidAutoConnected:97 Android Auto connected in 0 mode [CONTEXT ratelimit_period="1 MINUTES" skipped=1 ]
+10-09 17:49:47.413  1898  6025 I MlBenchmarkInstaller: Device sampled out, skipping. [CONTEXT service_id=340 ]
+10-09 17:49:47.438  1898  1910 I gvuy    : (REDACTED) Shared storage file not found for %s
+10-09 17:49:47.438  1898  1910 I gvuy    : (REDACTED) Unable to retrieve flag snapshot for %s, using defaults.
+10-09 17:49:47.487   662  1163 E WifiDataStall: Ignore this poll. newStats: null txLinkSpeedMbps: 1 rxLinkSpeedMbps: 2 rssi: -50 connectionCapabilities: com.android.server.wifi.WifiNative$ConnectionCapabilities@7c2dafe
+10-09 17:49:47.492   662  1163 I MlConnectedScorer: 1. stats.getStatusDataStall()=0
+10-09 17:49:47.495   662  1163 I MlConnectedScorer: 2. stats.getStatusDataStall()=0
+10-09 17:49:47.495   662  1163 I MlConnectedScorer: handleL2DataStallInMlScorer is true, shouldBlockBssid=false mBlockCurrentBssid=false
+10-09 17:49:47.514   662  2685 D OomAdjuster: Not killing cached processes
+10-09 17:49:47.515  1454  1679 D SatelliteController: packageStateChanged: package:com.google.android.gms defaultSmsPackageName: com.google.android.apps.messaging satelliteGatewayServicePackageName: 
+10-09 17:49:47.515  1454  1679 I SatelliteAppTracker: onPackageModified : com.google.android.gms
+10-09 17:49:47.517   662  1242 W PackageInfo: Large parcel: size=159784 pkg=com.google.android.gms uid=10205 serv=155332(427) prevAllowSquashing=false
+10-09 17:49:47.520  1454  1679 D SatelliteAppTracker: packageName: com.google.android.gms, value: com.google.android.gms
+10-09 17:49:47.568   662   662 W Looper  : Slow dispatch took 405ms main app=system_server main=true group=FOREGROUND h=android.app.ActivityThread$H c=android.app.LoadedApk$ReceiverDispatcher$Args$$ExternalSyntheticLambda0@b7ee849 m=0
+10-09 17:49:47.573  1454  1562 V MessagingReadRestrictionAllowlistMonitor: onBroadcastReceived: No AppOp changes for package: com.google.android.gms
+10-09 17:49:47.573  1898  5682 I CheckinUtil: Classify the device as Phone. [CONTEXT service_id=130 ]
+10-09 17:49:47.574  1394  1580 D ApfFilter: (wlan0): Ignoring RA RA fe80::2 -> ff02::1 1800s PIO fec0::/64 86400s/14400s  which matches RA fe80::2 -> ff02::1 1800s PIO fec0::/64 86400s/14400s 
+10-09 17:49:47.575  1394  1580 D IpClient/wlan0: addressUpdated: fec0::8678:242d:9150:7eff/64 on ifindex 16 flags 0x00000900 scope 200 deprecationTime 14590455 expirationTime 86590455
+10-09 17:49:47.575  1394  1580 D IpClient/wlan0: addressUpdated: fec0::e266:68f0:63cf:b63a/64 on ifindex 16 flags 0x00000001 scope 200 deprecationTime 14590455 expirationTime 86590455
+10-09 17:49:47.570   662  1169 D TcpMetricsLogger: connect: uid=10205 netId=101 dst=[192.178.158.188]:5228 latencyMs=490 err=0
+10-09 17:49:47.593   662  2685 W PackageInfo: Large parcel: size=70828 pkg=com.google.android.gms uid=10205 perm=18128(95) reqPerm=20184(386) attr=27616(332) prevAllowSquashing=false
+10-09 17:49:47.602   662   690 I AppBindingService: [Supervision app] feature disabled
+10-09 17:49:47.609   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.609   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.609   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.609   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.609   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.609   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.609   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.653   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.653   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.653   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.654   662   662 W Looper  : Drained
+10-09 17:49:47.659  1898  4221 I ComponentChangedIO: Feature is not enabled, skipping component changed intent operation [CONTEXT service_id=469 ]
+10-09 17:49:47.663  1298  4886 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:47.673   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.673   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.673   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.673   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.673   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.673   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.726   662   843 D ActivityManager: freezing 4972 com.saathi.test
+10-09 17:49:47.727  4045  4796 I HWUI    : Davey! duration=1117ms; Flags=1, FrameTimelineVsyncId=18419, IntendedVsync=189369488410, Vsync=189386155076, InputEventId=0, HandleInputStart=189388950506, AnimationStart=189388951131, PerformTraversalsStart=189388951589, DrawStart=189684899548, FrameDeadline=189386155076, FrameStartTime=189388945173, FrameInterval=16666666, WorkloadTarget=16666666, AnimationTime=189386155076, AnimationCounter=-1, SyncQueued=189699334089, SyncStart=189700899964, IssueDrawCommandsStart=189715149131, SwapBuffers=189731677089, FrameCompleted=190489038756, DequeueBufferDuration=2750, QueueBufferDuration=212959, GpuCompleted=190489038756, SwapBuffersCompleted=189774598631, DisplayPresentTime=0, CommandSubmissionCompleted=189731677089, 
+10-09 17:49:47.727   662   843 D ActivityManager: freezing 5132 com.saathi.test:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+10-09 17:49:47.729   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.729  2499  2595 W eckt    : Timed out waiting on job to complete, continuing execution.
+10-09 17:49:47.771  6065  6166 I DialerPhlogger: com.google.android.libraries.phenotype.client.Phlogger.logInternal:44 Shared storage file not found for com.google.android.gms.clearcut_client#com.google.android.dialer
+10-09 17:49:47.782   662   861 I ImeTracker: system_server:dca231bf: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false displayId 0
+10-09 17:49:47.782   662   861 I ImeTracker: com.saathi:f67a6868: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false userId 0 displayId 0
+10-09 17:49:47.783   662   861 W InputChannel-JNI: Channel already disposed.
+10-09 17:49:47.783   662   861 I ImeTracker: system_server:dca231bf: onCancelled at PHASE_SERVER_SHOULD_HIDE
+10-09 17:49:47.785  2146  2146 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2361 
+10-09 17:49:47.786   662  1393 W PackageInfo: Large parcel: size=17220 pkg=com.google.android.gms uid=10205 prov=12768(47) prevAllowSquashing=false
+10-09 17:49:47.786  2146  2146 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1532 onStartInput(EditorInfo{EditorInfo{packageName=com.saathi, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+10-09 17:49:47.787  2146  2146 I LatinIMEBase: LatinIMEBase.updateInputViewCoverNavigation():316 Update input view padding, isNavbarOverInputWindow=true, bottom inset=144
+10-09 17:49:47.787  1898  6024 I SystemUpdate: [Control,InstallationControl] Installation progress updated to (0x000, -1.000).
+10-09 17:49:47.818   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+10-09 17:49:47.818   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+10-09 17:49:47.818   662  1169 D InetDiagMessage: Destroyed live tcp sockets for uids={10231} in 0ms
+10-09 17:49:47.826  1454  1794 D SatelliteAccessController: Current default SMS app:ComponentInfo{com.google.android.apps.messaging/com.google.android.apps.messaging.shared.receiver.SmsDeliverReceiver}
+10-09 17:49:47.826  1454  1794 D SatelliteController: getSelectedSatelliteSubId: subId=-1
+10-09 17:49:47.827  4045  4045 D InsetsController: hide(ime())
+10-09 17:49:47.827  4045  4045 I ImeTracker: com.saathi:f67a6868: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-09 17:49:47.832  6164  6164 I RegisteredComponentCache: generateComponentsList: New Components => 
+10-09 17:49:47.832  6164  6164 I RegisteredComponentCache: ComponentInfo: ResolveInfo{5c9d358 com.google.android.tag/com.android.apps.tag.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+10-09 17:49:47.832  6164  6164 I RegisteredComponentCache: generateComponentsList: Removed Components => 
+10-09 17:49:47.832  1653  1719 I Surface : Creating surface for consumer unnamed-1653-85 with slotExpansion=1 for 64 slots
+10-09 17:49:47.834  6164  6188 D CompatChangeReporter: Compat change id reported: 458413887; UID 1027; state: ENABLED
+10-09 17:49:47.854   662   811 W PackageConfigPersister: App-specific configuration not found for packageName: com.saathi and userId: 0
+10-09 17:49:47.858  2146  2461 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatusInternal():119 repeatCheckTimes = 0, locked = false
+10-09 17:49:47.861   662   690 I AppBindingService: [Supervision app] feature disabled
+10-09 17:49:47.863  2146  2461 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatusInternal():119 repeatCheckTimes = 1, locked = false
+10-09 17:49:47.869  6065  6165 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:54 Impression: CALL_SCREEN_INIT_AT_STARTUP
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: Timeout on service connection
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: java.lang.Throwable
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at cotl.a(:com.google.android.gms@263234035@26.32.34 (260400-968093310):65)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bfrw.c(:com.google.android.gms@263234035@26.32.34 (260400-968093310):13)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bfse.c(:com.google.android.gms@263234035@26.32.34 (260400-968093310):9)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bfrw.d(:com.google.android.gms@263234035@26.32.34 (260400-968093310):1)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bfre.a(:com.google.android.gms@263234035@26.32.34 (260400-968093310):26)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bfrd.call(:com.google.android.gms@263234035@26.32.34 (260400-968093310):5)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bnli.d(:com.google.android.gms@263234035@26.32.34 (260400-968093310):50)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bnli.c(:com.google.android.gms@263234035@26.32.34 (260400-968093310):6)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bnli.run(:com.google.android.gms@263234035@26.32.34 (260400-968093310):108)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at bnri.run(:com.google.android.gms@263234035@26.32.34 (260400-968093310):8)
+10-09 17:49:47.894  1898  4462 W GoogleHttpServiceClient: 	at java.lang.Thread.run(Thread.java:1571)
+10-09 17:49:47.905   662   690 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.dialer failed
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at zlf.k(PG:55)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at zvc.c(PG:15)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at zvc.d(PG:38)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at rza.call(PG:202)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at ahxv.call(PG:21)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at aiao.a(PG:3)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at ahzr.run(PG:19)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at aiap.run(PG:5)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at aasb.run(PG:7)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at zhx.run(PG:34)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at aarn.run(PG:829)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:1571)
+10-09 17:49:47.940  6065  6141 E PhenotypeFlagCommitter: 	at aatf.run(PG:61)
+10-09 17:49:47.941  6065  6152 I DialerLogcatLoggingBindings: com.android.dialer.logging.logcat.LogcatLoggingBindings.logImpression:47 Impression: APP_LAUNCHED
+10-09 17:49:47.941  6065  6152 I DialerFlags: com.android.dialer.phenotype.Flags$1.onSuccess:123 finished with result: false
+10-09 17:49:47.949   662   845 I RoleService: Granting default roles...
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.958   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:47.959  1454  1794 D SatelliteController: getConfigForSubId: subId= -1, config= PersistableBundle[{satellite_esos_supported_bool=false, satellite_connection_hysteresis_sec_int=180, satellite_supported_disaster_plmn_string_array=[], regional_satellite_earfcn_bundle=PersistableBundle[{}], satellite_entitlement_supported_bool=false, satellite_supported_emergency_plmn_string_array=[], satellite_configs_per_plmn_bundle=PersistableBundle[{}], satellite_sos_max_datagram_size_bytes_int=255, satellite_supported_msg_apps_string_array=[com.google.android.apps.messaging], satellite_connected_notification_throttle_millis_int=604800000, override_satellite_as_unconstrained_bool=false, satellite_display_name_string=, satellite_roaming_p2p_sms_inactivity_timeout_sec_int=180, satellite_roaming_turn_off_session_for_emergency_call_bool=true, emergency_messaging_supported_bool=false, carrier_roaming_satellite_emergency_messaging_provider_per_country_bundle=PersistableBundle[{}], satellite_data_support_mode_int=0, carrier_roaming_ntn_connect_type_int=0, satellite_attach_supported_bool=false, carrier_roaming_satellite_emergency_messaging_redirection_destination_string=, satellite_nidd_apn_name_string=, carrier_supported_satellite_services_per_provider_bundle=PersistableBundle[{}], satellite_roaming_esos_inactivity_timeout_sec_int=300, carrier_supported_satellite_notification_hysteresis_sec_int=180, carrier_config_applied_bool=false, carrier_roaming_ntn_emergency_call_to_satellite_handover_type_int=2, carrier_roaming_satellite_default_services_int_array=[3, 6], imsserviceentitlement.entitlement_server_url_string=, emergency_call_to_satellite_t911_handover_timeout_millis_int=30000, satellite_roaming_p2p_sms_supported_bool=false, carrier_config_version_string=, satellite_roaming_screen_off_inactivity_timeout_sec_int=30}]
+10-09 17:49:47.959  1454  1794 D SatelliteAccessController: supportedMsgApps:com.google.android.apps.messaging
+10-09 17:49:47.959   662   662 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+10-09 17:49:47.959   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:47.959   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:47.959   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:47.959   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:47.959   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:47.959   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:47.959   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:47.960   662   662 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-09 17:49:47.961   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.961   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.962   662   811 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:47.962   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.962   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:47.963  1898  1949 I PeopleGalProvider: Gal directories started.
+10-09 17:49:47.964  1898  1949 I PeopleGalProvider: Method 1 completed.
+10-09 17:49:47.964  1898  1949 I PeopleGalProvider: Method 1 finished successfully.
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.005   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.008   662  1320 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.016  6164  6190 I NfcEventLog: readListFromLogFile: No NFC events found in log file
+10-09 17:49:48.017  1298  1326 I ssioncontroller: Background concurrent mark compact GC freed 2832KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 4043KB/8086KB, paused 50.516ms,501us total 164.957ms
+10-09 17:49:48.018  3584  4481 I AiAiEcho: AppIndexer Package:[com.google.android.gms] UserProfile:[0] Enabled:[true].
+10-09 17:49:48.018  3584  4481 I AiAiEcho: AppFetcherImplV2 updateApps package:[com.google.android.gms], userId:[0], reason:[package is updated.].
+10-09 17:49:48.026  6065  6167 I DialerPhlogger: com.google.android.libraries.phenotype.client.Phlogger.logInternal:44 Shared storage file not found for com.google.android.libraries.performance.primes#com.google.android.dialer
+10-09 17:49:48.033  1898  1898 I MlBenchmarkInstaller: (REDACTED) Feature unrequest success = %b
+10-09 17:49:48.081   662  1169 D TcpMetricsLogger: connect: uid=10160 netId=101 dst=[172.217.116.4]:443 latencyMs=179 err=0
+10-09 17:49:48.082   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.099   662  2134 W libbinder.ServiceManagerCppClient: Waited one second for android.hardware.uwb.IUwb/default (is service started? Number of threads started in the threadpool: 32. Are binder threads started and available?)
+10-09 17:49:48.111  6164  6164 I NfcService: Starting NFC service
+10-09 17:49:48.111  6164  6164 I NativeNfcManager: Loading C NFC Support
+10-09 17:49:48.149   293  6191 W libc    : Unable to set property "ctl.interface_start" to "aidl/android.hardware.uwb.IUwb/default": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-09 17:49:48.165   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.168  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:48.201   662  1320 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.202   662  1320 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.204  1898  1910 I gvuy    : (REDACTED) Shared storage file not found for %s
+10-09 17:49:48.205  1898  1910 I gvuy    : (REDACTED) Unable to retrieve flag snapshot for %s, using defaults.
+10-09 17:49:48.206  1898  6025 W ChimeraUtils: Module com.google.android.gms.mobiledataplan missing resource null(0)
+10-09 17:49:48.206  1898  6025 W Glide   : Failed to find GeneratedAppGlideModule. You should include an annotationProcessor compile dependency on com.github.bumptech.glide:compiler in your application and a @GlideModule annotated AppGlideModule implementation or LibraryGlideModules will be silently ignored
+10-09 17:49:48.208   662  1628 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.209  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:48.209   662  1628 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.210  1898  6026 I SyntheticOperationsLogg: (REDACTED) SyntheticOperationsLogger unable to log "%s"'s use of "%s" because installOperationsCollector never executed
+10-09 17:49:48.210   662  1628 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.212  1898  6026 I MDM     : [TrustedTimeClientHelper] Creating new TrustedTimeClient client. [CONTEXT service_id=247 ]
+10-09 17:49:48.213  1898  6026 W MDM     : [BaseDeviceAdminManager] Q+ devices does not need device admin. [CONTEXT service_id=247 ]
+10-09 17:49:48.214  1898  6026 I motion_sickness_module: [Initializer] onInitRuntimeState [CONTEXT service_id=398 ]
+10-09 17:49:48.215  1898  1910 I gvuy    : (REDACTED) Shared storage file not found for %s
+10-09 17:49:48.217  1898  6026 I motion_sickness_module: [PermissionsUtil] MotionCues flag is disabled. [CONTEXT service_id=398 ]
+10-09 17:49:48.217  1898  6026 I motion_sickness_module: [Initializer] MotionSicknessAssist is not available, skipping initialization. [CONTEXT service_id=398 ]
+10-09 17:49:48.217  1898  6026 I Multidevice: [MultideviceModuleInitIntentOperation] Running data migration for feature settings [CONTEXT service_id=348 ]
+10-09 17:49:48.233   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:48.233   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:48.234   662  2161 D androidtc: Initializing SystemTextClassifier, type = System
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:48.234   662   866 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-09 17:49:48.240  1898  1910 I gvuy    : (REDACTED) Unable to retrieve flag snapshot for %s, using defaults.
+10-09 17:49:48.240  1898  1910 I gvuy    : (REDACTED) Shared storage file not found for %s
+10-09 17:49:48.241  1898  1910 I gvuy    : (REDACTED) Unable to retrieve flag snapshot for %s, using defaults.
+10-09 17:49:48.252  6164  6164 D nativeloader: Load libnfc_nci_jni.so using class loader ns clns-shared-9 (caller=/apex/com.android.nfcservices/priv-app/NfcNciApexGoogle@CP41.260828.004.A7/NfcNciApexGoogle.apk): ok
+10-09 17:49:48.253  6164  6164 I libnfc_nci: JNI_OnLoad: NFC Service: loading nci JNI
+10-09 17:49:48.253  1898  6024 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/com.google.android.gms.update.storage.xml: [<1: 0, <2: 0, <4: 1, <8: 2, <16: 2, <32: 2, <64: 2, <128: 0, <256: 6, <512: 2, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:48.268   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.268   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.280  1454  1454 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-09 17:49:48.280  1454  1562 V MessagingReadRestrictionAllowlistMonitor: onBroadcastReceived: No AppOp changes for package: com.google.android.gms
+10-09 17:49:48.285   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:48.285   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:48.285   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:48.285   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:48.291   662   682 W system_server: Weak pointer dereference blocked for 20 milliseconds.
+10-09 17:49:48.291   662  2540 W system_server: Weak pointer dereference blocked for 15 milliseconds.
+10-09 17:49:48.295  1295  1295 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-09 17:49:48.296  1653  1719 E ConsumerBase: [ImageReader-198x198f1u2816m2-1653-78] abandonLocked: ConsumerBase is abandoned!
+10-09 17:49:48.303  1898  1904 W System  : A resource failed to call close. 
+10-09 17:49:48.304  1898  6026 D nativeloader: Load /apex/com.google.android.gmssystem/priv-app/PrebuiltGmsCoreVic@CP41.260828.004.A7/PrebuiltGmsCoreVic.apk!/lib/arm64-v8a/libdatastore_shared_counter.so using class loader ns clns-9 (caller=/apex/com.google.android.gmssystem/priv-app/PrebuiltGmsCoreVic@CP41.260828.004.A7/PrebuiltGmsCoreVic.apk): ok
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - Parsing file '/etc/libnfc-nci.conf'
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [NFC_DEBUG_ENABLED] = 0
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [NFA_STORAGE] = "/data/nfc"
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [PRESERVE_STORAGE] = 0x01
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [POLLING_TECH_MASK] = 0x0F
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [UICC_LISTEN_TECH_MASK] = 0x07
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [NFA_MAX_EE_SUPPORTED] = 0x02
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [AID_FOR_EMPTY_SELECT] = {08:A0:00:00:01:51:00:00:00}
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [AID_MATCHING_MODE] = 0x01
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [NCI_RESET_TYPE] = 0x00
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [PRESENCE_CHECK_RETRY_COUNT] = 0
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [EUICC_MEP_MODE] = 0x03
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [NFCEE_EVENT_RF_DISCOVERY_OPTION] = 0x00
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [OPTIMIZE_ROUTING_TABLE_UPDATE] = 0x00
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [NFA_EE_ROUTE_DEBOUNCE_TIMER] = 0x01
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [KOVIO_PRESENCE_CHECK_TYPE] = 0x00
+10-09 17:49:48.305  6164  6164 I libnfc_nci: ConfigFile - [RECOVERY_OPTION] = 1
+10-09 17:49:48.305  6164  6164 I libnfc_nci: NfcAdaptation:440
+10-09 17:49:48.305  6164  6164 I libnfc_nci: NfcAdaptation::InitializeHalDeviceContext: INfc::getService()
+10-09 17:49:48.307   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.309   662  1236 D TextClassificationManagerService: Binding to ComponentInfo{com.google.android.as/com.google.android.apps.miphone.aiai.textclassifier.service.QAiaiTextClassifierService}
+10-09 17:49:48.313  1898  5912 I Nearby  : (REDACTED) is blocked device type %s, isAuto=%s, isIot=%s, isLatchsky=%s, isChinaWearable=%s, isTv=%s, isWearable=%s (supportWearOs=%s), isChromeOsDevice=%s (supportChromeOs=%s)
+10-09 17:49:48.315   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:48.323  1298  4886 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:48.353   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:48.353  1898  5912 I NearbyDiscovery: (REDACTED) onInitRuntimeState isDiscoveryEnabled: %s
+10-09 17:49:48.353   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:48.354   662  2570 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.375  1653  1719 I Surface : Creating surface for consumer unnamed-1653-86 with slotExpansion=1 for 64 slots
+10-09 17:49:48.376   662  2771 D ConnectivityService: requestNetwork for uid/pid:10205/1898 activeRequest: null callbackRequest: 186 [NetworkRequest [ TRACK_DEFAULT id=187, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10205 RequestorUid: 10205 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ], NetworkRequest [ REQUEST id=188, [ Transports: SATELLITE Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10205 RequestorUid: 10205 RequestorPkg: com.google.android.gms UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647 isUidTracked: false declaredMethods: AVAIL|LOST
+10-09 17:49:48.391   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.retaildemo
+10-09 17:49:48.391   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION, user: 0
+10-09 17:49:48.395  1298  4886 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:48.395  1898  5682 I Checkin : [AndroidCheckinProtoModule] Checkin reason type: 1 attempt count: 1.
+10-09 17:49:48.398  6164  6188 I RegisteredComponentCache: generateComponentsList: New Components => 
+10-09 17:49:48.398  6164  6188 I RegisteredComponentCache: ComponentInfo: ResolveInfo{6fc7421 com.google.android.tag/com.android.apps.tag.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+10-09 17:49:48.398  6164  6188 I RegisteredComponentCache: generateComponentsList: Removed Components => 
+10-09 17:49:48.398  6164  6188 I RegisteredComponentCache: ComponentInfo: ResolveInfo{5c9d358 com.google.android.tag/com.android.apps.tag.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+10-09 17:49:48.398   662  2161 E ClipboardService: Denying clipboard access to com.saathi.test, application is not in focus nor is it a system service for user 0
+10-09 17:49:48.409  1454  1454 D CarrierSvcBindHelper: No carrier app for: 0
+10-09 17:49:48.410  3584  3584 I AiAiTextClassifier: AiaiTextClassifierService.onCreate()
+10-09 17:49:48.412   662  1628 W PackageInfo: Large parcel: size=70828 pkg=com.google.android.gms uid=10205 perm=18128(95) reqPerm=20184(386) attr=27616(332) prevAllowSquashing=false
+10-09 17:49:48.412  1454  1679 D SatelliteController: packageStateChanged: package:com.google.android.gms defaultSmsPackageName: com.google.android.apps.messaging satelliteGatewayServicePackageName: 
+10-09 17:49:48.413  1454  1679 I SatelliteAppTracker: onPackageModified : com.google.android.gms
+10-09 17:49:48.414   662  1320 W PackageInfo: Large parcel: size=159784 pkg=com.google.android.gms uid=10205 serv=155332(427) prevAllowSquashing=false
+10-09 17:49:48.430   294   294 I hwservicemanager: getTransport: Cannot find entry android.hardware.nfc@1.2::INfc/default in either framework or device VINTF manifest.
+10-09 17:49:48.431  1454  1679 D SatelliteAppTracker: packageName: com.google.android.gms, value: com.google.android.gms
+10-09 17:49:48.503   662  1423 I Role    : com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mFlags='0', mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMetaData=[], mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0} Requirement{mFeatureFlag=null, mMinTargetSdkVersion=1}
+10-09 17:49:48.503   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING, user: 0
+10-09 17:49:48.511  1632  6102 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/METRICS_LOGGER_PREFERENCE_FILE.xml: [<1: 0, <2: 0, <4: 0, <8: 0, <16: 0, <32: 0, <64: 0, <128: 0, <256: 0, <512: 2, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:48.515  3584  3910 D androidtc: Initializing SystemTextClassifier, type = System
+10-09 17:49:48.515  3584  3910 W SystemServiceRegistry: No service published for: persistent_data_block
+10-09 17:49:48.519   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.589   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.593  1632  5836 I LSR     : Handling LSR module init in persistent process [CONTEXT service_id=277 ]
+10-09 17:49:48.604  1653  2402 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.apps.nexuslauncher/shared_prefs/com.android.launcher3.device.prefs.xml: [<1: 0, <2: 0, <4: 0, <8: 3, <16: 1, <32: 0, <64: 1, <128: 4, <256: 0, <512: 2, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:48.632   294   294 I hwservicemanager: getTransport: Cannot find entry android.hardware.nfc@1.1::INfc/default in either framework or device VINTF manifest.
+10-09 17:49:48.641   294   294 I hwservicemanager: getTransport: Cannot find entry android.hardware.nfc@1.0::INfc/default in either framework or device VINTF manifest.
+10-09 17:49:48.641  1632  1669 I gvuy    : (REDACTED) Shared storage file not found for %s
+10-09 17:49:48.642  1632  1669 I gvuy    : (REDACTED) Unable to retrieve flag snapshot for %s, using defaults.
+10-09 17:49:48.643   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.670   293  6199 W libc    : Unable to set property "ctl.interface_start" to "aidl/android.hardware.nfc.INfc/default": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-09 17:49:48.699   662  2570 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.710   662   690 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:48.711  3584  3910 I AiAiTextClassifier: ActionRankingDataTtlService - Scheduling action ranking job [jobId=284347269, interval=PT24H]
+10-09 17:49:48.712   662  1388 W ApplicationInfo: Large ApplicationInfo parcel: size=20060 package=com.google.android.googlequicksearchbox sharedLibs=3 resDirs=2 overlayPaths=2
+10-09 17:49:48.714   662  2690 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.720  1632  1664 I .gms.persistent: WaitForGcToComplete blocked ProfileSaver on Background for 1.824s
+10-09 17:49:48.724  1632  1632 I MagicTether: [LaunchUtils] No accounts found for enabling Instant Wifi. [CONTEXT service_id=276 ]
+10-09 17:49:48.725   662  1627 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.725   662  1627 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.726   662  1627 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.726   662  1627 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.733  1898  6026 I ComponentChangedIO: Feature is not enabled, skipping component changed intent operation [CONTEXT service_id=469 ]
+10-09 17:49:48.733   662  1169 D ConnectivityService: NetReassign [187 : null → 101] [c 0] [a 1] [i 1]
+10-09 17:49:48.733   662  1627 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.736   662  2540 W PackageInfo: Large parcel: size=17220 pkg=com.google.android.gms uid=10205 prov=12768(47) prevAllowSquashing=false
+10-09 17:49:48.737  1898  3171 I PeopleGalProvider: Gal directories started.
+10-09 17:49:48.737  1898  3171 I PeopleGalProvider: Method 1 completed.
+10-09 17:49:48.737  1898  3171 I PeopleGalProvider: Method 1 finished successfully.
+10-09 17:49:48.739   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.apps.work.clouddpc
+10-09 17:49:48.739   662   690 I AppBindingService: [Supervision app] feature disabled
+10-09 17:49:48.742  1632  5988 I SystemMemoryMap: (REDACTED) [activityrecognition] serialization complete (extras/values=%.2f/%.2fkb)
+10-09 17:49:48.743   662  1627 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.747   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:48.749   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:48.749   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:48.762  1454  1787 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+10-09 17:49:48.762  1454  1787 V ImsResolver: searchForImsServices: package=com.google.android.gms, users=[UserHandle{0}]
+10-09 17:49:48.765  6065  6165 I DialerLoggingConsentCheckerImpl: com.google.android.callingshared.logging.consent.impl.LoggingConsentCheckerImpl.getConsent$<anonymous>:72 timer stop with success, timer present: false
+10-09 17:49:48.767  6065  6152 I DialerLoggingConsentCheckerImpl: com.google.android.callingshared.logging.consent.impl.LoggingConsentCheckerImpl.getConsent$<anonymous>:72 timer stop with success, timer present: false
+10-09 17:49:48.775   662  2690 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.779   662   662 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+10-09 17:49:48.798  1898  2233 I Icing   : Indexing done com.google.android.gms-apps
+10-09 17:49:48.799  1653  1719 E ConsumerBase: [ImageReader-198x198f1u2816m2-1653-79] abandonLocked: ConsumerBase is abandoned!
+10-09 17:49:48.809  1898  1901 W gle.android.gms: Missing inline cache for cpgi cpfm.a(coxq)
+10-09 17:49:48.817  1632  1632 I MagicTether: [LaunchUtils] No accounts found for enabling Instant Wifi. [CONTEXT service_id=276 ]
+10-09 17:49:48.819   662  1239 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@e9cdd25a does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+10-09 17:49:48.823   662  2687 W ApplicationInfo: Large ApplicationInfo parcel: size=20060 package=com.google.android.googlequicksearchbox sharedLibs=3 resDirs=2 overlayPaths=2
+10-09 17:49:48.848  1653  1653 D RecentsView: onTaskDisplayChanged: 12, new displayId = 0
+10-09 17:49:48.851   662  2687 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:48.857   662   690 I AppBindingService: [Supervision app] feature disabled
+10-09 17:49:48.857   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.858   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.858   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.858   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.858   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.858   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:48.867  6065  6183 D WM-Processor: glr: processing WorkGenerationalId(workSpecId=0cb8bf0d-bc76-4afe-abf6-bb4ff4bf1605, generation=0)
+10-09 17:49:48.935   662  1155 D RecoverableKeyStoreMgr: Root of trust for recovery agent + 10205 is assigned for the first time to GoogleCloudKeyVaultServiceV1
+10-09 17:49:48.942  6065  6065 D WM-WorkerWrapper: Starting work for com.google.apps.tiktok.contrib.work.TikTokListenableWorker
+10-09 17:49:48.944  1898  3158 I Multidevice: [gmje] Running data migration for XdFeature parent setting -> categories [CONTEXT service_id=348 ]
+10-09 17:49:48.950  6065  6065 W MendelPackageState: Shared storage file not found for tiktok.device#com.google.android.dialer
+10-09 17:49:48.953  6065  6152 I DialerSingletonScopedExternalsLogging: com.google.android.dialershared.externals.logging.SingletonScopedExternalsLogging.recordCallMethodInvocation:75 event: TIKTOK_WORK_EXECUTION_MONITOR_ON_WORK_STARTED, function parameters: [0cb8bf0d-bc76-4afe-abf6-bb4ff4bf1605,com.android.dialer.voicemail.service.impl.VvmTaskWorker], return value: <empty>
+10-09 17:49:48.959  6065  6152 I DialerVvmTaskWorkerDelegate: com.android.dialer.voicemail.service.impl.scheduler.VvmTaskWorker$VvmTaskWorkerDelegate.executeVvmJob:191 Beginning execution of job ID: 2
+10-09 17:49:48.964  6065  6152 I DialerSingletonScopedExternalsLogging: com.google.android.dialershared.externals.logging.SingletonScopedExternalsLogging.recordCallMethodInvocation:66 event: VVM_TASK_WORKER_EXECUTE_VVM_JOB, function parameters: [2], return value: <empty> [CONTEXT enable_persistent_logger=true ]
+10-09 17:49:48.998   662  1155 I RecoverableKeyStoreMgr: Updating the certificate with the new serial number 10020
+10-09 17:49:48.998   662  1155 D RecoverableKeyStoreMgr: Getting and validating a random endpoint certificate
+10-09 17:49:49.000   662  1155 D RecoverableKeyStoreMgr: Saving the randomly chosen endpoint certificate to database
+10-09 17:49:49.000   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:49.000   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:49.000   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:49.000   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:49.000   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:49.000   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:49.000   662   662 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:49.000   662   662 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-09 17:49:49.000   662   662 W Looper  : Slow dispatch took 221ms main app=system_server main=true group=FOREGROUND h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticLambda72@58000dd m=0
+10-09 17:49:49.000   662   662 W Looper  : Slow delivery took 273ms main app=system_server main=true group=FOREGROUND h=android.app.ActivityThread$H c=android.app.LoadedApk$ServiceDispatcher$RunConnection@f80cdd9 m=0
+10-09 17:49:49.001   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.007  6065  6166 I DialerVvmCarrierIdentifierImpl: com.android.dialer.voicemail.service.impl.carriermapping.VvmCarrierIdentifierImpl.getVvmCarrierNameBlocking:101 Looking up carrier name for phone account handle: 1 [CONTEXT ratelimit_period="1 MINUTES" ]
+10-09 17:49:49.020  1454  1787 V ImsResolver: searchForImsServices: package=com.google.android.gms, users=[UserHandle{0}]
+10-09 17:49:49.030  1632  3290 E GmsTaskScheduler: sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+10-09 17:49:49.030  1632  3290 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 791910]
+10-09 17:49:49.033  1632  4314 I LSR     : Centralized reporting is disabled for all accounts [CONTEXT service_id=277 ]
+10-09 17:49:49.036   662  1155 I RecoverableKeyStoreMgr: This is a certificate change. Snapshot didn't exist
+10-09 17:49:49.041  1632  3290 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 791921]
+10-09 17:49:49.044   662   672 I system_server: Background young concurrent mark compact GC freed 23MB AllocSpace bytes, 6(240KB) LOS objects, 28% free, 43MB/60MB, paused 36.271ms,179.191ms total 1.388s
+10-09 17:49:49.051  6065  6167 I DialerVvmCarrierIdentifierImpl: com.android.dialer.voicemail.service.impl.carriermapping.VvmCarrierIdentifierImpl.getVvmCarrierNameBlocking:123 found carrier name: VVM_CARRIER_TMO_US [CONTEXT enable_persistent_logger=true ]
+10-09 17:49:49.053  6065  6152 I DialerRestVoicemailEnabledFn: com.android.dialer.voicemail.service.impl.vvmclients.rest.RestVoicemailEnabledFn.isEnabled:89 REST supported Pixel device [CONTEXT ratelimit_period="1 MINUTES" ]
+10-09 17:49:49.061  1454  1794 D SatelliteAccessController: Current default SMS app:ComponentInfo{com.google.android.apps.messaging/com.google.android.apps.messaging.shared.receiver.SmsDeliverReceiver}
+10-09 17:49:49.061  1454  1794 D SatelliteController: getSelectedSatelliteSubId: subId=-1
+10-09 17:49:49.062  1454  1794 D SatelliteController: getConfigForSubId: subId= -1, config= PersistableBundle[{satellite_esos_supported_bool=false, satellite_connection_hysteresis_sec_int=180, satellite_supported_disaster_plmn_string_array=[], regional_satellite_earfcn_bundle=PersistableBundle[{}], satellite_entitlement_supported_bool=false, satellite_supported_emergency_plmn_string_array=[], satellite_configs_per_plmn_bundle=PersistableBundle[{}], satellite_sos_max_datagram_size_bytes_int=255, satellite_supported_msg_apps_string_array=[com.google.android.apps.messaging], satellite_connected_notification_throttle_millis_int=604800000, override_satellite_as_unconstrained_bool=false, satellite_display_name_string=, satellite_roaming_p2p_sms_inactivity_timeout_sec_int=180, satellite_roaming_turn_off_session_for_emergency_call_bool=true, emergency_messaging_supported_bool=false, carrier_roaming_satellite_emergency_messaging_provider_per_country_bundle=PersistableBundle[{}], satellite_data_support_mode_int=0, carrier_roaming_ntn_connect_type_int=0, satellite_attach_supported_bool=false, carrier_roaming_satellite_emergency_messaging_redirection_destination_string=, satellite_nidd_apn_name_string=, carrier_supported_satellite_services_per_provider_bundle=PersistableBundle[{}], satellite_roaming_esos_inactivity_timeout_sec_int=300, carrier_supported_satellite_notification_hysteresis_sec_int=180, carrier_config_applied_bool=false, carrier_roaming_ntn_emergency_call_to_satellite_handover_type_int=2, carrier_roaming_satellite_default_services_int_array=[3, 6], imsserviceentitlement.entitlement_server_url_string=, emergency_call_to_satellite_t911_handover_timeout_millis_int=30000, satellite_roaming_p2p_sms_supported_bool=false, carrier_config_version_string=, satellite_roaming_screen_off_inactivity_timeout_sec_int=30}]
+10-09 17:49:49.062  1454  1794 D SatelliteAccessController: supportedMsgApps:com.google.android.apps.messaging
+10-09 17:49:49.064   662  2690 W ApplicationInfo: Large ApplicationInfo parcel: size=20060 package=com.google.android.googlequicksearchbox sharedLibs=3 resDirs=2 overlayPaths=2
+10-09 17:49:49.076   662  1239 D CorePackageUpdate: onRecentTaskRemoved Removing task: 10
+10-09 17:49:49.077  6065  6152 I DialerSharpieEnabledFn: com.android.dialer.sharpie.enabledfn.SharpieEnabledFn.isEnabled:39 disabled by flag [CONTEXT ratelimit_period="1 MINUTES" ]
+10-09 17:49:49.079  1653  1653 D TopTaskTracker: handleTaskMovedToFront: TaskInfo{userId=0 taskId=12 effectiveUid=10231 seqId=0 displayId=0 isRunning=true baseIntent=Intent { flg=0x10008000 cmp=com.saathi.test/com.saathi.ui.ExternalSurfaceActivity } baseActivity=ComponentInfo{com.saathi.test/com.saathi.ui.ExternalSurfaceActivity} topActivity=ComponentInfo{com.saathi.test/com.saathi.ui.ExternalSurfaceActivity} origActivity=null realActivity=ComponentInfo{com.saathi.test/com.saathi.ui.ExternalSurfaceActivity} realActivityIsAppLockEnabled=false numActivities=1 lastActiveTime=191709 supportsMultiWindow=true supportsMultiWindowWithoutConstraints=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.os.BinderProxy@bd547b6} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 156 - 0, 0) topActivityInfo=ActivityInfo{26d2cb7 com.saathi.ui.ExternalSurfaceActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isInteractive=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=null leafTaskBoundsFromOptions= false capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=503 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false isLeafTask= true eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 156 - 1280, 2784) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null topNonResizableActivityAspectRatio=-1.0 idealTaskOrientation=-1} topActivityMainWindowFrame=null}
+10-09 17:49:49.079  6065  6181 D WM-PackageManagerHelper: Skipping component enablement for androidx.work.impl.background.systemalarm.RescheduleReceiver
+10-09 17:49:49.082   662   845 I RoleService: Granting default roles...
+10-09 17:49:49.084  3584  3910 I AiAiTextClassifier: AiaiTextClassifierServiceConnector.onCreate()
+10-09 17:49:49.085  3584  3910 I AiAiTextClassifier: SmartselectLearningController: Calling SmartSelectTrainingManager to schedule training by database.
+10-09 17:49:49.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.090   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.155   662  1423 W SignedPackage: Cannot get ApplicationInfo for package: com.google.android.devicelockcontroller
+10-09 17:49:49.157   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.161   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.retaildemo
+10-09 17:49:49.162   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms.supervision, role: android.app.role.SYSTEM_SUPERVISION, user: 0
+10-09 17:49:49.163   662  1423 I Role    : com.google.android.gms not qualified for android.app.role.SYSTEM_CALL_STREAMING due to missing RequiredComponent{mFlags='0', mIntentFilterData=IntentFilterData{mAction='android.telecom.CallStreamingService', mCategories='[]', mDataScheme='null', mDataType='null'}, mMetaData=[], mPermission='android.permission.BIND_CALL_STREAMING_SERVICE', mQueryFlags=0} Requirement{mFeatureFlag=null, mMinTargetSdkVersion=1}
+10-09 17:49:49.163   662  1423 E RoleControllerServiceImpl: Default/fallback role holder package doesn't qualify for the role, package: com.google.android.gms, role: android.app.role.SYSTEM_CALL_STREAMING, user: 0
+10-09 17:49:49.163   662  1423 W SignedPackage: Package doesn't have required signing certificate: com.google.android.apps.work.clouddpc
+10-09 17:49:49.178   662  2134 W libbinder.ServiceManagerCppClient: Waited one second for android.hardware.uwb.IUwb/default (is service started? Number of threads started in the threadpool: 32. Are binder threads started and available?)
+10-09 17:49:49.178   662  1239 D CorePackageUpdate: Couldn't find a persistent state for task= 10
+10-09 17:49:49.182  1295  1395 V RecentTasksController: Notify recent tasks changed: 1
+10-09 17:49:49.182  1295  1395 V RecentTasksController: onRecentTaskRemovedForAddTask; removing task=10
+10-09 17:49:49.182  1295  1395 D ShellDesktopMode: (0): Removes freeform task: taskId=10
+10-09 17:49:49.182  1295  1395 W ShellDesktopMode: (0): No display id found for task: taskId=10
+10-09 17:49:49.182  1295  1395 V RecentTasksController: Notify recent tasks changed: 1
+10-09 17:49:49.182  1653  1653 D RecentTasksList: invalidateLoadedTasks - previous requestLoadId: -1
+10-09 17:49:49.182  1653  1653 D RecentTasksList: invalidateLoadedTasks - previous requestLoadId: -1
+10-09 17:49:49.187   293  6201 W libc    : Unable to set property "ctl.interface_start" to "aidl/android.hardware.uwb.IUwb/default": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-09 17:49:49.210   662  1833 W ApplicationInfo: Large ApplicationInfo parcel: size=20060 package=com.google.android.googlequicksearchbox sharedLibs=3 resDirs=2 overlayPaths=2
+10-09 17:49:49.210  1898  5915 D SharedPreferencesImpl: Time required to fsync /data/user/0/com.google.android.gms/shared_prefs/com.google.android.gms.update.storage.xml: [<1: 0, <2: 0, <4: 1, <8: 2, <16: 2, <32: 2, <64: 2, <128: 0, <256: 7, <512: 3, <1024: 0, <2048: 0, <4096: 0, <8192: 0, <16384: 0, >=16384: 0]
+10-09 17:49:49.215  1632  4314 I LSR     : No periodic upload requests, periodic reporting should be disabled [CONTEXT service_id=277 ]
+10-09 17:49:49.224  1632  5836 I LSR     : Refreshing periodic location reporting state [CONTEXT service_id=277 ]
+10-09 17:49:49.228  1898  5688 I RecoverableKeyStoreGms: [EnrollmentManager] Recovery service is initialized. [CONTEXT service_id=172 ]
+10-09 17:49:49.230  1295  1395 V WindowManagerShell: Transition requested (#21): android.os.BinderProxy@c4de52c TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=12 effectiveUid=10231 seqId=0 displayId=0 isRunning=true baseIntent=Intent { flg=0x10008000 cmp=com.saathi.test/com.saathi.ui.ExternalSurfaceActivity } baseActivity=ComponentInfo{com.saathi.test/com.saathi.ui.ExternalSurfaceActivity} topActivity=ComponentInfo{com.saathi.test/com.saathi.ui.ExternalSurfaceActivity} origActivity=null realActivity=ComponentInfo{com.saathi.test/com.saathi.ui.ExternalSurfaceActivity} realActivityIsAppLockEnabled=false numActivities=1 lastActiveTime=192058 supportsMultiWindow=true supportsMultiWindowWithoutConstraints=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.os.BinderProxy@5062bf5} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 156 - 0, 0) topActivityInfo=ActivityInfo{9838d8a com.saathi.ui.ExternalSurfaceActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isInteractive=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=null leafTaskBoundsFromOptions= false capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=503 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false isLeafTask= true eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 156 - 1280, 2784) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null topNonResizableActivityAspectRatio=-1.0 idealTaskOrientation=-1} topActivityMainWindowFrame=null}, pipChange = null, remoteTransitionInfo = null, displayChanges = null, requestedLocation = null, userChange = null, windowingLayerChange = null, fullscreenRequestChange = null, flags = 0, debugId = 21 }
+10-09 17:49:49.231  1295  1395 V ShellDesktopMode: skipping handleRequest reason=triggerTask's display doesn't support desktop mode
+10-09 17:49:49.231  1295  1395 D ShellSplitScreen: logExit: no-op, mLoggerSessionId is null
+10-09 17:49:49.233  1898  5540 I SystemUpdate: [Installation,ReceiverIntentOperation] Received intent: Intent { act=com.google.android.gms.update.BASE_MODULE_INIT cat=[targeted_intent_op_prefix:.update.control.ReceiverIntentOperation] xflg=0x4 cmp=com.google.android.gms/.chimera.GmsIntentOperationService }.
+10-09 17:49:49.249  1898  5915 I GmsModuleFndr: Beginning GMS chimera module scan
+10-09 17:49:49.249  1653  1719 I Surface : Creating surface for consumer unnamed-1653-87 with slotExpansion=1 for 64 slots
+10-09 17:49:49.253   662  1239 V ActivityTaskManager: TaskLaunchParamsModifier: phase=2 task=Task{8e0f2ee #12 type=standard A=10231:com.saathi.test} activity=ActivityRecord{238418025 u0 com.saathi.test/com.saathi.ui.ExternalSurfaceActivity t-1} display-area-from-source=DefaultTaskDisplayArea@151429556 display-id=0 task-display-area-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@151429556 inherit-from-source=fullscreen non-freeform-task-display-area display-area=DefaultTaskDisplayArea@151429556 skip-bounds-fullscreen
+10-09 17:49:49.253   662  1239 I ActivityTaskManager: START u0 {flg=0x10008000 xflg=0x4 cmp=com.saathi.test/com.saathi.ui.ExternalSurfaceActivity (has extras)} with LAUNCH_MULTIPLE from uid 10230 (com.saathi) (sr=251678227) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+10-09 17:49:49.255   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+10-09 17:49:49.258  4045  4045 D LifecycleMonitor: Lifecycle status change: com.saathi.ComplaintDraftActivity@52ec50e in: PAUSED
+10-09 17:49:49.258  4045  4045 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.saathi.ComplaintDraftActivity@52ec50e
+10-09 17:49:49.261  1632  4314 I LSR     : Centralized reporting is disabled for all accounts [CONTEXT service_id=277 ]
+10-09 17:49:49.269  1632  3290 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 792149]
+10-09 17:49:49.269  1632  3290 E GmsTaskScheduler: sendWakeUpEvent called on SchedulerClientBroadcastStrategy
+10-09 17:49:49.274   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.274   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.274   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.274   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.274   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.274   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.275   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.321   662  1169 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+10-09 17:49:49.321   662  1169 D InetDiagMessage: Destroyed live tcp sockets for uids={99000} in 66ms
+10-09 17:49:49.351   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.351   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.351   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.351   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.351   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.351   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.366   662  1627 W InputChannel-JNI: Channel already disposed.
+10-09 17:49:49.377  2282  4892 I libbinder.IPCThreadState: oneway function results for code 2 on binder at 0xb4007ed2d005c000 will be dropped but finished with status UNKNOWN_TRANSACTION
+10-09 17:49:49.423  3584  4479 I AiAiEcho: AppIndexer Package:[com.google.android.gms] UserProfile:[0] Enabled:[true].
+10-09 17:49:49.423  3584  4479 I AiAiEcho: AppFetcherImplV2 updateApps package:[com.google.android.gms], userId:[0], reason:[package is updated.].
+10-09 17:49:49.426   662  1628 D CorePackageUpdate: Couldn't find a persistent state for task= 12
+10-09 17:49:49.426   662  1628 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:49.427   662  1628 D DifferentDisplayCheck: Focus lost for Task Task{9d3850 #11 type=standard A=10230:com.saathi} on display 0
+10-09 17:49:49.427   662  1628 D DifferentDisplayCheck: Focus gained for Task Task{8e0f2ee #12 type=standard A=10231:com.saathi.test} on display 0
+10-09 17:49:49.448   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.450  1898  5915 I ModuleSetResolution: Computing pending module set with APKs: [[AdsFdrDynamite.integ:260480602100000], [Cronetdynamite:263234260400], [Dynamiteloader:263234260000], [Dynamitemodulesa:263234260000], [Dynamitemodulesc:263234260000], [Googlecertificates:263234260000], [Mapsdynamite:263234260000], [Measurementdynamite:263234260000]]
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature CAMERA_LOW_LIGHT_MANAGEMENT is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature MEDIA_EFFECT_ENHANCEMENT is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature actionlearner is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature ambient_context is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature antifingerprinting is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature appsearch_dynamite_impl is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature appsearch_impl is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature brella_dynamite is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature cam_feature_combo_query is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature continuity is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature dck_management is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature easyunlock is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature enterprise_zt_mp_complete is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature fast_pair is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature filament_support_checker is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature game_platform is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature games is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature growth_upgradeparty is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature health_tracking_base is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature home is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature homegraph is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature identity_credentials_placebo is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature identity_credentials_platform is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature tflite_dynamite is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_conversation_filtering is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_dashboard is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_ensure_supervision_setup is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_get_parent_verification_intent is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_get_supported_features is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_resource_filtering is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_revoke_supervision is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_screentime_restriction_callback is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature kids_transparency is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature maps3d is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature maps_core is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature mdocstore is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature mlkit.docscan.crop is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature mlkit.docscan.enhance is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature mlkit.docscan.shadow is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature mlkit.segmentation.subject is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature motion_api is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature perfetto_processor is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature performance_debug is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature permissions_debug is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature play_cloud_search is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature precisionfinding_module is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature semanticlocation_debug is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature spoon_pc is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature tensorgps_debug is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature tensorgps_metrics is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature tflite_delegate_edgetpu is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature tflite_delegate_test is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature tflite_gpu_dynamite is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature usonia is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature usonia_iam is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature vision.face is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature vision.ica is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature wasmlibs_brotli_native is disabled.
+10-09 17:49:49.451  1898  5915 I ModuleSetMgr: Download of container feature wasmlibs_dckscryptjni is disabled.
+10-09 17:49:49.452  1898  5912 I NearbyDiscovery: Trigger rescan contextual cards [CONTEXT service_id=265 ]
+10-09 17:49:49.457   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.457   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.457   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.457   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.457   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.457   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.459   662  1628 D ActivityManager: quick sync unfreeze 4972 for 1
+10-09 17:49:49.460  1898  5915 I ModuleSetResolution: Pending container module APKs: []
+10-09 17:49:49.460  1898  5915 I ModuleSetResolution: Pending non-container module APKs: []
+10-09 17:49:49.507   662  1727 W ApplicationInfo: Large ApplicationInfo parcel: size=20060 package=com.google.android.googlequicksearchbox sharedLibs=3 resDirs=2 overlayPaths=2
+10-09 17:49:49.524   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.524   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.524   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.524   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.524   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.524   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.533  4972  5043 W libc    : Access denied finding property "vendor.mesa.virtgpu.kumquat"
+10-09 17:49:49.538  4972  5043 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+10-09 17:49:49.539  4972  5043 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-09 17:49:49.559  6164  6188 I RegisteredComponentCache: generateComponentsList: New Components => 
+10-09 17:49:49.559  6164  6188 I RegisteredComponentCache: ComponentInfo: ResolveInfo{c3c8ad2 com.google.android.tag/com.android.apps.tag.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+10-09 17:49:49.559  6164  6188 I RegisteredComponentCache: generateComponentsList: Removed Components => 
+10-09 17:49:49.559  6164  6188 I RegisteredComponentCache: ComponentInfo: ResolveInfo{6fc7421 com.google.android.tag/com.android.apps.tag.TagViewer m=0x108000 userHandle=UserHandle{0}}, techs: android.nfc.tech.Ndef, 
+10-09 17:49:49.613   662   662 W Looper  : Slow dispatch took 611ms main app=system_server main=true group=FOREGROUND h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=com.android.internal.util.function.pooled.PooledLambdaImpl@e14ef27 m=0
+10-09 17:49:49.613   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:49.613   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:49.614   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:49.618  1295  1444 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@58043e2
+10-09 17:49:49.619   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:49.619   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:49.635  1454  1562 V MessagingReadRestrictionAllowlistMonitor: onBroadcastReceived: No AppOp changes for package: com.google.android.gms
+10-09 17:49:49.659   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.659   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.659   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.659   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.659   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.659   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.659   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.675  6164  6197 W libbinder.ServiceManagerCppClient: Waited one second for android.hardware.nfc.INfc/default (is service started? Number of threads started in the threadpool: 16. Are binder threads started and available?)
+10-09 17:49:49.676  1454  1454 D CarrierSvcBindHelper: onPackageModified: com.google.android.gms
+10-09 17:49:49.677  6204  6204 I android.hardware.uwb: uwb_default_hal: UWB HAL starting up
+10-09 17:49:49.677  1454  1454 D CarrierSvcBindHelper: No carrier app for: 0
+10-09 17:49:49.679   662   691 D ActivityManager: sync unfroze 4972 com.saathi.test for 3
+10-09 17:49:49.681   293  6206 W libc    : Unable to set property "ctl.interface_start" to "aidl/android.hardware.nfc.INfc/default": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-09 17:49:49.681  6204  6204 E android.hardware.uwb: uwb_default_hal: panicked at hardware/interfaces/uwb/aidl/default/src/uwb_chip.rs:56:14:
+10-09 17:49:49.681  6204  6204 E android.hardware.uwb: failed to open the serial device: Os { code: 6, kind: Uncategorized, message: "No such device or address" }
+--------- beginning of crash
+10-09 17:49:49.682  6204  6204 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 6204 (android.hardwar), pid 6204 (android.hardwar)
+10-09 17:49:49.682   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:49.682   662  1201 I AppWidgetPackageResolver: queryIntentReceivers for user 0 found: 0 receivers.
+10-09 17:49:49.695   662   691 D ActivityManager: sync unfroze 5132 com.saathi.test:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 for 3
+10-09 17:49:49.695   662   691 W OomAdjuster: Unknown sched group: -2147483648
+10-09 17:49:49.696  1632  1638 I .gms.persistent: ThreadFlipBegin blocked for 457.993ms
+10-09 17:49:49.700  1632  3279 I .gms.persistent: IncrementDisableThreadFlip blocked for 63.976ms
+10-09 17:49:49.724   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.724   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.724   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.724   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.724   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.724   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.733   662   691 W OomAdjuster: Unknown sched group: -2147483648
+10-09 17:49:49.767  3584  3584 I AiAiTextClassifier: onCreateTextClassificationSession = TextClassificationSessionId {ae790f0d-2592-4a0f-a33d-ecba66dcd566}
+10-09 17:49:49.767  1454  1679 D SatelliteController: packageStateChanged: package:com.google.android.gms defaultSmsPackageName: com.google.android.apps.messaging satelliteGatewayServicePackageName: 
+10-09 17:49:49.827  6215  6215 I crash_dump64: obtaining output fd from tombstoned, type: kDebuggerdTombstoneProto
+10-09 17:49:49.828   356   356 I tombstoned: received crash request for pid 6204
+10-09 17:49:49.830   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.830   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.830   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.830   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.830   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.830   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.830   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.929  6215  6215 I crash_dump64: performing dump of process 6204 (target tid = 6204)
+10-09 17:49:49.936   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.936   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.936   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.936   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.936   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.936   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:49.989  1295  1395 V RecentTasksController: Notify recent tasks changed: 1
+10-09 17:49:50.027   662   662 W Looper  : Slow dispatch took 412ms main app=system_server main=true group=FOREGROUND h=com.android.server.notification.NotificationManagerService$WorkerHandler c=com.android.server.notification.NotificationManagerService$CancelNotificationRunnable@2cf7179 m=0
+10-09 17:49:50.029   662  1242 W libbinder.Binder: Binder transaction to android.app.INotificationManager, function: UNKNOWN_FUNCTION_NAME, code: 33, took 1206ms. Data bytes: 700 Reply bytes: 4 Flags: 18
+10-09 17:49:50.037   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.041   662  1219 D ShortcutService: received package broadcast intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 (has extras) }
+10-09 17:49:50.042   662  1219 D ShortcutService: changing package: com.google.android.gms userId=0
+10-09 17:49:50.042   662  2130 W PackageInfo: Large parcel: size=17220 pkg=com.google.android.gms uid=10205 prov=12768(47) prevAllowSquashing=false
+10-09 17:49:50.044   662   681 W Looper  : Slow delivery took 307ms android.fg app=system_server main=false group=FOREGROUND h=android.os.Handler c=com.android.server.ondeviceintelligence.OnDeviceIntelligenceManagerService$$ExternalSyntheticLambda7@a28d6b1 m=0
+10-09 17:49:50.049  1653  1653 D RecentTasksList: invalidateLoadedTasks - previous requestLoadId: -1
+10-09 17:49:50.056  1295  1431 D WindowOnBackDispatcher: setOnBackInvokedCallbackInfo: android.view.ViewRootImpl$$ExternalSyntheticLambda16@58043e2
+10-09 17:49:50.069   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:50.069   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:50.069   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:50.069   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:50.069   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:50.069   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:50.069   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:50.070   662   866 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+10-09 17:49:50.070   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_shortcut_target_service, current:{}, new:{}
+10-09 17:49:50.070   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_button_targets, current:{}, new:{}
+10-09 17:49:50.070   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_gesture_targets, current:{}, new:{}
+10-09 17:49:50.070   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_qs_targets, current:{}, new:{}
+10-09 17:49:50.070   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_key_gesture_targets, current:{}, new:{}
+10-09 17:49:50.070   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_top_row_key_targets, current:{}, new:{}
+10-09 17:49:50.070   662   866 V AccessibilityUserState: updateShortcutTargets: type:accessibility_quick_access_targets, current:{}, new:{}
+10-09 17:49:50.081  1632  1638 W .gms.persistent: Suspending all threads took: 53.959ms
+10-09 17:49:50.083   662  1393 D CoreBackPreview: Window{c309d7f u0 Splash Screen com.saathi.test}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@2fa2134, mPriority=0, mIsAnimationCallback=false, mOverrideBehavior=0}
+10-09 17:49:50.084  1295  1395 V RecentTasksController: generateList(getRecentTasks)
+10-09 17:49:50.084   662   866 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-09 17:49:50.084  1295  1395 V RecentTasksController: initializeDesksMap - allDeskIds: []
+10-09 17:49:50.084  1295  1395 V RecentTasksController: Task 12 is not an active desktop task
+10-09 17:49:50.084  1295  1395 V RecentTasksController: Added fullscreen task: 12
+10-09 17:49:50.084  1295  1395 V RecentTasksController: Task 11 is not an active desktop task
+10-09 17:49:50.084  1295  1395 V RecentTasksController: Added fullscreen task: 11
+10-09 17:49:50.084  1295  1395 V RecentTasksController: generateList - complete
+10-09 17:49:50.085  1653  1707 D PreloadThumbnailUseCase: Preloading thumbnails for task ids: [[id=11 windowingMode=1 user=0 lastActiveTime=191955 lastFocusedTime=176605] null, [id=12 windowingMode=1 user=0 lastActiveTime=192306 lastFocusedTime=0] null]
+10-09 17:49:50.091  1632  1632 I MagicTether: [LaunchUtils] No accounts found for enabling Instant Wifi. [CONTEXT service_id=276 ]
+10-09 17:49:50.091  6215  6215 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-09 17:49:50.091  1632  1632 I MagicTether: (REDACTED) [NotificationPresenter] cancelNotification: %d
+10-09 17:49:50.091  6215  6215 F DEBUG   : Build fingerprint: 'google/sdk_gphone16k_arm64/emu64a16k:17/CP41.260828.004.A7/16296984:user/dev-keys'
+10-09 17:49:50.091  6215  6215 F DEBUG   : Kernel Release: '6.12.81-android16-6-g4f69fc7b210c-ab16167562'
+10-09 17:49:50.091  6215  6215 F DEBUG   : Revision: '0'
+10-09 17:49:50.091  6215  6215 F DEBUG   : ABI: 'arm64'
+10-09 17:49:50.091  6215  6215 F DEBUG   : Timestamp: 2026-10-09 17:49:50.023361216+0530
+10-09 17:49:50.091  6215  6215 F DEBUG   : Process uptime: 1s
+10-09 17:49:50.091  6215  6215 F DEBUG   : Page size: 16384 bytes
+10-09 17:49:50.091  6215  6215 F DEBUG   : Executable: /vendor/bin/hw/android.hardware.uwb-service
+10-09 17:49:50.091  6215  6215 F DEBUG   : Cmdline: /vendor/bin/hw/android.hardware.uwb-service /dev/uwb0
+10-09 17:49:50.091  6215  6215 F DEBUG   : pid: 6204, ppid: 1, tid: 6204, name: android.hardwar  >>> /vendor/bin/hw/android.hardware.uwb-service <<<
+10-09 17:49:50.091  6215  6215 F DEBUG   : uid: 1083
+10-09 17:49:50.091  6215  6215 F DEBUG   : tagged_addr_ctrl: 0000000000000001 (PR_TAGGED_ADDR_ENABLE)
+10-09 17:49:50.091  6215  6215 F DEBUG   : pac_enabled_keys: 000000000000000f (PR_PAC_APIAKEY, PR_PAC_APIBKEY, PR_PAC_APDAKEY, PR_PAC_APDBKEY)
+10-09 17:49:50.091  6215  6215 F DEBUG   : signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------
+10-09 17:49:50.091  6215  6215 F DEBUG   : Abort message: 'failed to open the serial device: Os { code: 6, kind: Uncategorized, message: "No such device or address" }'
+10-09 17:49:50.091  6215  6215 F DEBUG   : 
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x0  0000000000000000  x1  000000000000183c  x2  0000000000000006  x3  00007fffd8986720
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x4  6462687564631f6b  x5  6462687564631f6b  x6  6462687564631f6b  x7  7f7f7f7f7f7f7f7f
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x8  00000000000000f0  x9  22fc8eb808574d7c  x10 000000ff00000020  x11 000000000006c000
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x12 000000007fffffff  x13 00000000000103d8  x14 000003c0858d3935  x15 0000000029aaaaab
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x16 00007424c5b3f6f8  x17 00007424c5b24140  x18 00007424c6f80000  x19 000000000000183c
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x20 000000000000183c  x21 00000000ffffffff  x22 00007fffd89868b0  x23 00005f70d7e569c0
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x24 00005f70d7e5c600  x25 00007fffd8987040  x26 00007fffd8986a50  x27 00007424c5e02e80
+10-09 17:49:50.091  6215  6215 F DEBUG   :     x28 00007fffd8987838  x29 00007fffd89867a0
+10-09 17:49:50.091  6215  6215 F DEBUG   :     lr  00007424c5ac0a6c  sp  00007fffd8986720  pc  00007424c5ac0a90  pst 0000000000000000
+10-09 17:49:50.091  6215  6215 F DEBUG   :     esr 0000000000000000  vg  0000000000000000
+10-09 17:49:50.091  6215  6215 F DEBUG   : 
+10-09 17:49:50.091  6215  6215 F DEBUG   : 18 total frames
+10-09 17:49:50.091  6215  6215 F DEBUG   : backtrace:
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #00 pc 0000000000078a90  /apex/com.android.runtime/lib64/bionic/libc.so (abort+160) (BuildId: a9afed04b969b74eb803b352fd273d29)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #01 pc 000000000003e284  /vendor/bin/hw/android.hardware.uwb-service (std::sys::pal::unix::abort_internal+8) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #02 pc 000000000003bda8  /vendor/bin/hw/android.hardware.uwb-service (std::process::abort+8) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #03 pc 00000000000387d8  /vendor/bin/hw/android.hardware.uwb-service (__rustc::__rust_abort+8) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #04 pc 000000000002cf48  /vendor/bin/hw/android.hardware.uwb-service (__rustc::__rust_start_panic+16) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #05 pc 00000000000387cc  /vendor/bin/hw/android.hardware.uwb-service (__rustc::rust_panic+8) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #06 pc 000000000003c0b0  /vendor/bin/hw/android.hardware.uwb-service (std::panicking::panic_with_hook+276) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #07 pc 0000000000037f24  /vendor/bin/hw/android.hardware.uwb-service (std::panicking::panic_handler::{closure#0}+60) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #08 pc 00000000000387f8  /vendor/bin/hw/android.hardware.uwb-service (__rustc::rust_begin_unwind+28) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #09 pc 0000000000025f2c  /vendor/bin/hw/android.hardware.uwb-service (core::panicking::panic_fmt+36) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #10 pc 0000000000025df8  /vendor/bin/hw/android.hardware.uwb-service (core::result::unwrap_failed+72) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #11 pc 000000000006209c  /vendor/bin/hw/android.hardware.uwb-service (<uwb_default_hal::uwb_chip::UwbChip>::new::{closure#0}+6288) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #12 pc 0000000000065e18  /vendor/bin/hw/android.hardware.uwb-service (<core::iter::adapters::map::Map<core::iter::adapters::map::Map<core::iter::adapters::enumerate::Enumerate<core::iter::adapters::skip::Skip<std::env::Args>>, uwb_default_hal::main::{closure#1}>, <uwb_default_hal::uwb::Uwb>::from_chips<core::iter::adapters::map::Map<core::iter::adapters::enumerate::Enumerate<core::iter::adapters::skip::Skip<std::env::Args>>, uwb_default_hal::main::{closure#1}>>::{closure#0}> as core::iter::traits::iterator::Iterator>::next+2712) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #13 pc 0000000000063940  /vendor/bin/hw/android.hardware.uwb-service (uwb_default_hal::main+540) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #14 pc 000000000006011c  /vendor/bin/hw/android.hardware.uwb-service (std::rt::lang_start::<core::result::Result<(), anyhow::Error>>::{closure#0}+32) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #15 pc 000000000003b6b0  /vendor/bin/hw/android.hardware.uwb-service (std::rt::lang_start_internal+620) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #16 pc 00000000000687a0  /vendor/bin/hw/android.hardware.uwb-service (main+56) (BuildId: d8af1002061c01b15dcf40f9b81df8a3)
+10-09 17:49:50.091  6215  6215 F DEBUG   :       #17 pc 000000000006fc38  /apex/com.android.runtime/lib64/bionic/libc.so (__libc_init+124) (BuildId: a9afed04b969b74eb803b352fd273d29)
+10-09 17:49:50.091  6215  6215 F DEBUG   : 
+10-09 17:49:50.091  6215  6215 F DEBUG   : Note: To display stack pointer information, use the pbtombstone tool:
+10-09 17:49:50.091  6215  6215 F DEBUG   :         pbtombstone --display-sp tombstone_XX.pb
+10-09 17:49:50.092  1632  1632 I MagicTether: [AutoDisconnectIntentOperation] Canceling task. [CONTEXT service_id=276 ]
+10-09 17:49:50.093   662  2540 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:50.094   662   845 I RoleService: Granting default roles...
+10-09 17:49:50.107   662  1833 D WindowManager: setClientSurface Surface(name=VRI-Splash Screen com.saathi.test#194)/@0xeb21ca0 for c309d7f Splash Screen com.saathi.test
+10-09 17:49:50.110   662  2687 I RecoverySnapshotStorage: Snapshot for uid 10205 not found
+10-09 17:49:50.111  1898  4553 I PeopleGalProvider: Gal directories started.
+10-09 17:49:50.111  1898  4553 I PeopleGalProvider: Method 1 completed.
+10-09 17:49:50.111  1898  4553 I PeopleGalProvider: Method 1 finished successfully.
+10-09 17:49:50.113  2499  2593 W eckt    : Timed out waiting on job to complete, continuing execution.
+10-09 17:49:50.118  1298  1407 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:50.118  1298  1407 I PermissionControllerServiceImpl: Updating user sensitive for uid 10205
+10-09 17:49:50.118  1898  4221 I AutofillFlagChangeInten: onHandleIntent() [CONTEXT service_id=177 ]
+10-09 17:49:50.119  1898  4221 I SyncIntentOperation: (REDACTED) Handling the intent: %s.
+10-09 17:49:50.125   662  1316 W NativeCrashListener: Couldn't find ProcessRecord for pid 6204
+10-09 17:49:50.126   356   356 E tombstoned: Tombstone written to: tombstone_05
+10-09 17:49:50.131   662  2687 W PlatformKeyManager: Platform generation ID was 0 but no entry was present in AndroidKeyStore. Generating fresh key.
+10-09 17:49:50.132   662  2774 W OomAdjuster: Unknown sched group: -2147483648
+10-09 17:49:50.135  1898  6025 I NearbyFastPair: (REDACTED) onInitRuntimeState isEnableWearableListener: %s
+10-09 17:49:50.136   662   681 W Looper  : Drained
+10-09 17:49:50.140   662  1727 W PackageInfo: Large parcel: size=70828 pkg=com.google.android.gms uid=10205 perm=18128(95) reqPerm=20184(386) attr=27616(332) prevAllowSquashing=false
+10-09 17:49:50.141  1898  5912 I NearbyDiscovery: (REDACTED) FastPair: HeadsetPieceImage, grant permission files:%d
+10-09 17:49:50.142  1898  5915 I MdiSyncModule: flag handling is skipping irrelevant intent.
+10-09 17:49:50.145  3584  4480 I AiAiEcho: AppIndexer Package:[com.google.android.gms] UserProfile:[0] Enabled:[true].
+10-09 17:49:50.145  3584  4480 I AiAiEcho: AppFetcherImplV2 updateApps package:[com.google.android.gms], userId:[0], reason:[package is updated.].
+10-09 17:49:50.148  1632  5988 I LSR     : No periodic upload requests, periodic reporting should be disabled [CONTEXT service_id=277 ]
+10-09 17:49:50.149  1898  1898 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.findmydevice.spot.service.management.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsApiService }
+10-09 17:49:50.149  1898  1898 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.findmydevice.spot.service.management.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsApiService }
+10-09 17:49:50.150   662   690 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:50.151   662  1833 W PackageManager: updateFlags: Removing GET_APP_LOCK_INFO due to likely sign extension of the deprecated GET_ATTRIBUTIONS flag. Please use GET_ATTRIBUTIONS_LONG
+10-09 17:49:50.154   662   690 I AppBindingService: [Supervision app] feature disabled
+10-09 17:49:50.156  1898  1898 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.onboardingconsent.api.ConsentManagerApiService.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsApiService }
+10-09 17:49:50.156  1898  1898 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.onboardingconsent.api.ConsentManagerApiService.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsApiService }
+10-09 17:49:50.165   662   811 W InputChannel-JNI: Channel already disposed.
+10-09 17:49:50.168  1898  3506 I GmsDebugLogger: [78] 
+10-09 17:49:50.172  1295  1444 I Surface : Creating surface for consumer unnamed-1295-8 with slotExpansion=1 for 64 slots
+10-09 17:49:50.172  1295  1444 I Surface : Creating surface for consumer VRI[test]#8(BLAST Consumer)8 with slotExpansion=1 for 64 slots
+10-09 17:49:50.173   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.173   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.174   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.174   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.174   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.174   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.176   662   662 W libbinder.IPCThreadState: Sending oneway calls to frozen process.
+10-09 17:49:50.179  4972  4972 D VRI[ExternalSurfaceActivity]: WindowInsets changed: 1280x2856 statusBars:[0,156,0,0] navigationBars:[0,0,0,72] mandatorySystemGestures:[0,192,0,96] 
+10-09 17:49:50.180  4972  4972 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@f04eb19
+10-09 17:49:50.195   662  2134 W libbinder.ServiceManagerCppClient: Waited one second for android.hardware.uwb.IUwb/default (is service started? Number of threads started in the threadpool: 32. Are binder threads started and available?)
+10-09 17:49:50.213   507   579 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.239   293  6229 W libc    : Unable to set property "ctl.interface_start" to "aidl/android.hardware.uwb.IUwb/default": PROP_ERROR_HANDLE_CONTROL_MESSAGE (0x20)
+10-09 17:49:50.239   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.239   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.239   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.239   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.239   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.239   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.312  6065  6139 W ServiceBindIntentUtils: Dynamic lookup for intent failed for action com.google.android.apps.safetycore.signals.BIND but has possible resolution
+10-09 17:49:50.313  6065  6139 W GmsClient: unable to connect to service: com.google.android.apps.safetycore.signals.BIND on com.google.android.gms
+10-09 17:49:50.314  4972  4972 I HWUI    : Using FreeType backend (prop=Auto)
+10-09 17:49:50.317  4972  4972 I Surface : Creating surface for consumer unnamed-4972-3 with slotExpansion=1 for 64 slots
+10-09 17:49:50.318  4972  4972 I Surface : Creating surface for consumer VRI[ExternalSurfaceActivity]#3(BLAST Consumer)3 with slotExpansion=1 for 64 slots
+10-09 17:49:50.322  2293  2293 I adbd    : adbd service requested 'shell,v2,TERM=dumb:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-t' '1000''
+10-09 17:49:50.324   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.324   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.324   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.324   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.324   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.324   507   507 W skia    : AGTM parsing failed flags.readFromStream(s) at 159
+10-09 17:49:50.324  1898  5912 I NearbyDiscovery: (REDACTED) grantSlicePermissionForAllUris: success for package %s
+10-09 17:49:50.329  6227  6227 I flags_health_check: ServerConfigurableFlagsReset reset_mode value: 1
+10-09 17:49:50.329  6227  6227 I flags_health_check: ServerConfigurableFlagsReset updatable crashing detected, resetting flags.

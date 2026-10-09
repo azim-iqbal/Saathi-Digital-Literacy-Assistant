@@ -1,0 +1,23 @@
+FF
+======================================================================
+FAIL: test_explicit_denial_cannot_support_transaction_or_account_access (backend.tests.test_reasoning_grounding.ReasoningGroundingTests.test_explicit_denial_cannot_support_transaction_or_account_access)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_reasoning_grounding.py", line 34, in test_explicit_denial_cannot_support_transaction_or_account_access
+    self.assertEqual(validate_assessment(snap,IncidentProposal('POSSIBLE_FINANCIAL',(signal,))),'uncertain')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'uncertain'
+
+======================================================================
+FAIL: test_explicit_order_cannot_be_dropped_reversed_or_missing_in_any_locale (backend.tests.test_reasoning_grounding.ReasoningGroundingTests.test_explicit_order_cannot_be_dropped_reversed_or_missing_in_any_locale)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_reasoning_grounding.py", line 22, in test_explicit_order_cannot_be_dropped_reversed_or_missing_in_any_locale
+    self.assertEqual(validate_plan(snap,PlanProposal(dropped,())),'evidence_missing')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'evidence_missing'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.005s
+
+FAILED (failures=2)

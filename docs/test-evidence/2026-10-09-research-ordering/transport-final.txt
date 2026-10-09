@@ -1,0 +1,10 @@
+
+com.saathi.ui.GatewayTransportIntegrationTest:....
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.ResearchRecoveryUiTest:..
+
+Time: 27.97
+
+OK (8 tests)
+
+

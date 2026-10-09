@@ -1,0 +1,18 @@
+
+com.saathi.ui.ConnectionCheckTest:..
+com.saathi.ui.ConnectionScreenUiTest:.
+com.saathi.ui.GatewaySetupUiTest:.
+com.saathi.ui.PausedRequestUiTest:..
+com.saathi.ui.CyberReportUiTest:....
+com.saathi.ui.ComplaintDraftUiTest:..
+com.saathi.ui.CyberLinkOverlayTest:..
+com.saathi.ui.PracticeRecoveryTest:...
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.VoiceSetupUiTest:.
+com.saathi.ui.LaunchUiTest:..
+
+Time: 120.965
+
+OK (21 tests)
+
+
