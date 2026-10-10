@@ -1,0 +1,11 @@
+
+com.saathi.ui.ReactiveFormIntegrationTest:..
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.PortalWorkflowIntegrationTest:.
+
+Time: 49.976
+
+OK (7 tests)
+
+

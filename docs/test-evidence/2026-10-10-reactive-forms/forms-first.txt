@@ -1,0 +1,40 @@
+
+com.saathi.ui.ReactiveFormIntegrationTest:
+Error in nativeFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest):
+java.lang.AssertionError: First required field: Open the app or browser you want help with. Saathi will check its visible controls.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:30)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:63)
+	at com.saathi.ui.ReactiveFormIntegrationTest.nativeFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:92)
+
+Error in webFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest):
+java.lang.AssertionError: First required field: Fill the highlighted field. Enter and review the value yourself; Saathi does not read, type, or submit it. This field is marked required.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:30)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:63)
+	at com.saathi.ui.ReactiveFormIntegrationTest.webFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:93)
+
+
+Time: 31.685
+There were 2 failures:
+1) nativeFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest)
+java.lang.AssertionError: First required field: Open the app or browser you want help with. Saathi will check its visible controls.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:30)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:63)
+	at com.saathi.ui.ReactiveFormIntegrationTest.nativeFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:92)
+2) webFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest)
+java.lang.AssertionError: First required field: Fill the highlighted field. Enter and review the value yourself; Saathi does not read, type, or submit it. This field is marked required.
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:30)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:63)
+	at com.saathi.ui.ReactiveFormIntegrationTest.webFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:93)
+
+FAILURES!!!
+Tests run: 2,  Failures: 2
+
+

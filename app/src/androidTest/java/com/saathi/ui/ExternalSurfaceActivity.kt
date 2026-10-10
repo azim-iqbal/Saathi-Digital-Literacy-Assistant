@@ -9,8 +9,10 @@ import android.widget.TextView
 
 /** Installed in the separate test APK/UID. No production entry, real data or remote page. */
 class ExternalSurfaceActivity : Activity() {
+    private var formDependent: android.widget.EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent.getBooleanExtra("reactive_form", false)) { showReactiveForm(); return }
         if (intent.getBooleanExtra("portal_fixture", false)) { showPortal(); return }
         if (intent.getBooleanExtra("paste_fixture", false)) { showPaste(); return }
         if (intent.getBooleanExtra("close_fixture", false)) { finish(); return }
@@ -28,6 +30,35 @@ class ExternalSurfaceActivity : Activity() {
             setContentView(layout); return
         }
         showChoices()
+    }
+    private fun showReactiveForm() {
+        if (intent.getBooleanExtra("web_form", false)) {
+            setContentView(WebView(this).apply {
+                settings.javaScriptEnabled = true
+                loadDataWithBaseURL(null, """<html><meta name='viewport' content='width=device-width, initial-scale=1'><body>
+                    <input id='city' aria-label='City *' placeholder='City *' required><input aria-label='Company (optional)' placeholder='Company (optional)'>
+                    <input aria-label='State *' placeholder='State *' required>
+                    <button onclick='document.activeElement.blur()'>Finish editing</button>
+                    <button onclick='document.getElementById("city").setAttribute("aria-invalid","true")'>Invalid city</button>
+                    <button onclick='document.getElementById("city").removeAttribute("aria-invalid")'>Correct city</button>
+                    <span id='conditional'></span>
+                    <button onclick='setTimeout(function(){document.getElementById("conditional").innerHTML="&lt;input aria-label=\"Country *\" placeholder=\"Country *\" required&gt;"},600)'>Show dependent</button>
+                    <button onclick='document.getElementById("conditional").innerHTML=""'>Hide dependent</button>
+                    <button onclick='document.getElementById("conditional").innerHTML="&lt;input type=\"password\" aria-label=\"OTP\" value=\"fictional-secret-canary\"&gt;"'>Private step</button>
+                    <button disabled>Submit</button></body></html>""", "text/html", "UTF-8", null)
+            }); return
+        }
+        val layout=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; setPadding(32,100,32,32); isFocusableInTouchMode=true }
+        fun field(h: String)=android.widget.EditText(this).apply { hint=h; inputType=android.text.InputType.TYPE_CLASS_TEXT; isSingleLine=true }
+        val city=field("City *"); val company=field("Company (optional)"); val state=field("State *")
+        layout.addView(city); layout.addView(company); layout.addView(state)
+        layout.addView(Button(this).apply { isAllCaps=false; text="Finish editing"; setOnClickListener { layout.requestFocus(); getSystemService(android.view.inputmethod.InputMethodManager::class.java)?.hideSoftInputFromWindow(windowToken,0) } })
+        layout.addView(Button(this).apply { isAllCaps=false; text="Invalid city"; setOnClickListener { city.error="Review this field"; layout.requestFocus() } })
+        layout.addView(Button(this).apply { isAllCaps=false; text="Correct city"; setOnClickListener { city.error=null; layout.requestFocus() } })
+        layout.addView(Button(this).apply { isAllCaps=false; text="Show dependent"; setOnClickListener { if(formDependent==null) { formDependent=field("Country *"); layout.addView(formDependent,3) }; layout.requestFocus() } })
+        layout.addView(Button(this).apply { isAllCaps=false; text="Hide dependent"; setOnClickListener { layout.removeView(formDependent); formDependent=null; layout.requestFocus() } })
+        layout.addView(Button(this).apply { isAllCaps=false; text="Submit"; isEnabled=false })
+        setContentView(layout); layout.requestFocus()
     }
     private fun showChoices() {
         val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 100, 32, 32) }

@@ -22,4 +22,8 @@ class ObservationGate {
     fun currentKey(): String? = if (active) current?.toString() else null
     fun matchesPresentation(key: String?): Boolean = key != null && key == currentKey()
     fun accepts(ticket: Ticket): Boolean = active && current == ticket
+    /** A local form probe may reuse identity only on the same current surface. */
+    fun probe(packageName: String, windowId: Int): Ticket? = current?.takeIf {
+        active && it.packageName == packageName && it.windowId == windowId
+    }
 }

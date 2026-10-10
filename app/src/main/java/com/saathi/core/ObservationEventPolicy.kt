@@ -5,7 +5,7 @@ package com.saathi.core
  */
 object ObservationEventPolicy {
     fun relevant(type: Int, eventWindow: Int, currentRootWindow: Int?): Boolean {
-        val contentOnly = type in setOf(1, 16, 2048, 4096) // clicked, text, content, scrolled
+        val contentOnly = type in setOf(1, 8, 16, 2048, 4096, 8192) // clicked, text, content, scrolled
         return !contentOnly || eventWindow < 0 || currentRootWindow == null || currentRootWindow < 0 || eventWindow == currentRootWindow
     }
 }

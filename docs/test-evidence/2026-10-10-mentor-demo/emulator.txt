@@ -1,0 +1,12 @@
+
+com.saathi.ui.ReactiveFormIntegrationTest:..
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.AssistantUiTest:...
+com.saathi.ui.ComplaintDraftUiTest:.
+com.saathi.ui.SaathiUiTest:.
+
+Time: 76.586
+
+OK (8 tests)
+
+

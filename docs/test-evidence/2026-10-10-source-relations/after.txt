@@ -1,0 +1,14 @@
+...F..................................
+======================================================================
+FAIL: test_same_labels_in_independent_sources_keep_their_own_graphs (backend.tests.test_reasoning_grounding.ReasoningGroundingTests.test_same_labels_in_independent_sources_keep_their_own_graphs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_reasoning_grounding.py", line 24, in test_same_labels_in_independent_sources_keep_their_own_graphs
+    self.assertIsNone(validate_plan(snap,PlanProposal(steps,())))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'safety_rejected' is not None
+
+----------------------------------------------------------------------
+Ran 38 tests in 0.066s
+
+FAILED (failures=1)

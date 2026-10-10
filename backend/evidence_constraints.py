@@ -13,7 +13,12 @@ _ORDER = (
 )
 
 def missing_explicit_order(proposal,evidence):
-    selected={s.navigation.label:s for s in proposal.steps if s.navigation is not None and s.navigation.kind=='READ_OPTION'}
+    # Labels are not global identities. Keep evidence provenance and retain all
+    # candidates so duplicate labels cannot silently overwrite an earlier step.
+    selected={}
+    for step in proposal.steps:
+        if step.navigation is not None and step.navigation.kind=='READ_OPTION':
+            selected.setdefault((step.evidence_id,step.navigation.label),[]).append(step)
     by_id={s.id:s for s in proposal.steps}
     def ancestors(step):
         seen=set();pending=list(step.depends_on)
@@ -26,10 +31,18 @@ def missing_explicit_order(proposal,evidence):
     for source in evidence:
         for pattern in _ORDER:
             for parent,child in pattern.findall(source.snippet):
-                step=selected.get(child)
-                if step is None or step.evidence_id!=source.evidence_id:continue
-                prerequisite=selected.get(parent)
-                if prerequisite is None or prerequisite.id not in ancestors(step):return True
+                # A cited ordering instruction cannot evade the relationship check
+                # by dropping every navigation annotation. Uncited source sections
+                # do not impose unrelated steps on a narrower reviewed plan.
+                cited = any(s.evidence_id == source.evidence_id and
+                            (parent,child) in pattern.findall(s.quote) for s in proposal.steps)
+                children=selected.get((source.evidence_id,child),[])
+                if not children:
+                    if cited:return True
+                    continue
+                parents=selected.get((source.evidence_id,parent),[])
+                if len(children)!=1 or len(parents)!=1:return True
+                if parents[0].id not in ancestors(children[0]):return True
     return False
 
 _DENIALS = {

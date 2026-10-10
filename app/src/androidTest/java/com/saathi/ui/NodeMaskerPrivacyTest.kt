@@ -47,9 +47,11 @@ class NodeMaskerPrivacyTest {
         try {
             node.setBoundsInScreen(Rect(10, 20, 200, 90)); node.isVisibleToUser = true
             node.text = "Inbox fictional-private-message"
+            node.isContentInvalid = true; node.inputType = 1
             val masked = NodeMasker.flatten(node).single()
             assertTrue(masked.privateContext); assertNull(masked.text); assertNull(masked.description)
             assertNull(masked.resourceId); assertFalse(masked.hasValue)
+            assertFalse(masked.contentInvalid); assertFalse(masked.requiredField); assertEquals(0, masked.inputType)
             assertEquals(com.saathi.core.ScreenInterruption.Reason.PRIVATE, com.saathi.core.ScreenInterruption.reason(listOf(masked)))
             node.text = "fictional-entered-value"; node.isEditable = true; node.hintText = "Destination"
             val editable = NodeMasker.flatten(node).single()

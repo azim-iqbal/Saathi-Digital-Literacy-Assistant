@@ -1,0 +1,228 @@
+.................E.........E...................EEEE..................EEE..............................E...........................................................
+======================================================================
+ERROR: test_http_routes_require_auth_and_explicit_consent (test_diagnostics.DiagnosticsTests.test_http_routes_require_auth_and_explicit_consent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_diagnostics.py", line 97, in test_http_routes_require_auth_and_explicit_consent
+    server = make_server(secret, gateway, port=0)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_http_unexpected_failure_is_sanitized_and_next_request_recovers (test_failures.FailureTests.test_http_unexpected_failure_is_sanitized_and_next_request_recovers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_failures.py", line 120, in test_http_unexpected_failure_is_sanitized_and_next_request_recovers
+    server = make_server("x" * 40, gateway, port=0)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_authentication_before_work_and_loopback_binding (test_gateway.HttpTests.test_authentication_before_work_and_loopback_binding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_gateway.py", line 225, in setUp
+    self.server = make_server(self.token, self.gateway, port=0)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_cancel_requires_authentication_and_has_no_sensitive_result (test_gateway.HttpTests.test_cancel_requires_authentication_and_has_no_sensitive_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_gateway.py", line 225, in setUp
+    self.server = make_server(self.token, self.gateway, port=0)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_invalid_bodies_do_not_use_budget (test_gateway.HttpTests.test_invalid_bodies_do_not_use_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_gateway.py", line 225, in setUp
+    self.server = make_server(self.token, self.gateway, port=0)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_short_startup_token_is_rejected (test_gateway.HttpTests.test_short_startup_token_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_gateway.py", line 225, in setUp
+    self.server = make_server(self.token, self.gateway, port=0)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_invented_target_returns_no_guidance (test_live_http.LiveHttpTests.test_invented_target_returns_no_guidance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_live_http.py", line 24, in setUp
+    self.server = make_server(self.token, self.gateway, port=0)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_live_route_uses_primary_only_and_rejects_replay (test_live_http.LiveHttpTests.test_live_route_uses_primary_only_and_rejects_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_live_http.py", line 24, in setUp
+    self.server = make_server(self.token, self.gateway, port=0)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: test_private_or_expired_request_never_reaches_models (test_live_http.LiveHttpTests.test_private_or_expired_request_never_reaches_models)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_live_http.py", line 24, in setUp
+    self.server = make_server(self.token, self.gateway, port=0)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 130, in make_server
+    return LocalServer((host, port), Handler)
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/server.py", line 22, in __init__
+    super().__init__(*args)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+======================================================================
+ERROR: setUpClass (test_provider_https.ProviderHttpsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_provider_https.py", line 45, in setUpClass
+    cls.server=http.server.ThreadingHTTPServer(('127.0.0.1',0),Handler)
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py", line 148, in server_bind
+    socketserver.TCPServer.server_bind(self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+----------------------------------------------------------------------
+Ran 161 tests in 2.355s
+
+FAILED (errors=10)

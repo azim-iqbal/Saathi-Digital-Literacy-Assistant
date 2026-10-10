@@ -45,6 +45,9 @@ object SaathiSession {
     private var pausedTask: PausedTask? = null
     private var sourcePlan: com.saathi.core.ReviewedPlanNavigation? = null
     fun reviewedPlan(): com.saathi.core.EvidencePlan? = (sourcePlan ?: pausedTask?.sourcePlan)?.plan
+    fun canRecheckForm() = active && live && sourcePlan == null && FormGuide.isRequest(goal) &&
+        latestNodes.any { it.isEditable } && com.saathi.core.ScreenInterruption.reason(latestNodes) == null &&
+        !com.saathi.core.BrowserSafetyPolicy.present(latestNodes)
     fun wantsBrowserLocation() = active && sourcePlan != null
     fun discardReviewedPlan(plan: com.saathi.core.EvidencePlan?) {
         if (plan != null && reviewedPlan() === plan) stop()
@@ -262,6 +265,23 @@ object SaathiSession {
 
     fun beginObservation(packageName: String, windowId: Int): ObservationGate.Ticket? =
         observationGate.observe(packageName, windowId)
+
+    fun formProbe(packageName: String, windowId: Int): ObservationGate.Ticket? =
+        if (canRecheckForm()) observationGate.probe(packageName, windowId) else null
+
+    /** Unchanged local fallback observations must not clear the marker or stop speech.
+     * External events still invalidate immediately, rejecting a concurrent/late probe.
+     */
+    fun onFormProbe(nodes: List<UiNode>, ticket: ObservationGate.Ticket, observedAtMs: Long) {
+        handler.post {
+            if (!observationGate.accepts(ticket) || !canRecheckForm()) return@post
+            if (System.currentTimeMillis() - observedAtMs !in 0..2_000) { onScreenUnavailable(); return@post }
+            if (nodes == latestNodes) return@post
+            invalidateScreen()
+            val fresh = beginObservation(ticket.packageName, ticket.windowId) ?: return@post
+            onScreenChanged(nodes, fresh, observedAtMs = observedAtMs)
+        }
+    }
 
     fun onObservationFailed(ticket: ObservationGate.Ticket) {
         handler.post { if (observationGate.accepts(ticket)) onScreenUnavailable() }

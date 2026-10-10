@@ -4,6 +4,7 @@ import android.graphics.Rect
 import com.saathi.core.GuideStep
 import com.saathi.core.GuideTarget
 import com.saathi.core.UiNode
+import com.saathi.core.*
 
 /** Local-only form field guidance. Values are discarded; it never writes, clicks, or submits fields. */
 internal object FormGuide {
@@ -54,16 +55,23 @@ internal object FormGuide {
             "Ek se zyada form fields focused hain, isliye main guess nahi karunga. Jis field ko bharna hai, use tap karein."
         ))
 
-        val next = focused.singleOrNull() ?: fields.filter { !it.value.valueKnown || !it.value.hasValue }
-            .minWithOrNull(compareBy<IndexedValue<UiNode>> { it.value.bounds.top }.thenBy { it.value.bounds.left })
+        val ordered = fields.sortedWith(compareBy<IndexedValue<UiNode>> { it.value.bounds.top }.thenBy { it.value.bounds.left })
+        val assessment = ReactiveForm.assess(ordered.map { (index, node) ->
+            FormField(index.toString(), node.hint, when {
+                !node.valueKnown -> FormPresence.UNKNOWN
+                node.hasValue -> FormPresence.PRESENT
+                else -> FormPresence.EMPTY
+            }, node.isFocused, node.contentInvalid, node.isEnabled, node.requiredField)
+        })
+        val next = assessment.next?.id?.toIntOrNull()?.let { index -> fields.firstOrNull { it.index == index } }
         if (next == null) return noTarget(if (fields.isEmpty()) copy(
-            "I cannot identify a safe text field here. Scroll until a form field is visible, then I will check again.",
-            "Yahan safe text field nahi mila. Form field ko screen par laaiye; main phir jaanchunga.",
-            "Yahan safe text field nahi mila. Form field ko screen par laaiye; main phir check karunga."
+            "I cannot identify a safe visible text field here. Guidance will recheck when the screen changes.",
+            "यहाँ सुरक्षित फ़ील्ड नहीं दिख रहा। स्क्रीन बदलने पर फिर जाँच होगी।",
+            "Yahan safe field nahi dikh raha. Screen badalne par phir check hoga."
         ) else copy(
-            "The visible fields look filled. Review them yourself, then scroll to the next section if needed.",
-            "Dikh rahe fields bhare hue lagte hain. Khud jaanch lein, phir zaroorat ho to agle hissa tak scroll karein.",
-            "Dikh rahe fields bhare hue lagte hain. Khud jaanch lein, phir zaroorat ho to agle section tak scroll karein."
+            "No remaining required empty field is established. Optional fields may be skipped. Values and validity are not verified; review the form yourself before continuing or submitting.",
+            "कोई शेष आवश्यक खाली फ़ील्ड प्रमाणित नहीं है। वैकल्पिक फ़ील्ड छोड़ सकते हैं। मान और वैधता सत्यापित नहीं हैं; आगे बढ़ने या जमा करने से पहले स्वयं जाँचें।",
+            "Koi baaki required khaali field confirmed nahi hai. Optional fields chhod sakte hain. Values aur validity verified nahi hain; aage badhne ya submit se pehle khud review karein."
         ))
 
         val node = next.value
@@ -77,8 +85,16 @@ internal object FormGuide {
             "$fieldName field mein jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta.",
             "$fieldName field mein jaankari khud bharein aur jaanchein; Saathi ise nahi padhta, likhta ya submit karta."
         )
+        val requirement = ReactiveForm.requiredness(node.hint, node.requiredField)
+        val detail = when {
+            node.contentInvalid -> copy("This field reports an error. Correct it and check the form's validation message.", "इस फ़ील्ड में त्रुटि है। इसे सुधारें और फ़ॉर्म का संदेश जाँचें।", "Is field mein error hai. Ise sudhaarein aur form ka message check karein.")
+            requirement == FormRequiredness.UNKNOWN -> copy("Requiredness is unknown; decide from the form's instructions.", "यह आवश्यक है या नहीं, स्पष्ट नहीं है; फ़ॉर्म के निर्देश जाँचें।", "Required hai ya nahi, clear nahi hai; form ke instructions check karein.")
+            requirement == FormRequiredness.CONDITIONAL -> copy("This field is conditional. Check whether its stated condition applies to you.", "यह शर्त पर निर्भर फ़ील्ड है। जाँचें कि शर्त आप पर लागू है या नहीं।", "Yeh conditional field hai. Check karein ki shart aap par lagti hai ya nahi.")
+            requirement == FormRequiredness.OPTIONAL -> copy("This field is optional.", "यह फ़ील्ड वैकल्पिक है।", "Yeh field optional hai.")
+            else -> copy("This field is marked required.", "यह फ़ील्ड आवश्यक बताया गया है।", "Yeh field required mark hai.")
+        }
         return GuideStep(
-            instruction,
+            "$instruction $detail",
             language,
             GuideTarget(Rect(node.bounds), node.resourceId, "Form field", next.index),
             "Check the current screen after the user moves to another field.",
@@ -136,6 +152,7 @@ internal object FormGuide {
             ?.replace(Regex("\\s+"), " ")
             ?.trim()
             ?.trimEnd(':', '*', '.')
+            ?.trim()
             ?.lowercase(java.util.Locale.ROOT)
             ?: return null
         if ('@' in value) return "email"

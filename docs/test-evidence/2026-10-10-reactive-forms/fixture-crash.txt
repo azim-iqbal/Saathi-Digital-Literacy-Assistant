@@ -1,0 +1,57 @@
+--------- beginning of crash
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: FATAL EXCEPTION: main
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: Process: com.saathi.test, PID: 22886
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Lkotlin/collections/CollectionsKt;
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at com.saathi.ui.ExternalSurfaceActivity.showReactiveForm(ExternalSurfaceActivity.kt:47)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at com.saathi.ui.ExternalSurfaceActivity.onCreate(ExternalSurfaceActivity.kt:14)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9356)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9334)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1566)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4763)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4978)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:224)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:133)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:103)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:80)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2942)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:126)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:285)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:390)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:9884)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: Caused by: java.lang.ClassNotFoundException: Didn't find class "kotlin.collections.CollectionsKt" on path: DexPathList[[zip file "/data/app/~~YQkoM5fU9Up5pjepSmdXIA==/com.saathi.test-5R6kgRR_xUJJ6B382oJBrA==/base.apk"],nativeLibraryDirectories=[/data/app/~~YQkoM5fU9Up5pjepSmdXIA==/com.saathi.test-5R6kgRR_xUJJ6B382oJBrA==/lib/arm64, /system/lib64, /system_ext/lib64]]
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:279)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:644)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:580)
+10-10 12:23:47.912 22886 22886 E AndroidRuntime: 	... 20 more
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: FATAL EXCEPTION: main
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: Process: com.saathi.test, PID: 23942
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Lkotlin/collections/CollectionsKt;
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at com.saathi.ui.ExternalSurfaceActivity.showReactiveForm(ExternalSurfaceActivity.kt:47)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at com.saathi.ui.ExternalSurfaceActivity.onCreate(ExternalSurfaceActivity.kt:14)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9356)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:9334)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1566)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4763)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4978)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:224)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:133)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:103)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:80)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2942)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:126)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:285)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:390)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:9884)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: Caused by: java.lang.ClassNotFoundException: Didn't find class "kotlin.collections.CollectionsKt" on path: DexPathList[[zip file "/data/app/~~bGuOC0qlhJoBXw6n-emhbw==/com.saathi.test-9FfDjI3h6rFf5HJqvgz8eQ==/base.apk"],nativeLibraryDirectories=[/data/app/~~bGuOC0qlhJoBXw6n-emhbw==/com.saathi.test-9FfDjI3h6rFf5HJqvgz8eQ==/lib/arm64, /system/lib64, /system_ext/lib64]]
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:279)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:644)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:580)
+10-10 12:25:00.362 23942 23942 E AndroidRuntime: 	... 20 more

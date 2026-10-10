@@ -1,0 +1,23 @@
+..FF
+======================================================================
+FAIL: test_identical_labels_from_another_source_cannot_supply_a_prerequisite (backend.tests.test_reasoning_grounding.ReasoningGroundingTests.test_identical_labels_from_another_source_cannot_supply_a_prerequisite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_reasoning_grounding.py", line 17, in test_identical_labels_from_another_source_cannot_supply_a_prerequisite
+    self.assertEqual(validate_plan(snap,PlanProposal((parent,child),())),'evidence_missing')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'evidence_missing'
+
+======================================================================
+FAIL: test_same_labels_in_independent_sources_keep_their_own_graphs (backend.tests.test_reasoning_grounding.ReasoningGroundingTests.test_same_labels_in_independent_sources_keep_their_own_graphs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/azimiqbal/Documents/Saathi- Digital Literacy Co-Pilot/backend/tests/test_reasoning_grounding.py", line 24, in test_same_labels_in_independent_sources_keep_their_own_graphs
+    self.assertIsNone(validate_plan(snap,PlanProposal(steps,())))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'safety_rejected' is not None
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+FAILED (failures=2)

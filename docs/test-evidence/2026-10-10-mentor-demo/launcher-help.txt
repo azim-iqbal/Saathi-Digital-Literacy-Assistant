@@ -1,0 +1,14 @@
+usage: mentor_demo.py [-h] [--adb ADB] [--serial SERIAL] [--install]
+                      [--screen {home,native-form,web-form,navigation,portal}]
+
+Open an explicitly synthetic mentor demo on an already running emulator. No
+backend, tokens, model calls, input automation or permission changes. The
+presenter starts/stops guidance through Saathi's existing UI.
+
+options:
+  -h, --help            show this help message and exit
+  --adb ADB
+  --serial SERIAL       An emulator serial, e.g. emulator-5554
+  --install             Install existing debug app and separate synthetic
+                        fixture APK (preserves app data)
+  --screen {home,native-form,web-form,navigation,portal}

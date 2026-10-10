@@ -19,7 +19,10 @@ data class UiNode(
     val isFocused: Boolean = false,
     val valueKnown: Boolean = true,
     val structuralPrivateField: Boolean = false,
-    val privateContext: Boolean = false
+    val privateContext: Boolean = false,
+    val contentInvalid: Boolean = false,
+    val requiredField: Boolean = false,
+    val inputType: Int = 0
 ) {
     fun fingerprintPart() = listOf(resourceId, text, description, className, isEnabled, bounds.toShortString()).joinToString("|")
 }

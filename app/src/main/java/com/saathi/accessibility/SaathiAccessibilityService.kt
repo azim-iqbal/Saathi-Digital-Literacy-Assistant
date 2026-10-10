@@ -15,7 +15,19 @@ class SaathiAccessibilityService : AccessibilityService() {
     private var pending = false
     private var copying = false
     private var dirty = false
+    private var settlingOnly = false
     @Volatile private var destroyed = false
+    private val settleBudget = com.saathi.core.FormObservationBudget()
+    private val settle = Runnable {
+        if (settleBudget.take(!destroyed && SaathiSession.canRecheckForm())) {
+            settlingOnly = true
+            scheduleCopy()
+        }
+    }
+    private fun scheduleSettlingCheck() {
+        handler.removeCallbacks(settle)
+        if (settleBudget.pending(!destroyed && SaathiSession.canRecheckForm())) handler.postDelayed(settle, 750)
+    }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -24,6 +36,7 @@ class SaathiAccessibilityService : AccessibilityService() {
 
     /** A changed request needs a fresh tree even when the other app has not emitted an event. */
     private fun refreshScreen() {
+        settlingOnly = false
         SaathiSession.invalidateScreen()
         dirty = true
         scheduleCopy()
@@ -35,7 +48,8 @@ class SaathiAccessibilityService : AccessibilityService() {
         if (event.eventType !in setOf(
                 AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED, AccessibilityEvent.TYPE_WINDOWS_CHANGED,
                 AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED, AccessibilityEvent.TYPE_VIEW_SCROLLED,
-                AccessibilityEvent.TYPE_VIEW_CLICKED, AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED
+                AccessibilityEvent.TYPE_VIEW_CLICKED, AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED,
+                AccessibilityEvent.TYPE_VIEW_FOCUSED, AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED
             )) return
         // Our non-focusable overlay can announce a delayed window-state event. It has not
         // changed the underlying screen; re-observing would interrupt speech/model work.
@@ -54,6 +68,10 @@ class SaathiAccessibilityService : AccessibilityService() {
         val root = runCatching { rootInActiveWindow }.getOrNull()
         val rootWindow = try { root?.windowId } finally { @Suppress("DEPRECATION") root?.recycle() }
         if (!com.saathi.core.ObservationEventPolicy.relevant(event.eventType, event.windowId, rootWindow)) return
+        // An external event opens one finite local-only settling window. The fallback
+        // cannot replenish itself, send AI calls or poll a private/unavailable screen.
+        settleBudget.onExternalEvent()
+        handler.removeCallbacks(settle)
         refreshScreen()
     }
 
@@ -90,7 +108,10 @@ class SaathiAccessibilityService : AccessibilityService() {
                 SaathiSession.onScreenUnavailable()
                 return@postDelayed
             }
-            val ticket = SaathiSession.beginObservation(root.packageName?.toString().orEmpty(), root.windowId)
+            val probe = if (settlingOnly) SaathiSession.formProbe(root.packageName?.toString().orEmpty(), root.windowId) else null
+            if (settlingOnly && probe == null) SaathiSession.invalidateScreen()
+            settlingOnly = false
+            val ticket = probe ?: SaathiSession.beginObservation(root.packageName?.toString().orEmpty(), root.windowId)
             val observedAtMs = System.currentTimeMillis()
             val started = android.os.SystemClock.elapsedRealtime()
             val snapshot = AccessibilityNodeInfo.obtain(root)
@@ -105,12 +126,15 @@ class SaathiAccessibilityService : AccessibilityService() {
                     ObservationDiagnostics.snapshot(android.os.SystemClock.elapsedRealtime() - started)
                     val browserLocation = if (SaathiSession.wantsBrowserLocation() &&
                         com.saathi.core.ScreenInterruption.reason(nodes) == null) BrowserLocationReader.read(snapshot) else null
-                    if (!destroyed) SaathiSession.onScreenChanged(nodes, ticket, browserLocation, observedAtMs)
+                    if (!destroyed) {
+                        if (probe != null) SaathiSession.onFormProbe(nodes, ticket, observedAtMs)
+                        else SaathiSession.onScreenChanged(nodes, ticket, browserLocation, observedAtMs)
+                    }
                 }
                 catch (error: RuntimeException) { ObservationDiagnostics.observationFailure(error.message.orEmpty()); SaathiSession.onObservationFailed(ticket) }
                 finally {
                     @Suppress("DEPRECATION") snapshot.recycle()
-                    if (!destroyed) handler.post { copying = false; if (dirty) scheduleCopy() }
+                    if (!destroyed) handler.post { copying = false; if (dirty) scheduleCopy() else scheduleSettlingCheck() }
                 }
             }
         }, 150)
@@ -131,6 +155,12 @@ class SaathiAccessibilityService : AccessibilityService() {
         private var instance: SaathiAccessibilityService? = null
         fun isConnected() = instance != null
         /** Main-thread only, like session changes and accessibility event delivery. */
-        fun requestCurrentScreen() { instance?.refreshScreen() }
+        fun requestCurrentScreen() { instance?.let {
+            // A new/retargeted task can start on an already-open, event-silent form.
+            // Give that first observation the same finite settling window as a tap.
+            it.settleBudget.onExternalEvent()
+            it.handler.removeCallbacks(it.settle)
+            it.refreshScreen()
+        } }
     }
 }

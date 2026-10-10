@@ -1,0 +1,187 @@
+{
+  "maximum_provider_calls": 4,
+  "provider_reservations": 4,
+  "cases": [
+    {
+      "case": "plan",
+      "request_id": "final-plan",
+      "elapsed_ms": 2683,
+      "accepted": false,
+      "reason": "disagreement",
+      "individual_scores": {
+        "groq": {
+          "three_reading_steps": false,
+          "prerequisite_chain": false,
+          "evidence_backed": true,
+          "eligibility_requirement": true
+        },
+        "gemini": {
+          "three_reading_steps": true,
+          "prerequisite_chain": true,
+          "evidence_backed": true,
+          "eligibility_requirement": true
+        }
+      },
+      "providers": [
+        {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "diagnostics": {
+            "request_id": "final-plan",
+            "session_id": "final-plan",
+            "validation_reason": "ACCEPTED",
+            "response_category": "STRUCTURED",
+            "outcome": "succeeded",
+            "real_api": true,
+            "http_received": true,
+            "http_status": 200,
+            "checked_at_ms": 1791615244343,
+            "elapsed_ms": 2252,
+            "input_tokens": 597,
+            "output_tokens": 1023,
+            "total_tokens": 1620,
+            "network": {
+              "phase": "complete",
+              "phase_ms": {
+                "dns": 572,
+                "connect": 12,
+                "tls": 14,
+                "write": 0,
+                "first_byte": 1609,
+                "body": 1,
+                "json": 0,
+                "complete": 3
+              },
+              "failure_stage": null,
+              "failure_kind": null
+            }
+          }
+        },
+        {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "diagnostics": {
+            "request_id": "final-plan",
+            "session_id": "final-plan",
+            "validation_reason": "ACCEPTED",
+            "response_category": "STRUCTURED",
+            "outcome": "succeeded",
+            "real_api": true,
+            "http_received": true,
+            "http_status": 200,
+            "checked_at_ms": 1791615244343,
+            "elapsed_ms": 2670,
+            "input_tokens": 523,
+            "output_tokens": 375,
+            "total_tokens": 898,
+            "network": {
+              "phase": "complete",
+              "phase_ms": {
+                "dns": 572,
+                "connect": 11,
+                "tls": 17,
+                "write": 0,
+                "first_byte": 2028,
+                "body": 0,
+                "json": 0,
+                "complete": 1
+              },
+              "failure_stage": null,
+              "failure_kind": null
+            }
+          }
+        }
+      ],
+      "status": "FAIL"
+    },
+    {
+      "case": "incident",
+      "request_id": "final-incident",
+      "elapsed_ms": 1113,
+      "accepted": true,
+      "reason": null,
+      "individual_scores": {
+        "groq": {
+          "cautious_financial": true,
+          "respects_no_transfer": true
+        },
+        "gemini": {
+          "cautious_financial": true,
+          "respects_no_transfer": true
+        }
+      },
+      "providers": [
+        {
+          "provider": "groq",
+          "model": "openai/gpt-oss-20b",
+          "diagnostics": {
+            "request_id": "final-incident",
+            "session_id": "final-incident",
+            "validation_reason": "ACCEPTED",
+            "response_category": "STRUCTURED",
+            "outcome": "succeeded",
+            "real_api": true,
+            "http_received": true,
+            "http_status": 200,
+            "checked_at_ms": 1791615247028,
+            "elapsed_ms": 641,
+            "input_tokens": 395,
+            "output_tokens": 217,
+            "total_tokens": 612,
+            "network": {
+              "phase": "complete",
+              "phase_ms": {
+                "dns": 2,
+                "connect": 6,
+                "tls": 12,
+                "write": 0,
+                "first_byte": 612,
+                "body": 0,
+                "json": 0,
+                "complete": 0
+              },
+              "failure_stage": null,
+              "failure_kind": null
+            }
+          }
+        },
+        {
+          "provider": "gemini",
+          "model": "gemini-3.1-flash-lite",
+          "diagnostics": {
+            "request_id": "final-incident",
+            "session_id": "final-incident",
+            "validation_reason": "ACCEPTED",
+            "response_category": "STRUCTURED",
+            "outcome": "succeeded",
+            "real_api": true,
+            "http_received": true,
+            "http_status": 200,
+            "checked_at_ms": 1791615247028,
+            "elapsed_ms": 1097,
+            "input_tokens": 308,
+            "output_tokens": 33,
+            "total_tokens": 341,
+            "network": {
+              "phase": "complete",
+              "phase_ms": {
+                "dns": 2,
+                "connect": 7,
+                "tls": 10,
+                "write": 0,
+                "first_byte": 1068,
+                "body": 0,
+                "json": 0,
+                "complete": 0
+              },
+              "failure_stage": null,
+              "failure_kind": null
+            }
+          }
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "provenance": "Genuine provider adapters; fictional evidence; paired validation, not Android E2E"
+}

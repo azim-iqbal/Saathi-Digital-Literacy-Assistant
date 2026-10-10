@@ -1,0 +1,17 @@
+{
+  "configured_keys_checked": 2,
+  "artifacts": [
+    {
+      "file": "Saathi-Synthetic-Fixture.apk",
+      "sha256": "0492dae3da40e4e8a6d49c31efc5a59ea4eaf3daf117b01691c309d27286acba",
+      "bytes": 1317870,
+      "exact_configured_provider_key_found": false
+    },
+    {
+      "file": "Saathi-Mentor-Demo-debug.apk",
+      "sha256": "c8f1af5711bb81a6e2d9bb9178ce6ba9866cfb6e68be7b06bae5ae07d5c9d969",
+      "bytes": 11356658,
+      "exact_configured_provider_key_found": false
+    }
+  ]
+}

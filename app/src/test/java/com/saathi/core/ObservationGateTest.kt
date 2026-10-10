@@ -4,6 +4,15 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class ObservationGateTest {
+    @Test fun `form probes preserve identity but never cross events windows or sessions`() {
+        val gate = ObservationGate(); gate.start()
+        val ticket = gate.observe("form", 1)!!
+        repeat(8) { assertEquals(ticket, gate.probe("form", 1)); assertTrue(gate.accepts(ticket)) }
+        assertNull(gate.probe("other", 1)); assertNull(gate.probe("form", 2))
+        gate.invalidate(); assertNull(gate.probe("form", 1)); assertFalse(gate.accepts(ticket))
+        gate.stop(); gate.start(); gate.observe("form", 1)
+        assertFalse(gate.accepts(ticket))
+    }
     @Test fun `stop rejects a delayed tree and clears presentation identity`() {
         val gate = ObservationGate(); gate.start()
         val ticket = gate.observe("practice", 1)!!

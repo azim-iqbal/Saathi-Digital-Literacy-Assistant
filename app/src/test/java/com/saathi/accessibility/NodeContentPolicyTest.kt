@@ -26,6 +26,18 @@ class NodeContentPolicyTest {
             assertNull(result.text); assertNull(result.description)
         }
     }
+    @Test fun cursorMetadataShowsPresenceWithoutReadingValuesOrCertifyingValidity() {
+        for(position in listOf(-1,0,4)) {
+            val result=NodeContentPolicy.read(false,true,"City *",null,1,false,
+                { error("No value access") },{ error("No description access") },position)
+            assertEquals(position>0,result.hasValue);assertEquals(position>0,result.valueKnown)
+            assertNull(result.text)
+        }
+        val cleared=NodeContentPolicy.read(false,true,"City *",null,1,true,{ error("No value") },{ null },0)
+        assertTrue(cleared.valueKnown);assertFalse(cleared.hasValue)
+        val secret=NodeContentPolicy.read(true,true,"OTP",null,0,false,{ error("No value") },{ error("No description") },8)
+        assertFalse(secret.valueKnown);assertFalse(secret.hasValue)
+    }
     @Test fun staticSecretsStillRedactedWhilePublicDatesAndPricesSurvive() {
         for (value in listOf("OTP 582139", "card number 4111 1111 1111 1111", "password synthetic-secret", "ＣＶＶ 123", "pass\u200Bword fictional")) {
             val result = NodeContentPolicy.read(false, false, null, null, 0, false, { value }, { null })

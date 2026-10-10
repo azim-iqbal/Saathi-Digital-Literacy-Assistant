@@ -6,7 +6,7 @@ internal object NodeContentPolicy {
         val structuralPrivateField: Boolean, val hasValue: Boolean, val valueKnown: Boolean)
 
     fun read(password: Boolean, editable: Boolean, hint: String?, id: String?, inputType: Int,
-             showingHint: Boolean, text: () -> String?, description: () -> String?): Content {
+             showingHint: Boolean, text: () -> String?, description: () -> String?, selectionEnd: Int = -1): Content {
         // Android input-type constants, kept platform-independent for accessor regression tests.
         val variation = inputType and 0xfff
         val secretType = variation in setOf(0x81, 0x91, 0xe1, 0x12)
@@ -14,8 +14,9 @@ internal object NodeContentPolicy {
         if (privateMetadata) return Content(null, null, true, editable || password || secretType, false, false)
         // An unlabelled editable field may also contain a secret. Never inspect its value or
         // content description to decide whether it is filled. Showing a hint is a structural
-        // empty-field signal; absence of a hint is UNKNOWN, not proof of completion.
-        if (editable) return Content(null, null, false, false, false, showingHint)
+        // empty-field signal. A positive cursor offset proves only presence; offset zero
+        // or a missing hint alone remains UNKNOWN. Neither signal proves validity.
+        if (editable) return Content(null, null, false, false, !showingHint && selectionEnd > 0, showingHint || selectionEnd > 0)
         val publicText = text()?.take(300)
         val publicDescription = description()?.take(300)
         val sensitive = SensitiveContent.isSensitive(false, publicText, publicDescription)

@@ -8,6 +8,23 @@ from backend.incident import IncidentSnapshot,IncidentProposal,validate_assessme
 from backend.tests.test_incident import request
 
 class ReasoningGroundingTests(unittest.TestCase):
+    def test_identical_labels_from_another_source_cannot_supply_a_prerequisite(self):
+        rule='Select “Alpha”. After reading “Alpha”, select “Beta”.'
+        other='Select “Alpha” to read unrelated information.'
+        snap=dataclasses.replace(snapshot(),evidence=(evidence(snippet=rule),evidence(evidence_id='e2',snippet=other,source_url='https://other.example.test/')))
+        parent=Step('s1','Alpha',(),'e2',other,'USER_CONFIRMATION',NavigationHint('READ_OPTION','Alpha'))
+        child=Step('s2','Beta',('s1',),'e1',rule,'USER_CONFIRMATION',NavigationHint('READ_OPTION','Beta'))
+        self.assertEqual(validate_plan(snap,PlanProposal((parent,child),())),'evidence_missing')
+
+    def test_same_labels_in_independent_sources_keep_their_own_graphs(self):
+        rule='Select “Alpha”. After reading “Alpha”, select “Beta”.'
+        snap=dataclasses.replace(snapshot(),evidence=(evidence(snippet=rule),evidence(evidence_id='e2',snippet=rule,source_url='https://other.example.test/')))
+        steps=tuple(Step('s'+str(i),label,depends,source,rule,'USER_CONFIRMATION',NavigationHint('READ_OPTION',label))
+                    for i,label,depends,source in [(1,'Alpha',(),'e1'),(2,'Beta',('s1',),'e1'),(3,'Alpha',(),'e2'),(4,'Beta',('s3',),'e2')])
+        self.assertIsNone(validate_plan(snap,PlanProposal(steps,())))
+        broken=(steps[0],dataclasses.replace(steps[1],depends_on=()),*steps[2:])
+        self.assertEqual(validate_plan(snap,PlanProposal(broken,())),'evidence_missing')
+
     def test_explicit_order_cannot_be_dropped_reversed_or_missing_in_any_locale(self):
         snippets=[
             'Select “Alpha”. After reading “Alpha”, select “Beta”. After reading “Beta”, select “Gamma”.',
@@ -21,6 +38,8 @@ class ReasoningGroundingTests(unittest.TestCase):
             dropped=tuple(dataclasses.replace(s,depends_on=()) for s in steps)
             self.assertEqual(validate_plan(snap,PlanProposal(dropped,())),'evidence_missing')
             self.assertEqual(validate_plan(snap,PlanProposal((dataclasses.replace(steps[2],depends_on=()),),())),'evidence_missing')
+            omitted=tuple(dataclasses.replace(s,navigation=None) for s in steps)
+            self.assertEqual(validate_plan(snap,PlanProposal(omitted,())),'evidence_missing')
     def test_explicit_denial_cannot_support_transaction_or_account_access(self):
         summaries=[
             'Someone requested money. No money was transferred and nobody accessed my account.',

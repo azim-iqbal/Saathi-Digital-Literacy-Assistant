@@ -32,6 +32,9 @@ Include prerequisites at any
 needed depth. If the source says B follows A, B must depend_on A; if C follows B,
 C must depend_on B. Array order does not establish a dependency. Keep each selected
 option attached to the correct step. Cycles are forbidden. Do not invent rules.
+If a cited excerpt explicitly orders quoted public reading options, represent each
+option and its dependencies; do not collapse that sequence into one generic step
+or omit the grounded navigation annotations. Otherwise withhold the plan.
 criteria is an array of 0..12 objects: id (c1..c12), evidence_id, quote (EXACT
 source excerpt describing one eligibility condition). Do not ask for private values.
 Include only supported requirements for the requested jurisdiction. Official/primary

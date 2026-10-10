@@ -16,7 +16,8 @@ object NodeMasker {
         // as soon as the screen context is classified; keep only a non-content handoff flag.
         return if (com.saathi.core.PrivateContextPolicy.blocksCloud(nodes)) nodes.map {
             it.copy(text = null, description = null, hint = null, resourceId = null,
-                hasValue = false, valueKnown = false, privateContext = true)
+                hasValue = false, valueKnown = false, privateContext = true,
+                contentInvalid = false, requiredField = false, inputType = 0)
         } else nodes
     }
 
@@ -28,7 +29,7 @@ object NodeMasker {
             val className = node.className?.toString()
             val editable = node.isEditable || className.orEmpty().contains("EditText")
             val content = NodeContentPolicy.read(node.isPassword, editable, hint, id, node.inputType,
-                node.isShowingHintText, { node.text?.toString() }, { node.contentDescription?.toString() })
+                node.isShowingHintText, { node.text?.toString() }, { node.contentDescription?.toString() }, node.textSelectionEnd)
             val sensitive = content.sensitive
             into += UiNode(
                 bounds = bounds,
@@ -46,7 +47,12 @@ object NodeMasker {
                 structuralPrivateField = content.structuralPrivateField,
                 clickableAncestorBounds = clickableAncestor?.let(::Rect),
                 isEditable = editable,
-                isFocused = node.isFocused
+                isFocused = node.isFocused,
+                contentInvalid = !sensitive && node.isContentInvalid,
+                // Optional absence of new platform metadata remains UNKNOWN, not OPTIONAL.
+                requiredField = !sensitive && android.os.Build.VERSION.SDK_INT >= 36 &&
+                    runCatching { AccessibilityNodeInfo::class.java.getMethod("isFieldRequired").invoke(node) == true }.getOrDefault(false),
+                inputType = if (sensitive) 0 else node.inputType
             )
         }
         return if (node.isClickable && node.isEnabled && node.isVisibleToUser && !bounds.isEmpty) bounds else clickableAncestor

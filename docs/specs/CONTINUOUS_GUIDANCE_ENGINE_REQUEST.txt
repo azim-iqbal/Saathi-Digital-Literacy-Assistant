@@ -1,0 +1,586 @@
+# SAATHI — FINAL CONTINUOUS GUIDANCE ENGINE AND PRE-DEPLOYMENT COMPLETION
+
+You have access to Saathi's entire repository, previous remediation work, Git history, architecture and test evidence.
+
+The app already has research, task planning, accessibility observation, field highlighting, local-first guidance, AI provider integration, privacy masking, pause/resume, sensitive-field handoffs and browser navigation.
+
+Your task is to improve the existing architecture into a reliable, continuously reactive digital guidance assistant.
+
+**Do not rebuild the entire codebase unnecessarily. Refactor only the components that require changes, preserve all accepted functionality, and maintain the existing UI.**
+
+## Primary product requirement
+
+Saathi must guide users through forms and digital workflows without requiring them to zoom in, zoom out, rotate the screen or manually trigger an accessibility refresh.
+
+It must:
+
+1. Discover visible form fields.
+2. Identify their purpose.
+3. Determine whether each is required, optional or unknown.
+4. Detect when the user fills, clears or changes a field.
+5. Determine whether the field is locally valid, invalid or unverified.
+6. Highlight the appropriate next field.
+7. Advance automatically when there is sufficient evidence.
+8. Preserve the original task across navigation.
+9. Handle private fields without interrupting the overall task.
+10. Continue until the workflow reaches a verifiable completion state.
+
+Keep every tap, submission, payment, declaration and authentication action under the user's control.
+
+---
+
+# PHASE 1 — FIND THE ZOOM-DEPENDENT GUIDANCE DEFECT
+
+Investigate why guidance currently updates only after zooming or another screen-changing action.
+
+Inspect:
+
+- AccessibilityService event subscriptions
+- AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED
+- TYPE_VIEW_TEXT_SELECTION_CHANGED
+- TYPE_VIEW_FOCUSED
+- TYPE_VIEW_CLICKED
+- TYPE_WINDOW_CONTENT_CHANGED
+- TYPE_WINDOW_STATE_CHANGED
+- TYPE_WINDOWS_CHANGED
+- WebView accessibility behavior
+- Node copying and invalidation
+- Event debouncing
+- Session revision tracking
+- Target grounding
+- Overlay positioning
+- Observation scheduling
+- Cancellation and generation identifiers
+
+Determine whether the failure is caused by:
+
+- Missing events
+- Event filtering
+- Over-aggressive debouncing
+- Stale screen snapshots
+- Cached node references
+- WebView timing
+- Focus-state handling
+- Missing observation requests
+- Overlay update failures
+- Incorrect field-state transitions
+
+Reproduce the issue in a controlled form.
+
+Capture the failing behavior before implementing a fix.
+
+Do not use zooming, scrolling or artificial layout changes as a workaround.
+
+## Required result
+
+Typing into a field must cause the guidance engine to reassess progress when a trustworthy event or observation becomes available.
+
+Clearing a previously completed field must invalidate that field's completion state.
+
+If a supported application does not emit useful accessibility events, use a bounded, lifecycle-aware observation fallback where Android permits it.
+
+Do not continuously poll inaccessible or protected screens.
+
+Do not create an infinite observation loop.
+
+---
+
+# PHASE 2 — BUILD A GENERAL FORM UNDERSTANDING ENGINE
+
+Create or improve a structured form model.
+
+Conceptually:
+
+Form
+- Form identity
+- Screen identity
+- Current step
+- Fields
+- Dependencies
+- Submission boundary
+- Completion evidence
+
+Field
+- Stable structural identity
+- Visible label
+- Accessibility role
+- Input type
+- Requiredness
+- Visibility
+- Enabled state
+- Focus state
+- Value-presence state
+- Validation state
+- Sensitivity classification
+- Current bounds
+- Evidence/confidence
+
+Use existing models where possible.
+
+Do not duplicate the architecture unnecessarily.
+
+## Requiredness classification
+
+Support:
+
+- REQUIRED
+- OPTIONAL
+- UNKNOWN
+- CONDITIONAL
+
+Derive requiredness from trustworthy evidence such as:
+
+- Accessibility metadata
+- Native validation hints
+- HTML form metadata when available through legitimate integration
+- Visible asterisks
+- Explicit optional labels
+- Form instructions
+- Conditional dependencies
+- User-visible validation messages
+- Reviewed official workflow evidence
+
+Do not assume every field is required.
+
+Do not assume the absence of an asterisk means optional.
+
+Do not fabricate requiredness when metadata is unavailable.
+
+If uncertain, explain the uncertainty.
+
+## Conditional fields
+
+Support workflows such as:
+
+- Selecting Yes reveals additional required fields.
+- Selecting No hides dependent fields.
+- Choosing a state changes available districts.
+- Selecting an applicant category changes requirements.
+- Selecting a payment method reveals different fields.
+
+Reevaluate the form structure after meaningful changes.
+
+Never reuse stale bounds or obsolete field identities.
+
+---
+
+# PHASE 3 — REACTIVE FIELD COMPLETION TRACKING
+
+Implement a deterministic field-state machine.
+
+Suggested states:
+
+- NOT_STARTED
+- ACTIVE
+- VALUE_PRESENT
+- VALIDATION_PENDING
+- VALID
+- INVALID
+- OPTIONAL_SKIPPED
+- USER_CONFIRMATION_REQUIRED
+- UNKNOWN
+
+Do not equate VALUE_PRESENT with VALID.
+
+## Required behavior
+
+When a user starts typing:
+
+- Observe the relevant safe structural change.
+- Keep the current field highlighted if it is incomplete.
+- Do not dispatch an AI request for every keystroke.
+
+When the user finishes:
+
+- Evaluate available local validation evidence.
+- Advance only if the completion criteria are satisfied.
+
+When the user clears a field:
+
+- Mark the previous completion evidence stale.
+- Reassess dependencies.
+- Return guidance to the field when necessary.
+
+When an error appears:
+
+- Identify the error using safe UI evidence.
+- Explain what needs correction.
+- Highlight the appropriate field.
+
+When an optional field is empty:
+
+- Allow the user to skip it.
+- Do not block the workflow.
+
+When requiredness is unknown:
+
+- Do not silently classify it as required.
+- Explain the uncertainty and provide an appropriate user-controlled continuation.
+
+When the user navigates backward:
+
+- Reconstruct current field states from fresh observations.
+- Do not assume previous entries remain valid.
+
+---
+
+# PHASE 4 — AUTOMATIC NEXT-FIELD GUIDANCE
+
+Create a deterministic next-field selection policy.
+
+Prioritize:
+
+1. Current invalid required field.
+2. Current incomplete required field.
+3. Next unmet conditional requirement.
+4. Optional fields according to user preference or workflow relevance.
+5. Next navigation control after form readiness is established.
+
+Do not blindly select the first visible input.
+
+Respect:
+
+- Form order
+- Dependency relationships
+- Accessibility semantics
+- User-visible validation
+- Current focus
+- Hidden fields
+- Disabled fields
+- Dynamic forms
+- Multi-step forms
+
+The user should not have to manually request the next highlight after every field.
+
+However, Saathi must not automatically click buttons, submit forms or enter values.
+
+---
+
+# PHASE 5 — CONTINUOUS PRIVATE-FIELD GUIDANCE
+
+Preserve privacy enforcement.
+
+Do not disable NodeMasker.
+
+Do not send passwords, OTPs, PINs, CVVs, authentication tokens or other secrets to the backend or AI providers.
+
+Instead, allow the guidance session to continue through a privacy-preserving local handoff.
+
+## Behavior
+
+When Saathi reaches a sensitive field:
+
+- Keep the original task active.
+- Identify the field's purpose using safe structural metadata.
+- Highlight the field if safe.
+- Explain that the user should enter the information themselves.
+- Suspend cloud processing of the sensitive screen.
+- Disable listening during sensitive entry.
+- Avoid reading or retaining the actual value.
+- Use safe local progress indicators where available.
+- Reobserve after the sensitive interaction.
+- Continue automatically when a trustworthy safe transition is established.
+
+Do not treat focus loss or a non-empty field as proof of successful authentication.
+
+If the user remains on a protected screen, continue waiting.
+
+If the user reports completion, verify the next safe screen before advancing.
+
+## Non-sensitive content
+
+For ordinary non-sensitive fields, support optional AI-assisted interpretation of field values only when:
+
+- The user has been clearly informed.
+- Explicit consent is obtained.
+- The data is necessary for the requested guidance.
+- Data minimization is applied.
+- Existing backend privacy controls are respected.
+
+No deceptive privacy messaging is permitted.
+
+---
+
+# PHASE 6 — IMPROVE AI FORM REASONING
+
+AI should reason about:
+
+- Form purpose
+- Field purpose
+- Requiredness
+- Conditional dependencies
+- Validation messages
+- Prerequisites
+- Eligibility
+- Next safe action
+- Completion evidence
+
+Prefer local deterministic rules for direct UI facts.
+
+Use AI when interpretation or broader task reasoning is genuinely necessary.
+
+Do not send every keystroke to AI.
+
+Use stable screen revisions and request cancellation.
+
+Reject stale replies.
+
+Reject unsupported target references.
+
+Require grounded evidence for high-impact decisions.
+
+Preserve existing Gemini/Groq provider contracts and budgets.
+
+---
+
+# PHASE 7 — COMPLETE THE REMAINING WEBVIEW WORK
+
+The latest handoff identifies:
+
+- A proposed fix for stale markers.
+- An unresolved portal transition failure.
+
+Verify both.
+
+Create regression tests covering:
+
+- Rapid field entry
+- Field clearing
+- Dynamic form updates
+- WebView navigation
+- Renderer recreation
+- Stale accessibility nodes
+- Late callbacks
+- Overlay repositioning
+- Scroll changes
+- Keyboard appearance
+- Focus changes
+- Portal transitions
+- Navigation back/forward
+
+Investigate the historical failure with preserved diagnostics.
+
+Do not call it resolved without reproducible evidence.
+
+---
+
+# PHASE 8 — FINAL REGRESSIONS AND UI COMPARISON
+
+Collect all pending emulator results.
+
+Fix genuine production failures.
+
+Fix test-harness defects separately.
+
+Finish the before/after screenshot comparison.
+
+The approved Saathi interface must remain visually unchanged.
+
+No redesign.
+
+No new onboarding.
+
+No new theme.
+
+No changed typography.
+
+No changed navigation.
+
+Reuse existing UI components for any necessary guidance-state indicators.
+
+---
+
+# PHASE 9 — AI QUALITY VERIFICATION
+
+The latest handoff authorizes four additional genuine provider calls.
+
+First verify whether those four calls remain unused.
+
+Do not assume authorization is still available if logs show they were consumed.
+
+Run deterministic planning and incident tests before live calls.
+
+If the four-call allowance is still valid, use no more than four genuine calls.
+
+Evaluate:
+
+- Evidence-backed planning
+- Prerequisite reasoning
+- Eligibility
+- Incident assessment
+- English/Hindi/Hinglish behavior
+- Latency
+- Validation acceptance
+- Correct uncertainty handling
+
+Do not fabricate model accuracy.
+
+Do not weaken validators.
+
+Do not spend additional calls without authorization.
+
+---
+
+# PHASE 10 — BROWSER AND PROTECTED PORTAL ACCEPTANCE
+
+Verify trustworthy HTTPS destination handling.
+
+Do not rely on page branding or unverified address text.
+
+Preserve fail-closed behavior where trustworthy browser metadata is unavailable.
+
+For cybercrime reporting:
+
+- Verify public guidance.
+- Verify controlled authenticated-form fixtures.
+- Test login/OTP/CAPTCHA handoff.
+- Verify safe continuation.
+- Test field guidance and requiredness.
+- Test complaint preparation and review.
+- Do not submit complaints.
+- Do not invent authenticated test results without legitimate access.
+
+---
+
+# PHASE 11 — PHYSICAL-DEVICE ACCEPTANCE
+
+Detect available connected Android hardware.
+
+Where available, test:
+
+- Microphone accuracy
+- TTS
+- Continuous voice
+- Background survival
+- Permission handling
+- Accessibility
+- TalkBack
+- Overlay accuracy
+- Performance
+- Battery and memory behavior
+
+Where unavailable, provide executable/manual device acceptance procedures and mark those tests BLOCKED.
+
+Do not claim emulator testing proves physical-device behavior.
+
+---
+
+# PHASE 12 — PRE-DEPLOYMENT READINESS
+
+Actual deployment remains deferred.
+
+However, validate:
+
+- Backend container build
+- Local container startup
+- Environment configuration
+- Cloud Run compatibility
+- Durable-state requirements
+- Stateless instance behavior
+- Multi-instance consistency where relevant
+- Authentication
+- Rate limits
+- Quota persistence
+- Cancellation and request accounting
+- Secret handling
+- HTTPS release configuration
+- Release build compilation
+
+Cloud Run instance-local files must not be assumed durable or shared.
+
+If the application relies on SQLite or local files for critical persistent state, identify the affected invariants and implement or document an appropriate external durable-store architecture.
+
+Use deterministic multi-instance tests where possible.
+
+Do not deploy.
+
+Do not create paid cloud resources.
+
+Do not publish or sign a distributable production APK.
+
+---
+
+# PHASE 13 — FINAL END-TO-END ACCEPTANCE
+
+Build controlled end-to-end tests for:
+
+1. Simple native form.
+2. Multi-field required form.
+3. Optional fields.
+4. Conditional fields.
+5. Required field cleared after completion.
+6. Invalid field corrected.
+7. WebView form.
+8. Dynamic JavaScript form.
+9. Multi-page form.
+10. Sensitive OTP field.
+11. Password handoff.
+12. CAPTCHA handoff.
+13. Navigation away and return.
+14. Network loss.
+15. AI timeout.
+16. Stale AI response.
+17. Accessibility permission loss.
+18. Screen rotation.
+19. Scroll and keyboard changes.
+20. Task completion.
+
+For each test, verify:
+
+- No zooming required.
+- No manual refresh required under supported observation conditions.
+- Correct field identified.
+- Correct requiredness classification or explicit uncertainty.
+- Correct progress tracking.
+- Correct next-field highlight.
+- No secret transmission.
+- No stale marker.
+- No fabricated completion.
+- User remains in control.
+
+Run all existing backend, Android, evaluation, emulator, privacy, accessibility, browser, UI, lint and build regressions.
+
+---
+
+# DEFINITION OF DONE
+
+The application should:
+
+- React to field changes automatically.
+- Guide required fields in the correct order.
+- Handle optional and conditional fields.
+- Detect when previously completed fields become incomplete.
+- Explain validation failures.
+- Advance guidance when safe completion evidence exists.
+- Preserve privacy during sensitive entry.
+- Continue the original task after private handoffs.
+- Work without zoom-based refresh workarounds on supported screens.
+- Preserve the approved UI.
+- Pass available automated tests.
+- Have documented, truthful results for physical-device and protected-portal tests.
+- Be prepared for deployment without performing deployment.
+
+## Final report
+
+Provide:
+
+1. Root cause of zoom-dependent guidance.
+2. Implemented reactive form engine.
+3. Required/optional/conditional field handling.
+4. Sensitive-field continuity behavior.
+5. WebView investigation and results.
+6. AI accuracy and latency results.
+7. Browser/portal acceptance.
+8. Physical-device results.
+9. UI screenshot comparison.
+10. Cloud Run readiness.
+11. Complete regression results.
+12. Remaining external blockers.
+13. Final capability matrix.
+14. Files changed.
+
+Do not commit, push, deploy or publish.
+
+Do not stop after writing an implementation plan.
+
+**Implement, test, fix, retest and finish all repository-solvable work now.**
