@@ -10,6 +10,17 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class NodeMaskerPrivacyTest {
+    @Test fun mixedFormKeepsSafeFieldIndicesWithoutSelectingSecrets() {
+        val secret = com.saathi.core.UiNode(Rect(0,0,200,80),null,null,null,null,"EditText",true,true,true,
+            isSensitive=true,isEditable=true,structuralPrivateField=true,valueKnown=false)
+        val city = secret.copy(bounds=Rect(0,100,200,180),hint="City *",isPassword=false,isSensitive=false,
+            structuralPrivateField=false,valueKnown=true,hasValue=false)
+        val nodes=listOf(secret,city)
+        assertNull(com.saathi.orchestrator.FormGuide.next(nodes,"en-IN").target)
+        val local=com.saathi.orchestrator.FormGuide.next(nodes,"en-IN",allowMixedPrivateForm=true)
+        assertEquals(1,local.target?.nodeIndex);assertEquals(city.bounds,local.target?.bounds)
+        assertFalse(local.goalComplete)
+    }
     @Test fun privateOccupancyMustNotBeDerivedFromValue() {
         @Suppress("DEPRECATION") val node = AccessibilityNodeInfo.obtain()
         try {

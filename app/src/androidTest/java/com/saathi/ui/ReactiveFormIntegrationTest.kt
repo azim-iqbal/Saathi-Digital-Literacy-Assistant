@@ -85,7 +85,7 @@ class ReactiveFormIntegrationTest {
         } finally { com.saathi.accessibility.ObservationDiagnostics.observer=null }
     }
     private fun exercise(web:Boolean) {
-        assertTrue(android.os.Build.MODEL.startsWith("sdk_") || android.os.Build.FINGERPRINT.contains("generic"))
+        assertTrue(android.os.Build.MODEL.startsWith("sdk_") || android.os.Build.FINGERPRINT.contains("generic") || InstrumentationRegistry.getArguments().getString("physicalDeviceConfirmed") == "true")
         val oldServices=shell("settings get secure enabled_accessibility_services");val oldEnabled=shell("settings get secure accessibility_enabled")
         val oldOverlay=Regex("SYSTEM_ALERT_WINDOW: (allow|ignore|deny|default)").find(shell("appops get com.saathi SYSTEM_ALERT_WINDOW"))?.groupValues?.get(1) ?: "default"
         val external=Intent().setComponent(ComponentName(inst.context.packageName,ExternalSurfaceActivity::class.java.name))
@@ -94,6 +94,7 @@ class ReactiveFormIntegrationTest {
             shell("appops set com.saathi SYSTEM_ALERT_WINDOW allow")
             shell("settings put secure enabled_accessibility_services com.saathi/com.saathi.accessibility.SaathiAccessibilityService")
             shell("settings put secure accessibility_enabled 1")
+            DeviceTestAccess.reconnect(automation)
             waitFor("Service") { com.saathi.accessibility.SaathiAccessibilityService.isConnected() }
             ActivityScenario.launch(MainActivity::class.java).use { scenario ->
                 scenario.onActivity { assertTrue(SaathiSession.startLive(it,"Help fill form",GuidanceLanguage.ENGLISH,false));it.startActivity(external) }
@@ -131,6 +132,11 @@ class ReactiveFormIntegrationTest {
                     assertTrue(privateNodes.any { it.structuralPrivateField })
                     assertFalse(privateNodes.any { it.text?.contains("fictional-secret-canary")==true || it.description?.contains("fictional-secret-canary")==true })
                     assertFalse(SaathiSession.canRecheckForm())
+                    action("City *","");action("Finish editing")
+                    waitFor("Mixed private form still guides a safe empty field locally") { SaathiSession.instruction.value.contains("city field") }
+                    assertEquals(session,SaathiSession.sessionKey())
+                    assertEquals(calls,PracticeGateway.requestsStarted.get())
+                    action("City *","Fixturetown");action("Finish editing")
                     action("Hide dependent")
                     waitFor("Same form task resumes after private field disappears") { SaathiSession.instruction.value.contains("validity are not verified") }
                     assertEquals(session,SaathiSession.sessionKey());assertEquals(calls,PracticeGateway.requestsStarted.get())

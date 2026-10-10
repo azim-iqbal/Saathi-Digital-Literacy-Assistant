@@ -1,0 +1,42 @@
+[
+  {
+    "name": "home-light",
+    "same_size": true,
+    "identical": false,
+    "bbox": [
+      0,
+      0,
+      1280,
+      2856
+    ]
+  },
+  {
+    "name": "home-dark",
+    "same_size": true,
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "assistant-light",
+    "same_size": true,
+    "identical": false,
+    "bbox": [
+      72,
+      2142,
+      343,
+      2238
+    ]
+  },
+  {
+    "name": "assistant-dark",
+    "same_size": true,
+    "identical": true,
+    "bbox": null
+  },
+  {
+    "name": "assistant-paused",
+    "same_size": true,
+    "identical": true,
+    "bbox": null
+  }
+]

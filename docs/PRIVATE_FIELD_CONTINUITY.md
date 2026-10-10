@@ -6,6 +6,10 @@ The original task remains active across private fields. Saathi can show a struct
 
 The request to remove masking and send all private field values has NOT been implemented. A private badge is not consent to transmit those values. Future optional ordinary-value assessment would need exact preview, purpose and recipient disclosure, explicit per-use consent, minimization, cancellation and server-side validation; that feature is not present. The existing separately consented reporting-summary assessment is not automatic field-value upload.
 
+## Mixed public/private screens — 10 October addition
+
+A structural private field no longer creates badges over unrelated redacted labels. Badges are deduplicated and limited to current private editable bounds. Safe ordinary form fields and hierarchy-grounded commerce controls can receive local guidance beside an unfocused private input, subject to challenge/context/dialog/payment/error/consent/security guards. Cloud/listening stay suspended on mixed private screens. No editable values are copied, read aloud or uploaded. See CROSS_APP_COMMERCE.md and the actual-service mixed-form test. This is not certification of arbitrary mixed screens.
+
 ## Zoom-dependent updates
 
 Implemented event subscriptions include text, selection, focus, content, scroll and window changes. Events invalidate stale guidance immediately. Fresh snapshots use cache invalidation on Android33+. A bounded local follow-up window checks delayed form updates without repeatedly clearing an unchanged marker. Starting or retargeting on an already-open form now arms that same finite window even without a new external event. Private/unavailable/ineligible screens close the fallback window; fallback observations do not call AI.

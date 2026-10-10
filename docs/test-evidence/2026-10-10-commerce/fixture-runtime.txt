@@ -1,0 +1,27 @@
+--------- beginning of crash
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: FATAL EXCEPTION: main
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: Process: com.saathi.test, PID: 28171
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Lkotlin/jvm/functions/Function0;
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at java.lang.Class.newInstance(Native Method)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.AppComponentFactory.instantiateActivity(AppComponentFactory.java:100)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.Instrumentation.newActivity(Instrumentation.java:1480)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:4675)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:4978)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:224)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeNonLifecycleItem(TransactionExecutor.java:133)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:103)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:80)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2942)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.os.Handler.dispatchMessageImpl(Handler.java:142)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:126)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:285)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:390)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:9884)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:575)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:906)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: Caused by: java.lang.ClassNotFoundException: Didn't find class "kotlin.jvm.functions.Function0" on path: DexPathList[[zip file "/data/app/~~AnSakDP1lxmlUBErhChSbA==/com.saathi.test--CPKurJK_QUy8qtzM9xxJw==/base.apk"],nativeLibraryDirectories=[/data/app/~~AnSakDP1lxmlUBErhChSbA==/com.saathi.test--CPKurJK_QUy8qtzM9xxJw==/lib/arm64, /system/lib64, /system_ext/lib64]]
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:279)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:644)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	at java.lang.ClassLoader.loadClass(ClassLoader.java:580)
+10-10 18:46:42.778 28171 28171 E AndroidRuntime: 	... 18 more

@@ -1,0 +1,10 @@
+
+com.saathi.ui.NodeMaskerPrivacyTest:....
+com.saathi.ui.ReactiveFormIntegrationTest:..
+com.saathi.ui.PauseResumeIntegrationTest:.
+
+Time: 48.735
+
+OK (7 tests)
+
+

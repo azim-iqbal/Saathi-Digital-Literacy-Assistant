@@ -1,0 +1,82 @@
+
+com.saathi.ui.CommerceGuidanceTest:
+Error in realServiceFollowsProductHierarchyToReviewAndPrivateReturnWithoutBackend(com.saathi.ui.CommerceGuidanceTest):
+java.lang.AssertionError: Service connected: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.CommerceGuidanceTest.waitFor(CommerceGuidanceTest.kt:31)
+	at com.saathi.ui.CommerceGuidanceTest.realServiceFollowsProductHierarchyToReviewAndPrivateReturnWithoutBackend(CommerceGuidanceTest.kt:63)
+..
+com.saathi.ui.ReactiveFormIntegrationTest:
+Error in nativeFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest):
+java.lang.AssertionError: Service: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:47)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:97)
+	at com.saathi.ui.ReactiveFormIntegrationTest.nativeFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:152)
+
+Error in webFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest):
+java.lang.AssertionError: Service: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:47)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:97)
+	at com.saathi.ui.ReactiveFormIntegrationTest.webFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:153)
+
+com.saathi.ui.PauseResumeIntegrationTest:
+Error in manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(com.saathi.ui.PauseResumeIntegrationTest):
+java.lang.AssertionError: Service connected; state=STOPPED; instruction=
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PauseResumeIntegrationTest.waitFor(PauseResumeIntegrationTest.kt:48)
+	at com.saathi.ui.PauseResumeIntegrationTest.manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(PauseResumeIntegrationTest.kt:112)
+
+com.saathi.ui.PermissionLossIntegrationTest:
+Error in overlayAndAccessibilityRevocationStopAndNeverAutoResume(com.saathi.ui.PermissionLossIntegrationTest):
+java.lang.AssertionError: Real Saathi accessibility service bound; state=STOPPED; instruction=
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PermissionLossIntegrationTest.waitFor(PermissionLossIntegrationTest.kt:32)
+	at com.saathi.ui.PermissionLossIntegrationTest.overlayAndAccessibilityRevocationStopAndNeverAutoResume(PermissionLossIntegrationTest.kt:54)
+
+
+Time: 66.854
+There were 5 failures:
+1) realServiceFollowsProductHierarchyToReviewAndPrivateReturnWithoutBackend(com.saathi.ui.CommerceGuidanceTest)
+java.lang.AssertionError: Service connected: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.CommerceGuidanceTest.waitFor(CommerceGuidanceTest.kt:31)
+	at com.saathi.ui.CommerceGuidanceTest.realServiceFollowsProductHierarchyToReviewAndPrivateReturnWithoutBackend(CommerceGuidanceTest.kt:63)
+2) nativeFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest)
+java.lang.AssertionError: Service: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:47)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:97)
+	at com.saathi.ui.ReactiveFormIntegrationTest.nativeFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:152)
+3) webFieldsReactWithoutZoomRefreshOrValueAccess(com.saathi.ui.ReactiveFormIntegrationTest)
+java.lang.AssertionError: Service: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ReactiveFormIntegrationTest.waitFor(ReactiveFormIntegrationTest.kt:47)
+	at com.saathi.ui.ReactiveFormIntegrationTest.exercise(ReactiveFormIntegrationTest.kt:97)
+	at com.saathi.ui.ReactiveFormIntegrationTest.webFieldsReactWithoutZoomRefreshOrValueAccess(ReactiveFormIntegrationTest.kt:153)
+4) manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(com.saathi.ui.PauseResumeIntegrationTest)
+java.lang.AssertionError: Service connected; state=STOPPED; instruction=
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PauseResumeIntegrationTest.waitFor(PauseResumeIntegrationTest.kt:48)
+	at com.saathi.ui.PauseResumeIntegrationTest.manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations(PauseResumeIntegrationTest.kt:112)
+5) overlayAndAccessibilityRevocationStopAndNeverAutoResume(com.saathi.ui.PermissionLossIntegrationTest)
+java.lang.AssertionError: Real Saathi accessibility service bound; state=STOPPED; instruction=
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PermissionLossIntegrationTest.waitFor(PermissionLossIntegrationTest.kt:32)
+	at com.saathi.ui.PermissionLossIntegrationTest.overlayAndAccessibilityRevocationStopAndNeverAutoResume(PermissionLossIntegrationTest.kt:54)
+
+FAILURES!!!
+Tests run: 7,  Failures: 5
+
+

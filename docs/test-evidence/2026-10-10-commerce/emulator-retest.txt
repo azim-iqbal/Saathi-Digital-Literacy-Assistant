@@ -1,0 +1,12 @@
+
+com.saathi.ui.CommerceGuidanceTest:...
+com.saathi.ui.ReactiveFormIntegrationTest:..
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:....
+com.saathi.ui.TravelPrivacyUiTest:.
+
+Time: 60.645
+
+OK (11 tests)
+
+

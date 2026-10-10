@@ -22,7 +22,10 @@ data class UiNode(
     val privateContext: Boolean = false,
     val contentInvalid: Boolean = false,
     val requiredField: Boolean = false,
-    val inputType: Int = 0
+    val inputType: Int = 0,
+    // Snapshot-local hierarchy; never a saved ID or a screen coordinate heuristic.
+    val parentIndex: Int? = null,
+    val privacyKind: com.saathi.accessibility.PrivacyKind = com.saathi.accessibility.PrivacyKind.UNKNOWN_SENSITIVE
 ) {
     fun fingerprintPart() = listOf(resourceId, text, description, className, isEnabled, bounds.toShortString()).joinToString("|")
 }

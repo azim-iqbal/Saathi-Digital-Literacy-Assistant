@@ -12,6 +12,7 @@ class ExternalSurfaceActivity : Activity() {
     private var formDependent: android.widget.EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent.getBooleanExtra("commerce_fixture", false)) { showCommerce(0); return }
         if (intent.getBooleanExtra("reactive_form", false)) { showReactiveForm(); return }
         if (intent.getBooleanExtra("portal_fixture", false)) { showPortal(); return }
         if (intent.getBooleanExtra("paste_fixture", false)) { showPaste(); return }
@@ -30,6 +31,40 @@ class ExternalSurfaceActivity : Activity() {
             setContentView(layout); return
         }
         showChoices()
+    }
+    private fun showCommerce(page: Int) {
+        val layout = LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; setPadding(32,100,32,32) }
+        fun text(label: String) = TextView(this).apply { text=label; textSize=22f }
+        fun button(label: String, next: Int) = Button(this).apply { text=label; isAllCaps=false; setOnClickListener { showCommerce(next) } }
+        layout.addView(text("Synthetic commerce fixture — no orders"))
+        when(page) {
+            0 -> layout.addView(button("Search",1))
+            1,2 -> {
+                val grid=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL }
+                fun card(title: String, amount: String, desired: Boolean): LinearLayout {
+                    val card=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES }
+                    card.addView(text(title)); card.addView(text(amount))
+                    if(page==2 && desired) card.addView(text("Quantity: 1"))
+                    else card.addView(button("ADD",if(desired) 2 else 5))
+                    return card
+                }
+                grid.addView(card("Fixture oat drink", "₹36",false))
+                grid.addView(card("Fixture milk", "₹47",true))
+                layout.addView(grid)
+                if(page==2) layout.addView(button("View cart",3))
+            }
+            3 -> {
+                layout.addView(text("Your cart"));layout.addView(text("Fixture milk"));layout.addView(text("Order total ₹47"))
+                layout.addView(button("Fixture private step",4))
+            }
+            4 -> {
+                layout.addView(text("Order total ₹47"))
+                layout.addView(android.widget.EditText(this).apply { hint="CVV";inputType=18;setText("321") })
+                layout.addView(button("Fixture return",3))
+            }
+            else -> layout.addView(text("Wrong product selected"))
+        }
+        setContentView(layout)
     }
     private fun showReactiveForm() {
         if (intent.getBooleanExtra("web_form", false)) {

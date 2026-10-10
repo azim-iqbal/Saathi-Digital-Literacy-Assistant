@@ -1,0 +1,29 @@
+{
+  "rounds": 3,
+  "handoffs": 9,
+  "samples": [
+    {
+      "round": 1,
+      "elapsed_ms": 4308,
+      "pss_kb": 107785,
+      "heap_bytes": 5389264,
+      "thread_count": 31
+    },
+    {
+      "round": 2,
+      "elapsed_ms": 8803,
+      "pss_kb": 107863,
+      "heap_bytes": 5422032,
+      "thread_count": 31
+    },
+    {
+      "round": 3,
+      "elapsed_ms": 12710,
+      "pss_kb": 107895,
+      "heap_bytes": 5454800,
+      "thread_count": 31
+    }
+  ],
+  "cloud_requests": 0,
+  "scope": "Synthetic private\/message\/CAPTCHA round trips; no audio, account login or hours-long leak certification"
+}

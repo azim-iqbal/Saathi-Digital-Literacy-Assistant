@@ -1,0 +1,10 @@
+
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:...
+com.saathi.ui.ReactiveFormIntegrationTest:..
+
+Time: 33.238
+
+OK (6 tests)
+
+

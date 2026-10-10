@@ -1,0 +1,69 @@
+ACCESSIBILITY MANAGER (dumpsys accessibility)
+
+currentUserId=0
+hasMagnificationConnection=false
+Magnification on display#0
+    MagnificationConfig[mode: 1, activated: false, scale: 1.0, centerX: 640.0, centerY: 1392.0] 
+    Magnification region=SkRegion((0,0,1280,2784))
+    IdOfLastServiceToMagnify=-1
+    SupportWindowMagnification=true
+    WindowMagnificationConnectionState=DISCONNECTED
+Magnification preferences:{
+    magnificationCursorFollowingMode=0
+    magnificationFollowTypingEnabled=true
+    magnificationFollowKeyboardEnabled=true
+    alwaysOnMagnificationEnabled=true
+    magnificationPanelButtonEnabled=true
+}
+User state[
+     attributes:{id=0, touchExplorationEnabled=false, serviceHandlesDoubleTap=false, requestMultiFingerGestures=false, requestTwoFingerPassthrough=false, sendMotionEventsEnabledfalse, displayMagnificationEnabled=false, autoclickEnabled=false, nonInteractiveUiTimeout=0, interactiveUiTimeout=0, installedServiceCount=6, magnificationModes={0=1}, magnificationCapabilities=3, audioDescriptionByDefaultEnabled=false, textHighContrastEnabled=false, mouseKeysEnabled=false, gamepadMouseEnabled=false, permittedAccessibilityServices=null}
+     button mode: 1
+     shortcut key:{}
+     button:{}
+     button target:{null}
+     gesture:{}
+     qs shortcut targets:{}
+     a11y tiles in QS panel:{}
+     top row key:{}
+     quick access dialog:{}
+     keyboard shortcuts targets:{}
+     Installed services:{
+      0 : {com.android.systemui.accessibility.accessibilitymenu/com.android.systemui.accessibility.accessibilitymenu.AccessibilityMenuService} (A11yTool)
+      1 : {com.google.android.accessibility.switchaccess/com.android.switchaccess.SwitchAccessService} (A11yTool)
+      2 : {com.google.android.apps.accessibility.voiceaccess/com.google.android.apps.accessibility.voiceaccess.JustSpeakService} (A11yTool)
+      3 : {com.google.android.marvin.talkback/com.google.android.accessibility.selecttospeak.SelectToSpeakService} (A11yTool)
+      4 : {com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService} (A11yTool)
+      5 : {com.saathi/com.saathi.accessibility.SaathiAccessibilityService}
+     }
+     Bound services:{}
+     Enabled services:{}
+     Binding services:{}
+     Crashed services:{}
+     Client list info:{
+          Client list callbacks: 9
+          Client list killed: false
+          Client list broadcasts count: -1
+          Registered clients:{
+[com.google.android.apps.photos][com.google.android.googlequicksearchbox][com.google.android.inputmethod.latin][com.saathi][com.google.android.apps.wellbeing][com.google.android.googlequicksearchbox][com.saathi.test][com.google.android.apps.messaging][com.google.android.apps.nexuslauncher]}]
+Ui Automation[eventTypes=TYPES_ALL_MASK, notificationTimeout=0]
+User Info [ userId=0 ]
+Top focused display Id = 0
+     Active Window Id = 1125
+     Top Focused Window Id = 1125
+     Accessibility Focused Window Id = -1
+
+
+Window attributes:[{753=AccessibilityWindowAttributes{mAccessibilityWindowTitle=nullmLocales=[en_US]}, 1124=AccessibilityWindowAttributes{mAccessibilityWindowTitle=English (US) (QWERTY)mLocales=[en_US]}, 1125=AccessibilityWindowAttributes{mAccessibilityWindowTitle=HomemLocales=[en_US]}, 1126=AccessibilityWindowAttributes{mAccessibilityWindowTitle=Navigation barmLocales=[en_US]}, 1127=AccessibilityWindowAttributes{mAccessibilityWindowTitle=nullmLocales=[en_US]}, 1128=AccessibilityWindowAttributes{mAccessibilityWindowTitle=nullmLocales=[en_US]}, 1129=AccessibilityWindowAttributes{mAccessibilityWindowTitle=nullmLocales=[en_US]}, 1130=AccessibilityWindowAttributes{mAccessibilityWindowTitle=NotificationShademLocales=[en_US]}, 1131=AccessibilityWindowAttributes{mAccessibilityWindowTitle=Navigation bar Edge PanelmLocales=[en_US]}, 1132=AccessibilityWindowAttributes{mAccessibilityWindowTitle=nullmLocales=[en_US]}}]
+Global client list info:{
+    Client list callbacks: 6
+    Client list killed: false
+    Client list broadcasts count: -1
+    Registered clients:{
+[com.google.android.as][com.android.server.telecom, com.android.localtransport, com.android.dynsystem, com.android.emulator.multidisplay, com.android.inputdevices, com.android.settings, com.android.location.fused, com.android.providers.settings, android, com.android.DeviceAsWebcam, com.android.keychain][com.google.android.gms][com.google.android.as][com.google.android.permissioncontroller][com.android.systemui]
+
+Proxy manager state:
+    Number of proxy connections: 0
+    Registered proxy connections:
+Accessibility Display Listener:
+    SystemUI uid: 10198
+    1 valid display: 0

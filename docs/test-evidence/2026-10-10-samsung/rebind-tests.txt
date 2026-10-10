@@ -1,0 +1,11 @@
+
+com.saathi.ui.CommerceGuidanceTest:...
+com.saathi.ui.ReactiveFormIntegrationTest:..
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+
+Time: 43.565
+
+OK (7 tests)
+
+

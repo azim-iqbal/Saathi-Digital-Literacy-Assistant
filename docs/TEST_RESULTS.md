@@ -1,3 +1,39 @@
+## 10 October 2026 — Real Zepto product-to-cart verification
+
+- **PASS:** Full local Android unit suite: 166 tests; debug and test APK builds succeeded.
+- **PASS:** Samsung physical-device observation on an existing Zepto product-results screen. A specific public product received exact Add guidance; after one user-authorized reversible add, Saathi detected the added/quantity state and highlighted the unique Cart action. No model request was made; fresh snapshot timings were 353 ms and 246 ms.
+- **PASS:** The Cart opened to the same single test item. It was removed immediately, returning to the results screen where Saathi again guided the marked Add control. No checkout, payment, purchase, private entry or portal declaration occurred.
+- **PASS:** `CommerceGuidanceTest` 4/4 on the Samsung after fixing its test-only overlay-window transition race. The retry preserves the originally grounded rectangle and never substitutes a nearby control.
+- **NOT CERTIFIED:** arbitrary products, stock/location changes, checkout, payments, all Zepto versions, universal Android accessibility behavior, microphone/TTS/OEM background survival, or other browsers/apps.
+
+Filtered, text-only evidence is recorded in `docs/test-evidence/2026-10-10-samsung/zepto-e2e-2026-10-10.md`; raw screenshots/XML containing device-specific address details were deleted. Production UI and core guidance behavior were not changed.
+
+## 10 October 2026 — Samsung physical-device verification and real Zepto fixes
+
+Usage stop: latest check4% short-window remaining/39% weekly. Stop new work now; threshold was crossed between checks. No reset/model calls/commit/push/deployment. Samsung SM-M076B Android16/API36 connected via wireless ADB (rediscover transport; do not reuse70 blindly). User approved uninstalling the incompatible-signature Saathi and replacing it; saved settings/drafts were deleted as explicitly authorized. Current debug build is installed; no release or deployment.
+
+User explicitly authorized selecting an existing saved Zepto delivery location; Home selected. Zepto26.10.1 remains installed with its own data intact. No cart additions, order, payment, complaint or external message. Raw temporary screenshot/XML containing address details was removed from host/device; repository evidence contains filtered labels/structural metadata only.
+
+PASS:165 Android unit tests plus debug/test builds. Physical controlled suite7/7 PASS after correcting Samsung instrumentation service reconnection (initial5/7 failed before scenarios because enabled service was recorded crashed after instrumentation restart). Service startup fix is test-harness-only, not proof of production crash recovery. Includes commerce3, native/WebView no-zoom forms2, pause/resume1 and permission-loss1. Seven passes precede the final initial-observation production fix; full post-fix device regression is PENDING.
+
+Real Zepto found and fixed three general defects: explicit public weight ranges (450–500g) were falsely sensitive; rotating Search “suggestion” labels were not recognized; initial startLive on an already-open quiet screen did not explicitly request a snapshot. Reproduced first two in failing unit tests, third with real service trace (0 snapshots/no instruction) then fixed. Final real Zepto results: snapshot185ms, externalEvents0, GUIDING,0 private fields,0 redacted nodes, no failure; several milk products correctly produce user-choice guidance. Home search target also verified, with personal address redacted and local search guidance retained. This is PARTIAL real Zepto acceptance: specific product/Add/cart/checkout still NOT RUN. Earlier observer-only PASS with blank instruction was not a guidance pass; later probes assert guidance and preserve diagnostics.
+
+Evidence: `docs/test-evidence/2026-10-10-samsung/`. `zepto-defects-before.txt`, `start-observation-build.txt`, `rebind-tests.txt`, `zepto-search-fixed.json`, `zepto-milk-diagnostics.json`, `zepto-milk-start-fixed.json`, `controlled-device.tar`. No screenshots of real address committed. UI production layout/theme unchanged.
+
+NEXT FIRST: build latest test source (new quiet-start CommerceGuidanceTest wrapper added AFTER last APK build, not yet run); rerun affected physical commerce/forms/pause/revocation tests. Then continue actual Zepto with a specific observed product request, verify its own Add and cart state; any reversible test cart additions must be removed, never purchase. PhysicalSpeechTest source compiled earlier but NOT RUN; no microphone permission granted or real speech tested. Other broad gates remain unchanged. No background instrumentation/server remains. Installed app is current production code; ignored mentor APK predates these Samsung fixes and must be refreshed after regressions. Preserve all preexisting changes.
+
+## 10 October 2026 — General commerce, element privacy and no-zoom form verification
+
+Latest brief saved at `docs/specs/CROSS_APP_COMMERCE_REQUEST.txt`. Read `docs/CROSS_APP_COMMERCE.md` and `docs/test-evidence/2026-10-10-commerce/README.md` first. Existing work preserved; UI design unchanged; no model calls, release signing, commit, push or deployment.
+
+Implemented: numeric resource-ID privacy false-positive fix; expanded/localized credential and price corpus; explicit node privacy categories; snapshot-local hierarchy; local search/product/Add/quantity/cart-review guidance; safe named promotional dismissal on recognized dialog containers; deduplicated badges for actual private editable fields; safe local form/product guidance alongside unfocused private fields with cloud/listening still suspended. No editable value getter or private upload. No automatic transaction/typing/clicking or completion assertion.
+
+Verification:163 Android unit PASS; debug/test builds, release Kotlin and lint PASS (0 errors/61 warnings). Final selected emulator group18/19 passed; Chrome failed because its required local fixture server/reverse mapping were absent, then passed1/1 with those prerequisites restored.19 distinct selected cases therefore have passing final-code evidence across runs. Native/WebView forms advance without zoom and include mixed private-field guidance. Synthetic commerce follows the correct repeated Add to cart review and resumes the same goal after private entry. Backend unchanged; previous170/9 offline evidence retained, not rerun. Three of five UI captures pixel-identical; two light captures visually inspected with differences documented. Debug mentor APKs refreshed and exact configured-key scan passed.
+
+NOT COMPLETE: real Zepto acceptance blocked by no installed Zepto/connected phone (question pending). Generic fixture is not Zepto. Richer screen semantics, flexible/free-form commerce and cab/ticket flows, general form validation/dependencies/completion, historical stale-marker attribution, broader genuine AI planning and shared durable storage remain repository-level work. Prior live provider allowance exhausted. Physical speech/OEM/TalkBack/performance and authenticated portal require actual hardware/access. TinyFish documentation fetched, not integrated: no comparative improvement benchmark yet. Deployment remains deferred.
+
+Next: obtain legitimate Zepto test access and inspect its actual accessibility hierarchy, then close unsupported general control/intent cases without retailer rules. Preserve this turn's regressions and privacy boundaries. Do not repeat the missing Chrome fixture setup mistake. No active instrumentation or backend server remains; emulator cleanup recorded below.
+
 ## 10 October 2026 — Source-scoped prerequisites, usage handoff
 
 Latest instruction: continue remaining work and hand off near/below10% short-window remaining (supersedes8% floor for this run). Latest check12%; final check follows. No resets, emulator, model calls, deployment, signing, commit or push in this phase. Existing Android/UI changes and mentor APK preserved.

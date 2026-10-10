@@ -1,0 +1,14 @@
+[
+  {
+    "path": "deliverables/mentor-demo/Saathi-Mentor-Demo-debug.apk",
+    "sha256": "e347ab9af41eb167ab9d1fa5a42be073912c30410412f154d0a46be842957d90",
+    "configured_key_matches": false,
+    "configured_keys_checked": 2
+  },
+  {
+    "path": "deliverables/mentor-demo/Saathi-Synthetic-Fixture.apk",
+    "sha256": "c9e9e7d36abeadb4581be7bfe30ad3d3b8cf8c6a01e06fb16c3e1391ef23f788",
+    "configured_key_matches": false,
+    "configured_keys_checked": 2
+  }
+]

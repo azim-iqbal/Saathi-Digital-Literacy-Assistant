@@ -4,6 +4,31 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class NodeContentPolicyTest {
+    @Test fun publicProductWeightRangesAreNotSecretNumbers() {
+        for(label in listOf("450 - 500 g", "200 - 300 g", "500-1000 ml", "Product, 450 - 500 g, ₹47")) {
+            val result=NodeContentPolicy.read(false,false,null,null,0,false,{label},{null})
+            assertFalse(label,result.sensitive)
+        }
+        assertTrue(SensitiveContent.isSensitive(false,"OTP 450 - 500 g"))
+        assertTrue(SensitiveContent.isSensitive(false,"1234-5678"))
+    }
+
+    @Test fun publicCommerceIdentifiersAreNotEnteredSecrets() {
+        for(label in listOf("₹47","₹36","₹30","₹१२४९","€١٢٤٩","₹16 platform fee","₹1,249 hotel rate","₹325 cab fare","₹250 ticket","₹149 burger","₹40 delivery fee","20% discount","₹895 order total","ADD","Checkout ₹650","Pay ₹500")) {
+            val result=NodeContentPolicy.read(false,false,null,"shop:id/product_123456",0,false,{label},{null})
+            assertFalse(label,result.sensitive);assertEquals(label,result.text)
+        }
+        val normal=NodeContentPolicy.read(false,true,"Destination","app:id/field_123456",1,true,{error("Value read")},{error("Description read")})
+        assertFalse(normal.sensitive)
+        val private=NodeContentPolicy.read(false,true,null,"app:id/enterOtp_123456",1,false,{error("Value read")},{error("Description read")})
+        assertTrue(private.sensitive)
+    }
+    @Test fun credentialCorpusIsPrivateWithoutAnyEnteredValueRead() {
+        for(label in listOf("Enter CVV", "CVC", "TOTP", "UPI PIN", "OTP", "Card number", "Password", "MPIN", "Security code", "Bank password", "Payment authentication OTP", "Card expiry", "Security answer", "Authentication token", "O.T.P.", "पासवर्ड", "सीवीवी", "ＣＶＣ")) {
+            val result=NodeContentPolicy.read(false,true,label,null,1,false,{error("Value read")},{error("Description read")})
+            assertTrue(label,result.sensitive);assertTrue(label,result.structuralPrivateField)
+        }
+    }
     @Test fun privateMetadataNeverCallsValueOrDescriptionGetters() {
         for ((password, hint, id, type) in listOf(
             listOf(true, null, null, 0), listOf(false, "OTP", null, 0),

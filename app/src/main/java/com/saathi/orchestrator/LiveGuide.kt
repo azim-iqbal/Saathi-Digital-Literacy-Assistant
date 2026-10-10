@@ -59,6 +59,8 @@ object LiveGuide {
         if (com.saathi.core.ResearchIntent.claimType(request) != null) return Plan(
             GuideStep(com.saathi.core.ResearchIntent.message(language), language, null,
                 "Explicit consent and current evidence are required.", false), useCloud = false)
+        PopupGuide.next(nodes, language)?.let { return Plan(it, useCloud = false) }
+        CommerceGuide.next(request, nodes, language)?.let { return Plan(it, useCloud = false) }
         // Form progression uses only local field metadata. Editable contents never go to a model.
         if (FormGuide.isRequest(request)) return Plan(FormGuide.next(nodes, language), useCloud = false)
         val local = next(request, nodes, language)

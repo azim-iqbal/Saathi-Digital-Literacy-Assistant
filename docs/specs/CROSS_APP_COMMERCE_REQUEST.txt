@@ -1,0 +1,1300 @@
+# SAATHI — GENERAL CROSS-APP GUIDANCE, CONTEXT-AWARE PRIVACY CLASSIFICATION & FINAL RELIABILITY PASS
+
+## Objective
+
+Continue from the CURRENT Saathi repository and all previous remediation work.
+
+Do **not** rebuild completed functionality.
+
+Do **not** redesign the UI.
+
+The immediate production defect is visible in the supplied Zepto screenshots:
+
+Saathi is classifying ordinary public commerce elements such as:
+
+- ₹47
+- ₹36
+- ₹30
+- product cards
+- product names
+- quantity/add controls
+
+as `PRIVATE FIELD`.
+
+This is incorrect.
+
+The application is over-classifying monetary information as sensitive because the privacy classifier is relying too heavily on superficial monetary/numeric cues rather than understanding:
+
+**what kind of element it is, whether the user enters data into it, what screen it belongs to, and what role that value plays in the workflow.**
+
+Fix this generally.
+
+Do not create Zepto-specific hacks.
+
+The resulting architecture must work across classes of apps including, but not limited to:
+
+### Quick commerce / grocery
+- Zepto
+- Blinkit
+- BigBasket
+- Flipkart Minutes
+- Swiggy Instamart
+
+### Food delivery
+- Zomato
+- Swiggy
+
+### Ride / mobility
+- Ola
+- Uber
+- similar cab/taxi apps
+
+### Ticketing / entertainment
+- BookMyShow
+- cinema/event-ticketing apps
+
+### Government / public services
+- District/state/government apps
+- existing researched government workflows
+
+### General commerce
+- Flipkart
+- similar shopping apps
+
+These names are ACCEPTANCE TARGETS.
+
+Do not hard-code their layouts, product labels, screen coordinates, resource IDs or workflows unless a platform contract genuinely requires an adapter.
+
+The architecture must remain GENERAL.
+
+---
+
+# PART 1 — REPRODUCE THE CURRENT FALSE POSITIVE FIRST
+
+Before changing production code, reproduce the failure represented by the screenshots.
+
+Build fixture screens containing realistic public commerce UI:
+
+- Product image
+- Product name
+- ₹47
+- previous price ₹48
+- discount
+- quantity
+- “ADD”
+- delivery time
+- cart subtotal
+- delivery fee
+- taxes
+- cab fare estimate
+- movie-ticket price
+- restaurant item price
+- surge pricing display
+
+Verify that the CURRENT classifier incorrectly labels the relevant monetary elements private.
+
+Preserve failing evidence.
+
+Then implement the fix.
+
+Do not simply change the screenshot fixture to satisfy existing behavior.
+
+---
+
+# PART 2 — REPLACE “MONEY = PRIVATE” WITH SEMANTIC PRIVACY CLASSIFICATION
+
+Privacy classification must be CONTEXTUAL.
+
+## Fundamental rule
+
+A monetary amount is not sensitive merely because it contains:
+
+- ₹
+- $
+- €
+- a number
+- “price”
+- “fare”
+- “total”
+- “fee”
+- “amount”
+- “pay”
+
+The classifier must distinguish:
+
+### PUBLIC / SAFE DISPLAY DATA
+
+Examples:
+
+₹47
+
+₹399
+
+20% off
+
+₹120 delivery fee
+
+₹325 estimated fare
+
+₹250 ticket price
+
+₹1,249 order total
+
+₹399/night
+
+₹86 taxes
+
+Product price
+
+Menu item price
+
+Cab estimate
+
+Surge multiplier
+
+Movie ticket amount
+
+Displayed wallet promotion
+
+Order savings
+
+These are generally public/read-only workflow information.
+
+They must NOT be labelled private simply because they are money-related.
+
+---
+
+# PART 3 — WHAT SHOULD ACTUALLY BE PRIVATE
+
+Use strong signals for sensitive fields.
+
+Examples include:
+
+### Authentication
+
+- Password
+- Passcode
+- OTP
+- TOTP
+- Authentication code
+- Login PIN
+- MPIN
+
+### Payments
+
+- Card number
+- CVV/CVC
+- ATM PIN
+- UPI PIN
+- Net-banking password
+- Payment OTP
+- Security code
+- Card expiry when entered as part of payment credentials
+- Bank authentication secrets
+
+### High-confidence secret/account fields
+
+- Recovery code
+- Security answer where clearly authentication-related
+- Private authentication token
+- Explicit credential fields
+
+Potentially identifying information should follow the project's existing privacy/data-minimization policy, but do NOT blindly treat every name, address, phone-like label or number on a screen as authentication-secret data.
+
+Do not turn an entire screen private merely because one private input exists.
+
+---
+
+# PART 4 — USE A MULTI-SIGNAL PRIVACY CLASSIFIER
+
+Refactor the classifier into evidence-based classification.
+
+Conceptually classify each element as:
+
+PUBLIC_DISPLAY
+PUBLIC_ACTION
+USER_INPUT_NORMAL
+USER_INPUT_PERSONAL
+SENSITIVE_AUTH
+SENSITIVE_PAYMENT
+UNKNOWN_SENSITIVE
+NON_INTERACTIVE_DECORATION
+
+Do not rely on one keyword.
+
+Consider multiple signals.
+
+## A. Node structure
+
+Use Android accessibility evidence such as:
+
+- editable
+- password flag
+- input type
+- focusable
+- clickable
+- enabled
+- role/class
+- selected
+- checked
+- content description
+- hint text
+- view ID/resource name where safely available
+
+Explicit password semantics should be treated as a strong sensitive signal.
+
+A non-editable `TextView` showing `₹47` should not become sensitive merely because it contains currency.
+
+---
+
+## B. Editability matters
+
+Distinguish:
+
+READ-ONLY MONEY DISPLAY
+
+from:
+
+EDITABLE PAYMENT INPUT
+
+Examples:
+
+`₹47` displayed under a milk product
+→ PUBLIC_DISPLAY
+
+`Fare estimate ₹320`
+→ PUBLIC_DISPLAY
+
+`₹250 ticket`
+→ PUBLIC_DISPLAY
+
+`Card number [ editable ]`
+→ SENSITIVE_PAYMENT
+
+`CVV [ editable ]`
+→ SENSITIVE_PAYMENT
+
+`Enter UPI PIN`
+→ SENSITIVE_PAYMENT
+
+`OTP [ editable ]`
+→ SENSITIVE_AUTH / PAYMENT depending on verified context
+
+---
+
+## C. Semantic context
+
+Evaluate nearby safe labels and ancestor/sibling semantics.
+
+Example:
+
+Product card
+→ product title
+→ price ₹47
+→ ADD
+
+This cluster strongly indicates commerce browsing.
+
+It is not sensitive.
+
+Payment form
+→ Debit/Credit Card
+→ Card number
+→ Expiry
+→ CVV
+→ Pay ₹847
+
+This cluster indicates payment context.
+
+But note:
+
+`Pay ₹847`
+
+is still not itself a secret.
+
+The amount remains public/read-only.
+
+The card number/CVV/PIN fields are sensitive.
+
+Privacy must be ELEMENT-SCOPED wherever possible.
+
+---
+
+# PART 5 — PAYMENT CONTEXT MUST NOT BLACKOUT THE ENTIRE SCREEN
+
+A payment screen can contain both public and private elements.
+
+For example:
+
+Order total: ₹847
+→ SAFE DISPLAY
+
+Card ending 4821
+→ follow existing masking/data-minimization policy
+
+Card number input
+→ PRIVATE
+
+CVV
+→ PRIVATE
+
+OTP
+→ PRIVATE
+
+Pay ₹847
+→ CONSEQUENTIAL ACTION, NOT “PRIVATE DATA”
+
+This distinction is critical.
+
+Do not use:
+
+PAYMENT SCREEN = EVERYTHING PRIVATE.
+
+Use:
+
+PRIVATE FIELD = PRIVATE FIELD.
+
+Consequential action classification should remain separate from information-sensitivity classification.
+
+---
+
+# PART 6 — BUILD A GENERAL SCREEN-SEMANTICS MODEL
+
+Classify screen-level context independently from field privacy.
+
+Possible screen contexts:
+
+COMMERCE_HOME
+SEARCH_RESULTS
+PRODUCT_LIST
+PRODUCT_DETAIL
+CART
+CHECKOUT
+ADDRESS_SELECTION
+PAYMENT_METHOD
+PAYMENT_AUTH
+ORDER_CONFIRMATION
+FOOD_MENU
+RESTAURANT_LIST
+CAB_SEARCH
+CAB_RESULTS
+CAB_CONFIRMATION
+TRIP_STATUS
+EVENT_LIST
+EVENT_DETAIL
+SEAT_SELECTION
+TICKET_CHECKOUT
+LOGIN
+OTP_CHALLENGE
+CAPTCHA
+GOVERNMENT_FORM
+GENERIC_FORM
+POPUP
+UNKNOWN
+
+This classification must be probabilistic/evidence-based.
+
+Do not require every app to map perfectly to one category.
+
+Use UNKNOWN when evidence is insufficient.
+
+Screen context is supporting evidence.
+
+It must never override strong node-level privacy evidence.
+
+---
+
+# PART 7 — CROSS-APP COMMERCE GUIDANCE ENGINE
+
+Create general acceptance workflows.
+
+## Example: user says
+
+“Order milk.”
+
+Saathi should:
+
+1. Preserve the goal `order milk`.
+2. Observe the current application.
+3. Recognize product-discovery/search context.
+4. Find a grounded search action if needed.
+5. Guide the user toward search.
+6. Observe query/results.
+7. Identify relevant product cards.
+8. Explain product/price information.
+9. Highlight the correct ADD/select control.
+10. Reobserve.
+11. Recognize cart/quantity state.
+12. Continue toward review/checkout.
+13. Stop short of autonomously making consequential decisions.
+14. Hand authentication/payment-sensitive entry to the user.
+15. Continue after safe verification.
+
+No coordinate hard-coding.
+
+No Zepto-specific product strings.
+
+---
+
+# PART 8 — GENERALIZE TO FOOD DELIVERY
+
+Test:
+
+“Order a veg burger.”
+
+Possible progression:
+
+restaurant discovery
+→ restaurant/menu
+→ search/filter
+→ item
+→ customization
+→ add
+→ cart
+→ address/review
+→ payment handoff
+→ confirmation
+
+Saathi must identify:
+
+Public:
+
+- restaurant names
+- ratings
+- menu prices
+- delivery fees
+- discounts
+- ETA
+- cart total
+
+Private/sensitive only when justified:
+
+- payment credentials
+- OTP
+- authentication secrets
+
+Do not mark restaurant prices private.
+
+---
+
+# PART 9 — GENERALIZE TO CAB APPS
+
+Test:
+
+“Book a cab to the airport.”
+
+Saathi should reason about:
+
+pickup
+→ destination
+→ ride options
+→ fares
+→ ETA
+→ ride selection
+→ confirmation boundary
+→ payment/authentication where relevant
+
+Displayed values such as:
+
+₹280
+₹325
+₹410
+
+are FARE INFORMATION.
+
+They must not be classified private.
+
+A fare can be consequential information without being secret information.
+
+Maintain separate concepts:
+
+SENSITIVITY
+versus
+CONSEQUENCE/RISK.
+
+---
+
+# PART 10 — GENERALIZE TO BOOKMYSHOW / TICKETING
+
+Test:
+
+“Book two movie tickets.”
+
+Guide through:
+
+movie/event
+→ venue
+→ showtime
+→ quantity
+→ seats
+→ price
+→ review
+→ payment handoff
+
+Ticket prices and seat prices are not secrets.
+
+Seat selection may be consequential but is not private credential data.
+
+Do not automatically confirm purchases.
+
+---
+
+# PART 11 — ADVANCED FORM ENGINE
+
+Complete the currently open requirement:
+
+**Advanced forms: general validation, dependency tracking and verified completion.**
+
+Support:
+
+REQUIRED
+OPTIONAL
+CONDITIONAL
+UNKNOWN
+
+Fields must not require zooming to update.
+
+Track:
+
+EMPTY
+ACTIVE
+VALUE_PRESENT
+VALID
+INVALID
+PENDING
+OPTIONAL_SKIPPED
+UNKNOWN
+
+If a required field becomes empty again, invalidate its completion.
+
+If selecting one option creates another required field, recompute dependencies.
+
+Do not use “non-empty” alone as proof of validity.
+
+Use available:
+
+- local validation state
+- visible errors
+- accessibility semantics
+- form transitions
+- reviewed workflow rules
+- explicit user confirmation when unavoidable
+
+---
+
+# PART 12 — REMOVE THE ZOOM-IN / ZOOM-OUT DEPENDENCY
+
+Currently Saathi sometimes requires zooming or another visual-layout change before it discovers the field/target correctly.
+
+This is unacceptable.
+
+Investigate Android accessibility events and observation invalidation.
+
+Specifically inspect handling of:
+
+- TYPE_VIEW_TEXT_CHANGED
+- TYPE_VIEW_FOCUSED
+- TYPE_VIEW_CLICKED
+- TYPE_WINDOW_CONTENT_CHANGED
+- TYPE_WINDOW_STATE_CHANGED
+- TYPE_WINDOWS_CHANGED
+- scrolling
+- keyboard/IME appearance
+- WebView accessibility changes
+- renderer changes
+
+Verify debounce/coalescing behavior.
+
+Do not rely on zoom.
+
+Do not rely on screen rotation.
+
+Do not rely on scrolling solely to force refresh.
+
+A fresh meaningful accessibility change should trigger bounded reassessment.
+
+Use lifecycle-aware fallback re-observation only where necessary.
+
+Avoid uncontrolled polling.
+
+---
+
+# PART 13 — STALE HIGHLIGHT ROOT CAUSE
+
+The outstanding requirement says:
+
+> Browser reliability: broaden real-site testing and establish the historical stale-highlight root cause.
+
+Finish it.
+
+Investigate:
+
+- stale AccessibilityNodeInfo
+- old screen/window IDs
+- bounds copied before layout change
+- viewport changes
+- WebView rendering
+- keyboard resizing
+- scroll offsets
+- renderer recreation
+- asynchronous overlays
+- late AI replies
+- session revisions
+- target generations
+- mutation timing
+
+Never reuse old coordinates just because the visible label still matches.
+
+Before highlighting:
+
+verify CURRENT screen
++ CURRENT node
++ CURRENT bounds
++ CURRENT session
++ CURRENT goal step.
+
+If verification fails:
+
+remove the highlight
+and reobserve.
+
+---
+
+# PART 14 — POPUPS, PROMOTIONS AND ADS
+
+Saathi must recognize temporary overlays that obstruct the actual task.
+
+Examples:
+
+- promotional modal
+- “special offer”
+- subscription upsell
+- install prompt
+- newsletter
+- rating prompt
+- coupon popup
+- full-screen promotion
+- ad interstitial
+
+Search safe visible UI for controls such as:
+
+Close
+Dismiss
+Skip
+No thanks
+Not now
+Maybe later
+X
+
+and equivalent localized/accessibility descriptions.
+
+## Important distinction
+
+Do NOT automatically dismiss:
+
+- security warnings
+- permission requests
+- legal consent
+- cookie/privacy choices requiring meaningful consent
+- payment confirmations
+- destructive confirmation dialogs
+- authentication prompts
+- system warnings
+
+Those are not “ads.”
+
+---
+
+# PART 15 — POPUP CLASSIFICATION
+
+Create a general overlay classifier:
+
+PROMOTIONAL_DISMISSIBLE
+INFORMATIONAL
+PERMISSION
+CONSENT
+SECURITY_WARNING
+AUTHENTICATION
+PAYMENT_CONFIRMATION
+SYSTEM_DIALOG
+UNKNOWN
+
+Only a high-confidence:
+
+PROMOTIONAL_DISMISSIBLE
+
+overlay may be treated as nuisance UI.
+
+For normal Saathi interaction philosophy:
+
+prefer highlighting the Close/Skip option and telling the user to dismiss it.
+
+If the product already supports low-risk automatic nuisance dismissal, keep it behind an explicit user setting and only allow it for highly confident promotional overlays.
+
+Never automatically approve consent.
+
+Never automatically accept permissions.
+
+Never automatically confirm purchases.
+
+Never automatically dismiss security warnings.
+
+---
+
+# PART 16 — “X” BUTTON SAFETY
+
+Do not click every `X`.
+
+Determine whether the X belongs to:
+
+- promotional overlay
+- search clear button
+- cart item removal
+- screen close
+- account deletion confirmation
+- dialog cancellation
+- floating widget
+- browser tab
+
+Use hierarchy, bounds and dialog/container context.
+
+A generic X heuristic alone is insufficient.
+
+---
+
+# PART 17 — AI PLANNING
+
+Resolve the remaining:
+
+**AI planning: inconsistent reasoning.**
+
+Evaluate general scenarios for:
+
+- product search
+- restaurant ordering
+- ride booking
+- ticket booking
+- government form
+- prerequisite discovery
+- eligibility
+- incident recovery
+
+Require AI output to distinguish:
+
+FACT
+OBSERVED_UI
+INFERENCE
+RECOMMENDATION
+REQUIRED_ACTION
+OPTIONAL_ACTION
+UNKNOWN
+
+Do not permit an AI model to convert uncertainty into a fabricated required step.
+
+Reject plans contradicting fresh UI evidence.
+
+---
+
+# PART 18 — LIVE MODEL CHECKS
+
+There is a newly authorized bounded provider-call allowance referenced by the latest project state.
+
+Verify from repository evidence how many calls remain before using them.
+
+Never assume.
+
+Run all deterministic validation first.
+
+If calls remain, use them specifically for the highest-information tests:
+
+- one advanced planning scenario
+- one incident/recovery scenario
+- multilingual equivalent where budget permits
+
+Record:
+
+provider
+model
+latency
+validation outcome
+reason code
+usage metadata where supplied
+
+Do not log sensitive prompts.
+
+Do not exceed authorization.
+
+---
+
+# PART 19 — TINYFISH — EVALUATE, DO NOT BLINDLY ADD
+
+Research current TinyFish capabilities before integration.
+
+TinyFish currently exposes capabilities conceptually including:
+
+Search
+Fetch
+Browser
+Agent
+
+Use it only where it solves a real Saathi problem.
+
+## Good Saathi uses
+
+Potentially:
+
+- current public product/service research
+- public policy lookup
+- current ticket/fare/public web information
+- dynamic JavaScript-rendered public websites
+- authoritative source extraction
+- fresh incident/status research
+- structured public web evidence
+
+Search/Fetch may be particularly useful for retrieval because they can return structured web context.
+
+## Bad use
+
+Do NOT route native Zepto/Blinkit/Uber UI understanding through TinyFish.
+
+TinyFish cloud Chromium does not represent what the user currently sees inside a native Android app.
+
+Do not create a parallel autonomous purchasing agent.
+
+Do not use it to:
+
+- enter the user's payment credentials
+- enter OTP/PIN/CVV
+- bypass CAPTCHA
+- submit purchases
+- impersonate the user
+- replace AccessibilityService grounding
+
+## Integration rule
+
+Benchmark TinyFish against the existing retrieval stack first.
+
+Measure:
+
+- freshness
+- source quality
+- latency
+- cost
+- reliability
+- token reduction
+- provenance
+- privacy implications
+
+Integrate only if it measurably improves Saathi.
+
+Abstract retrieval behind the existing provider/retrieval interface.
+
+Never bind planning directly to one vendor.
+
+Keep API keys server-side.
+
+No API key in APK.
+
+---
+
+# PART 20 — RESEARCH VS LIVE APP OBSERVATION
+
+Maintain a strict separation:
+
+LIVE APP OBSERVATION
+= Android AccessibilityService
+
+WEB RESEARCH
+= backend retrieval/search/TinyFish if chosen
+
+AI REASONING
+= grounded structured context
+
+UI GUIDANCE
+= local target verification + overlay
+
+Do not let web research override what the live application actually shows.
+
+For example:
+
+Web says milk costs ₹50.
+
+Live Zepto screen says ₹47.
+
+Saathi should guide using the live screen's ₹47 display.
+
+Research can provide context, not overwrite grounded UI.
+
+---
+
+# PART 21 — REAL-APP ACCEPTANCE MATRIX
+
+Create a controlled acceptance matrix across application categories.
+
+Do not perform unauthorized purchases.
+
+Test public/pre-confirmation paths where legitimate.
+
+Categories:
+
+Quick commerce
+Food delivery
+General commerce
+Ride booking
+Ticketing
+Government/public service
+Generic native form
+Generic WebView form
+
+For each capture:
+
+DISCOVERY
+SEARCH
+RESULT
+SELECTION
+CART/REVIEW
+AUTH HANDOFF
+PAYMENT HANDOFF
+COMPLETION
+
+Record:
+
+PASS
+PARTIAL
+BLOCKED
+FAIL
+
+Never manufacture compatibility.
+
+---
+
+# PART 22 — FALSE POSITIVE PRIVACY TEST SUITE
+
+Build a dedicated regression corpus.
+
+Must NOT become private:
+
+₹47
+
+₹36
+
+₹30
+
+₹325 cab fare
+
+₹250 ticket
+
+₹149 burger
+
+₹40 delivery fee
+
+₹16 platform fee
+
+20% discount
+
+₹895 order total
+
+₹1,249 hotel rate
+
+“ADD”
+
+“Checkout ₹650”
+
+“Pay ₹500”
+
+when these are public/read-only UI.
+
+Must become private under strong context:
+
+Enter CVV
+
+UPI PIN
+
+OTP
+
+Card number
+
+Password
+
+MPIN
+
+Security code
+
+Bank password
+
+Payment authentication OTP
+
+Include Unicode, spacing, localization and visually similar labels.
+
+Test English/Hindi/Hinglish variants.
+
+---
+
+# PART 23 — DO NOT MARK WHOLE PRODUCT GRIDS PRIVATE
+
+Explicitly reproduce the current Zepto regression:
+
+A grid containing product cards, prices and ADD buttons.
+
+Expected:
+
+0 incorrect PRIVATE FIELD banners on ordinary product cards.
+
+No giant private-screen banner.
+
+No microphone shutdown merely because ₹ symbols appear.
+
+No cloud suppression merely because a page displays prices.
+
+If an actual sensitive field appears later in checkout, only the appropriate sensitive interaction should enter private handoff.
+
+---
+
+# PART 24 — GUIDANCE PRIORITY
+
+When the user's goal is:
+
+“Order milk”
+
+and the current screen contains:
+
+search
+product cards
+prices
+ADD controls
+promotional overlay
+
+Saathi should reason approximately:
+
+1. Is a popup obscuring required UI?
+2. If safely dismissible, guide its dismissal.
+3. Is search required?
+4. If yes, highlight search.
+5. Otherwise identify grounded relevant results.
+6. Guide the user to the relevant product/selection.
+7. Verify cart state.
+8. Continue.
+
+Do not let public prices short-circuit the task into PRIVATE HANDOFF.
+
+---
+
+# PART 25 — OVERLAY SANITY
+
+Only render a `PRIVATE FIELD` marker where there is an actual private target.
+
+Do not repeat PRIVATE FIELD banners across unrelated product-card bounds.
+
+Never generate multiple privacy overlays from one broad screen-level classification.
+
+Deduplicate overlays.
+
+Bound overlays to their current target.
+
+Clear stale overlays immediately on:
+
+- target disappearance
+- window revision
+- scroll
+- layout mutation
+- navigation
+- task change
+- session change
+
+---
+
+# PART 26 — FINAL REGRESSIONS
+
+Finish the existing open work:
+
+### AI planning
+Resolve inconsistent reasoning and run authorized checks.
+
+### Advanced forms
+Complete validation/dependencies/verified completion.
+
+### Browser reliability
+Broaden real-site testing and historical stale-highlight investigation.
+
+### Renderer/keyboard/rotation
+Complete pending regressions.
+
+### Long-session
+Collect and evaluate endurance results.
+
+### Physical device
+Test when actual hardware is connected:
+- voice
+- background survival
+- permissions
+- TalkBack
+- performance
+
+Do not claim emulator = physical PASS.
+
+### Cybercrime portal
+Verify protected steps only using legitimate access.
+
+Never file a real complaint solely for testing.
+
+### Production infrastructure
+Implement/validate shared durable storage architecture where repository work permits.
+
+Actual hosting/deployment remains deferred.
+
+---
+
+# PART 27 — UI MUST REMAIN UNCHANGED
+
+Do not redesign Saathi.
+
+Do not change:
+
+- colors
+- typography
+- onboarding
+- glass components
+- navigation
+- branding
+- logo
+- bubble styling
+- layout proportions
+
+Functional overlays may be corrected because the current PRIVATE FIELD overlays are erroneous behavior.
+
+That is a bug fix, not a visual redesign.
+
+Finish before/after screenshot comparison.
+
+---
+
+# PART 28 — SUCCESS CRITERIA
+
+The fix is accepted when:
+
+### Zepto regression
+
+Searching/browsing milk shows:
+
+product prices normally
+
+ADD buttons normally
+
+no false PRIVATE FIELD overlays
+
+no privacy handoff
+
+Saathi identifies an appropriate next step.
+
+### Payment regression
+
+Public checkout total remains visible/non-private.
+
+Actual CVV/PIN/OTP/password becomes private.
+
+Guidance preserves the original task and continues after safe user completion.
+
+### Cross-app regression
+
+The same general classifier works against controlled:
+
+quick-commerce
+food
+ride
+ticket
+commerce
+government
+
+fixtures without app-specific price exceptions.
+
+### Popup regression
+
+Promotional popup:
+correct Close/Skip target.
+
+Security warning:
+NOT classified as ad.
+
+Payment confirmation:
+NOT automatically dismissed.
+
+Permission request:
+NOT automatically accepted.
+
+### Dynamic guidance
+
+No zoom-in/out required to refresh target.
+
+No stale highlights.
+
+Fresh field changes cause bounded reassessment.
+
+---
+
+# PART 29 — REPORT
+
+At the end report:
+
+1. Root cause of Zepto privacy false positives.
+2. Exact classifier changes.
+3. False-positive/false-negative privacy results.
+4. Zepto acceptance.
+5. Other quick-commerce acceptance.
+6. Food-delivery acceptance.
+7. Ride acceptance.
+8. Ticketing acceptance.
+9. Popup/ad handling.
+10. Zoom dependency investigation.
+11. Stale-highlight investigation.
+12. Advanced-form results.
+13. AI planning results.
+14. TinyFish evaluation and whether it was integrated.
+15. Browser results.
+16. Long-session results.
+17. Physical-device results.
+18. Cybercrime-portal result.
+19. UI comparison.
+20. Full regression counts.
+21. Remaining external blockers.
+22. Updated capability matrix.
+23. Files changed.
+
+Classify every result:
+
+PASS
+PARTIAL
+BLOCKED
+FAIL
+NOT RUN
+
+---
+
+# FINAL ENGINEERING RULE
+
+Do not optimize Saathi by making privacy less accurate.
+
+Make privacy **more semantically accurate**.
+
+The desired result is:
+
+**Public commerce information stays usable.**
+
+**Actual secrets stay protected.**
+
+**Consequential actions remain user-controlled.**
+
+**Guidance works across applications without app-specific hacks.**
+
+**Dynamic fields update without zooming.**
+
+**Popups are understood rather than blindly clicked.**
+
+**Research augments live guidance but never replaces grounded Android observation.**
+
+Implement this now.
+
+Do not stop after producing an audit.
+
+Reproduce → Fix → Test → Retest → Run regressions → Update capability evidence.
+
+Do not commit, push, deploy or publish.

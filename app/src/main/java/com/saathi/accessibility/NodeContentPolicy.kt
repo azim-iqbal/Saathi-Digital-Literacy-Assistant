@@ -10,7 +10,7 @@ internal object NodeContentPolicy {
         // Android input-type constants, kept platform-independent for accessor regression tests.
         val variation = inputType and 0xfff
         val secretType = variation in setOf(0x81, 0x91, 0xe1, 0x12)
-        val privateMetadata = SensitiveContent.isSensitive(password || secretType, hint, id)
+        val privateMetadata = SensitiveContent.isSensitive(password || secretType, hint) || SensitiveContent.hasPrivateMetadata(id)
         if (privateMetadata) return Content(null, null, true, editable || password || secretType, false, false)
         // An unlabelled editable field may also contain a secret. Never inspect its value or
         // content description to decide whether it is filled. Showing a hint is a structural

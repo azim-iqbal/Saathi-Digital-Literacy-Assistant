@@ -102,3 +102,9 @@ Production hosting, multi-instance durable storage, final physical-device accept
 - Separate fixture: `app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk`.
 - Rehearsal evidence: `docs/test-evidence/2026-10-10-mentor-demo/`.
 - Current remaining engineering work: `docs/NEXT_CONTINUATION.md`.
+
+## Optional local commerce rehearsal — 10 October
+
+Use the current debug APK and separate fixture APK. In Saathi request **Order milk**, choose Text only and start live help with the existing accessibility/overlay permissions. Run `python3 tools/mentor_demo.py --screen commerce`. Follow Search, the marked Add belonging to Fixture milk, then View cart. Review stays a user decision. The fixture private step demonstrates CVV handoff and Return retains the same task. There are no real orders.
+
+Label this clearly as a **synthetic cross-app demonstration**, not Zepto. The real Zepto acceptance path is still blocked by missing app/device access. Do not claim all products, checkout or real ordering work from this rehearsal.

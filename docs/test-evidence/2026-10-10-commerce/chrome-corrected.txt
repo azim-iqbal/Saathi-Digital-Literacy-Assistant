@@ -1,0 +1,8 @@
+
+com.saathi.ui.ChromeGuidanceIntegrationTest:.
+
+Time: 17.617
+
+OK (1 test)
+
+

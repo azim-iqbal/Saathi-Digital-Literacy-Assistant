@@ -16,7 +16,7 @@ def main():
     parser.add_argument('--adb', default=shutil.which('adb') or str(Path.home() / 'Library/Android/sdk/platform-tools/adb'))
     parser.add_argument('--serial', help='An emulator serial, e.g. emulator-5554')
     parser.add_argument('--install', action='store_true', help='Install existing debug app and separate synthetic fixture APK (preserves app data)')
-    parser.add_argument('--screen', choices=['home', 'native-form', 'web-form', 'navigation', 'portal'], default='home')
+    parser.add_argument('--screen', choices=['home', 'native-form', 'web-form', 'navigation', 'portal', 'commerce'], default='home')
     args = parser.parse_args()
     if not Path(args.adb).is_file():
         parser.error('Android platform tools not found. Supply --adb /path/to/adb.')
@@ -48,6 +48,7 @@ def main():
             'web-form': ['--ez', 'reactive_form', 'true', '--ez', 'web_form', 'true'],
             'navigation': [],
             'portal': ['--ez', 'portal_fixture', 'true'],
+            'commerce': ['--ez', 'commerce_fixture', 'true'],
         }[args.screen]
         run('shell', 'am', 'start', '-n', 'com.saathi.test/com.saathi.ui.ExternalSurfaceActivity', '-f', '0x10008000', *extras)
     print('Opened ' + args.screen + '. Follow docs/DEMO_SCRIPT.md. No AI request or permission change was made by this launcher.')

@@ -1,0 +1,21 @@
+
+com.saathi.ui.PhysicalCommerceObservationTest:
+Error in observeConsentedPublicSurface(com.saathi.ui.PhysicalCommerceObservationTest):
+java.lang.AssertionError: Service produced guidance
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PhysicalCommerceObservationTest.observeConsentedPublicSurface(PhysicalCommerceObservationTest.kt:58)
+
+
+Time: 17.646
+There was 1 failure:
+1) observeConsentedPublicSurface(com.saathi.ui.PhysicalCommerceObservationTest)
+java.lang.AssertionError: Service produced guidance
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.PhysicalCommerceObservationTest.observeConsentedPublicSurface(PhysicalCommerceObservationTest.kt:58)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+

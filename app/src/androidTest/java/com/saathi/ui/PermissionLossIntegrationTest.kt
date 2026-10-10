@@ -33,7 +33,7 @@ class PermissionLossIntegrationTest {
     }
     private fun output() = File(InstrumentationRegistry.getArguments().getString("additionalTestOutputDir") ?: context.filesDir.path).apply { mkdirs() }
     @Test fun overlayAndAccessibilityRevocationStopAndNeverAutoResume() {
-        assertTrue("Run only on a synthetic Android emulator", android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.MODEL.startsWith("sdk_"))
+        assertTrue("Emulator or explicitly authorized physical device required", android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.MODEL.startsWith("sdk_") || InstrumentationRegistry.getArguments().getString("physicalDeviceConfirmed") == "true")
         val service = "com.saathi/com.saathi.accessibility.SaathiAccessibilityService"
         val priorServices = shell("settings get secure enabled_accessibility_services")
         val priorEnabled = shell("settings get secure accessibility_enabled")
@@ -51,6 +51,7 @@ class PermissionLossIntegrationTest {
             val enabled = (priorServices.takeUnless { it == "null" }.orEmpty().split(':').filter { it.isNotBlank() } + service).distinct().joinToString(":")
             shell("settings put secure enabled_accessibility_services $enabled")
             shell("settings put secure accessibility_enabled 1")
+            DeviceTestAccess.reconnect(automation)
             waitFor("Real Saathi accessibility service bound") {
                 shell("dumpsys accessibility").substringAfter("Bound services:").substringBefore("Enabled services:").contains("label=Saathi guidance")
             }
@@ -89,7 +90,7 @@ class PermissionLossIntegrationTest {
                     shell("dumpsys accessibility").substringAfter("Bound services:").substringBefore("Enabled services:").contains("label=Saathi guidance")
                 }
                 assertFalse("Restoring accessibility must not restart observation", SaathiSession.isActive())
-                File(output(), "permission-loss-result.txt").writeText("PASS: live overlay permission revoked; session and presentation stopped; explicit restart; accessibility revoked; session and presentation stopped; neither permission restoration restarted observation. Text-only emulator session, no microphone capture.\n")
+                File(output(), "permission-loss-result.txt").writeText("PASS: live overlay permission revoked; session and presentation stopped; explicit restart; accessibility revoked; session and presentation stopped; neither permission restoration restarted observation. Text-only controlled session on ${android.os.Build.MODEL}, no microphone capture.\n")
             }
         } finally {
             File(output(), "service-state-final.txt").writeText(shell("dumpsys accessibility"))

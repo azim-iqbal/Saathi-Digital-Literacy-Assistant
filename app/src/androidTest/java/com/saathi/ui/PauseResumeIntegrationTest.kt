@@ -91,7 +91,7 @@ class PauseResumeIntegrationTest {
     } }
 
     @Test fun manualPauseAndPrivateChallengeRoundTripsRequireFreshObservations() {
-        assertTrue(android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.MODEL.startsWith("sdk_"))
+        assertTrue(android.os.Build.FINGERPRINT.contains("generic") || android.os.Build.MODEL.startsWith("sdk_") || InstrumentationRegistry.getArguments().getString("physicalDeviceConfirmed") == "true")
         val service = "com.saathi/com.saathi.accessibility.SaathiAccessibilityService"
         val priorServices = shell("settings get secure enabled_accessibility_services")
         val priorEnabled = shell("settings get secure accessibility_enabled")
@@ -109,6 +109,7 @@ class PauseResumeIntegrationTest {
             val enabled = (priorServices.takeUnless { it == "null" }.orEmpty().split(':').filter { it.isNotBlank() } + service).distinct().joinToString(":")
             shell("settings put secure enabled_accessibility_services $enabled")
             shell("settings put secure accessibility_enabled 1")
+            DeviceTestAccess.reconnect(automation)
             waitFor("Service connected") { com.saathi.accessibility.SaathiAccessibilityService.isConnected() }
             ActivityScenario.launch(MainActivity::class.java).use { scenario ->
                 scenario.onActivity {
@@ -207,7 +208,7 @@ class PauseResumeIntegrationTest {
                     }
                 }
                 File(output(), "lifecycle-resource-samples.json").writeText(org.json.JSONObject()
-                    .put("cycles",cycles).put("samples",samples).put("scope","emulator text-mode cycles; not hours-long/OEM/speech certification").toString(2))
+                    .put("cycles",cycles).put("samples",samples).put("scope","controlled text-mode cycles on ${android.os.Build.MODEL}; not hours-long/OEM/speech certification").toString(2))
                 screenshot("resume-restored")
                 main { SaathiSession.pause(); SaathiSession.stop(); assertFalse(SaathiSession.resume(context)) }
                 assertFalse(SaathiSession.canResume())

@@ -84,6 +84,9 @@ object SaathiSession {
     fun startLive(app: Context, request: String, language: GuidanceLanguage, spoken: Boolean): Boolean {
         if (!acceptsLiveRequest(request)) return false
         start(app, request, language, spoken, com.saathi.ui.Preferences(app).speechRate, liveMode = true)
+        // Starting on an already-open app may produce no new external accessibility event.
+        // Observe explicitly, as Resume and request replacement already do.
+        if (active) com.saathi.accessibility.SaathiAccessibilityService.requestCurrentScreen()
         return active
     }
 
@@ -335,6 +338,25 @@ object SaathiSession {
                 val interruption = com.saathi.core.ScreenInterruption.reason(nodes)
                 if (interruption != null) {
                     privateHandoffPending = true
+                    // A private input does not erase safe local fields beside it.
+                    // Cloud and listening remain suspended for the mixed screen;
+                    // retain original node indices and never inspect entered values.
+                    if (interruption == com.saathi.core.ScreenInterruption.Reason.PRIVATE && live &&
+                        !com.saathi.core.PrivateContextPolicy.blocksCloud(nodes) &&
+                        !nodes.any { (it.isSensitive || it.isPassword) && it.isFocused } &&
+                        com.saathi.core.ScreenInterruption.reason(nodes.filterNot { it.isSensitive || it.isPassword }) == null &&
+                        com.saathi.core.PaymentSafety.state(nodes) == null &&
+                        !com.saathi.core.BrowserConsentPolicy.present(nodes) &&
+                        !com.saathi.core.ScreenErrorPolicy.present(nodes) && PopupGuide.classify(nodes) == null &&
+                        !com.saathi.core.BrowserSafetyPolicy.present(nodes)) {
+                        val local = if (FormGuide.isRequest(goal)) FormGuide.next(nodes, language.apiTag, allowMixedPrivateForm = true)
+                            else CommerceGuide.next(goal, nodes, language.apiTag, allowMixedPrivate = true)
+                        if (local?.target != null) {
+                            present(local, true)
+                            mutableStatus.value = GuidanceSessionState.SENSITIVE_HANDOVER
+                            return@Runnable
+                        }
+                    }
                     present(GuideStep(com.saathi.core.ScreenInterruption.message(interruption, language.apiTag),
                         language.apiTag, if (interruption == com.saathi.core.ScreenInterruption.Reason.PRIVATE && (live || practiceEligible))
                             com.saathi.core.ScreenInterruption.privateTarget(nodes) else null,
@@ -521,7 +543,10 @@ object SaathiSession {
                 HighlightOverlayService.intent(
                     app,
                     step.target?.bounds,
-                    latestNodes.filter { it.isSensitive }.map { it.bounds },
+                    // A redacted text label is not an editable private field. Never
+                    // paint field badges across arbitrary product-card rectangles.
+                    latestNodes.filter { it.structuralPrivateField && it.isEditable && !it.bounds.isEmpty }
+                        .map { it.bounds }.distinct(),
                     complete = false,
                     status = step.speechText,
                     presentationKey = presentationKey()

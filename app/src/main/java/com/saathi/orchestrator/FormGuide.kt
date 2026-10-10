@@ -29,7 +29,7 @@ internal object FormGuide {
 
     fun isRequest(request: String): Boolean = form.containsMatchIn(request) && helpAction.containsMatchIn(request)
 
-    fun next(nodes: List<UiNode>, language: String): GuideStep {
+    fun next(nodes: List<UiNode>, language: String, allowMixedPrivateForm: Boolean = false): GuideStep {
         fun copy(en: String, hi: String, hinglish: String) = when (language) {
             "hi-IN" -> hi
             "hinglish" -> hinglish
@@ -37,7 +37,7 @@ internal object FormGuide {
         }
         fun noTarget(message: String) = GuideStep(message, language, null, "Wait for a safe visible form field.", false)
 
-        if (nodes.any { it.isSensitive || it.isPassword }) return noTarget(copy(
+        if (!allowMixedPrivateForm && nodes.any { it.isSensitive || it.isPassword }) return noTarget(copy(
             "This screen includes a private field. Fill it yourself; Saathi will not send the value to AI or save it.",
             "Is screen par niji field hai. Ise khud bharein; Saathi ise nahi padhega ya mark karega.",
             "Is screen par private field hai. Ise khud bharein; Saathi private fields ko nahi padhega ya mark karega."

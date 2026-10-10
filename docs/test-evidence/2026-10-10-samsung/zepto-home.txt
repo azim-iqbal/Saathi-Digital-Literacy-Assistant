@@ -1,0 +1,17 @@
+
+com.saathi.ui.PhysicalCommerceObservationTest:
+Error in observeConsentedPublicSurface(com.saathi.ui.PhysicalCommerceObservationTest):
+java.lang.IllegalArgumentException: Required value was null.
+	at com.saathi.ui.PhysicalCommerceObservationTest.observeConsentedPublicSurface(PhysicalCommerceObservationTest.kt:28)
+
+
+Time: 0.472
+There was 1 failure:
+1) observeConsentedPublicSurface(com.saathi.ui.PhysicalCommerceObservationTest)
+java.lang.IllegalArgumentException: Required value was null.
+	at com.saathi.ui.PhysicalCommerceObservationTest.observeConsentedPublicSurface(PhysicalCommerceObservationTest.kt:28)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+

@@ -1,0 +1,31 @@
+
+com.saathi.ui.CommerceGuidanceTest:...
+com.saathi.ui.ReactiveFormIntegrationTest:..
+com.saathi.ui.PauseResumeIntegrationTest:.
+com.saathi.ui.NodeMaskerPrivacyTest:....
+com.saathi.ui.TravelPrivacyUiTest:.
+com.saathi.ui.ChromeGuidanceIntegrationTest:
+Error in realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest):
+java.lang.AssertionError: Chrome readiness: expected synthetic Help page; no legal/onboarding acceptance is automated
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:108)
+
+com.saathi.ui.PortalWorkflowIntegrationTest:.
+com.saathi.ui.ObservationFailureIntegrationTest:.
+com.saathi.ui.PermissionLossIntegrationTest:.
+com.saathi.ui.SaathiUiTest:.
+com.saathi.ui.AssistantUiTest:...
+
+Time: 130.025
+There was 1 failure:
+1) realChromePageTracksDetourPrivateFormAndRetarget(com.saathi.ui.ChromeGuidanceIntegrationTest)
+java.lang.AssertionError: Chrome readiness: expected synthetic Help page; no legal/onboarding acceptance is automated
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.saathi.ui.ChromeGuidanceIntegrationTest.realChromePageTracksDetourPrivateFormAndRetarget(ChromeGuidanceIntegrationTest.kt:108)
+
+FAILURES!!!
+Tests run: 19,  Failures: 1
+
+

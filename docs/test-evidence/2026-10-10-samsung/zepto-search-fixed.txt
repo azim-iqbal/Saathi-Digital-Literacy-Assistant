@@ -1,0 +1,8 @@
+
+com.saathi.ui.PhysicalCommerceObservationTest:.
+
+Time: 5.218
+
+OK (1 test)
+
+
